@@ -21,6 +21,8 @@ import jp.co.sss.shop.util.Constant;
  */
 @Controller
 public class LoginController {
+	
+	//test
 
 	/**
 	 * 会員情報
