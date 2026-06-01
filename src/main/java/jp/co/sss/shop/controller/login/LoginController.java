@@ -23,6 +23,7 @@ import jp.co.sss.shop.util.Constant;
 public class LoginController {
 	
 	//test
+	//chatGpt
 
 	/**
 	 * 会員情報
