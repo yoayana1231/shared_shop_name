@@ -36,7 +36,7 @@ public class ClientItemShowController {
 	 */
 	@RequestMapping(path = "/" , method = { RequestMethod.GET, RequestMethod.POST })
 	public String index(Model model) {
-	
+		model.addAttribute("items", itemRepository.findAll());
 		return "index";
 	}
 }
