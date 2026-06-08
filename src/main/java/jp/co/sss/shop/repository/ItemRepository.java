@@ -59,6 +59,9 @@ public interface ItemRepository extends JpaRepository<Item, Integer> {
 	
 //	新着順のリポジトリ
 	List<Item> findAllByOrderByInsertDateDesc();
+	
+	//曖昧検索用メソッド
+	List<Item> findByNameContaining(String search);
 
 	
 }
