@@ -83,6 +83,9 @@ header {
 .admin header {
 	background: #ff8669;
 }
+.header_one{
+	display: flex;
+}
 
 /* スキルアップテクニック3
  * font-sizeの単位emは親要素に設定されたfont-sizeの相対指定となります。
