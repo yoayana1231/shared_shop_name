@@ -38,18 +38,9 @@ public class ClientItemShowController {
 	 * @param model    Viewとの値受渡し
 	 * @return "index" トップ画面
 	 */
-	
-//	売れてる奴だけ表示する（トップ画面）
-	@RequestMapping(path = "/", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(path = "/" , method = { RequestMethod.GET, RequestMethod.POST })
 	public String index(Model model) {
-		List<Item> list = itemRepository.findByQuantityDesc();
-//		売れ筋順
-		if (!list.isEmpty()) {
-			model.addAttribute("items", itemRepository.findByQuantityDesc());
-//		新着順	
-		} else {
-			model.addAttribute("items",itemRepository.findAllByOrderByInsertDateDesc());
-		}
+		model.addAttribute("items", itemRepository.findAll());
 		return "index";
 	}
 
