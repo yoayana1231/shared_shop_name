@@ -23,7 +23,8 @@ import jp.co.sss.shop.util.Constant;
 public class LoginController {
 	
 	//test
-
+	//吉田ばーか
+	
 	/**
 	 * 会員情報
 	 */
