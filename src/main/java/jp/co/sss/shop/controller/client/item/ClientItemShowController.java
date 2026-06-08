@@ -1,15 +1,14 @@
 package jp.co.sss.shop.controller.client.item;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import jp.co.sss.shop.entity.Item;
+import jp.co.sss.shop.repository.CategoryRepository;
 import jp.co.sss.shop.repository.ItemRepository;
 import jp.co.sss.shop.service.BeanTools;
 
@@ -25,6 +24,12 @@ public class ClientItemShowController {
 	 */
 	@Autowired
 	ItemRepository itemRepository;
+	
+	/*
+	 * カテゴリ情報
+	 */
+	@Autowired
+	CategoryRepository categoryRepository;
 
 	/**
 	 * Entity、Form、Bean間のデータコピーサービス
@@ -57,4 +62,18 @@ public class ClientItemShowController {
 		}
 		return "client/item/list";
 	}
+	
+	/*
+	 * 一覧表示 カテゴリ検索
+	 * 
+	 * @param model Viewとの値受渡し
+	 * @return "client/item/list" 商品一覧
+	 */
+	@GetMapping(path = "/client/item/list/{sortType}/{id}")
+	public String categorySort(@PathVariable Integer id,
+			@PathVariable int deleteFlag, Model model) {
+		model.addAttribute("items", categoryRepository.findById(id));
+		return "client/item/list";
+	}
+	
 }
