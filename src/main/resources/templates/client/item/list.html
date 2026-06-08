@@ -20,7 +20,6 @@
 		<a th:unless="${sortType==2}" th:href="@{/client/item/list/2(categoryId=${categoryId})}"
 			th:text="#{sort.hotsell.str}"></a>
 		
-
 		<p th:text="#{msg.client.item.list.none}" th:if="${#lists.isEmpty(items)}"></p>
 
 	</div>

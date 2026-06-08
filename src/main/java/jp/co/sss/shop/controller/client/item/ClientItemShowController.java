@@ -1,5 +1,7 @@
 package jp.co.sss.shop.controller.client.item;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import jp.co.sss.shop.entity.Category;
+import jp.co.sss.shop.entity.Item;
 import jp.co.sss.shop.repository.CategoryRepository;
 import jp.co.sss.shop.repository.ItemRepository;
 import jp.co.sss.shop.service.BeanTools;
@@ -51,7 +55,7 @@ public class ClientItemShowController {
 
 //	売れてない奴も表示する（商品一覧）
 	@RequestMapping(path = "/client/item/list/{sortType}", method = { RequestMethod.GET })
-	public String clientItem(@PathVariable int sortType,Model model) {
+	public String clientItem(@PathVariable int sortType, Model model) {
 		model.addAttribute("items", itemRepository.findAllByQuantityDesc());
 //		新着順
 		if (sortType ==1) {
@@ -69,10 +73,13 @@ public class ClientItemShowController {
 	 * @param model Viewとの値受渡し
 	 * @return "client/item/list" 商品一覧
 	 */
-	@GetMapping(path = "/client/item/list/{sortType}/{id}")
-	public String categorySort(@PathVariable Integer id,
-			@PathVariable int deleteFlag, Model model) {
-		model.addAttribute("items", categoryRepository.findById(id));
+	@GetMapping(path = "/client/item/list/category")
+	public String categorySort(Integer categoryId,  Model model) {
+		Category category = new Category();
+		category.setId(categoryId);
+		List<Item> items = itemRepository.findByCategory(category);
+		model.addAttribute("items", items);
+
 		return "client/item/list";
 	}
 	
