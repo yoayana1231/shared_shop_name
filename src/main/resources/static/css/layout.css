@@ -58,13 +58,11 @@ li {
 
 }
 
-
-
-.container {
-	width: 960px;
-	margin: 0 auto;
-	justify-content: space-between;
-}
+/*.container {*/
+/*	width: auto;*/
+/*	margin: 0 auto;*/
+/*	justify-content: space-between;*/
+/*}*/
 
 body>.container {
 	margin-top: 15px;
@@ -78,6 +76,7 @@ body>.container {
 header .container {
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 }
 
 header {
@@ -90,6 +89,10 @@ header {
 }
 
 .header_one {
+	display: flex;
+}
+
+.header_two{
 	display: flex;
 }
 
@@ -137,11 +140,10 @@ header {
  * 基本サイズが変更になったとしても、比例して大きさが変化します。
  */
 .site_title {
-	font-size: 1.8em;
+	font-size: 1em;
 	font-weight: normal;
-	margin: 0;
+	margin: 3px;
 	cursor: pointer;
-
 }
 
 /* スキルアップテクニック4
