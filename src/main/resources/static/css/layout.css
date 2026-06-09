@@ -81,7 +81,7 @@ header .container {
 }
 
 header {
-	background: rgb(228, 237, 239);
+	background: #ffffff;
 	padding: 10px 0;
 }
 
@@ -99,6 +99,26 @@ header {
 	box-sizing: border-box;
 }
 
+.search-demo-form {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.search-demo-form input {
+	min-width: 1;
+	height: 40px;
+}
+
+.search-demo-form button {
+	cursor: pointer;
+}
+
+/*.search-demo-form input:focus {*/
+/*	outline: none;*/
+/*	border-color: #0f5132;*/
+/*	box-shadow: 0 0 0 4px rgb(232, 234, 249);*/
+
+/*}*/
 
 .header-serch button {
 	display: inline-flex;
@@ -106,7 +126,7 @@ header {
 	justify-content: center;
 	height: 40px;
 	box-sizing: border-box;
-	cursor: pointer
+
 }
 
 /* スキルアップテクニック3
@@ -120,6 +140,8 @@ header {
 	font-size: 1.8em;
 	font-weight: normal;
 	margin: 0;
+	cursor: pointer;
+
 }
 
 /* スキルアップテクニック4
