@@ -21,6 +21,11 @@ p {
 	display: flex;
 }
 
+.top_photo {
+	height: 100vh;
+	width: 100%;
+}
+
 /* ---- 入力フォーム(ログイン) ---- */
 
 .user_container {
