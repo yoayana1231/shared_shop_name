@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import jp.co.sss.shop.bean.UserBean;
+import jp.co.sss.shop.entity.User;
 import jp.co.sss.shop.form.LoginForm;
 import jp.co.sss.shop.repository.UserRepository;
 import jp.co.sss.shop.util.Constant;
@@ -71,18 +72,23 @@ public class LoginController {
 			session.invalidate();
 			returnStr = "login";
 
-		} else {
-			//セッションスコープから権限を取り出す
-			Integer authority = ((UserBean) session.getAttribute("user")).getAuthority();
-			if (authority.intValue() == Constant.AUTH_CLIENT) {
-				// 一般会員ログインした場合、トップ画面表示処理にリダイレクト
-				returnStr = "redirect:/";
-			} else {
-
-				// 運用管理者、もしくはシステム管理者としてログインした場合、管理者用メニュー画面表示処理にリダイレクト
-				returnStr = "redirect:/admin/menu";
-			}
 		}
+
+		User user = userRepository.findByEmail(form.getEmail());
+		UserBean userBean = new UserBean();
+		userBean.setId(user.getId());
+		userBean.setAuthority(user.getAuthority());
+		// 必要に応じて他の情報もセット
+
+		session.setAttribute("user", userBean);
+
+		// 3. 権限による分岐
+		if (user.getAuthority() == Constant.AUTH_CLIENT) {
+			returnStr = "redirect:/";
+		} else {
+			returnStr = "redirect:/admin/menu";
+		}
+
 		return returnStr;
 
 	}
