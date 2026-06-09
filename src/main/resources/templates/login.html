@@ -52,7 +52,7 @@
 						<div class="login_row">
 							<div class="label"></div>
 							<div class="input">
-								<input type="submit" th:value="#{login.msg.button}" />
+								<input class="login_botan" type="submit" th:value="#{login.msg.button}" />
 							</div>
 						</div>
 					</div>
@@ -67,7 +67,7 @@
 					<form th:action="@{/login}" method="post" class="login_form" th:object="${loginForm}">
 						<div class="label_newMember"></div>
 						<div class="input_newMember">
-							<input type="submit" th:value="#{client.regist}" />
+							<input class="new_login_botan" type="submit" th:value="#{client.regist}" />
 						</div>
 					</form>
 				</div>

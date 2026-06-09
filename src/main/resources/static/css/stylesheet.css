@@ -67,12 +67,33 @@ p {
 	cursor: pointer;
 }
 
+.login_botan {
+	transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.login_botan:hover {
+	transform: translateY(-1px);
+	box-shadow: 0 12px 24px rgb(232, 234, 249);
+
+}
+
 .new_login_content input {
 	cursor: pointer;
 }
 
+.new_login_botan {
+	transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.new_login_botan:hover {
+	transform: translateY(-1px);
+	box-shadow: 0 12px 24px rgb(232, 234, 249);
+
+}
+
+
 .a {
-	border: 3px solid #ffffff;
+	border: 3px solid #F7F7F7;
 	overflow: hidden;
 	border-radius: 16px;
 	background: #ffffff;
@@ -84,7 +105,7 @@ p {
 }
 
 .new_login_content {
-	border: 3px solid rgb(242, 242, 238);
+	border: 3px solid #F7F7F7;
 	overflow: hidden;
 	border-radius: 16px;
 	background: #ffffff;
@@ -109,6 +130,7 @@ p {
 	text-align: center;
 	margin: 0;
 	cursor: default;
+	font-family: Noto Sans JP;
 }
 
 .login .page_title {
@@ -124,6 +146,7 @@ p {
 	text-align: center;
 	font-size: 25px;
 	cursor: default;
+	font-family: sans-serif;
 }
 
 .input_login {
@@ -141,7 +164,9 @@ p {
 	margin-top: 30px;
 	text-align: center;
 	font-size: 25px;
-	cursor: default
+	cursor: default;
+	font-family: sans-serif;
+
 }
 
 /* ---- 会員登録入力画面へのリンク ---- */
