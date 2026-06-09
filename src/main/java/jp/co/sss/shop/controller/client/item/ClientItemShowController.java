@@ -1,5 +1,7 @@
 package jp.co.sss.shop.controller.client.item;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import jp.co.sss.shop.entity.Category;
 import jp.co.sss.shop.entity.Item;
 import jp.co.sss.shop.repository.CategoryRepository;
-
 import jp.co.sss.shop.repository.ItemRepository;
 import jp.co.sss.shop.service.BeanTools;
 
@@ -27,7 +28,7 @@ public class ClientItemShowController {
 	 */
 	@Autowired
 	ItemRepository itemRepository;
-	
+
 	/*
 	 * カテゴリ情報
 	 */
@@ -65,7 +66,7 @@ public class ClientItemShowController {
 		}
 		return "client/item/list";
 	}
-	
+
 	/*
 	 * 一覧表示 カテゴリ検索
 	 * 
@@ -73,7 +74,7 @@ public class ClientItemShowController {
 	 * @return "client/item/list" 商品一覧
 	 */
 	@GetMapping(path = "/client/item/list/category")
-	public String categorySort(Integer categoryId,  Model model) {
+	public String categorySort(Integer categoryId, Model model) {
 		Category category = new Category();
 		category.setId(categoryId);
 		List<Item> items = itemRepository.findByCategory(category);
@@ -81,7 +82,7 @@ public class ClientItemShowController {
 
 		return "client/item/list";
 	}
-	
+
 	//石田実装 あいまい検索用コントローラー
 	//name属性 search
 	//新規追加リポジトリメソッド findByNameContaining
@@ -91,6 +92,5 @@ public class ClientItemShowController {
 		model.addAttribute("items", itemRepository.findByNameContaining(search));
 		return "client/item/list";
 	}
-  
-  
+
 }
