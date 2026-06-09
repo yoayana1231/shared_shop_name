@@ -1,5 +1,7 @@
 package jp.co.sss.shop.controller.client.item;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import jp.co.sss.shop.entity.Category;
 import jp.co.sss.shop.entity.Item;
 import jp.co.sss.shop.repository.CategoryRepository;
-
 import jp.co.sss.shop.repository.ItemRepository;
 import jp.co.sss.shop.service.BeanTools;
 
@@ -68,7 +69,6 @@ public class ClientItemShowController {
 	
 	/*
 	 * 一覧表示 カテゴリ検索
-	 * 吉永作成
 	 * 
 	 * @param model Viewとの値受渡し
 	 * @return "client/item/list" 商品一覧
