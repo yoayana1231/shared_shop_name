@@ -10,7 +10,7 @@
 		<h2 th:class="title" th:text="#{category.select.title}"></h2>
 		<div class="form">
 			<!-- 商品一覧画面以外で表示 -->
-			<form th:if="${sortType == null}" th:action="@{/client/item/list/1}">
+			<form th:if="${sortType == null}" th:action="@{/client/item/list/category}">
 				<select name="categoryId">
 					<option th:value="#{constants.category.select.none.no}" th:text="#{constants.category.select.none}"></option>
 					<option th:each="category: ${categories}"
