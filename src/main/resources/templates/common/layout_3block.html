@@ -1,16 +1,18 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	th:fragment="layout(title,body)">
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="layout(title,body)">
+
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="stylesheet" type="text/css" th:href="@{/css/layout.css}" />
-<link rel="stylesheet" type="text/css" th:href="@{/css/stylesheet.css}" />
-<title th:replace="${title}"></title>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/layout.css}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/stylesheet.css}" />
+	<title th:replace="${title}"></title>
 </head>
-<body th:classappend="${(session.user != null and (session.user.authority == 0 or session.user.authority == 1)) ? 'admin' : 'user' }">
+
+<body
+	th:classappend="${(session.user != null and (session.user.authority == 0 or session.user.authority == 1)) ? 'admin' : 'user' }">
 	<!--/* ヘッダー */-->
-	<header >
+	<header>
 		<div th:replace="~{common/header :: layout-header}"></div>
 	</header>
 
@@ -24,4 +26,5 @@
 		<div th:replace="~{common/footer :: layout-footer}"></div>
 	</footer>
 </body>
+
 </html>
