@@ -69,6 +69,7 @@ public class ClientItemShowController {
 	
 	/*
 	 * 一覧表示 カテゴリ検索
+	 * 吉永作成
 	 * 
 	 * @param model Viewとの値受渡し
 	 * @return "client/item/list" 商品一覧
