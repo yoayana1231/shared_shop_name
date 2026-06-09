@@ -9,6 +9,7 @@ import jp.co.sss.shop.entity.Favorite;
 public interface FavoriteRepository extends JpaRepository<Favorite, Integer>{
 	
 	boolean existsByItemId(Integer itemId);
+	
 	List<Favorite>findByItemId(Integer itemId);
 	
 	Favorite findFirstByOrderByIdDesc();
