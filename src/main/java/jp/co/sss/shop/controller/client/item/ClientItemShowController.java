@@ -1,7 +1,5 @@
 package jp.co.sss.shop.controller.client.item;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import jp.co.sss.shop.entity.Category;
 import jp.co.sss.shop.entity.Item;
 import jp.co.sss.shop.repository.CategoryRepository;
+
 import jp.co.sss.shop.repository.ItemRepository;
 import jp.co.sss.shop.service.BeanTools;
 
@@ -47,22 +46,22 @@ public class ClientItemShowController {
 	 * @param model    Viewとの値受渡し
 	 * @return "index" トップ画面
 	 */
-	@RequestMapping(path = "/" , method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(path = "/", method = { RequestMethod.GET, RequestMethod.POST })
 	public String index(Model model) {
 		model.addAttribute("items", itemRepository.findAll());
 		return "index";
 	}
 
-//	売れてない奴も表示する（商品一覧）
+	//	売れてない奴も表示する（商品一覧）
 	@RequestMapping(path = "/client/item/list/{sortType}", method = { RequestMethod.GET })
 	public String clientItem(@PathVariable int sortType, Model model) {
 		model.addAttribute("items", itemRepository.findAllByQuantityDesc());
-//		新着順
-		if (sortType ==1) {
+		//		新着順
+		if (sortType == 1) {
 			model.addAttribute("items", itemRepository.findAllByOrderByInsertDateDesc());
-//		売れ筋順	
+			//		売れ筋順	
 		} else {
-			model.addAttribute("items",itemRepository.findAllByQuantityDesc());
+			model.addAttribute("items", itemRepository.findAllByQuantityDesc());
 		}
 		return "client/item/list";
 	}
@@ -83,4 +82,15 @@ public class ClientItemShowController {
 		return "client/item/list";
 	}
 	
+	//石田実装 あいまい検索用コントローラー
+	//name属性 search
+	//新規追加リポジトリメソッド findByNameContaining
+
+	@RequestMapping("/client/item/list/search")
+	public String clientItemListSearch(String search, Model model) {
+		model.addAttribute("items", itemRepository.findByNameContaining(search));
+		return "client/item/list";
+	}
+  
+  
 }

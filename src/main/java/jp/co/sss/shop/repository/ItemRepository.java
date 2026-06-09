@@ -63,5 +63,9 @@ public interface ItemRepository extends JpaRepository<Item, Integer> {
 	
 	//カテゴリ検索
 	List<Item> findByCategory(Category category);
+  
+	//曖昧検索用メソッド
+	List<Item> findByNameContaining(String search);
+
 	
 }
