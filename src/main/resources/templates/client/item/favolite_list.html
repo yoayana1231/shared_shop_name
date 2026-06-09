@@ -18,6 +18,7 @@
 				<th th:text="#{data.item.name}"></th>
 				<th th:text="#{data.item.price}"></th>
 				<th th:text="#{category}"></th>
+				<th>お気に入りボタン(仮)</th>
 			</tr>
 			<!--/* 商品一覧 */-->
 			<tr th:each="favorite: ${favoriteItems}">
@@ -29,6 +30,12 @@
 				<td><a th:href="@{/client/item/detail/{id}(id=${favorite.item.id})}" th:text="${favorite.item.name}"></a></td>
 				<td th:text="${favorite.item.price}"></td>
 				<td th:text="${favorite.item.category.name}"></td>
+				<td>
+					<form th:action="@{/client/favorite/update}" method="post">
+						<input type="hidden" name="id" th:value="${favorite.id}">
+						<button type="submit">登録・削除</button>
+					</form>
+				</td>
 			</tr>
 		</table>
 	</th:block>
