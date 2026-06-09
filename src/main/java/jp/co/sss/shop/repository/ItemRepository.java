@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import jp.co.sss.shop.entity.Category;
 import jp.co.sss.shop.entity.Item;
 
 /**
@@ -60,6 +61,9 @@ public interface ItemRepository extends JpaRepository<Item, Integer> {
 //	新着順のリポジトリ
 	List<Item> findAllByOrderByInsertDateDesc();
 	
+	//カテゴリ検索
+	List<Item> findByCategory(Category category);
+  
 	//曖昧検索用メソッド
 	List<Item> findByNameContaining(String search);
 
