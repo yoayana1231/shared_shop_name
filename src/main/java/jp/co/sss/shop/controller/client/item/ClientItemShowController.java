@@ -77,8 +77,12 @@ public class ClientItemShowController {
 	public String categorySort(Integer categoryId,  Model model) {
 		Category category = new Category();
 		category.setId(categoryId);
+		
 		List<Item> items = itemRepository.findByCategory(category);
+		List<Category> categories = categoryRepository.findAll();
+		
 		model.addAttribute("items", items);
+		model.addAttribute("categories", categories);
 
 		return "client/item/list";
 	}
