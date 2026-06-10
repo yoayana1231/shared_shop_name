@@ -49,9 +49,11 @@ public class FavoriteController {
 		// ユーザーオブジェクトを生成
 		User user = new User();
 		user.setId(userId);
-		List<Favorite> favoriteItems = favoriteRepository.findByUser(user);
 		
-		// お気に入りテーブルから新しい順で一覧を取得
+		// ログイン中のユーザIDかつ削除フラグが0のものを検索
+		List<Favorite> favoriteItems =
+				favoriteRepository.findByUserIdAndDeleteFlag(userId, 0);
+		
 		// リクエストスコープに格納
 		model.addAttribute("favoriteItems", favoriteItems);
 				
@@ -93,6 +95,7 @@ public class FavoriteController {
 			favoriteRepository.save(newFavorite);
 		}
 		
+		// 元居たページに戻す
 		return "redirect:/";
 		
 	}
