@@ -1,4 +1,4 @@
-package jp.co.sss.shop.controller;
+package jp.co.sss.shop.controller.client;
 
 import java.util.List;
 
