@@ -48,7 +48,7 @@ public class ReviewController {
 	public String review(@PathVariable Integer itemId,
 			@ModelAttribute ReviewForm form, HttpSession session) {
 		
-		// セッションンに商品IDを保存しておく
+		// セッションに商品IDを保存しておく
 		session.setAttribute("itemId", itemId);
 		
 		return "client/item/review_input";
@@ -103,6 +103,8 @@ public class ReviewController {
 		
 		//入力内容をDBに登録
 		review = reviewRepository.save(review);
+		// 入力完了したらセッションの商品IDを削除
+		session.removeAttribute("itemId");
 		
 		return "client/item/detail";
 		
@@ -113,12 +115,37 @@ public class ReviewController {
 	 */
 	@PostMapping("/client/review/check/back")
 	public String back(@ModelAttribute ReviewForm form, Model model) {
+		
 		model.addAttribute("form", form);
 		return "client/item/review_input";
+		
 	}
 	
 	/*
 	 * レビュー削除処理
 	 */
+	@PostMapping("/client/review/delete")
+	public String delete(HttpSession session) {
+		
+		// ログイン中のユーザーIDを取得
+		Integer userId = ((UserBean) session.getAttribute("user")).getId();
+		// セッションに保存した商品IDを取得
+		Integer itemId = (Integer) session.getAttribute("itemId");
+		
+		Reviews review =
+			reviewRepository.findByItemIdAndUserIdAndDeleteFlag(itemId, userId, 0);
+		
+		if (review != null) {
+			// 表示中→削除フラグを1にする
+			review.setDeleteFlag(1);
+		}
+		
+		//DBに変更を保存
+		reviewRepository.save(review);
+		// 入力完了したらセッションの商品IDを削除
+		session.removeAttribute("itemId");
+		
+		return "redirect:/client/item/detail";
+	}
 
 }
