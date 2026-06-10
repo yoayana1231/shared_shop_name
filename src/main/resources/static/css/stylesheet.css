@@ -27,7 +27,6 @@ p {
 	justify-content: flex-end;
 	align-items: center;
 	height: 700px;
-	width: 1264.670px;
 	background: rgb(235, 251, 254);
 }
 
@@ -35,16 +34,32 @@ p {
 	padding-right: 50px;
 	width: 500px;
 	height: 85%;
-
 }
 
 .brand_concept {
-	display: flex;
-	align-items: center;
-  	gap: 12px;
+	display: right;
+	align-items: self-start;
+	gap: 12px;
 	flex-direction: column
 }
 
+.brand_concept_char{
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	align-items: self-start;
+}
+
+.brand_concept_photo {
+	display: flex;
+    justify-content:flex-start ;
+    flex-direction: row;
+    margin-top: -150px;
+}
+
+.brand_concept_photo_1{
+	width: 700px;
+}
 /* ---- 入力フォーム(ログイン) ---- */
 
 .user_container {

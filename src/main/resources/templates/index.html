@@ -15,10 +15,22 @@
 
 	<!--ブランドコンセプト-->
 	<div class="brand_concept">
-		<h1>ブランドコンセプト</h1>
-		<h2>独自性</h2>
-		<p>素材をありのまま表現、シンプルなのに高級感ある</p>
+		<div class="brand_concept_char">
+			<h1>ブランドコンセプト</h1>
+			<h2>日常のラグジュアリー</h2>
+			<p>厳選された素材と洗練された色彩が、あなたの個性にそっと寄り添います</p>
+			<p>鏡に向き合う時間が、もっと愛おしく、誇らしくなるように</p>
+		</div>
+		<div class="brand_concept_photo">
+			<img class="brand_concept_photo_1" th:src="@{/images/top_image_two.jpg}" alt="コンセプト写真">
+		</div>
 	</div>
+
+	<!--おすすめ-->
+
+
+	<!--ランキング-->
+
 
 	<!--カテゴリ欄	-->
 	<div class="header_two">
@@ -30,17 +42,15 @@
 		<div th:each="category: ${categories}">
 			<a th:href="@{/client/item/list/category}" th:value="${category.id}" th:text="${category.name}"></a>
 		</div>
-<!--		<a th:href="@{/client/item/list/category/}" th:value="">リップ</a>-->
-<!--		<a th:href="@{/client/item/list/category/2}">チーク</a>-->
-<!--		<a th:href="@{/client/item/list/category/3}">アイシャドウ</a>-->
-<!--		<a th:href="@{/client/item/list/category/4}">マスカラ</a>-->
-<!--		<a th:href="@{/client/item/list/category/5}">アイライナー</a>-->
-<!--		<a th:href="@{/client/item/list/category/6}">アイブロウ</a>-->
-<!--		<a th:href="@{/client/item/list/category/7}">ファンデーション</a>-->
-<!--		<a th:href="@{/client/item/list/category/8}">下地</a>-->
+		<!--		<a th:href="@{/client/item/list/category/}" th:value="">リップ</a>-->
+		<!--		<a th:href="@{/client/item/list/category/2}">チーク</a>-->
+		<!--		<a th:href="@{/client/item/list/category/3}">アイシャドウ</a>-->
+		<!--		<a th:href="@{/client/item/list/category/4}">マスカラ</a>-->
+		<!--		<a th:href="@{/client/item/list/category/5}">アイライナー</a>-->
+		<!--		<a th:href="@{/client/item/list/category/6}">アイブロウ</a>-->
+		<!--		<a th:href="@{/client/item/list/category/7}">ファンデーション</a>-->
+		<!--		<a th:href="@{/client/item/list/category/8}">下地</a>-->
 	</div>
-
-
 
 	<div>
 		<h2 class="title">
@@ -61,8 +71,9 @@
 					<img th:src="@{/images/common/no_image.jpg}" th:if="${item.image == null}" />
 				</a>
 			</div>
+		</th:block>
 	</div>
-	</th:block>
+
 </body>
 
 </html>
