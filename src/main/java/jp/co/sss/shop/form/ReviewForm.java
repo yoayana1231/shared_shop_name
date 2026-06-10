@@ -1,65 +1,54 @@
-package jp.co.sss.shop.entity;
+package jp.co.sss.shop.form;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.SequenceGenerator;
-import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+import jp.co.sss.shop.entity.Item;
+import jp.co.sss.shop.entity.User;
 
-@Entity
-@Table(name = "reviews")
-public class Reviews {
-
+/*
+ * レビュー入力フォーム
+ */
+public class ReviewForm implements Serializable {
+	
 	/*
 	 * レビューID
 	 */
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_reviews_gen")
-	@SequenceGenerator(name = "seq_review_gen", sequenceName = "seq_review", allocationSize = 1)
 	private Integer id;
 
 	/*
 	 * ユーザ情報
 	 */
-	@ManyToOne
-	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	private User user;
 
 	/*
 	 * 商品情報
 	 */
-	@ManyToOne
-	@JoinColumn(name = "item_id", referencedColumnName = "id")
 	private Item item;
 
 	/*
 	 * 評価
 	 */
-	@Column
+	@NotBlank
 	private Integer rating;
 
 	/*
 	 * コメント
 	 */
-	@Column
+	@NotBlank
+	@Size(min = 1, max = 140)
 	private String comments;
 
 	/*
 	 * 削除フラグ
 	 */
-	@Column(insertable = false)
 	private Integer deleteFlag;
 
 	/*
 	 * 投稿日時
 	 */
-	@Column(insertable = false)
 	private Date insertDate;
 
 	
