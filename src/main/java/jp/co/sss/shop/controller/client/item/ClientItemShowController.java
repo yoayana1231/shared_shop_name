@@ -1,5 +1,6 @@
 package jp.co.sss.shop.controller.client.item;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +11,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import jakarta.servlet.http.HttpSession;
+import jp.co.sss.shop.bean.ItemBean;
+import jp.co.sss.shop.bean.UserBean;
 import jp.co.sss.shop.entity.Category;
 import jp.co.sss.shop.entity.Item;
+import jp.co.sss.shop.entity.User;
+import jp.co.sss.shop.entity.ViewHistories;
 import jp.co.sss.shop.repository.CategoryRepository;
 import jp.co.sss.shop.repository.ItemRepository;
+import jp.co.sss.shop.repository.UserRepository;
+import jp.co.sss.shop.repository.ViewHistoriesRepository;
 import jp.co.sss.shop.service.BeanTools;
 
 /**
@@ -35,6 +43,12 @@ public class ClientItemShowController {
 	@Autowired
 	CategoryRepository categoryRepository;
 
+	@Autowired
+	ViewHistoriesRepository viewHistoriesRepository;
+
+	@Autowired
+	UserRepository userRepository;
+
 	/**
 	 * Entity、Form、Bean間のデータコピーサービス
 	 */
@@ -48,8 +62,18 @@ public class ClientItemShowController {
 	 * @return "index" トップ画面
 	 */
 	@RequestMapping(path = "/", method = { RequestMethod.GET, RequestMethod.POST })
-	public String index(Model model) {
+	public String index(Model model, HttpSession session) {
 		model.addAttribute("items", itemRepository.findAll());
+
+		//		市川実装	閲覧履歴表示
+		UserBean userBean = (UserBean) session.getAttribute("user");
+		if (userBean != null) {
+			User user = userRepository.getReferenceById(userBean.getId());
+
+			List<ViewHistories> histories = viewHistoriesRepository.findByUserOrderByViewedAtDesc(user);
+			model.addAttribute("histories", histories);
+		}
+
 		return "index";
 	}
 
@@ -93,4 +117,68 @@ public class ClientItemShowController {
 		return "client/item/list";
 	}
 
+	/**
+	 * 市川実装	商品詳細画面用コントローラー
+	 * 
+	 * @param id
+	 * @param model		Viewへの値受渡し
+	 * @param session	ログイン確認
+	 * @return			商品詳細画面
+	 */
+
+	@GetMapping("/client/item/detail/{id}")
+	public String clientItemDetail(@PathVariable Integer id, Model model, HttpSession session) {
+
+		Item item = itemRepository.getReferenceById(id);
+		ItemBean itemBean = new ItemBean();
+		itemBean.setId(item.getId());
+		itemBean.setName(item.getName());
+		itemBean.setPrice(item.getPrice());
+		itemBean.setDescription(item.getDescription());
+		itemBean.setStock(item.getStock());
+		itemBean.setImage(item.getImage());
+		itemBean.setCategoryId(item.getCategory().getId());
+		itemBean.setCategoryName(item.getCategory().getName());
+
+		model.addAttribute("item", itemBean);
+
+		UserBean userBean = (UserBean) session.getAttribute("user");
+
+		User user = null;
+
+		if (userBean != null) {
+			user = userRepository.getReferenceById(userBean.getId());
+		}
+
+		// ログインしている（一般会員である）場合のみ、閲覧履歴を保存・更新する
+		if (user != null) {
+			saveOrUpdateViewHistory(user, item);
+		}
+		return "client/item/detail";
+	}
+
+	/**
+	 * 市川実装	閲覧履歴用メソッド
+	 * 新規追加リポジトリメソッド	findByUserAndItem(User user, Item item);
+	 * 
+	 * @param user	ログインしているユーザー
+	 * @param item	閲覧した商品
+	 */
+
+	private void saveOrUpdateViewHistory(User user, Item item) {
+		// すでに同じユーザーが同じ商品の履歴を持っているか確認
+		ViewHistories history = viewHistoriesRepository.findByUserAndItem(user, item);
+
+		if (history != null) {
+			history.setViewedAt(LocalDateTime.now());
+			viewHistoriesRepository.save(history);
+		} else {
+			ViewHistories newHistory = new ViewHistories();
+			newHistory.setUser(user);
+			newHistory.setItem(item);
+			newHistory.setViewedAt(LocalDateTime.now());
+			viewHistoriesRepository.save(newHistory);
+		}
+
+	}
 }
