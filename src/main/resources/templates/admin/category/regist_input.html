@@ -26,10 +26,8 @@
 				<li><label> <span class="input_title">[[#{categoryForm.name}]]</span></label>
 					<input type="text" th:field="*{name}" />
 				</li>
-				<li><label> <span class="input_title">[[#{categoryForm.description}]]</span></label> 
-				 <textarea
-					name="description" th:inline="text" rows="6"
-					th:text="*{description}"></textarea>
+				<li><label> <span class="input_title">[[#{categoryForm.description}]]</span></label>
+					<textarea name="description" th:inline="text" rows="6" th:text="*{description}"></textarea>
 				</li>
 			</ul>
 			<input type="submit" value="確認" class="send_button" />

@@ -8,9 +8,10 @@ import jp.co.sss.shop.entity.Favorite;
 
 public interface FavoriteRepository extends JpaRepository<Favorite, Integer>{
 	
-	boolean existsByItemId(Integer itemId);
-	List<Favorite>findByItemId(Integer itemId);
+	// 商品IDとユーザーIDを条件にした検索
+	Favorite findByItemIdAndUserId(Integer itemId, Integer userId);
 	
-	Favorite findFirstByOrderByIdDesc();
+	// ユーザIDと削除フラグを条件にした検索
+	List<Favorite>findByUserIdAndDeleteFlag(Integer useId, Integer i);
 
 }
