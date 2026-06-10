@@ -30,7 +30,7 @@ public class ViewHistories {
 	@JoinColumn(name = "item_id", referencedColumnName = "id")
 	private Item item;
 
-	@Column(insertable = false)
+	@Column
 	private LocalDateTime viewedAt;
 
 	@Column(insertable = false)
