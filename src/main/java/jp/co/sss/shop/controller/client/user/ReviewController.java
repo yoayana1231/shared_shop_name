@@ -45,11 +45,11 @@ public class ReviewController {
 	 * レビュー入力画面に遷移
 	 */
 	@GetMapping("/client/review/input/{id}")
-	public String review(@PathVariable Integer itemId,
+	public String review(@PathVariable Integer id,
 			@ModelAttribute ReviewForm form, HttpSession session) {
 		
 		// セッションに商品IDを保存しておく
-		session.setAttribute("itemId", itemId);
+		session.setAttribute("itemId", id);
 		
 		return "client/item/review_input";
 		

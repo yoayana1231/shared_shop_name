@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{common/layout_5block :: layout(~{::title},~{::body/content()})}">
+
+<head>
+	<meta charset="UTF-8">
+	<title>レビュー入力</title>
+</head>
+
+<body class="user">
+
+	<h2 th:class="title" th:text="#{review}+#{input.title.action}"></h2>
+
+</body>
+
+</html>
