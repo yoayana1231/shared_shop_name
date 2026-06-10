@@ -77,6 +77,7 @@ header .container {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	height: 50px;
 }
 
 header {
@@ -90,10 +91,17 @@ header {
 
 .header_one {
 	display: flex;
+	grid-template-columns: 240px minmax(280px, 1fr) auto;
+
+}
+
+.header_light{
+	display: flex;
 }
 
 .header_two{
 	display: flex;
+	justify-content: space-evenly
 }
 
 .header-serch input {
@@ -292,7 +300,6 @@ aside.admin_menu {
 
 /* ---- メイン ---- */
 .main {
-	width: 76%;
 	padding-bottom: 80px;
 
 }

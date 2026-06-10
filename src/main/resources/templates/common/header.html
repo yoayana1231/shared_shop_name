@@ -11,6 +11,7 @@
 		<div th:fragment="layout-header">
 			<div class="container">
 				<h1><a th:class="site_title" th:href="@{/}" th:text="#{shop.title}"></h1></a>
+
 				<!--検索欄-->
 				<div class="header-serch">
 
@@ -21,34 +22,36 @@
 					</form>
 				</div>
 
-				<!--ログイン-->
+				<div class="header_light">
+					<!--ログイン-->
+					<!--一般三郎　さん　|　ログアウト-->
+					<div th:if="${session.user != null and session.user.authority == 2}" class="user_info">
+						<a th:href="@{/client/user/detail}" th:text="${session.user.name}"></a>さん | <a
+							th:href="@{/logout}" th:text="#{logout}"></a>
+					</div>
 
-				<!--一般三郎　さん　|　ログアウト-->
-				<div th:if="${session.user != null and session.user.authority == 2}" class="user_info">
-					<a th:href="@{/client/user/detail}" th:text="${session.user.name}"></a>さん | <a th:href="@{/logout}"
-						th:text="#{logout}"></a>
+
+					<div th:if="${session.user != null and (session.user.authority == 0 or session.user.authority == 1)}"
+						class="user_info">
+						<a th:href="@{/admin/user/detail/{id}(id=${session.user.id})}"
+							th:text="${session.user.name}"></a>さん
+						<a th:href="@{/logout}" th:text="#{logout}"></a>
+					</div>
+
+					<!--ログイン・会員登録　|　新規会員登録-->
+					<div th:if="${session.user == null}" class="user_info">
+						<a th:href="@{/login}" th:text="#{login}"></a> | <a th:href="@{/client/user/regist/input/init}"
+							th:text="#{client.regist}"></a>
+					</div>
+
+					<!--お気に入り-->
+
+					<!--買い物かご-->
+					<a th:href="@{/client/basket/list}" th:text="#{basket}" class="user_info"></a>
+
 				</div>
-
-
-				<div th:if="${session.user != null and (session.user.authority == 0 or session.user.authority == 1)}"
-					class="user_info">
-					<a th:href="@{/admin/user/detail/{id}(id=${session.user.id})}" th:text="${session.user.name}"></a>さん
-					|
-					<a th:href="@{/logout}" th:text="#{logout}"></a>
-				</div>
-
-				<!--ログイン・会員登録　|　新規会員登録-->
-				<div th:if="${session.user == null}" class="user_info">
-					<a th:href="@{/login}" th:text="#{login}"></a> | <a th:href="@{/client/user/regist/input/init}"
-						th:text="#{client.regist}"></a>
-				</div>
-
-				<!--お気に入り-->
-
-				<!--買い物かご-->
-				<a th:href="@{/client/basket/list}" th:text="#{basket}"></a>
-
 			</div>
+
 
 			<div class="header_two">
 				<!--商品一覧-->
@@ -56,16 +59,17 @@
 					<a class="shop_list" th:href="@{/client/item/list/1}" th:text="#{item}+#{title.list}">商品一覧</a>
 				</div>
 
-				<div class="shop_list_items">
-					<a th:herf="@{/}">リップ</a>
-					<a th:herf="@{/}">チーク</a>
-					<a th:herf="@{/}">アイシャドウ</a>
-					<a th:herf="@{/}">マスカラ</a>
-					<a th:herf="@{/}">アイライナー</a>
-					<a th:herf="@{/}">アイブロウ</a>
-					<a th:herf="@{/}">ファンデーション</a>
-					<a th:herf="@{/}">下地</a>
+				<div th:each="category: ${categories}">
+					<a th:href="@{/client/item/list/category}" th:value="${category.id}" th:text="${category.name}"></a>
 				</div>
+				<!--				<a th:href="@{/client/item/list/1}">リップ</a>-->
+				<!--				<a th:href="@{/client/item/list/2}">チーク</a>-->
+				<!--				<a th:href="@{/client/item/list/3}">アイシャドウ</a>-->
+				<!--				<a th:href="@{/client/item/list/4}">マスカラ</a>-->
+				<!--				<a th:href="@{/client/item/list/5}">アイライナー</a>-->
+				<!--				<a th:href="@{/client/item/list/6}">アイブロウ</a>-->
+				<!--				<a th:href="@{/client/item/list/7}">ファンデーション</a>-->
+				<!--				<a th:href="@{/client/item/list/8}">下地</a>-->
 			</div>
 		</div>
 	</div>

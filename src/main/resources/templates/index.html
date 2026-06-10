@@ -8,9 +8,39 @@
 </head>
 
 <body class="user index">
-
+	<!--トップ写真-->
 	<div class="top_page">
-		<img class="top_photo" th:src="@{/images/image_top_photo.jpg}" alt="トップ写真"></div>
+		<img class="top_photo" th:src="@{/images/image_top_photo.jpg}" alt="トップ写真">
+	</div>
+
+	<!--ブランドコンセプト-->
+	<div class="brand_concept">
+		<h1>ブランドコンセプト</h1>
+		<h2>独自性</h2>
+		<p>素材をありのまま表現、シンプルなのに高級感ある</p>
+	</div>
+
+	<!--カテゴリ欄	-->
+	<div class="header_two">
+		<!--商品一覧-->
+		<div>
+			<a class="shop_list" th:href="@{/client/item/list/1}" th:text="#{item}+#{title.list}">商品一覧</a>
+		</div>
+
+		<div th:each="category: ${categories}">
+			<a th:href="@{/client/item/list/category}" th:value="${category.id}" th:text="${category.name}"></a>
+		</div>
+<!--		<a th:href="@{/client/item/list/category/}" th:value="">リップ</a>-->
+<!--		<a th:href="@{/client/item/list/category/2}">チーク</a>-->
+<!--		<a th:href="@{/client/item/list/category/3}">アイシャドウ</a>-->
+<!--		<a th:href="@{/client/item/list/category/4}">マスカラ</a>-->
+<!--		<a th:href="@{/client/item/list/category/5}">アイライナー</a>-->
+<!--		<a th:href="@{/client/item/list/category/6}">アイブロウ</a>-->
+<!--		<a th:href="@{/client/item/list/category/7}">ファンデーション</a>-->
+<!--		<a th:href="@{/client/item/list/category/8}">下地</a>-->
+	</div>
+
+
 
 	<div>
 		<h2 class="title">
