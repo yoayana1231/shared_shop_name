@@ -13,17 +13,18 @@ body {
 }
 
 p {
-	color: #12526d;
+	color: #595959;
 	margin: 15px 0;
 }
 
-h1{
+h1 {
 	color: #595959;
 }
 
-h2{
+h2 {
 	color: #595959;
 }
+
 /* --- トップ画面 ---*/
 .navi_area~.container {
 	display: flex;
@@ -51,7 +52,7 @@ h2{
 	flex-direction: column
 }
 
-.brand_concept_char{
+.brand_concept_char {
 	display: flex;
 	align-items: flex-end;
 	flex-direction: column;
@@ -60,14 +61,45 @@ h2{
 
 .brand_concept_photo {
 	display: flex;
-    justify-content:flex-start ;
-    flex-direction: row;
-    margin-top: -150px;
- }
+	justify-content: flex-start;
+	flex-direction: row;
+	margin-top: -150px;
+}
 
-.brand_concept_photo_1{
+.brand_concept_photo_1 {
 	width: 700px;
 }
+
+.margin {
+	display: flex;
+	flex-direction: column;
+}
+
+.category_list {
+	box-sizing: initial;
+	height: 100%;
+	list-style: none;
+	margin: 0;
+	position: relative;
+	transition-property: transform;
+	width: 100%;
+}
+
+.category_photo {
+	width: 100%;
+	height: 200px;
+	object-fit: cover;
+	display: block;
+	display: flex;
+}
+
+.category_main{
+	display: flex;
+	justify-content: space-evenly;
+	display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
 /* ---- 入力フォーム(ログイン) ---- */
 
 .user_container {

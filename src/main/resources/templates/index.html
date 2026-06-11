@@ -15,14 +15,16 @@
 
 	<!--ブランドコンセプト-->
 	<div class="brand_concept">
-		<div class="brand_concept_char">
-			<h1>ブランドコンセプト</h1>
-			<h2>日常のラグジュアリー</h2>
-			<p>厳選された素材と洗練された色彩が、あなたの個性にそっと寄り添います</p>
-			<p>鏡に向き合う時間が、もっと愛おしく、誇らしくなるように</p>
-		</div>
+
 		<div class="brand_concept_photo">
-			<img class="brand_concept_photo_1" th:src="@{/images/top_image_two.jpg}" alt="コンセプト写真">
+			<img class="brand_concept_photo_1" th:src="@{/images/top_image_two_1.jpg}" alt="コンセプト写真">
+
+			<div class="brand_concept_char">
+				<h1>ブランドコンセプト</h1>
+				<h2>日常のラグジュアリー</h2>
+				<p>厳選された素材と洗練された色彩が、あなたの個性にそっと寄り添います</p>
+				<p>鏡に向き合う時間が、もっと愛おしく、誇らしくなるように</p>
+			</div>
 		</div>
 	</div>
 
@@ -33,25 +35,26 @@
 
 
 	<!--カテゴリ欄	-->
-	<div class="header_two">
-		<!--商品一覧-->
-		<div>
-			<a class="shop_list" th:href="@{/client/item/list/1}" th:text="#{item}+#{title.list}">商品一覧</a>
-		</div>
 
-		<div th:each="category: ${categories}">
-			<a th:href="@{/client/item/list/category}" th:value="${category.id}" th:text="${category.name}"></a>
+	<!--商品一覧-->
+	<!--		<div>-->
+	<!--			<a class="shop_list" th:href="@{/client/item/list/1}" th:text="#{item}+#{title.list}">商品一覧</a>-->
+	<!--		</div>-->
+	<div class="margin">
+		<h1 class="category_h1">カテゴリ</h1>
+
+		<div class="category_main">
+
+			<div th:each="category: ${categories}" class="category_list">
+				<a th:href="@{/client/item/list/category}" th:value="${category.id}">
+					<img class="category_photo"
+						th:src="@{/images/top/category/top_image_{imgName}.jpg(imgName=${category.id})}">
+					<span th:text="${category.name}"></span>
+				</a>
+			</div>
+
 		</div>
-		<!--		<a th:href="@{/client/item/list/category/}" th:value="">リップ</a>-->
-		<!--		<a th:href="@{/client/item/list/category/2}">チーク</a>-->
-		<!--		<a th:href="@{/client/item/list/category/3}">アイシャドウ</a>-->
-		<!--		<a th:href="@{/client/item/list/category/4}">マスカラ</a>-->
-		<!--		<a th:href="@{/client/item/list/category/5}">アイライナー</a>-->
-		<!--		<a th:href="@{/client/item/list/category/6}">アイブロウ</a>-->
-		<!--		<a th:href="@{/client/item/list/category/7}">ファンデーション</a>-->
-		<!--		<a th:href="@{/client/item/list/category/8}">下地</a>-->
 	</div>
-
 	<div>
 		<h2 class="title">
 			<span th:if="${sortType==1}" th:text="#{sort.latest.title}"></span>
