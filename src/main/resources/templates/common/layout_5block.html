@@ -6,6 +6,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link rel="stylesheet" type="text/css" th:href="@{/css/layout.css}" />
 	<link rel="stylesheet" type="text/css" th:href="@{/css/stylesheet.css}" />
+<!--	//新しく作ったCSS-->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/itemlist.css}" />
+	
+	
 	<title th:replace="${title}"></title>
 </head>
 
@@ -20,7 +24,7 @@
 	</nav>
 	<div class="container">
 		<!--/* サイドバー */-->
-		<aside th:replace="~{common/sidebar :: layout-sidebar}"></aside>
+<!--		<aside th:replace="~{common/sidebar :: layout-sidebar}"></aside>-->
 		<!--/* メイン */-->
 		<article class="main">
 			<div th:replace="${body}"></div>
