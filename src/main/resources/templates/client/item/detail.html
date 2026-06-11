@@ -32,6 +32,7 @@
 				<dd th:text="*{description}"></dd>
 			</dl>
 		</div>
+		
 		<div class="detail_button_area">
 			<form th:action="@{/client/basket/add}" method="post" class="user_info_form" th:if="*{stock > 0}">
 				<input type="hidden" th:field="*{id}" />
@@ -44,7 +45,41 @@
 			<form th:action="@{/client/item/list/1}" method="post">
 				<input type="submit" value="戻る" class="back_button" />
 			</form>
-		</div>*
+		</div>
+		
+		<div>
+			<!--レビュー表示-->
+			<table>
+				<tr>
+					<th th:text="#{reviewForm.rating}"></th>
+					<th th:text="#{reviewForm.comments}"></th>
+				</tr>
+				<tr th:each="review: ${itemReviews}">
+					<td>
+						<div th:switch="${review.rating}">
+							<span th:case="1">☆</span>
+							<span th:case="2">☆☆</span>
+							<span th:case="3">☆☆☆</span>
+							<span th:case="4">☆☆☆☆</span>
+							<span th:case="5">☆☆☆☆☆</span>
+						</div>
+					</td>
+					<td th:text="${review.comments}"></td>
+					<td ${reviews.userId} == ${session.user.id}>
+						<form th:action="@{/client/review/input/{id}(id=${item.id})}" method="get">
+							<input type="hidden" name="itemId" th:value="${review.item.id}">
+							<button type="submit">変更</button>
+						</form>
+					</td>
+					<td ${reviews.userId} == ${session.user.id}>
+						<form th:action="@{/client/review/delete}" method="post">
+							<input type="hidden" name="itemId" th:value="${review.item.id}">
+							<button type="submit">削除</button>
+						</form>
+					</td>
+				</tr>
+			</table>
+		</div>
 	</div>
 
 </body>

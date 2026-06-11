@@ -69,7 +69,7 @@ public class ReviewController {
 		} else {
 			// エラーなし→formに保存して確認画面へ	
 			model.addAttribute(form);
-			return "client/ritem/review_check";
+			return "client/item/review_check";
 		}
 		
 	}
@@ -103,10 +103,12 @@ public class ReviewController {
 		
 		//入力内容をDBに登録
 		review = reviewRepository.save(review);
+		//戻すページURLを保存
+		String returnURL = "client/item/detail/" + itemId;
 		// 入力完了したらセッションの商品IDを削除
 		session.removeAttribute("itemId");
 		
-		return "client/item/detail";
+		return "redirect:/" + returnURL;
 		
 	}
 	
@@ -142,10 +144,12 @@ public class ReviewController {
 		
 		//DBに変更を保存
 		reviewRepository.save(review);
+		//戻すページURLを保存
+		String returnURL = "client/item/detail/" + itemId;
 		// 入力完了したらセッションの商品IDを削除
 		session.removeAttribute("itemId");
 		
-		return "redirect:/client/item/detail";
+		return "redirect:/" + returnURL;
 	}
 
 }

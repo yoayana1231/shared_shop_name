@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.sql.Date;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import jp.co.sss.shop.entity.Item;
 import jp.co.sss.shop.entity.User;
@@ -31,7 +32,7 @@ public class ReviewForm implements Serializable {
 	/*
 	 * 評価
 	 */
-	@NotBlank
+	@NotNull
 	private Integer rating;
 
 	/*
