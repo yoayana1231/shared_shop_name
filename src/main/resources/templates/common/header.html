@@ -15,8 +15,8 @@
 				<!--検索欄-->
 				<div class="header-serch">
 
-				<form class="search-demo-form" th:action="@{/client/item/list/search}">
-					<input type="search" placeholder="商品名・カテゴリで探す" name="search">
+					<form class="search-demo-form" th:action="@{/client/item/list/search}">
+						<input type="search" placeholder="商品名・カテゴリで探す" name="search">
 
 						<button type="submit">検索</button>
 					</form>
@@ -43,10 +43,10 @@
 					<a th:href="@{/login}" th:text="#{login}"></a> | <a th:href="@{/client/user/regist/input/init}"
 						th:text="#{client.regist}"></a>
 				</div>
-				
-					<!--お気に入り-->
 
-					<!--買い物かご-->
+				<!--お気に入り-->
+
+				<!--買い物かご-->
 				<div class="user_info">
 					<a th:href="@{/client/basket/list}"><img th:src="@{/images/shopping_cart.png}"></a>
 				</div>
@@ -61,14 +61,7 @@
 				<div th:each="category: ${categories}">
 					<a th:href="@{/client/item/list/category}" th:value="${category.id}" th:text="${category.name}"></a>
 				</div>
-				<!--				<a th:href="@{/client/item/list/1}">リップ</a>-->
-				<!--				<a th:href="@{/client/item/list/2}">チーク</a>-->
-				<!--				<a th:href="@{/client/item/list/3}">アイシャドウ</a>-->
-				<!--				<a th:href="@{/client/item/list/4}">マスカラ</a>-->
-				<!--				<a th:href="@{/client/item/list/5}">アイライナー</a>-->
-				<!--				<a th:href="@{/client/item/list/6}">アイブロウ</a>-->
-				<!--				<a th:href="@{/client/item/list/7}">ファンデーション</a>-->
-				<!--				<a th:href="@{/client/item/list/8}">下地</a>-->
+		
 			</div>
 		</div>
 	</div>
