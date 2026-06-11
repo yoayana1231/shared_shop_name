@@ -3,7 +3,7 @@
 body {
 	color: #12526d;
 	font-size: 14px;
-	background-color: #ffffff;
+	background-color: #F7F7F7;
 }
 
 /* ---- テキスト系 ---- */
@@ -13,9 +13,17 @@ body {
 }
 
 p {
+	color: #12526d;
 	margin: 15px 0;
 }
 
+h1{
+	color: #595959;
+}
+
+h2{
+	color: #595959;
+}
 /* --- トップ画面 ---*/
 .navi_area~.container {
 	display: flex;
@@ -45,9 +53,9 @@ p {
 
 .brand_concept_char{
 	display: flex;
+	align-items: flex-end;
 	flex-direction: column;
 	gap: 12px;
-	align-items: self-start;
 }
 
 .brand_concept_photo {
@@ -55,7 +63,7 @@ p {
     justify-content:flex-start ;
     flex-direction: row;
     margin-top: -150px;
-}
+ }
 
 .brand_concept_photo_1{
 	width: 700px;
