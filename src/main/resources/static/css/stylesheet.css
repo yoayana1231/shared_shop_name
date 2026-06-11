@@ -785,6 +785,23 @@ select {
 	margin: 10px auto 20px;
 }
 
+.category_one {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+}
+
+.category_tittle h1 {
+	width: 100%;
+	height: min-content;
+}
+
+.category_list img {
+	  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+}
+
 /* ---- 注文詳細 ---- */
 .list_table .total {
 	font-weight: bold;

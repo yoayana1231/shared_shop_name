@@ -101,8 +101,9 @@ header {
 }
 
 .header_two{
-	display: flex;
-	justify-content: space-evenly
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	justify-content: space-evenly;
 }
 
 .header-serch input {
