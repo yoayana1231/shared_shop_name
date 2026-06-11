@@ -126,16 +126,19 @@ public class ReviewController {
 	/*
 	 * レビュー削除処理
 	 */
-	@PostMapping("/client/review/delete")
-	public String delete(HttpSession session) {
+	@GetMapping("/client/review/delete/{reviewId}")
+	public String delete(@PathVariable Integer reviewId,  HttpSession session) {
 		
 		// ログイン中のユーザーIDを取得
 		Integer userId = ((UserBean) session.getAttribute("user")).getId();
 		// セッションに保存した商品IDを取得
 		Integer itemId = (Integer) session.getAttribute("itemId");
 		
-		Reviews review =
-			reviewRepository.findByItemIdAndUserIdAndDeleteFlag(itemId, userId, 0);
+//		Reviews review =
+//			reviewRepository.findByItemIdAndUserIdAndDeleteFlag(itemId, userId, 0);
+		
+		Reviews review = 
+				reviewRepository.findByIdAndDeleteFlag(reviewId, 0);
 		
 		if (review != null) {
 			// 表示中→削除フラグを1にする

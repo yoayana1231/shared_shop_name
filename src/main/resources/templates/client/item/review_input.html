@@ -22,6 +22,7 @@
 		
 		<!--評価-->
 		<div>
+		<div>
 			<lavel><input type="radio" th:field="*{rating}" value="1">☆</lavel><br>
 			<lavel><input type="radio" th:field="*{rating}" value="2">☆☆</lavel><br>
 			<lavel><input type="radio" th:field="*{rating}" value="3">☆☆☆</lavel><br>
@@ -37,9 +38,10 @@
 		<div class="send_button">
 			<input type="submit" value="確認">
 		</div>
+		
 	</form>
 	
-	<form th:action="@{/client/item/detail/{id}}" method="post">
+	<form th:action="@{/client/item/detail/{id}}" method="get">
 		<input class="send_button" type="submit" value="戻る">
 	</form>
 

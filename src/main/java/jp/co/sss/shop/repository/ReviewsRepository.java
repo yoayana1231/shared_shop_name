@@ -14,5 +14,8 @@ public interface ReviewsRepository extends JpaRepository<Reviews, Integer> {
 	// 商品IDとユーザーIDと削除フラグを条件にした検索
 	Reviews findByItemIdAndUserIdAndDeleteFlag
 				(Integer itemId, Integer userId, Integer i);
+	
+	// レビューIDと削除フラグを条件にした検索
+	Reviews findByIdAndDeleteFlag(Integer id, Integer i);
 
 }

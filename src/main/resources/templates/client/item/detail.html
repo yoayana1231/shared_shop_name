@@ -55,6 +55,9 @@
 					<th th:text="#{reviewForm.comments}"></th>
 				</tr>
 				<tr th:each="review: ${itemReviews}">
+					<div>
+						<input type=""
+					</div>
 					<td>
 						<div th:switch="${review.rating}">
 							<span th:case="1">☆</span>
@@ -65,15 +68,15 @@
 						</div>
 					</td>
 					<td th:text="${review.comments}"></td>
-					<td ${reviews.userId} == ${session.user.id}>
+					<td th:if="${review.user.id} == ${session.user.id}">
 						<form th:action="@{/client/review/input/{id}(id=${item.id})}" method="get">
 							<input type="hidden" name="itemId" th:value="${review.item.id}">
 							<button type="submit">変更</button>
 						</form>
 					</td>
-					<td ${reviews.userId} == ${session.user.id}>
-						<form th:action="@{/client/review/delete}" method="post">
-							<input type="hidden" name="itemId" th:value="${review.item.id}">
+					<td th:if="${review.user.id} == ${session.user.id}">
+						<form th:action="@{/client/review/delete/{id}(id=${review.id})} " method="get">
+							<input type="hidden" name="reviewId" th:value="${review.id}">
 							<button type="submit">削除</button>
 						</form>
 					</td>
