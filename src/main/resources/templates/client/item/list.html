@@ -6,6 +6,11 @@
 <head>
 	<title th:text="#{item}+#{title.list}+' | '+ #{shop.title}"></title>
 	<meta charset="UTF-8" />
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link
+		href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap"
+		rel="stylesheet">
 
 </head>
 
@@ -28,32 +33,37 @@
 
 
 	<th:block th:if="!${#lists.isEmpty(items)}">
-		<!--			<article class="item_menu">-->
-		<!--				<p class="item_image" th:text="#{data.item.image}"></p>-->
-		<!--				<p class="item_name" th:text="#{data.item.name}"></p>-->
-		<!--				<p class="item_price" th:text="#{data.item.price}"></p>-->
-		<!--				<p class="item_category" th:text="#{category}"></p>-->
-		<!--				<p class="favorite">お気に入りボタン(仮)</p>-->
-		<!--			</article>-->
-		<!--/* 商品一覧 */-->
+		<!--					<article class="item_menu">-->
+		<!--						<p class="item_image" th:text="#{data.item.image}"></p>-->
+		<!--						<p class="item_name" th:text="#{data.item.name}"></p>-->
+		<!--						<p class="item_price" th:text="#{data.item.price}"></p>-->
+		<!--						<p class="item_category" th:text="#{category}"></p>-->
+		<!--						<p class="favorite">お気に入りボタン(仮)</p>-->
+		<!--					</article>-->
+		<!--		/* 商品一覧 */-->
 		<div class="list_card">
 			<article class="item_card_list" th:each="item, status: ${items}">
-				<p th:text="${item.image}"></p>
 				<div class="image">
-					<img th:src="@{/images/{image}(image=${item.image})}" th:if="${item.image != null}" />
-					<img th:src="@{/images/common/no_image.jpg}" th:if="${item.image == null}" />
+					<a th:href="@{/client/item/detail/{id}(id=${item.id})}">
+						<img th:src="@{/images/photo/{imgName}(imgName=${item.image})}" th:if="${item.image != null}" />
+						<img th:src="@{/images/common/no_image.jpg}" th:if="${item.image == null}" />
+					</a>
 				</div>
-				<p class="item_name"><a th:href="@{/client/item/detail/{id}(id=${item.id})}" th:text="${item.name}"></a>
-				</p>
-				<p class="item_price" th:text="${item.price}"><br></p>
-				<p class="item_category" th:text="${item.category.name}"></p>
-				<p class="item_form">
-				<form th:action="@{/client/favorite/update}" method="post">
-					<input type="hidden" name="itemId" th:value="${item.id}">
-					<button type="submit">登録・削除</button>
-					
-				</form>
-				</p>
+				
+				<div>
+					<div class="item_info">
+						<p class="item_name"><a class="a_tag" th:href="@{/client/item/detail/{id}(id=${item.id})}"
+								th:text="${item.name}"></a></p>
+						<p class="item_price" th:text="${item.price}"></p>
+					</div>
+					<p class="item_category" th:text="${item.category.name}"></p>
+					<p class="item_form">
+					<form th:action="@{/client/favorite/update}" method="post">
+						<input type="hidden" name="itemId" th:value="${item.id}">
+						<button type="submit"><img th:src="@{/images/favorite.png}"></button>
+					</form>
+					</p>
+				</div>
 			</article>
 		</div>
 	</th:block>
