@@ -20,6 +20,7 @@
 		<!--		<li><a th:href="@{/client/basket/list}" th:text="#{basket}"></a></li>-->
 
 		<!--注文一覧（会員マイページに持ってく）-->
+
 		<th:block th:if="${session.user != null}">
 			<li><a th:href="@{/client/order/list}" th:text="#{order}+#{title.list}"></a></li>
 		</th:block>

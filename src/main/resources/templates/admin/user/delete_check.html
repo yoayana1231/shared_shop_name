@@ -11,7 +11,7 @@
 	<h2 th:class="title" th:text="#{user}+#{title.delete.check}"></h2>
 	<p th:class="check_message" th:text="#{msg.delete.check}"></p>
 	<div class="user_info_form_area" th:object=${userForm}>
-		<ul class="input_list" >
+		<ul class="input_list">
 			<li>
 				<span class="input_title">[[#{userForm.email}]]</span>
 				<span class="input_value" th:text="*{email}"></span>

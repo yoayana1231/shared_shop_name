@@ -12,7 +12,8 @@
 	<p th:class="input_message" th:text="#{msg.update.input}"></p>
 
 	<div class="user_info_form_area">
-		<form th:action="@{/admin/category/update/check}" method="post" class="user_info_form" th:object="${categoryForm}">
+		<form th:action="@{/admin/category/update/check}" method="post" class="user_info_form"
+			th:object="${categoryForm}">
 			<th:block th:if="${#fields.hasErrors()}">
 				<ul class="error_list">
 					<li th:each="err:${#fields.detailedErrors()}" th:text="${err.message}"></li>
@@ -30,8 +31,7 @@
 				<li>
 					<label>
 						<span class="input_title">[[#{categoryForm.description}]]</span>
-						<textarea name="description" th:inline="text" rows="6"
-							th:text="*{description}"></textarea>
+						<textarea name="description" th:inline="text" rows="6" th:text="*{description}"></textarea>
 					</label>
 				</li>
 			</ul>

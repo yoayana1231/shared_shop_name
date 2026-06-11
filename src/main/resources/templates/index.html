@@ -71,6 +71,29 @@
 					<img th:src="@{/images/common/no_image.jpg}" th:if="${item.image == null}" />
 				</a>
 			</div>
+		</th:block>>
+	</div>
+
+
+	<div>
+		<h2 class="title">
+			<span th:text="#{sort.history.title}"></span>
+		</h2>
+	</div>
+	<div th:if="${#lists.isEmpty(histories)}">
+		<p th:text="#{msg.client.item.list.none}"></p>
+	</div>
+	<div class="item_list">
+		<th:block th:each="itemHistories, status: ${histories}" th:if="${status.count le 4}">
+			<!--/* 1件分の商品情報 */-->
+			<div class="item">
+				<div class="item_name" th:text="${itemHistories.item.name}"></div>
+				<a th:href="@{/client/item/detail/}+${itemHistories.item.id}">
+					<img th:src="@{/images/{image}(image=${itemHistories.item.image})}"
+						th:if="${itemHistories.item.image != null}" />
+					<img th:src="@{/images/common/no_image.jpg}" th:if="${itemHistories.item.image == null}" />
+				</a>
+			</div>
 		</th:block>
 	</div>
 
