@@ -40,7 +40,7 @@
 			<article class="item_card_list" th:each="item, status: ${items}">
 				<p th:text="${item.image}"></p>
 				<div class="image">
-					<img th:src="@{/images/{image}(image=${item.image})}" th:if="${item.image != null}" />
+					<img th:src="@{/images/photo/{imgName}(imgName=${item.image})}" th:if="${item.image != null}" />
 					<img th:src="@{/images/common/no_image.jpg}" th:if="${item.image == null}" />
 				</div>
 				<p class="item_name"><a th:href="@{/client/item/detail/{id}(id=${item.id})}" th:text="${item.name}"></a>

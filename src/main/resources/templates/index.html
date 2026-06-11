@@ -89,8 +89,8 @@
 			<div class="item">
 				<div class="item_name" th:text="${itemHistories.item.name}"></div>
 				<a th:href="@{/client/item/detail/}+${itemHistories.item.id}">
-					<img th:src="@{/images/{image}(image=${itemHistories.item.image})}"
-						th:if="${itemHistories.item.image != null}" />
+					<img th:src="@{/images/photo/{imgName}(imgName=${item.image})}" th:if="${item.image != null}" />"
+						
 					<img th:src="@{/images/common/no_image.jpg}" th:if="${itemHistories.item.image == null}" />
 				</a>
 			</div>
