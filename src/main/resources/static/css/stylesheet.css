@@ -3,7 +3,7 @@
 body {
 	color: #12526d;
 	font-size: 14px;
-	background-color: #ffffff;
+	background-color: #F7F7F7;
 }
 
 /* ---- テキスト系 ---- */
@@ -13,14 +13,61 @@ body {
 }
 
 p {
+	color: #12526d;
 	margin: 15px 0;
 }
 
+h1{
+	color: #595959;
+}
+
+h2{
+	color: #595959;
+}
 /* --- トップ画面 ---*/
 .navi_area~.container {
 	display: flex;
+	margin: 0;
 }
 
+.top_page {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	height: 700px;
+	background: rgb(235, 251, 254);
+}
+
+.top_photo {
+	padding-right: 50px;
+	width: 500px;
+	height: 85%;
+}
+
+.brand_concept {
+	display: right;
+	align-items: self-start;
+	gap: 12px;
+	flex-direction: column
+}
+
+.brand_concept_char{
+	display: flex;
+	align-items: flex-end;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.brand_concept_photo {
+	display: flex;
+    justify-content:flex-start ;
+    flex-direction: row;
+    margin-top: -150px;
+ }
+
+.brand_concept_photo_1{
+	width: 700px;
+}
 /* ---- 入力フォーム(ログイン) ---- */
 
 .user_container {
