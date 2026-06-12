@@ -6,18 +6,19 @@
 <head>
 	<title th:text="#{item}+#{title.list}+' | '+ #{shop.title}"></title>
 	<meta charset="UTF-8" />
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link
-		href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap"
-		rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;700&display=swap" rel="stylesheet">
 
 </head>
 
 <body th:object="${loginForm}" class="user item_list">
-
-	<h2 th:class="title" th:text="#{item}+#{title.list}"></h2>
-
+	<div class="list_title">
+		<div class="img_title">
+			<img th:src="@{/images/flower_title.avif}">
+		</div>
+		<div class="text_title">
+			<h2 th:class="title_list" th:text="#{item}+#{title.list}"></h2>
+		</div>
+	</div>
 	<div class="sorted_by">
 		<span th:if="${sortType==1}" th:text="#{sort.latest.str}"></span>
 		<a th:unless="${sortType==1}" th:href="@{/client/item/list/1(categoryId=${categoryId})}"
@@ -49,20 +50,26 @@
 						<img th:src="@{/images/common/no_image.jpg}" th:if="${item.image == null}" />
 					</a>
 				</div>
-				
 				<div>
-					<div class="item_info">
-						<p class="item_name"><a class="a_tag" th:href="@{/client/item/detail/{id}(id=${item.id})}"
-								th:text="${item.name}"></a></p>
-						<p class="item_price" th:text="${item.price}"></p>
+
+					<p class="item_name" th:text="${item.name}"></p>
+					<p class="item_price" th:text="${item.price}"></p>
+					<span class="item_category" th:text="${item.category.name}"></span>
+					<div class="item_form">
+						<div class="button_all">
+							<div class="favorite_button">
+								<form th:action="@{/client/favorite/update}" method="post">
+									<input type="hidden" name="itemId" th:value="${item.id}">
+									<button type="submit"><img th:src="@{/images/faviorite_blank.svg}"></button>
+								</form>
+							</div>
+							<div class="cart">
+								<form th:action="@{/client/basket/list}" method="get">
+									<button type="submit" class="cart-button">ADD TO CART</button>
+								</form>
+							</div>
+						</div>
 					</div>
-					<p class="item_category" th:text="${item.category.name}"></p>
-					<p class="item_form">
-					<form th:action="@{/client/favorite/update}" method="post">
-						<input type="hidden" name="itemId" th:value="${item.id}">
-						<button type="submit"><img th:src="@{/images/favorite.png}"></button>
-					</form>
-					</p>
 				</div>
 			</article>
 		</div>
