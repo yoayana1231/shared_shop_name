@@ -1,85 +1,53 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	th:replace="~{common/layout_3block :: layout(~{::title},~{::body/content()})}">
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
 
 <head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title th:text="#{login}+' | '+ #{shop.title}"> </title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title th:text="#{login.msg.button}">Login</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/login.css(v=2026061101)}" />
 </head>
 
-<body class="user_login">
-	<div class="user_container">
-		<h1 th:class="page_title" th:text="#{login}">ログイン・会員登録</h1>
+<body class="auth-login-page">
+    <main class="auth-lunaria" aria-label="ログイン画面">
+        <section class="auth-login-card" aria-labelledby="auth-title">
+            <p class="auth-kicker">Sign in to continue to your account</p>
+            <h1 id="auth-title">Welcome back</h1>
 
+            <form th:action="@{/login}" method="post" class="auth-form" th:object="${loginForm}">
+                <th:block th:if="${#fields.hasErrors()}">
+                    <div class="auth-error" role="alert">
+                        <ul>
+                            <li th:each="err : ${#fields.detailedErrors()}" th:text="${err.message}"></li>
+                        </ul>
+                    </div>
+                </th:block>
 
+                <div class="auth-field">
+                    <label for="email">EMAIL ADDRESS</label>
+                    <input id="email" type="email" th:field="*{email}" placeholder="you@example.com" autocomplete="email" />
+                </div>
 
-		<div class="a">
-			<h2 th:class="page_title_login" th:text="#{login.msg.button}">ログイン</h2>
-			<!--			<div class="login_content">-->
-			<p th:class="description" th:text="#{msg.login.input}">メールアドレスとパスワードを入力してください。</p>
+                <div class="auth-field">
+                    <div class="auth-label-row">
+                        <label for="password">PASSWORD</label>
+                        <span>Forgot password?</span>
+                    </div>
+                    <input id="password" type="password" th:field="*{password}" placeholder="パスワードを入力してください" autocomplete="current-password" />
+                </div>
 
-			<div class="login_form_area_one">
-				<h2 class="formSectionTitle"></h2>
-				<form th:action="@{/login}" method="post" class="login_form" th:object="${loginForm}">
-					<th:block th:if="${#fields.hasErrors()}">
-						<div class="error_list">
-							<ul>
-								<li th:each="err:${#fields.detailedErrors()}" th:text="${err.message}"></li>
-							</ul>
-							<br />
-						</div>
-					</th:block>
+                <button class="auth-primary-button" type="submit">Login</button>
+            </form>
 
+            <div class="auth-divider"><span>OR</span></div>
 
-					<div class="input_login">
-						<div class="input_gamen">
-							<div class="login_row">
-								<label class="label"></label>
-								<div class="input_mail">
-									<input type="text" th:field="*{email}" placeholder="メールアドレス" />
-								</div>
-							</div>
-
-							<div class="login_row">
-								<label class="label"></label>
-								<div class="input_pass">
-									<input type="password" th:field="*{password}" placeholder="パスワード" />
-								</div>
-							</div>
-						</div>
-
-						<div class="login_row">
-							<div class="label"></div>
-							<div class="input">
-								<input class="login_botan" type="submit" th:value="#{login.msg.button}" />
-							</div>
-						</div>
-					</div>
-			</div>
-		</div>
-		<div class="new_login_content">
-
-			<div class="login_form_area">
-				<h2 class="formSectionTitle">初めてご登録のお客様</h2>
-				<div>
-					<p th:class="description" th:text="#{msg.new.login.input}">お気に入り登録を使用することができるようになります</p>
-					<form th:action="@{/login}" method="post" class="login_form" th:object="${loginForm}">
-						<div class="label_newMember"></div>
-						<div class="input_newMember">
-							<input class="new_login_botan" type="submit" th:value="#{client.regist}" />
-						</div>
-					</form>
-				</div>
-			</div>
-
-		</div>
-
-		<!--			</div>-->
-		<p class="complete_link">
-			<a th:href="@{/}" th:text="#{msg.back.to.top}"></a>
-		</p>
-
+            <a class="auth-secondary-link" th:href="@{/client/user/regist/input/init}">
+                <small>New to CryBaby?</small>
+                <strong>CREATE AN ACCOUNT</strong>
+                <span aria-hidden="true">›</span>
+            </a>
+        </section>
+    </main>
 </body>
 
 </html>
