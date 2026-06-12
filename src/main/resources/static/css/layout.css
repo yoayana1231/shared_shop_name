@@ -102,7 +102,7 @@ header {
 
 .header_two{
 	display: flex;
-	justify-content: space-evenly
+	justify-content: space-evenly;
 }
 
 .header-serch input {
