@@ -3,6 +3,7 @@
 
 <head>
 	<meta charset="UTF-8" />
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -18,50 +19,52 @@
 					<form class="search-demo-form" th:action="@{/client/item/list/search}">
 						<input type="search" placeholder="商品名・カテゴリで探す" name="search">
 
-						<button type="submit">検索</button>
+						<button type="submit" th:src="@{/images/header/search.png}">検索</button>
 					</form>
 				</div>
+				
+				<div class="right_photo">
+					<div class="header_light">
+						<!--ログイン-->
+						<!--一般三郎　さん　|　ログアウト-->
+						<div th:if="${session.user != null and session.user.authority == 2}" class="user_info">
 
-				<div class="header_light">
-					<!--ログイン-->
-					<!--一般三郎　さん　|　ログアウト-->
-					<div th:if="${session.user != null and session.user.authority == 2}" class="user_info">
-						
-						<img th:src="@{/images/header/person.png}">
-						<a th:href="@{/client/user/detail}" th:text="${session.user.name}"></a>
-						さん | <a th:href="@{/logout}" th:text="#{logout}"></a>
-						
+							<a th:href="@{/client/user/detail}"><img class="person_photo"
+									th:src="@{/images/header/person.png}"></a>
+							<a th:href="@{/logout}" th:text="#{logout}"></a>
+
+						</div>
+
+
+						<div th:if="${session.user != null and (session.user.authority == 0 or session.user.authority == 1)}"
+							class="user_info">
+							<a th:href="@{/admin/user/detail/{id}(id=${session.user.id})}"
+								th:text="${session.user.name}"></a>さん
+							<a th:href="@{/logout}" th:text="#{logout}"></a>
+						</div>
+					</div>
+					<!--ログイン・会員登録　|　新規会員登録-->
+					<div th:if="${session.user == null}" class="user_info">
+
+						<a th:href="@{/login}"><img class="person_photo" th:src="@{/images/header/person.png}"></a>
+						<!--<a th:href="@{/client/user/regist/input/init}" th:text="#{client.regist}"></a>-->
+
+					</div>
+
+					<!--お気に入り-->
+					<div class="user_info">
+						<a th:href="@{/client/favorite/list}"><img class="favorite_photo"
+								th:src="@{/images/header/favorite.png}"></a>
 					</div>
 
 
-					<div th:if="${session.user != null and (session.user.authority == 0 or session.user.authority == 1)}"
-						class="user_info">
-						<a th:href="@{/admin/user/detail/{id}(id=${session.user.id})}"
-							th:text="${session.user.name}"></a>さん
-						<a th:href="@{/logout}" th:text="#{logout}"></a>
+					<!--買い物かご-->
+					<div class="user_info">
+						<a th:href="@{/client/basket/list}"><img class="cart_photo"
+								th:src="@{/images/header/shopping_cart.png}"></a>
 					</div>
-				</div>
-				<!--ログイン・会員登録　|　新規会員登録-->
-				<div th:if="${session.user == null}" class="user_info">
-					
-					<img th:src="@{/images/header/person.png}">
-					<a th:href="@{/login}" th:text="#{login}"></a> 
-					|<a th:href="@{/client/user/regist/input/init}" th:text="#{client.regist}"></a>
-						
-				</div>
-
-				<!--お気に入り-->
-				<div class="user_favorite">
-					<a th:href="@{/client/favorite/list}"><img th:src="@{/images/header/favorite.png}"></a>
-				</div>
-
-
-				<!--買い物かご-->
-				<div class="user_info">
-					<a th:href="@{/client/basket/list}"><img th:src="@{/images/header/shopping_cart.png}"></a>
 				</div>
 			</div>
-
 			<div class="header_two">
 				<!--商品一覧-->
 				<div>
