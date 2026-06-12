@@ -15,14 +15,19 @@
 
 	<!--ブランドコンセプト-->
 	<div class="brand_concept">
-		<div class="brand_concept_char">
-			<h1>ブランドコンセプト</h1>
-			<h2>日常のラグジュアリー</h2>
-			<p>厳選された素材と洗練された色彩が、あなたの個性にそっと寄り添います</p>
-			<p>鏡に向き合う時間が、もっと愛おしく、誇らしくなるように</p>
-		</div>
+
 		<div class="brand_concept_photo">
 			<img class="brand_concept_photo_1" th:src="@{/images/top_image_two_1.jpg}" alt="コンセプト写真">
+<<<<<<< HEAD
+=======
+
+			<div class="brand_concept_char">
+				<h1>ブランドコンセプト</h1>
+				<h2>日常のラグジュアリー</h2>
+				<p>厳選された素材と洗練された色彩が、あなたの個性にそっと寄り添います</p>
+				<p>鏡に向き合う時間が、もっと愛おしく、誇らしくなるように</p>
+			</div>
+>>>>>>> main
 		</div>
 	</div>
 
@@ -49,6 +54,7 @@
 	<!--ランキング-->
 
 
+<<<<<<< HEAD
 	<!--	<div>-->
 	<!--		<h2 class="title">-->
 	<!--			<span th:if="${sortType==1}" th:text="#{sort.latest.title}"></span>-->
@@ -70,6 +76,50 @@
 	<!--			</div>-->
 	<!--		</th:block>>-->
 	<!--	</div>-->
+=======
+	<!--カテゴリ欄	-->
+
+	<!--商品一覧-->
+	<!--		<div>-->
+	<!--			<a class="shop_list" th:href="@{/client/item/list/1}" th:text="#{item}+#{title.list}">商品一覧</a>-->
+	<!--		</div>-->
+	<div class="margin">
+		<h1 class="category_h1">カテゴリ</h1>
+
+		<div class="category_main">
+
+			<div th:each="category: ${categories}" class="category_list">
+				<a th:href="@{/client/item/list/category}" th:value="${category.id}">
+					<img class="category_photo"
+						th:src="@{/images/top/category/top_image_{imgName}.jpg(imgName=${category.id})}">
+					<span th:text="${category.name}"></span>
+				</a>
+			</div>
+
+		</div>
+	</div>
+	<div>
+		<h2 class="title">
+			<span th:if="${sortType==1}" th:text="#{sort.latest.title}"></span>
+			<span th:if="${sortType==2 || sortType==null}" th:text="#{sort.hotsell.title}"></span>
+		</h2>
+	</div>
+	<div th:if="${#lists.isEmpty(items)}">
+		<p th:text="#{msg.client.item.list.none}"></p>
+	</div>
+	<div class="item_list">
+		<th:block th:each="item, status: ${items}" th:if="${status.count le 10}">
+			<!--/* 1件分の商品情報 */-->
+			<div class="item">
+				<div class="item_name" th:text="${item.name}"></div>
+				<a th:href="@{/client/item/detail/}+${item.id}">
+					<img th:src="@{/images/{image}(image=${item.image})}" th:if="${item.image != null}" />
+					<img th:src="@{/images/common/no_image.jpg}" th:if="${item.image == null}" />
+				</a>
+			</div>
+		</th:block>>
+	</div>
+>>>>>>> main
 
 
 	<div>
