@@ -74,7 +74,22 @@ public class LoginController {
 
 		}
 
+		// メールアドレスからユーザー情報を取得
 		User user = userRepository.findByEmail(form.getEmail());
+		
+		// 取得したユーザー情報と入力されたパスワードが正しいか判定
+		if ((user == null) || (user.getPassword() != form.getPassword())) {
+			// 一致しなかった場合
+			// セッション情報を無効にして、ログイン画面再表示
+			session.invalidate();
+			returnStr = "login";
+		} else {
+			// 一致した場合
+			// セッションに情報をセット
+		}
+		
+		
+		
 		UserBean userBean = new UserBean();
 		userBean.setId(user.getId());
 		userBean.setAuthority(user.getAuthority());
