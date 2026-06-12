@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.servlet.http.HttpSession;
@@ -127,13 +128,15 @@ public class ReviewController {
 	/*
 	 * レビュー削除処理
 	 */
-	@GetMapping("/client/review/delete")
-	public String delete(@RequestParam("reviewid") Integer reviewId,  HttpSession session) {
+	@PostMapping("/client/review/delete")
+	public String delete(@RequestHeader(value="Referer", required=false) String referer,
+			@RequestParam("reviewId") Integer reviewId,
+			HttpSession session) {
 		
-		// ログイン中のユーザーIDを取得
+//		// ログイン中のユーザーIDを取得
 		Integer userId = ((UserBean) session.getAttribute("user")).getId();
-		// セッションに保存した商品IDを取得
-		Integer itemId = (Integer) session.getAttribute("itemId");
+//		// セッションに保存した商品IDを取得
+//		Integer itemId = (Integer) session.getAttribute("itemId");
 		
 //		Reviews review =
 //			reviewRepository.findByItemIdAndUserIdAndDeleteFlag(itemId, userId, 0);
@@ -148,12 +151,11 @@ public class ReviewController {
 		
 		//DBに変更を保存
 		reviewRepository.save(review);
-		//戻すページURLを保存
-		String returnURL = "client/item/detail/" + itemId;
+
 		// 入力完了したらセッションの商品IDを削除
 		session.removeAttribute("itemId");
 		
-		return "redirect:/" + returnURL;
+		return referer;
 	}
 
 }

@@ -60,7 +60,7 @@
 					<tr th:each="review: ${itemReviews}">
 						<td th:text="${review.rating}"></td>
 						<td th:text="${review.comments}"></td>
-						<div  th:if="${review.item.id == id}">
+						<th:block  th:if="${session.user != null && review.user == session.user.id}">
 							<td>
 								<form th:action="@{/client/review/input/{id}(id=${item.id})}" method="get">
 									<input type="hidden" th:value="*{id}">
@@ -68,12 +68,12 @@
 								</form>
 							</td>
 							<td>
-								<form th:action="@{/client/review/delete}" method="get">
+								<form th:action="@{/client/review/delete}" method="post">
 									<input type="hidden" name="reviewId" th:value="${review.id}">
 									<button type="submit">削除</button>
 								</form>
 							</td>
-						</div>
+						</th:block>
 					</tr>
 				</table>
 			</th:block>
