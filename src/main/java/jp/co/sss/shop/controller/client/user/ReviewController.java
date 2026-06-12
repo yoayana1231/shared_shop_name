@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.servlet.http.HttpSession;
@@ -44,14 +43,40 @@ public class ReviewController {
 	UserRepository userRepository;
 	
 	/*
-	 * レビュー入力画面に遷移
+	 * レビュー入力画面に遷移（新規登録）
 	 */
-	@GetMapping("/client/review/input/{id}")
-	public String review(@PathVariable Integer id,
-			@ModelAttribute ReviewForm form, HttpSession session) {
+	@GetMapping("/client/review/input/{itemId}")
+	public String reviewNew(@PathVariable Integer itemId,
+			@ModelAttribute ReviewForm form, Model model) {
 		
-		// セッションに商品IDを保存しておく
-		session.setAttribute("itemId", id);
+		// URLから受け取った商品IDをFormに保存
+		Item item = new Item();
+		item.setId(itemId);
+		form.setItem(item);
+		
+		model.addAttribute("reviewForm", form);
+		
+		return "client/item/review_input";
+		
+	}
+	
+	/* 
+	 * レビュー入力画面に遷移（編集）
+	 */
+	@GetMapping("/client/review/input/{reviewId}")
+	public String reviewEdit(@PathVariable Integer reviewId,
+			@ModelAttribute ReviewForm form, Model model) {
+		
+		// DBから編集するデータを取得する
+		Reviews editReview = reviewRepository.findByIdAndDeleteFlag(reviewId, 0);
+		
+		if (editReview != null) {
+			//データをFormにコピー
+			BeanUtils.copyProperties(form, editReview);
+			form.setItem(editReview.getItem());
+		}
+		
+		model.addAttribute("reviewForm", form);
 		
 		return "client/item/review_input";
 		
@@ -83,9 +108,15 @@ public class ReviewController {
 	public String save(@ModelAttribute ReviewForm form, 
 			HttpSession session, Model model) {
 		
-		//Reviewオブジェクトを生成
-		Reviews review = new Reviews();
-		BeanUtils.copyProperties(form, review);
+		Reviews review;
+		
+		if (form.getId() == null) {
+			review = new Reviews();
+		} else {
+			review = reviewRepository.findByIdAndDeleteFlag(form.getId(), form.getDeleteFlag());
+		}
+		
+		BeanUtils.copyProperties(review, form);
 		
 		// Userオブジェクトを生成
 		User user = new User();
@@ -93,22 +124,17 @@ public class ReviewController {
 		Integer userId = ((UserBean) session.getAttribute("user")).getId();
 		user.setId(userId);
 		
-		// Itemオブジェクトを生成
-		Item item = new Item();
 		// セッションに保存した商品IDを取得
-		Integer itemId = (Integer) session.getAttribute("itemId");
-		item.setId(itemId);
+		Integer itemId = form.getItem().getId();
 		
-		//ReviewエンティティにItemとUserをセット
+		//ReviewエンティティにUserをセット
 		review.setUser(user);
-		review.setItem(item);
 		
 		//入力内容をDBに登録
 		review = reviewRepository.save(review);
+		
 		//戻すページURLを保存
 		String returnURL = "client/item/detail/" + itemId;
-		// 入力完了したらセッションの商品IDを削除
-		session.removeAttribute("itemId");
 		
 		return "redirect:/" + returnURL;
 		
@@ -129,33 +155,24 @@ public class ReviewController {
 	 * レビュー削除処理
 	 */
 	@PostMapping("/client/review/delete")
-	public String delete(@RequestHeader(value="Referer", required=false) String referer,
-			@RequestParam("reviewId") Integer reviewId,
+	public String delete(@RequestParam("reviewId") Integer reviewId,
 			HttpSession session) {
-		
-//		// ログイン中のユーザーIDを取得
-		Integer userId = ((UserBean) session.getAttribute("user")).getId();
-//		// セッションに保存した商品IDを取得
-//		Integer itemId = (Integer) session.getAttribute("itemId");
-		
-//		Reviews review =
-//			reviewRepository.findByItemIdAndUserIdAndDeleteFlag(itemId, userId, 0);
 		
 		Reviews review = 
 				reviewRepository.findByIdAndDeleteFlag(reviewId, 0);
 		
+		// 商品IDを保存（リダイレクト用）
+		Integer itemId = review.getItem().getId();
+		
 		if (review != null) {
 			// 表示中→削除フラグを1にする
 			review.setDeleteFlag(1);
+			//DBに変更を保存
+			reviewRepository.save(review);
 		}
 		
-		//DBに変更を保存
-		reviewRepository.save(review);
+		return "redirect:/client/item/detail/" + itemId;
 
-		// 入力完了したらセッションの商品IDを削除
-		session.removeAttribute("itemId");
-		
-		return referer;
 	}
 
 }

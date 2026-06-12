@@ -20,19 +20,19 @@
 			<span th:case="4">☆☆☆☆</span>
 			<span th:case="5">☆☆☆☆☆</span>
 		</div>
-	</div>
-	<div>
 		<div>コメント</div>
 		<div th:text="${reviewForm.comments}"></div>
 	</div>
 	
 	<form th:action="@{/client/review/check/save}" method="post" th:object="${reviewForm}">
+		<input type="hidden" th:field="*{item.id}">
 		<input type="hidden" th:field="*{rating}">
 		<input type="hidden" th:field="*{comments}">
 		<input type="submit" value="送信">
 	</form>
 	
 	<form th:action="@{/client/review/check/back}" method="post" th:object="${reviewForm}">
+		<input type="hidden" th:field="*{item.id}">
 		<input type="hidden" th:field="*{rating}">
 		<input type="hidden" th:field="*{comments}">
 		<input type="submit" value="戻る">
