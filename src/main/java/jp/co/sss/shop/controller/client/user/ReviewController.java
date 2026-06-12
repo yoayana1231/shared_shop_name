@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -126,8 +127,8 @@ public class ReviewController {
 	/*
 	 * レビュー削除処理
 	 */
-	@GetMapping("/client/review/delete/{reviewId}")
-	public String delete(@PathVariable Integer reviewId,  HttpSession session) {
+	@GetMapping("/client/review/delete")
+	public String delete(@RequestParam("reviewid") Integer reviewId,  HttpSession session) {
 		
 		// ログイン中のユーザーIDを取得
 		Integer userId = ((UserBean) session.getAttribute("user")).getId();

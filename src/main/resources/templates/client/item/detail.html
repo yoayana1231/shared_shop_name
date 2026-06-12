@@ -49,39 +49,35 @@
 		
 		<div>
 			<!--レビュー表示-->
-			<table>
-				<tr>
-					<th th:text="#{reviewForm.rating}"></th>
-					<th th:text="#{reviewForm.comments}"></th>
-				</tr>
-				<tr th:each="review: ${itemReviews}">
-					<div>
-						<input type=""
-					</div>
-					<td>
-						<div th:switch="${review.rating}">
-							<span th:case="1">☆</span>
-							<span th:case="2">☆☆</span>
-							<span th:case="3">☆☆☆</span>
-							<span th:case="4">☆☆☆☆</span>
-							<span th:case="5">☆☆☆☆☆</span>
+			<p th:text="#{msg.review.list.none}" th:if="${#lists.isEmpty(itemReviews)}"></p>
+			
+			<th:block th:if="!${#lists.isEmpty(itemReviews)}">
+				<table>
+					<tr>
+						<th th:text="#{rating}"></th>
+						<th th:text="#{comments}"></th>
+					</tr>
+					<tr th:each="review: ${itemReviews}">
+						<td th:text="${review.rating}"></td>
+						<td th:text="${review.comments}"></td>
+						<div  th:if="${review.item.id == id}">
+							<td>
+								<form th:action="@{/client/review/input/{id}(id=${item.id})}" method="get">
+									<input type="hidden" th:value="*{id}">
+									<button type="submit">編集</button>
+								</form>
+							</td>
+							<td>
+								<form th:action="@{/client/review/delete}" method="get">
+									<input type="hidden" name="reviewId" th:value="${review.id}">
+									<button type="submit">削除</button>
+								</form>
+							</td>
 						</div>
-					</td>
-					<td th:text="${review.comments}"></td>
-					<td th:if="${review.user.id} == ${session.user.id}">
-						<form th:action="@{/client/review/input/{id}(id=${item.id})}" method="get">
-							<input type="hidden" name="itemId" th:value="${review.item.id}">
-							<button type="submit">変更</button>
-						</form>
-					</td>
-					<td th:if="${review.user.id} == ${session.user.id}">
-						<form th:action="@{/client/review/delete/{id}(id=${review.id})} " method="get">
-							<input type="hidden" name="reviewId" th:value="${review.id}">
-							<button type="submit">削除</button>
-						</form>
-					</td>
-				</tr>
-			</table>
+					</tr>
+				</table>
+			</th:block>
+		
 		</div>
 	</div>
 
