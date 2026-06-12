@@ -74,19 +74,31 @@ public class LoginController {
 
 		}
 
+		// メールアドレスからユーザー情報を取得
 		User user = userRepository.findByEmail(form.getEmail());
-		UserBean userBean = new UserBean();
-		userBean.setId(user.getId());
-		userBean.setAuthority(user.getAuthority());
-		// 必要に応じて他の情報もセット
-
-		session.setAttribute("user", userBean);
-
-		// 3. 権限による分岐
-		if (user.getAuthority() == Constant.AUTH_CLIENT) {
-			returnStr = "redirect:/";
+		
+		// 取得したユーザー情報と入力されたパスワードが正しいか判定
+		if ((user == null) || (!user.getPassword().equals(form.getPassword()))) {
+			// 一致しなかった場合
+			// セッション情報を無効にして、ログイン画面再表示
+			session.invalidate();
+			returnStr = "login";
 		} else {
-			returnStr = "redirect:/admin/menu";
+			// 一致した場合
+			// セッションに情報をセット
+			UserBean userBean = new UserBean();
+			userBean.setId(user.getId());
+			userBean.setName(user.getName());
+			userBean.setAuthority(user.getAuthority());
+			
+			session.setAttribute("user", userBean);
+			
+			// 権限による分岐
+			if (user.getAuthority() == Constant.AUTH_CLIENT) {
+				returnStr = "redirect:/";
+			} else {
+				returnStr = "redirect:/admin/menu";
+			}
 		}
 
 		return returnStr;

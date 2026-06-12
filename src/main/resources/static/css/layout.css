@@ -41,7 +41,7 @@ form {
 }
 
 table {
-	width: 100%;
+/*	width: 100%;*/
 	background-color: #fff;
 	border-collapse: collapse;
 	margin: 0px auto 20px;
@@ -58,13 +58,11 @@ li {
 
 }
 
-
-
-.container {
-	width: 960px;
-	margin: 0 auto;
-	justify-content: space-between;
-}
+/*.container {*/
+/*	width: auto;*/
+/*	margin: 0 auto;*/
+/*	justify-content: space-between;*/
+/*}*/
 
 body>.container {
 	margin-top: 15px;
@@ -78,6 +76,8 @@ body>.container {
 header .container {
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
+	height: 50px;
 }
 
 header {
@@ -91,6 +91,18 @@ header {
 
 .header_one {
 	display: flex;
+	grid-template-columns: 240px minmax(280px, 1fr) auto;
+
+}
+
+.header_light{
+	display: flex;
+	width: auto;
+}
+
+.header_two{
+	display: flex;
+	justify-content: space-evenly;
 }
 
 .header-serch input {
@@ -137,11 +149,10 @@ header {
  * 基本サイズが変更になったとしても、比例して大きさが変化します。
  */
 .site_title {
-	font-size: 1.8em;
+	font-size: 1em;
 	font-weight: normal;
-	margin: 0;
+	margin: 3px;
 	cursor: pointer;
-
 }
 
 /* スキルアップテクニック4
@@ -151,6 +162,8 @@ header {
 .user_info {
 	text-align: right;
 	padding-top: 15px;
+	width: auto; 
+	height: 35px;
 }
 
 .user_info a {
@@ -290,8 +303,9 @@ aside.admin_menu {
 
 /* ---- メイン ---- */
 .main {
-	width: 76%;
+	width: 100%;
 	padding-bottom: 80px;
+
 
 }
 
@@ -429,7 +443,7 @@ aside.admin_menu {
  * footer要素は画面、もしくはページの最下部に表示されるようになります。
  */
 footer {
-	background-color: #87ceeb;
+	background-color: #ffffff;
 	text-align: center;
 	position: absolute;
 	bottom: 0;
