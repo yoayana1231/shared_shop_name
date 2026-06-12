@@ -57,6 +57,7 @@
 				<div>
 					<a class="shop_list" th:href="@{/client/item/list/1}" th:text="#{item}+#{title.list}">商品一覧</a>
 				</div>
+				
 
 				<div th:each="category: ${categories}">
 					<a th:href="@{/client/item/list/category}" th:value="${category.id}" th:text="${category.name}"></a>
@@ -70,6 +71,7 @@
 				<!--				<a th:href="@{/client/item/list/7}">ファンデーション</a>-->
 				<!--				<a th:href="@{/client/item/list/8}">下地</a>-->
 			</div>
+			
 		</div>
 	</div>
 
