@@ -41,7 +41,7 @@ form {
 }
 
 table {
-	width: 100%;
+/*	width: 100%;*/
 	background-color: #fff;
 	border-collapse: collapse;
 	margin: 0px auto 20px;
@@ -102,7 +102,7 @@ header {
 
 .header_two{
 	display: flex;
-	justify-content: space-evenly
+	justify-content: space-evenly;
 }
 
 .header-serch input {
@@ -303,7 +303,9 @@ aside.admin_menu {
 
 /* ---- メイン ---- */
 .main {
+	width: 100%;
 	padding-bottom: 80px;
+
 
 }
 
