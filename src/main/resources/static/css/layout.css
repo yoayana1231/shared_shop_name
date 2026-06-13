@@ -42,7 +42,7 @@ form {
 }
 
 table {
-	/*	width: 100%;*/
+	width: 100%;
 	background-color: #fff;
 	border-collapse: collapse;
 	margin: 0px auto 20px;
@@ -105,10 +105,10 @@ header {
 .header_two {
 	display: flex;
 	justify-content: space-evenly;
+	margin: 5px 0 5px 0;
 }
 
 .header_two a {
-	/*	transition: color .24s ease, background .24s ease, border-color .24s ease, transform .24s ease, box-shadow .24s ease;*/
 	text-decoration: none;
 	cursor: pointer;
 }
@@ -136,31 +136,37 @@ header {
 .person_photo {
 	width: 35px;
 	height: 35px;
-	border: 3px solid #f3f3f3;
+	border: 2px solid #f3f3f3;
 	border-radius: 50%;
 	object-fit: cover;
 	transform: translateY(-2px);
-	box-shadow: 0 10px 24px rgba(15, 81, 50, .16);
+	box-shadow: 0 5px 14px rgba(15, 81, 50, .16);
 }
 
 .cart_photo {
 	width: 35px;
 	height: 35px;
-	border: 3px solid #f3f3f3;
+	border: 2px solid #f3f3f3;
 	border-radius: 50%;
 	object-fit: cover;
 	transform: translateY(-2px);
-	box-shadow: 0 10px 24px rgba(15, 81, 50, .16);
+	box-shadow: 0 5px 14px rgba(15, 81, 50, .16);
+	font-size: 0.78rem;
+}
+
+.cart_photo img{
+	width: 50%;
+	height: 50%;
 }
 
 .favorite_photo {
 	width: 35px;
 	height: 35px;
-	border: 3px solid #f3f3f3;
+	border: 2px solid #f3f3f3;
 	border-radius: 50%;
 	object-fit: cover;
 	transform: translateY(-2px);
-	box-shadow: 0 10px 24px rgba(15, 81, 50, .16);
+	box-shadow: 0 5px 14px rgba(15, 81, 50, .16);
 }
 
 .right_photo {
