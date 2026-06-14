@@ -225,5 +225,9 @@ public class ClientOrderRegistController {
 	}
 
 	//入力画面で戻るを押した時の処理
-//	⑫
+	@RequestMapping(path = "/client/order/complete", method = RequestMethod.POST)
+	public String showOrderComplete() {
+		return "/client/order/complete";
+	}
+
 }
