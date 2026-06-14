@@ -17,10 +17,12 @@ import jp.co.sss.shop.bean.ItemBean;
 import jp.co.sss.shop.bean.UserBean;
 import jp.co.sss.shop.entity.Category;
 import jp.co.sss.shop.entity.Item;
+import jp.co.sss.shop.entity.Reviews;
 import jp.co.sss.shop.entity.User;
 import jp.co.sss.shop.entity.ViewHistories;
 import jp.co.sss.shop.repository.CategoryRepository;
 import jp.co.sss.shop.repository.ItemRepository;
+import jp.co.sss.shop.repository.ReviewsRepository;
 import jp.co.sss.shop.repository.UserRepository;
 import jp.co.sss.shop.repository.ViewHistoriesRepository;
 import jp.co.sss.shop.service.BeanTools;
@@ -49,6 +51,10 @@ public class ClientItemShowController {
 
 	@Autowired
 	UserRepository userRepository;
+	
+	// Reviewリポジトリ
+	@Autowired
+	ReviewsRepository reviewRepository;
 
 	/**
 	 * Entity、Form、Bean間のデータコピーサービス
@@ -120,6 +126,7 @@ public class ClientItemShowController {
 
 	/**
 	 * 市川実装	商品詳細画面用コントローラー
+	 * 吉永実装 レビュー表示部分
 	 * 
 	 * @param id
 	 * @param model		Viewへの値受渡し
@@ -155,6 +162,15 @@ public class ClientItemShowController {
 		if (user != null) {
 			saveOrUpdateViewHistory(user, item);
 		}
+		
+		//レビュー表示
+		//詳細画面を表示している商品IDかつ削除フラグが0のものを検索
+		List<Reviews> itemReviews =
+				reviewRepository.findByItemIdAndDeleteFlag(id, 0);
+		
+		//リクエストスコープに格納
+		model.addAttribute("itemReviews", itemReviews);
+		
 		return "client/item/detail";
 	}
 
