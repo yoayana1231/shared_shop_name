@@ -11,9 +11,9 @@
 		<!--トップ（Cry Baby）-->
 		<div th:fragment="layout-header">
 			<div class="container">
-				<a th:class="site_title" th:href="@{/}" th:text="#{shop.title}">
-					<img th:src="@{/images/header/Cry_Baby_logo.jpg}">
-				</a>
+				<h1><a th:class="site_title" th:href="@{/}" th:text="#{shop.title}">
+						<img th:src="@{/images/header/Cry_Baby_logo.jpg}">
+					</a></h1>
 
 				<!--検索欄-->
 				<div class="header-serch">
@@ -25,7 +25,7 @@
 						</button>
 					</form>
 				</div>
-				
+
 				<div class="right_photo">
 					<div class="header_light">
 						<!--ログイン-->
@@ -76,7 +76,8 @@
 
 
 				<div th:each="category: ${categories}">
-					<a class="shop_list_many" th:href="@{/client/item/list/category}" th:value="${category.id}" th:text="${category.name}"></a>
+					<a class="shop_list_many" th:href="@{/client/item/list/category}" th:value="${category.id}"
+						th:text="${category.name}"></a>
 				</div>
 
 			</div>

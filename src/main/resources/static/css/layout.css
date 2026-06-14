@@ -119,18 +119,36 @@ header {
 	box-sizing: border-box;
 }
 
+.header-serch button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	height: 40px;
+	box-sizing: border-box;
+}
+
 .search-demo-form {
 	display: grid;
 	grid-template-columns: minmax(0, 1fr) auto;
 }
 
 .search-demo-form input {
-	min-width: 1;
+	min-width: 0;
 	height: 40px;
+	border: 1px solid rgb(192, 192, 192);
+    flex-grow: 1;
+    padding: 0.7rem 0 0.7rem 0.8rem;
+    border-radius: 1.5rem 0 0 1.5rem;
 }
 
 .search-demo-form button {
 	cursor: pointer;
+	border: 1px solid rgb(192, 192, 192);
+    padding: .8rem .9rem .8rem .8rem;
+    border-radius: 0 1.5rem 1.5rem 0;
+    border: none;
+    background-color: rgb(235, 251, 254);
+    font-size: .75rem;
 
 }
 
@@ -191,26 +209,32 @@ header {
 
 /*}*/
 
-.header-serch button {
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	height: 40px;
-	box-sizing: border-box;
-
-}
-
 .shop_list {
 	position: relative;
 	letter-spacing: 0.16em;
 	text-transform: uppercase;
 	padding: 8px 0px;
-	transition: color 0.24s, background 0.24s, border-color 0.24s, transform 0.24s, box-shadow 0.24s;
 	color: #595959;
+	object-fit: cover;
+	transition: transform .18s ease, box-shadow .18s ease;
+	padding: 1.0625rem;
+}
+
+.shop_list:hover{
+	transform: translateY(-2px);
+	box-shadow: 0 12px 24px rgba(15, 81, 50, .16);		
 }
 
 .shop_list_many {
 	color: #595959;
+	object-fit: cover;
+	transition: transform .18s ease, box-shadow .18s ease;
+	padding: 1.0625rem;
+}
+
+.shop_list_many:hover{
+	transform: translateY(-2px);
+	box-shadow: 0 12px 24px rgba(15, 81, 50, .16);		
 }
 
 /* スキルアップテクニック3
@@ -225,6 +249,9 @@ header {
 	font-weight: normal;
 	margin: 3px;
 	cursor: pointer;
+	color: #595959;
+	text-decoration: none;
+	
 }
 
 /* スキルアップテクニック4
@@ -268,9 +295,9 @@ header {
 
 
 /* ---- ナビゲーションバー ---- */
-.navi_area {
-	background: #edf9fe;
-}
+/*.navi_area {*/
+/*	background: #edf9fe;*/
+/*}*/
 
 .navi_menu {
 	width: 960px;
