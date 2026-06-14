@@ -131,6 +131,7 @@ header {
 
 .search-demo-form button {
 	cursor: pointer;
+
 }
 
 .person_photo {
@@ -139,8 +140,12 @@ header {
 	border: 2px solid #f3f3f3;
 	border-radius: 50%;
 	object-fit: cover;
+	transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.person_photo:hover {
 	transform: translateY(-2px);
-	box-shadow: 0 5px 14px rgba(15, 81, 50, .16);
+	box-shadow: 0 12px 24px rgba(15, 81, 50, .16);
 }
 
 .cart_photo {
@@ -149,14 +154,12 @@ header {
 	border: 2px solid #f3f3f3;
 	border-radius: 50%;
 	object-fit: cover;
-	transform: translateY(-2px);
-	box-shadow: 0 5px 14px rgba(15, 81, 50, .16);
-	font-size: 0.78rem;
+	transition: transform .18s ease, box-shadow .18s ease;
 }
 
-.cart_photo img{
-	width: 50%;
-	height: 50%;
+.cart_photo:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 12px 24px rgba(15, 81, 50, .16);
 }
 
 .favorite_photo {
@@ -165,8 +168,12 @@ header {
 	border: 2px solid #f3f3f3;
 	border-radius: 50%;
 	object-fit: cover;
+	transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.favorite_photo:hover{
 	transform: translateY(-2px);
-	box-shadow: 0 5px 14px rgba(15, 81, 50, .16);
+	box-shadow: 0 12px 24px rgba(15, 81, 50, .16);	
 }
 
 .right_photo {
@@ -191,6 +198,19 @@ header {
 	height: 40px;
 	box-sizing: border-box;
 
+}
+
+.shop_list {
+	position: relative;
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+	padding: 8px 0px;
+	transition: color 0.24s, background 0.24s, border-color 0.24s, transform 0.24s, box-shadow 0.24s;
+	color: #595959;
+}
+
+.shop_list_many {
+	color: #595959;
 }
 
 /* スキルアップテクニック3

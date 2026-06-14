@@ -11,15 +11,18 @@
 		<!--トップ（Cry Baby）-->
 		<div th:fragment="layout-header">
 			<div class="container">
-				<h1><a th:class="site_title" th:href="@{/}" th:text="#{shop.title}"></a></h1>
+				<a th:class="site_title" th:href="@{/}" th:text="#{shop.title}">
+					<img th:src="@{/images/header/Cry_Baby_logo.jpg}">
+				</a>
 
 				<!--検索欄-->
 				<div class="header-serch">
 
 					<form class="search-demo-form" th:action="@{/client/item/list/search}">
 						<input type="search" placeholder="商品名・カテゴリで探す" name="search">
-
-						<button type="submit" th:src="@{/images/header/search.svg}">検索</button>
+						<button class="search_button" type="submit">
+							<img th:src="@{/images/header/search.svg}" alt="検索">
+						</button>
 					</form>
 				</div>
 				
@@ -73,7 +76,7 @@
 
 
 				<div th:each="category: ${categories}">
-					<a th:href="@{/client/item/list/category}" th:value="${category.id}" th:text="${category.name}"></a>
+					<a class="shop_list_many" th:href="@{/client/item/list/category}" th:value="${category.id}" th:text="${category.name}"></a>
 				</div>
 
 			</div>

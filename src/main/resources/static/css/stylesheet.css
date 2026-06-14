@@ -795,7 +795,7 @@ select {
 }
 
 .category_tittle {
-	width: 100%;
+	width: 500px;
 	height: min-content;
 	margin-top: 80px;
 	margin-left: 50px;
