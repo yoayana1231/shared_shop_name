@@ -38,8 +38,7 @@
 				<input type="hidden" th:field="*{id}" />
 				<input type="submit" value="買い物かごに入れる" class="send_button" />
 			</form>
-			<form th:action="@{/client/review/input/{itemId}(id=${item.id})}" method="get" class="user_info_form">
-				<input type="hidden" th:field="*{id}" />
+			<form th:action="@{/client/review/input/{itemId}(itemId=${item.id})}" method="get" class="user_info_form">
 				<input type="submit" value="レビュー" class="send_button" />
 			</form>
 			<form th:action="@{/client/item/list/1}" method="post">
@@ -62,7 +61,7 @@
 						<td th:text="${review.comments}"></td>
 						<th:block  th:if="${session.user != null && review.user.id == session.user.id}">
 							<td>
-								<form th:action="@{/client/review/input/{reviewId}(id=${review.id})}" method="get">
+								<form th:action="@{/client/review/edit/input/{reviewId}(reviewId=${review.id})}" method="get">
 <!--									<input type="hidden" th:value="${review.id}">-->
 									<button type="submit">編集</button>
 								</form>

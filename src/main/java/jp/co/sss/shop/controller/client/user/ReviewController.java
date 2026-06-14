@@ -63,7 +63,7 @@ public class ReviewController {
 	/* 
 	 * レビュー入力画面に遷移（編集）
 	 */
-	@GetMapping("/client/review/input/{reviewId}")
+	@GetMapping("/client/review/edit/input/{reviewId}")
 	public String reviewEdit(@PathVariable Integer reviewId,
 			@ModelAttribute ReviewForm form, Model model) {
 		
@@ -72,7 +72,7 @@ public class ReviewController {
 		
 		if (editReview != null) {
 			//データをFormにコピー
-			BeanUtils.copyProperties(form, editReview);
+			BeanUtils.copyProperties(editReview, form);
 			form.setItem(editReview.getItem());
 		}
 		
@@ -112,11 +112,14 @@ public class ReviewController {
 		
 		if (form.getId() == null) {
 			review = new Reviews();
+			BeanUtils.copyProperties(form, review);
 		} else {
-			review = reviewRepository.findByIdAndDeleteFlag(form.getId(), form.getDeleteFlag());
+			review = reviewRepository.findByIdAndDeleteFlag(form.getId(), 0);
+			review.setRating(form.getRating());
+			review.setComments(form.getComments());
 		}
 		
-		BeanUtils.copyProperties(review, form);
+		//BeanUtils.copyProperties(form, review);
 		
 		// Userオブジェクトを生成
 		User user = new User();
@@ -124,8 +127,8 @@ public class ReviewController {
 		Integer userId = ((UserBean) session.getAttribute("user")).getId();
 		user.setId(userId);
 		
-		// セッションに保存した商品IDを取得
-		Integer itemId = form.getItem().getId();
+		// 商品IDをセット（リダイレクト用）
+		Integer itemId = review.getItem().getId();
 		
 		//ReviewエンティティにUserをセット
 		review.setUser(user);
