@@ -11,28 +11,75 @@
 </head>
 
 <body th:object="${loginForm}" class="user item_list">
-	<div class="list_title">
-		<div class="img_title">
-			<img th:src="@{/images/flower_title.avif}">
+	<!--	<div class="list_title">-->
+	<!--		<div class="img_title">-->
+	<!--			<img th:src="@{/images/top_list_image.jpg}">-->
+	<!--		</div>-->
+	<!--		<div class="text_title">-->
+	<!--			<span th:class="title_list" th:text="#{item}+#{title.list}"></span>-->
+	<!--		</div>-->
+	<!--	</div>-->
+	<section class="hero">
+		<div class="hero-copy">
+			<p class="eyebrow">Make everyday</p>
+			<h1>Beautiful.</h1>
+			<p class="lead">わたしらしく、美しく。</p>
+			<p class="body-copy">
+				毎日にきらめきをくれる、<br />特別なコスメをあなたに。
+			</p>
 		</div>
-		<div class="text_title">
-			<h2 th:class="title_list" th:text="#{item}+#{title.list}"></h2>
+		<div class="hero-image" role="img" aria-label="cosmetics on marble table"></div>
+		<div class="hero-pager" aria-hidden="true">
+			<span class="is-current">01</span><span>02</span><span>03</span>
 		</div>
+	</section>
+	<div class="wide-banners">
+		<a th:href="@{/client/item/list/1(categoryId=${categoryId})}"
+			class="wide-banner arrival"><strong>NEW<br />ARRIVAL</strong><span>新作アイテムはこちら</span>
+			</th:unless="${sortType==1}"a>
+			<a th:href="@{/client/item/list/2(categoryId=${categoryId})}"
+				class="wide-banner special"><strong>EDITOR'S<br />PICK</strong><span>今月の人気アイテム</span></a>
 	</div>
-	<div class="sorted_by">
-		<span th:if="${sortType==1}" th:text="#{sort.latest.str}"></span>
-		<a th:unless="${sortType==1}" th:href="@{/client/item/list/1(categoryId=${categoryId})}"
-			th:text="#{sort.latest.str}"></a>
-
-		<span th:if="${sortType==2}" th:text="#{sort.hotsell.str}"></span>
-		<a th:unless="${sortType==2}" th:href="@{/client/item/list/2(categoryId=${categoryId})}"
-			th:text="#{sort.hotsell.str}"></a>
-
-		<p th:text="#{msg.client.item.list.none}" th:if="${#lists.isEmpty(items)}"></p>
+	<div class="section-head">
+		<div class="title-wrap">
+			<p class="section-label">PRODUCTS</p>
+			<h2>商品一覧</h2>
+		</div>
 
 	</div>
 
+	<div class="category-tabs">
 
+		<a th:href="@{/client/item/list/1}" class="active">すべて</a>
+
+		<a th:each="category : ${categories}" th:href="@{/client/item/list/category(categoryId=${category.id})}"
+			th:text="${category.name}">
+		</a>
+
+		<!--		<a href="#">下地</a>-->
+		<!--		<a href="#">ファンデーション</a>-->
+		<!--		<a href="#">アイブロウ</a>-->
+		<!--		<a href="#">アイライナー</a>-->
+		<!--		<a href="#">マスカラ</a>-->
+		<!--		<a href="#">アイシャドウ</a>-->
+		<!--		<a href="#">チーク</a>-->
+		<!--		<a href="#">リップ</a>-->
+
+
+	</div>
+	<!--		<div class="sorted_all">-->
+
+	<!--			<span class="new_sort" th:if="${sortType==1}" th:text="#{sort.latest.str}"></span>-->
+	<!--			<a class="a_new" th:unless="${sortType==1}" th:href="@{/client/item/list/1(categoryId=${categoryId})}"-->
+	<!--				th:text="#{sort.latest.str}"></a>-->
+
+	<!--			<span class="pop_sort" th:if="${sortType==2}" th:text="#{sort.hotsell.str}"></span>-->
+	<!--			<a class="a_new" th:unless="${sortType==2}" th:href="@{/client/item/list/2(categoryId=${categoryId})}"-->
+	<!--				th:text="#{sort.hotsell.str}"></a>-->
+
+	<!--			<p th:text="#{msg.client.item.list.none}" th:if="${#lists.isEmpty(items)}"></p>-->
+
+	<!--		</div>-->
 	<th:block th:if="!${#lists.isEmpty(items)}">
 		<!--					<article class="item_menu">-->
 		<!--						<p class="item_image" th:text="#{data.item.image}"></p>-->
@@ -44,36 +91,65 @@
 
 
 		<!--		/* 商品一覧 */-->
-		<div class="list_card">
-			<article class="item_card_list" th:each="item, status: ${items}">
-				<div class="image">
-					<a th:href="@{/client/item/detail/{id}(id=${item.id})}">
-						<img th:src="@{/images/photo/{imgName}(imgName=${item.image})}" th:if="${item.image != null}" />
-						<img th:src="@{/images/common/no_image.jpg}" th:if="${item.image == null}" />
-					</a>
-				</div>
-				<div>
 
-					<p class="item_name" th:text="${item.name}"></p>
-					<p class="item_price" th:text="${item.price}"></p>
-					<span class="item_category" th:text="${item.category.name}"></span>
-					<div class="item_form">
-						<div class="button_all">
-							<div class="favorite_button">
-								<form th:action="@{/client/favorite/update}" method="post">
-									<input type="hidden" name="itemId" th:value="${item.id}">
-									<button type="submit"><img th:src="@{/images/faviorite_blank.svg}"></button>
-								</form>
-							</div>
-							<div class="cart">
-								<form th:action="@{/client/basket/list}" method="get">
-									<button type="submit" class="cart-button">ADD TO CART</button>
-								</form>
+		<div class="list_card">
+			<aside class="editorial-column">
+				<div class="quote-card">
+					<span class="quote-mark">“</span>
+					<h3>ときめきは、<br />きっと毎日つくれる。</h3>
+					<p>心がふっとほどけるような、お気に入りとの出会いを。</p>
+				</div>
+				<div class="ranking-card">
+					<div class="mini-heading">
+						<span>RANKING</span><small>人気アイテム</small>
+					</div>
+					<ol>
+						<li>
+							<img th:src="@{/images/photo/shopping.webp}" alt="" /><span>さおりっぷ<small>¥3500</small></span>
+						</li>
+						<li>
+							<img th:src="@{/images/photo/shopping3.webp}"
+								alt="" /><span>蜜ひとくち<small>¥3000</small></span>
+						</li>
+						<li>
+							<img th:src="@{/images/photo/shopping4.webp}" alt="" /><span>恋つぼみ<small>¥3450</small></span>
+						</li>
+					</ol>
+					<a th:href="@{/client/item/list/2(categoryId=${categoryId})}">人気アイテムをもっとみる →</a>
+				</div>
+			</aside>
+			<div class="product_grid">
+				<article class="item_card_list" th:each="item, status: ${items}">
+					<div class="image">
+						<a th:href="@{/client/item/detail/{id}(id=${item.id})}">
+							<img th:src="@{/images/photo/{imgName}(imgName=${item.image})}"
+								th:if="${item.image != null}" />
+							<img th:src="@{/images/common/no_image.jpg}" th:if="${item.image == null}" />
+						</a>
+					</div>
+					<div>
+						<p class="item_name" th:text="${item.name}"></p>
+						<p class="item_price" th:text="${item.price}"></p>
+						<span class="item_category" th:text="${item.category.name}"></span>
+						<div class="item_form">
+							<div class="button_all">
+								<div class="favorite_button">
+									<form th:action="@{/client/favorite/update}" method="post">
+										<input type="hidden" name="itemId" th:value="${item.id}">
+										<button type="submit"><img th:src="@{/images/faviorite_blank.svg}"></button>
+									</form>
+								</div>
+								<div class="cart">
+									<!--																		<form th:action="@{/client/basket/add}" method="post" th:if="*{stock > 0}">-->
+									<form th:action="@{/client/basket/list}" method="get">
+										<button type="submit" class="cart-button">ADD TO CART</button>
+									</form>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-			</article>
+				</article>
+			</div>
 		</div>
 	</th:block>
 </body>

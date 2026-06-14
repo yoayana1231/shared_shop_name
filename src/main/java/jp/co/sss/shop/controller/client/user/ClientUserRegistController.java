@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
+import jp.co.sss.shop.bean.UserBean;
 import jp.co.sss.shop.entity.User;
 import jp.co.sss.shop.form.UserForm;
 import jp.co.sss.shop.repository.UserRepository;
@@ -100,9 +101,12 @@ public class ClientUserRegistController {
 		//セッションスコープの入力情報削除
 		session.removeAttribute("userForm");
 		//未ログインでの会員登録の場合
+		
 		if (user.getAuthority() == 2) {
 			//セッションスコープに会員情報をセットし、ログイン状態にする
-			session.setAttribute("newUsers", resist);
+			UserBean beanResist = new UserBean();
+			BeanUtils.copyProperties(resist, beanResist);
+			session.setAttribute("user", beanResist);
 
 		}
 
