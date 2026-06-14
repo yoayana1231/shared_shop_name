@@ -41,6 +41,8 @@
 		<!--						<p class="item_category" th:text="#{category}"></p>-->
 		<!--						<p class="favorite">お気に入りボタン(仮)</p>-->
 		<!--					</article>-->
+
+
 		<!--		/* 商品一覧 */-->
 		<div class="list_card">
 			<article class="item_card_list" th:each="item, status: ${items}">
@@ -70,8 +72,6 @@
 							</div>
 						</div>
 					</div>
-					<img th:src="@{/images/photo/{imgName}(imgName=${item.image})}" th:if="${item.image != null}" />
-					<img th:src="@{/images/common/no_image.jpg}" th:if="${item.image == null}" />
 				</div>
 			</article>
 		</div>

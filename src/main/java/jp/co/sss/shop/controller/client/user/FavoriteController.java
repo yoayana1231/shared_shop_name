@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jp.co.sss.shop.bean.UserBean;
 import jp.co.sss.shop.entity.Favorite;
@@ -65,7 +66,8 @@ public class FavoriteController {
 	 * お気に入り登録・削除
 	 */
 	@PostMapping("/client/favorite/update")
-	public String update(@RequestParam("itemId") Integer itemId, HttpSession session) {
+	public String update(HttpServletRequest request,
+			@RequestParam("itemId") Integer itemId, HttpSession session) {
 		
 		// ログイン中のユーザーIDを取得
 		Integer userId = ((UserBean) session.getAttribute("user")).getId();
@@ -95,8 +97,11 @@ public class FavoriteController {
 			favoriteRepository.save(newFavorite);
 		}
 		
+		// 元居たページのURLを取得
+		String returnURL = request.getHeader("referer");
+		
 		// 元居たページに戻す
-		return "redirect:/";
+		return "redirect:" + returnURL;
 		
 	}
 
