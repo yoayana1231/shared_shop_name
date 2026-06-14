@@ -30,27 +30,28 @@
 	</div>
 
 	<th:block th:if="${session.basketBeans != null}">
-		<table class="list_table basket">
-			<tr>
-				<th>[[#{data.basket.item.name}]]</th>
-				<th>[[#{data.basket.count}]]</th>
-				<th>[[#{data.basket.operate}]]</th>
-				<th>[[#{data.basket.stock.status}]]</th>
-			</tr>
-			<tr th:each="item, status: ${session.basketBeans}">
-				<td><a th:href="@{/client/item/detail/{id}(id=${item.id})}" th:text="${item.name}"></a></td>
-				<td th:text="${item.orderNum}"></td>
-				<td>
-					<form th:action="@{/client/basket/delete}" method="post">
-						<input type="hidden" name="id" th:value="${item.id}" /> <input type="submit" value="削除"
-							class="delete" />
-					</form>
-				</td>
-				<td th:if="${item.stock == 0}" th:text="#{data.out.of.stock}"></td>
-				<td th:if="${item.stock > 5}" th:text="#{data.in.stock}"></td>
-				<td th:if="${item.stock >= 1 and 5 >= item.stock }" th:text="${item.stock}"></td>
-			</tr>
-		</table>
+		<div class="list_table basket">
+			<!--			<tr>-->
+			<!--				<th>[[#{data.basket.item.name}]]</th>-->
+			<!--				<th>[[#{data.basket.count}]]</th>-->
+			<!--				<th>[[#{data.basket.operate}]]</th>-->
+			<!--				<th>[[#{data.basket.stock.status}]]</th>-->
+			<!--			</tr>-->
+			<article th:each="item, status: ${session.basketBeans}">
+				
+				<p><a th:href="@{/client/item/detail/{id}(id=${item.id})}" th:text="${item.name}"></a></p>
+				<p th:text="${item.orderNum}"></p>
+				<p>
+				<form th:action="@{/client/basket/delete}" method="post">
+					<input type="hidden" name="id" th:value="${item.id}" /> <input type="submit" value="削除"
+						class="delete" />
+				</form>
+				</p>
+				<p th:if="${item.stock == 0}" th:text="#{data.out.of.stock}"></p>
+				<p th:if="${item.stock > 5}" th:text="#{data.in.stock}"></p>
+				<p th:if="${item.stock >= 1 and 5 >= item.stock }" th:text="${item.stock}"></p>
+			</article>
+		</div>
 		<div class="user_info_form_area shopping_button">
 			<!--/* 注文手続きフォーム */-->
 			<form th:action="@{/client/order/address/input}" method="post">
