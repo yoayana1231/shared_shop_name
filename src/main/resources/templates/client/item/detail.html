@@ -15,7 +15,7 @@
 		<div class="item_detail_area">
 			<div class="item_image_area">
 				<img th:src="@{/images/photo/{imgName}(imgName=${item.image})}" th:if="${item.image != null}" />
-					<img th:src="@{/images/common/no_image.jpg}" th:if="${item.image == null}" />
+				<img th:src="@{/images/common/no_image.jpg}" th:if="${item.image == null}" />
 			</div>
 			<dl class="item_detail_list">
 				<dt>[[#{data.item.name}]]</dt>
