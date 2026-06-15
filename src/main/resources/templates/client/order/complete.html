@@ -7,14 +7,47 @@
 	<meta charset="UTF-8" />
 </head>
 
-<body class="user order_complete">
-	<h2 th:class="title" th:text="#{title.order.complete}"></h2>
+<body class="user order_complete" id="page-input">
+
+	<!--タイムライン-->
+	<nav class="step-timeline">
+		<ul class="step-list">
+			<li class="step-item step-cart">
+				<span class="step-icon">1</span>
+				<span class="step-label">情報入力</span>
+			</li>
+			<li class="step-item step-input">
+				<span class="step-icon">2</span>
+				<span class="step-label">支払方法選択</span>
+			</li>
+			<li class="step-item step-confirm">
+				<span class="step-icon">3</span>
+				<span class="step-label">ご注文確認</span>
+			</li>
+			<li class="step-item step-complete">
+				<span class="step-icon">4</span>
+				<span class="step-label">注文完了</span>
+			</li>
+		</ul>
+	</nav>
+
+	<!--YOUR CART-->
+	<h2 th:class="your_cart" th:text="#{title.order.address.input}"></h2>
+
+	<!--注文完了-->
+	<h2 th:class="complete_mozi" th:text="#{title.order.complete}"></h2>
 	<p th:class="complete_message">
-		<span th:text="#{msg.order.complete1}"></span>
+		<span class="message1" th:text="#{msg.order.complete1}"></span>
 		<br />
-		<span th:text="#{msg.order.complete2}"></span>
+		<span class="message1" th:text="#{msg.order.complete2}"></span>
 	</p>
-	<p class="complete_link"><a th:href="@{/}" th:text="#{msg.back.to.top}"></a></p>
+
+	<div class="top_return">
+		<button class="state-real-button state-real-button--hover_a" type="button">
+			<a th:href="@{/}" th:text="#{msg.back.to.top}"></a>
+		</button>
+	</div>
+	<!--	<p class="complete_link"><a th:href="@{/}" th:text="#{msg.back.to.top}"></a></p>-->
 </body>
 
 </html>

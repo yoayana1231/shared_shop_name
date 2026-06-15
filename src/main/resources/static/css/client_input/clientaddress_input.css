@@ -1,0 +1,123 @@
+@charset "UTF-8";
+
+ul, li {
+    margin: 30px;
+}
+
+.delivery_mozi{
+	display: flex;
+	margin-left: 30px;
+}
+
+.your_cart{
+	padding: 8px 15px;
+	font-size:40px;
+	display: flex;
+	justify-content: space-around;
+}
+
+.input_message_1{
+	padding-top: 1px;
+	font-size: 15px;
+	margin-left: 30px;
+}
+
+.input_list_a{
+    width: 100%;
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+}
+
+.input_list_a input{
+    width: 600px;
+    padding: 5px;
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+
+.input_list_a .input_title_a{
+	display: block;
+	line-height: 1.1rem;
+}
+
+.input_title_b{
+    width: 600px;
+    font-size: 1.1rem;
+    margin-bottom: 30px;	
+	display: block;
+	line-height: 1.1rem;	
+}
+
+.send_button_a{
+	margin-left: 60px;
+}
+
+.step-list {
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  padding: 0;
+  position: relative;
+}
+
+.step-list::before {
+  content: "";
+  position: absolute;
+  top: 20px;
+  left: 0; right: 0; height: 2px;
+  background-color: #e0e0e0;
+  z-index: 1;
+}
+
+.step-item { 
+	flex: 1; text-align: center; position: relative; z-index: 2; 
+}
+
+.step-icon {
+  display: flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px; border-radius: 50%;
+  background-color: #fff; border: 2px solid #e0e0e0; color: #999;
+  margin: 0 auto 8px auto; font-weight: bold; transition: all 0.3s;
+}
+
+.step-label { 
+	font-size: 0.85rem; color: #999; 
+}
+
+#page-cart .step-cart .step-icon,
+#page-input .step-input .step-icon,
+#page-confirm .step-confirm .step-icon,
+#page-complete .step-complete .step-icon {
+  border-color: #0066cc;
+  color: #0066cc;
+  box-shadow: 0 0 12px rgba(0, 102, 204, 0.5); /* 現在地を強く光らせる */
+}
+
+#page-cart .step-cart .step-label,
+#page-input .step-input .step-label,
+#page-confirm .step-confirm .step-label,
+#page-complete .step-complete .step-label {
+  color: #0066cc;
+  font-weight: bold;
+}
+
+#page-input .step-cart .step-icon,
+#page-confirm .step-cart .step-icon,
+#page-confirm .step-input .step-icon,
+#page-complete .step-cart .step-icon,
+#page-complete .step-input .step-icon,
+#page-complete .step-confirm .step-icon {
+  background-color: #0066cc; /* 背景を青で塗りつぶす */
+  border-color: #0066cc;
+  color: #fff; /* 数字を白抜きにする */
+  box-shadow: 0 0 8px rgba(0, 102, 204, 0.3); /* ほんのり光らせる */
+}
+
+#page-input .step-cart .step-label,
+#page-confirm .step-cart .step-label,
+#page-confirm .step-input .step-label,
+#page-complete .step-cart .step-label,
+#page-complete .step-input .step-label,
+#page-complete .step-confirm .step-label {
+  color: #333;
+}

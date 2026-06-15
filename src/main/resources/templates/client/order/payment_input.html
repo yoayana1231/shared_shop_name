@@ -8,9 +8,36 @@
 	<meta charset="UTF-8" />
 </head>
 
-<body class="user order_payment_input">
-	<h2 th:class="title" th:text="#{title.order.payment.input}"></h2>
-	<p th:class="input_message" th:text="#{msg.order.payment.input}"></p>
+<body class="user order_payment_input" id="page-input">
+
+	<!--タイムライン-->
+	<nav class="step-timeline">
+		<ul class="step-list">
+			<li class="step-item step-cart">
+				<span class="step-icon">1</span>
+				<span class="step-label">情報入力</span>
+			</li>
+			<li class="step-item step-input">
+				<span class="step-icon">2</span>
+				<span class="step-label">支払方法選択</span>
+			</li>
+			<li class="step-item step-confirm">
+				<span class="step-icon">3</span>
+				<span class="step-label">ご注文確認</span>
+			</li>
+			<li class="step-item step-complete">
+				<span class="step-icon">4</span>
+				<span class="step-label">注文完了</span>
+			</li>
+		</ul>
+	</nav>
+
+	<!--YOUR CART-->
+	<h2 th:class="your_cart" th:text="#{title.order.address.input}"></h2>
+	<!--お支払い方法選択-->
+	<h2 th:class="pay_mozi" th:text="#{title.order.payment.input}"></h2>
+	<!--お支払い方法を選択してください-->
+	<p th:class="input_message_a" th:text="#{msg.order.payment.input}"></p>
 
 	<div class="user_info_form_area">
 		<form th:action="@{/client/order/check}" method="post">
@@ -57,12 +84,13 @@
 				</li>
 			</ul>
 
-			<input type="submit" class="send_button" value="次へ" />
+			<input type="submit" class="send_button_a" value="次へ" />
 
 		</form>
 		<form th:action="@{/client/order/payment/back}" method="post" class="update">
-			<input type="submit" class="back_button" value="戻る" />
+			<input type="submit" class="back_button_a" value="戻る" />
 		</form>
+	</div>
 	</div>
 </body>
 

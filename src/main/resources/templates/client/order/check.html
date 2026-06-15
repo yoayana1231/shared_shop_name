@@ -7,10 +7,39 @@
 	<meta charset="UTF-8" />
 </head>
 
-<body class="user order_check">
-	<h2 th:class="title" th:text="#{title.order.check}"></h2>
-	<p th:class="check_message" th:text="#{msg.order.check}" th:if="${orderItemBeans != null}"></p>
-	<p th:class="check_error_message" th:text="#{msg.order.stop}" th:if="${orderItemBeans == null}"></p>
+<body class="user order_check" id="page-input">
+
+	<!--タイムライン-->
+	<nav class="step-timeline">
+		<ul class="step-list">
+			<li class="step-item step-cart">
+				<span class="step-icon">1</span>
+				<span class="step-label">情報入力</span>
+			</li>
+			<li class="step-item step-input">
+				<span class="step-icon">2</span>
+				<span class="step-label">支払方法選択</span>
+			</li>
+			<li class="step-item step-confirm">
+				<span class="step-icon">3</span>
+				<span class="step-label">ご注文確認</span>
+			</li>
+			<li class="step-item step-complete">
+				<span class="step-icon">4</span>
+				<span class="step-label">注文完了</span>
+			</li>
+		</ul>
+	</nav>
+
+	<!--YOUR CART-->
+	<h2 th:class="your_cart" th:text="#{title.order.address.input}"></h2>
+
+	<!--注文内容確認-->
+	<h2 th:class="check_mozi" th:text="#{title.order.check}"></h2>
+
+	<!--以下の内容でよろしければ、ご注文を確定してください。-->
+	<p th:class="check_message_a" th:text="#{msg.order.check}" th:if="${orderItemBeans != null}"></p>
+	<p th:class="check_error_message_a" th:text="#{msg.order.stop}" th:if="${orderItemBeans == null}"></p>
 
 	<!-- 在庫不足のメッセージ -->
 	<th:block th:if="${itemNameListLessThan != null || itemNameListZero != null}">
