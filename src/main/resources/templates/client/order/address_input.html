@@ -10,7 +10,6 @@
 
 <body class="user order_address_input" id="page-input">
 
-	<!--タイムライン-->
 	<nav class="step-timeline">
 		<ul class="step-list">
 			<li class="step-item step-cart">
@@ -32,118 +31,77 @@
 		</ul>
 	</nav>
 
-	<!--	YOUR CART-->
-	<h2 th:class="your_cart" th:text="#{title.order.address.input}"></h2>
+	<h2 class="your_cart" th:text="#{title.order.address.input}"></h2>
 
 	<div class="user_info_form_area">
-		<form th:action="@{/client/order/payment/input}" method="post" th:object="${orderForm}">
-			<th:block th:if="${#fields.hasErrors()}">
-				<ul class="error_list">
-					<li th:each="err:${#fields.detailedErrors()}" th:text="${err.message}"></li>
-				</ul>
-				<br />
-			</th:block>
-			<div class="all_form">
-				<div>
-					<ul class="input_list_a">
-						<h2 class="delivery_mozi">DELIVERY</h2>
-						<!--お届け先情報を入力してください。-->
-						<p th:class="input_message_1" th:text="#{msg.order.address.input}"></p>
-
-						<!--氏名-->
-						<li>
-							<label><span class="input_title_a">[[#{orderForm.name}]]</span></label>
-							<input type="text" th:field="*{name}" />
-						</li>
-
-						<!--電話番号-->
-						<li>
-							<label><span class="input_title_a">[[#{orderForm.phoneNumber}]]</span></label>
-							<input type="text" th:field="*{phoneNumber}" />
-						</li>
-						<!--郵便番号-->
-						<li>
-							<label><span class="input_title_a">[[#{orderForm.postalCode}]]</span></label>
-							<input type="text" th:field="*{postalCode}" />
-						</li>
-
-						<!--住所-->
-						<li>
-							<label><span class="input_title_a">[[#{orderForm.address}]]</span></label>
-							<textarea class="input_title_b" rows="6" th:field="*{address}"></textarea>
-						</li>
-
+		<div class="order_input_layout">
+			
+			<form class="address_form_card" th:action="@{/client/order/payment/input}" method="post" th:object="${orderForm}">
+				
+				<th:block th:if="${#fields.hasErrors()}">
+					<ul class="error_list">
+						<li th:each="err:${#fields.detailedErrors()}" th:text="${err.message}"></li>
 					</ul>
+				</th:block>
+
+				<div class="form_heading_block">
+					<h2 class="delivery_mozi">DELIVERY</h2>
+					<p class="input_message_1" th:text="#{msg.order.address.input}"></p>
 				</div>
 
-				
-				<aside class="editorial-column">
-					<div class="quote-card_a">
-						<span class="quote-mark">“</span>
-						<h3>ときめきは、<br />きっと毎日つくれる。</h3>
-						<p>心がふっとほどけるような、お気に入りとの出会いを。</p>
-					</div>
-					<div class="ranking-card">
-						<div class="mini-heading">
-							<span>RANKING</span><small>人気アイテム</small>
+				<ul class="input_list_a">
+					<li>
+						<label><span class="input_title_a">[[#{orderForm.name}]]</span></label>
+						<input type="text" th:field="*{name}" />
+					</li>
+					<li>
+						<label><span class="input_title_a">[[#{orderForm.phoneNumber}]]</span></label>
+						<input type="text" th:field="*{phoneNumber}" />
+					</li>
+					<li>
+						<label><span class="input_title_a">[[#{orderForm.postalCode}]]</span></label>
+						<input type="text" th:field="*{postalCode}" />
+					</li>
+					<li>
+						<label><span class="input_title_a">[[#{orderForm.address}]]</span></label>
+						<textarea class="input_title_b" rows="6" th:field="*{address}"></textarea>
+					</li>
+				</ul>
+
+				<input type="hidden" th:field="*{id}" />
+				<input type="hidden" th:field="*{payMethod}" />
+
+				<div class="order_button_area">
+					<input type="submit" value="戻る" class="back_button_a" th:formaction="@{/client/basket/list}" formmethod="post" formnovalidate />
+					<input type="submit" value="次へ" class="send_button_a" />
+				</div>
+			</form>
+
+			<aside class="order_summary_card">
+				<div class="summary_heading">
+					<span>ORDER SUMMARY</span>
+					<small>ご注文内容</small>
+				</div>
+
+				<div class="summary_items">
+					<div class="summary_item" th:each="basket:${session.basket}">
+						<div class="summary_thumb">
+							<img th:src="@{/images/photo/{imgName}(imgName=${basket.image})}" th:if="${basket.image != null}" />
+							<img th:src="@{/images/common/no_image.jpg}" th:if="${basket.image == null}" />
 						</div>
-						<ol>
-							<li>
-								<img th:src="@{/images/photo/shopping.webp}"
-									alt="" /><span>さおりっぷ<small>¥3500</small></span>
-							</li>
-							<li>
-								<img th:src="@{/images/photo/shopping3.webp}"
-									alt="" /><span>蜜ひとくち<small>¥3000</small></span>
-							</li>
-							<li>
-								<img th:src="@{/images/photo/shopping4.webp}"
-									alt="" /><span>恋つぼみ<small>¥3450</small></span>
-							</li>
-						</ol>
-						<a th:href="@{/client/item/list/2(categoryId=${categoryId})}">人気アイテムをもっとみる →</a>
+						<div class="summary_text">
+							<span class="summary_name" th:text="${basket.name}"></span>
+							<span class="summary_price" th:text="'&yen;'+${basket.price}"></span>
+						</div>
 					</div>
-				</aside>
-			</div>
+				</div>
 
-
-
-			<!--ID-->
-			<input type="hidden" th:field="*{id}" />
-
-			<!--支払い方法-->
-
-			<input type="hidden" th:field="*{payMethod}" />
-
-			<input type="submit" value="次へ" class="send_button_a" />
-		</form>
-
-		<form th:action="@{/client/basket/list}" method="post">
-			<input type="submit" value="戻る" class="back_button_a" />
-		</form>
-
-<!--		<div th:each="basket:${session.basket}">-->
-<!--			<img class="product_photo" th:src="@{/images/photo/{imgName}(imgName=${basket.image})}"-->
-<!--				th:if="${basket.image != null}" />-->
-<!--			<img class="product_non_photo" th:src="@{/images/common/no_image.jpg}" th:if="${basket.image == null}" />-->
-<!--			<span class="product_name" th:text="${basket.name}"></span>-->
-<!--			<span class="product_plece" th:text="'&yen;'+${basket.price}"></span>-->
-<!--		</div>-->
-
+				<div class="summary_note">
+					<p>内容を確認して、次の画面でお支払い方法を選択してください。</p>
+				</div>
+			</aside>
+			
+		</div>
 	</div>
-
-	<!--	<form method="post" th:object="${}">-->
-	<!--		<div class="user_info">-->
-	<!--			<div class="user_info_photo">-->
-	<!--				<input type="image" th:field="*{image}" />-->
-
-	<!--			</div>-->
-
-	<!--			<div class="user_info_photo_message">-->
-
-	<!--			</div>-->
-	<!--		</div>-->
-	<!--	</form>-->
 </body>
-
 </html>

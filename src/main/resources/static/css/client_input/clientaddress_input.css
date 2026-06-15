@@ -1,56 +1,17 @@
 @charset "UTF-8";
 
-ul,
-li {
-	margin: 30px;
+/* ===================================================
+   全体のベースレイアウト
+=================================================== */
+.order_address_input {
+	background: #f7f7f7;
 }
 
-.delivery_mozi {
-	display: flex;
-	margin-left: 30px;
-}
-
-.your_cart {
-	padding: 8px 15px;
-	font-size: 40px;
-	display: flex;
-	justify-content: space-around;
-}
-
-.input_message_1 {
-	padding-top: 1px;
-	font-size: 15px;
-	margin-left: 30px;
-}
-
-.input_list_a {
-	width: 100%;
-	font-size: 1.1rem;
-	margin-bottom: 30px;
-}
-
-.input_list_a input {
-	width: 600px;
-	padding: 5px;
-	box-sizing: border-box;
-	font-size: 1rem;
-}
-
-.input_list_a .input_title_a {
-	display: block;
-	line-height: 1.1rem;
-}
-
-.input_title_b {
-	width: 600px;
-	font-size: 1.1rem;
-	margin-bottom: 30px;
-	display: block;
-	line-height: 1.1rem;
-}
-
-.send_button_a {
-	margin-left: 60px;
+/* タイムラインのコンテナ */
+.step-timeline {
+	width: calc(100% - 64px);
+	max-width: 1480px;
+	margin: 24px auto 0;
 }
 
 .quote-card_a {
@@ -70,7 +31,7 @@ li {
 	margin-left: 200px;
 }
 
-.editorial-column{
+.editorial-column {
 	margin-left: 200px;
 }
 
@@ -79,14 +40,19 @@ li {
 	width: 400px;
 }
 
+/* ===================================================
+   タイムライン（ステップ）の基本スタイル
+=================================================== */
 .step-list {
 	display: flex;
 	justify-content: space-between;
 	list-style: none;
 	padding: 0;
+	margin: 0;
 	position: relative;
 }
 
+/* ステップを繋ぐ背景の横線 */
 .step-list::before {
 	content: "";
 	position: absolute;
@@ -105,6 +71,7 @@ li {
 	z-index: 2;
 }
 
+/* 丸アイコン（未完了時はグレー） */
 .step-icon {
 	display: flex;
 	align-items: center;
@@ -120,21 +87,29 @@ li {
 	transition: all 0.3s;
 }
 
+/* テキストラベル（未完了時はグレー） */
 .step-label {
 	font-size: 0.85rem;
 	color: #999;
 }
 
+/* ===================================================
+   ★ここが重要：CSSのみで状態を判定して光らせる設定
+=================================================== */
+
+/* 1. 自分がいるページ（現在地）のアイコンを強く光らせる */
 #page-cart .step-cart .step-icon,
 #page-input .step-input .step-icon,
 #page-confirm .step-confirm .step-icon,
 #page-complete .step-complete .step-icon {
 	border-color: #0066cc;
 	color: #0066cc;
+	background-color: #fff;
 	box-shadow: 0 0 12px rgba(0, 102, 204, 0.5);
-	/* 現在地を強く光らせる */
+	/* 鮮やかに発光 */
 }
 
+/* 2. 自分がいるページ（現在地）のテキストを青く太字にする */
 #page-cart .step-cart .step-label,
 #page-input .step-input .step-label,
 #page-confirm .step-confirm .step-label,
@@ -143,6 +118,7 @@ li {
 	font-weight: bold;
 }
 
+/* 3. 終了した過去のページのアイコンを青く塗りつぶして光らせる */
 #page-input .step-cart .step-icon,
 #page-confirm .step-cart .step-icon,
 #page-confirm .step-input .step-icon,
@@ -150,14 +126,14 @@ li {
 #page-complete .step-input .step-icon,
 #page-complete .step-confirm .step-icon {
 	background-color: #0066cc;
-	/* 背景を青で塗りつぶす */
 	border-color: #0066cc;
 	color: #fff;
 	/* 数字を白抜きにする */
 	box-shadow: 0 0 8px rgba(0, 102, 204, 0.3);
-	/* ほんのり光らせる */
+	/* ほんのり発光 */
 }
 
+/* 4. 終了した過去のページのテキストを濃いグレーにする */
 #page-input .step-cart .step-label,
 #page-confirm .step-cart .step-label,
 #page-confirm .step-input .step-label,
@@ -165,4 +141,243 @@ li {
 #page-complete .step-input .step-label,
 #page-complete .step-confirm .step-label {
 	color: #333;
+}
+
+/* ===================================================
+   フォーム・カートまわりの装飾（後半部分の綺麗な記述）
+=================================================== */
+.your_cart {
+	width: calc(100% - 64px);
+	max-width: 1480px;
+	margin: 56px auto 22px;
+	padding: 0;
+	color: #222;
+	font-size: clamp(28px, 3vw, 44px);
+	font-weight: 700;
+	letter-spacing: 0.06em;
+}
+
+.user_info_form_area {
+	width: calc(100% - 64px);
+	max-width: 1480px;
+	margin: 0 auto 80px;
+}
+
+.order_input_layout {
+	display: grid;
+	grid-template-columns: minmax(560px, 1fr) minmax(380px, 480px);
+	gap: clamp(32px, 4vw, 72px);
+	align-items: start;
+}
+
+.address_form_card,
+.order_summary_card {
+	display: block;
+	min-width: 0;
+}
+
+.form_heading_block {
+	margin-bottom: 24px;
+}
+
+.delivery_mozi {
+	margin: 0 0 10px;
+	color: #111;
+	font-size: 28px;
+	font-weight: 800;
+	letter-spacing: 0.04em;
+}
+
+.input_message_1 {
+	margin: 0;
+	color: #777;
+	font-size: 15px;
+}
+
+.input_list_a {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	font-size: 1.1rem;
+}
+
+.input_list_a li {
+	margin: 0 0 22px;
+}
+
+.input_list_a .input_title_a {
+	display: block;
+	margin-bottom: 8px;
+	color: #222;
+	line-height: 1.4;
+	font-weight: 600;
+}
+
+.input_list_a input,
+.input_title_b {
+	display: block;
+	width: 100%;
+	padding: 12px 14px;
+	box-sizing: border-box;
+	border: 1px solid #cfcfcf;
+	background: #fff;
+	font-size: 1rem;
+}
+
+.input_title_b {
+	resize: vertical;
+	min-height: 120px;
+	line-height: 1.6;
+}
+
+.order_button_area {
+	display: flex;
+	justify-content: flex-start;
+	gap: 14px;
+	margin-top: 30px;
+}
+
+.send_button_a,
+.back_button_a {
+	min-width: 110px;
+	padding: 10px 24px;
+	border: 1px solid #222;
+	border-radius: 999px;
+	background: #fff;
+	color: #222;
+	font-size: 0.95rem;
+	font-weight: 700;
+	cursor: pointer;
+}
+
+.send_button_a {
+	background: #222;
+	color: #fff;
+}
+
+.order_summary_card {
+	position: sticky;
+	top: 96px;
+	padding: 28px;
+	border: 1px solid rgba(0, 0, 0, 0.08);
+	border-radius: 24px;
+	background: #fff;
+	box-shadow: 0 18px 46px rgba(0, 0, 0, 0.06);
+}
+
+.summary_heading {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 16px;
+	margin-bottom: 20px;
+}
+
+.summary_heading span {
+	color: #111;
+	font-size: 18px;
+	font-weight: 800;
+	letter-spacing: 0.08em;
+}
+
+.summary_heading small {
+	color: #777;
+	font-size: 12px;
+}
+
+.summary_items {
+	display: grid;
+	gap: 16px;
+}
+
+.summary_item {
+	display: grid;
+	grid-template-columns: 76px minmax(0, 1fr);
+	gap: 14px;
+	align-items: center;
+}
+
+.summary_thumb {
+	width: 76px;
+	height: 76px;
+	overflow: hidden;
+	border-radius: 16px;
+	background: #f3f3f3;
+}
+
+.summary_thumb img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+}
+
+.summary_text {
+	min-width: 0;
+}
+
+.summary_name {
+	display: block;
+	overflow: hidden;
+	color: #222;
+	font-weight: 700;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.summary_price {
+	display: block;
+	margin-top: 6px;
+	color: #555;
+	font-weight: 700;
+}
+
+.summary_note {
+	margin-top: 24px;
+	padding-top: 18px;
+	border-top: 1px solid #eee;
+}
+
+.summary_note p {
+	margin: 0;
+	color: #777;
+	line-height: 1.8;
+}
+
+.error_list {
+	margin: 0 0 20px;
+	padding: 16px 20px;
+	border-radius: 14px;
+	background: #fff2f2;
+	color: #b00020;
+	list-style: none;
+}
+
+.error_list li {
+	margin: 0 0 6px;
+}
+
+.error_list li:last-child {
+	margin-bottom: 0;
+}
+
+/* ===================================================
+   レスポンシブ（スマホ・タブレット対応）
+=================================================== */
+@media screen and (max-width: 1024px) {
+
+	.step-timeline,
+	.your_cart,
+	.user_info_form_area {
+		width: calc(100% - 32px);
+	}
+
+	.order_input_layout {
+		grid-template-columns: 1fr;
+	}
+
+	.order_summary_card {
+		position: static;
+	}
 }
