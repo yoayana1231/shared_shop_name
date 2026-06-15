@@ -22,7 +22,7 @@
 		<div class="cart-layout">
 			<section class="cart-list" aria-label="cart items">
 				<article class="cart-item" th:each="item,status: ${session.basketBeans}">
-					<div class="item-number">01</div>
+					<div class="item-number"></div>
 					<div class="item-image">
 						<img th:src="@{/images/photo/{image}(image=${itemList[status.index].image})}"
 							th:if="${itemList[status.index].image != null}" />
@@ -34,7 +34,20 @@
 					</div>
 					<div class="quantity-box" aria-label="quantity">
 						<span>数量</span>
-						<div class="counter"><button>−</button><b th:text="${item.orderNum}"></b><button>＋</button></div>
+						<div class="counter">
+							<form th:action="@{/client/basket/delete/calc}" method="post">
+								<input type="hidden" name="id" th:value="${item.id}" />
+								<input type="hidden" name="dec" value="-1" />
+								<button type="submit">−</button>
+							</form>
+							<b th:text="${item.orderNum}"></b>
+							<form th:action="@{/client/basket/add/calc}" method="post">
+								<input type="hidden" name="id" th:value="${item.id}" />
+								<input type="hidden" name="inc" value="+1" />
+								<button type="submit">＋</button>
+							</form>
+
+						</div>
 					</div>
 					<div class="item-actions">
 						<a href="#">削除する</a>
