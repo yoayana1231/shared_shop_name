@@ -38,13 +38,25 @@
 					<input type="text" th:field="*{phoneNumber}" />
 				</li>
 			</ul>
+
+
+
 			<input type="hidden" th:field="*{id}" />
 			<input type="hidden" th:field="*{payMethod}" />
 			<input type="submit" value="次へ" class="send_button" />
 		</form>
+
 		<form th:action="@{/client/basket/list}" method="post">
 			<input type="submit" value="戻る" class="back_button" />
 		</form>
+
+		<div th:each="basket:${session.basket}">
+			<img th:src="@{/images/photo/{imgName}(imgName=${basket.image})}" th:if="${basket.image != null}" />
+			<img th:src="@{/images/common/no_image.jpg}" th:if="${basket.image == null}" />
+			<span th:text="${basket.name}"></span>
+			<span th:text="'&yen;'+${basket.price}"></span>
+		</div>
+
 	</div>
 </body>
 
