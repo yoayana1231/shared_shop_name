@@ -52,6 +52,9 @@ public class ClientOrderRegistController {
 			if (item == null || item.getStock() == 0 || basketBean.getOrderNum() > item.getStock()) {
 				return "redirect:/client/basket/list";
 			}
+
+			basketBean.setPrice(item.getPrice());
+			basketBean.setImage(item.getImage());
 		}
 
 		// オーダー入力フォーム
@@ -62,6 +65,7 @@ public class ClientOrderRegistController {
 		orderForm.setPayMethod(1);
 
 		session.setAttribute("orderForm", orderForm);
+		session.setAttribute("basket", basketBeans);
 
 		return "redirect:/client/order/address/input";
 	}
@@ -87,7 +91,7 @@ public class ClientOrderRegistController {
 	@RequestMapping(path = "/client/order/payment/input", method = RequestMethod.POST)
 	public String stepToPayment(@Valid @ModelAttribute("orderForm") OrderForm orderForm, BindingResult bindingResult,
 			HttpSession session) {
-		OrderForm  orderForms= (OrderForm) session.getAttribute("orderForm");
+		OrderForm orderForms = (OrderForm) session.getAttribute("orderForm");
 		orderForm.setId(orderForms.getId());
 		orderForm.setPayMethod(orderForms.getPayMethod());
 		session.setAttribute("orderForm", orderForm);
