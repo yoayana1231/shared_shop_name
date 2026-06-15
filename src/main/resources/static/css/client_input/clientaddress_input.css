@@ -16,7 +16,7 @@ ul, li {
 
 .your_cart{
 	padding: 8px 15px;
-	font-size:30px;
+	font-size:40px;
 	display: flex;
 	justify-content: space-around;
 }
@@ -52,7 +52,7 @@ ul, li {
 	line-height: 1.1rem;	
 }
 
-.back_button_a{
+.send_button_a{
 	margin-left: 60px;
 }
 

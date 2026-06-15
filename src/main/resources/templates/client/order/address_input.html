@@ -59,27 +59,26 @@
 
 			<input type="hidden" th:field="*{payMethod}" />
 
-			<form th:action="@{/client/basket/list}" method="post">
-				<input type="submit" value="戻る" class="back_button_a" />
-			</form>
-
 			<input type="submit" value="次へ" class="send_button_a" />
+		</form>
+		<form th:action="@{/client/basket/list}" method="post">
+			<input type="submit" value="戻る" class="back_button_a" />
 		</form>
 
 	</div>
-	
-<!--	<form method="post" th:object="${}">-->
-<!--		<div class="user_info">-->
-<!--			<div class="user_info_photo">-->
-<!--				<input type="image" th:field="*{image}" />-->
 
-<!--			</div>-->
+	<!--	<form method="post" th:object="${}">-->
+	<!--		<div class="user_info">-->
+	<!--			<div class="user_info_photo">-->
+	<!--				<input type="image" th:field="*{image}" />-->
 
-<!--			<div class="user_info_photo_message">-->
+	<!--			</div>-->
 
-<!--			</div>-->
-<!--		</div>-->
-<!--	</form>-->
+	<!--			<div class="user_info_photo_message">-->
+
+	<!--			</div>-->
+	<!--		</div>-->
+	<!--	</form>-->
 </body>
 
 </html>
