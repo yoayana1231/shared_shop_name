@@ -9,8 +9,10 @@
 </head>
 
 <body class="user order_address_input">
-	<h2 th:class="title" th:text="#{title.order.address.input}"></h2>
-	<p th:class="input_message" th:text="#{msg.order.address.input}"></p>
+
+	<!--	YOUR CART-->
+	<h2 th:class="your_cart" th:text="#{title.order.address.input}"></h2>
+
 	<div class="user_info_form_area">
 		<form th:action="@{/client/order/payment/input}" method="post" th:object="${orderForm}">
 			<th:block th:if="${#fields.hasErrors()}">
@@ -20,32 +22,64 @@
 				<br />
 			</th:block>
 
-			<ul class="input_list">
+			<ul class="input_list_a">
+				<h2 class="delivery_mozi">DELIVERY</h2>
+				<!--お届け先情報を入力してください。-->
+				<p th:class="input_message_1" th:text="#{msg.order.address.input}"></p>
+
+				<!--氏名-->
 				<li>
-					<label><span class="input_title">[[#{orderForm.postalCode}]]</span></label>
-					<input type="text" th:field="*{postalCode}" />
-				</li>
-				<li>
-					<label><span class="input_title">[[#{orderForm.address}]]</span></label>
-					<textarea rows="6" th:field="*{address}"></textarea>
-				</li>
-				<li>
-					<label><span class="input_title">[[#{orderForm.name}]]</span></label>
+					<label><span class="input_title_a">[[#{orderForm.name}]]</span></label>
 					<input type="text" th:field="*{name}" />
 				</li>
+
+				<!--電話番号-->
 				<li>
-					<label><span class="input_title">[[#{orderForm.phoneNumber}]]</span></label>
+					<label><span class="input_title_a">[[#{orderForm.phoneNumber}]]</span></label>
 					<input type="text" th:field="*{phoneNumber}" />
 				</li>
+				<!--郵便番号-->
+				<li>
+					<label><span class="input_title_a">[[#{orderForm.postalCode}]]</span></label>
+					<input type="text" th:field="*{postalCode}" />
+				</li>
+
+				<!--住所-->
+				<li>
+					<label><span class="input_title_a">[[#{orderForm.address}]]</span></label>
+					<textarea class="input_title_b" rows="6" th:field="*{address}"></textarea>
+				</li>
+
 			</ul>
+
+			<!--ID-->
 			<input type="hidden" th:field="*{id}" />
+
+			<!--支払い方法-->
+
 			<input type="hidden" th:field="*{payMethod}" />
-			<input type="submit" value="次へ" class="send_button" />
+
+			<form th:action="@{/client/basket/list}" method="post">
+				<input type="submit" value="戻る" class="back_button_a" />
+			</form>
+
+			<input type="submit" value="次へ" class="send_button_a" />
 		</form>
-		<form th:action="@{/client/basket/list}" method="post">
-			<input type="submit" value="戻る" class="back_button" />
-		</form>
+
 	</div>
+	
+<!--	<form method="post" th:object="${}">-->
+<!--		<div class="user_info">-->
+<!--			<div class="user_info_photo">-->
+<!--				<input type="image" th:field="*{image}" />-->
+
+<!--			</div>-->
+
+<!--			<div class="user_info_photo_message">-->
+
+<!--			</div>-->
+<!--		</div>-->
+<!--	</form>-->
 </body>
 
 </html>
