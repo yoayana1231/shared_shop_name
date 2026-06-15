@@ -33,7 +33,7 @@
 						<div th:if="${session.user != null and session.user.authority == 2}" class="user_info">
 
 							<a th:href="@{/client/user/detail}"><img class="person_photo"
-									th:src="@{/images/header/person.svg}"></a>
+									th:src="@{/images/header/person.svg}">さん|</a>
 							<a th:href="@{/logout}" th:text="#{logout}"></a>
 
 						</div>
@@ -68,19 +68,19 @@
 					</div>
 				</div>
 			</div>
-			<div class="header_two">
-				<!--商品一覧-->
-				<div>
-					<a class="shop_list" th:href="@{/client/item/list/1}" th:text="#{item}+#{title.list}">商品一覧</a>
-				</div>
+			<!--	<div class="header_two">-->
+			<!--	商品一覧-->
+			<!--	<div>-->
+			<!--	<a class="shop_list" th:href="@{/client/item/list/1}" th:text="#{item}+#{title.list}">商品一覧</a>-->
+			<!--	</div>-->
 
 
-				<div th:each="category: ${categories}">
-					<a class="shop_list_many" th:href="@{/client/item/list/category}" th:value="${category.id}"
-						th:text="${category.name}"></a>
-				</div>
+			<!--	<div th:each="category: ${categories}">-->
+			<!--	<a class="shop_list_many" th:href="@{/client/item/list/category}" th:value="${category.id}"-->
+			<!--		th:text="${category.name}"></a>-->
+			<!--	</div>-->
 
-			</div>
+			<!--	</div>-->
 
 		</div>
 	</div>

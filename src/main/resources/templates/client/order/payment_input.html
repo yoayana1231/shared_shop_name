@@ -84,11 +84,10 @@
 				</li>
 			</ul>
 
+<!--		<form th:action="@{/client/order/payment/back}" method="post" class="update">-->
+			<input type="submit" class="back_button_a" value="戻る" th:formaction="@{/client/order/payment/back}" formmethod="post" formnovalidate/>
 			<input type="submit" class="send_button_a" value="次へ" />
 
-		</form>
-		<form th:action="@{/client/order/payment/back}" method="post" class="update">
-			<input type="submit" class="back_button_a" value="戻る" />
 		</form>
 	</div>
 	</div>
