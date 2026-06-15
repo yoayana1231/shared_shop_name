@@ -18,50 +18,30 @@
 			</div>
 			<span>2 ITEMS</span>
 		</div>
+
 		<div class="cart-layout">
 			<section class="cart-list" aria-label="cart items">
-				<article class="cart-item">
+				<article class="cart-item" th:each="item,status: ${session.basketBeans}">
 					<div class="item-number">01</div>
 					<div class="item-image">
-						<img src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=500&q=86"
-							alt="ときめきルージュ" />
+						<img th:src="@{/images/photo/{image}(image=${itemList[status.index].image})}"
+							th:if="${itemList[status.index].image != null}" />
 					</div>
 					<div class="item-info">
-						<p class="category">リップスティック</p>
-						<h2>ときめきルージュ</h2>
-						<p class="price">¥3,520 <small>税込</small></p>
+						<p class="category" th:text="${itemList[status.index].category.name}"></p>
+						<h2><a th:href="@{/client/item/detail/{id}(id=${item.id})}" th:text="${item.name}"></a></h2>
+						<p class="price" th:text="${itemList[status.index].price}"><small>税込</small></p>
 					</div>
 					<div class="quantity-box" aria-label="quantity">
 						<span>数量</span>
-						<div class="counter"><button>−</button><b>1</b><button>＋</button></div>
+						<div class="counter"><button>−</button><b th:text="${item.orderNum}"></b><button>＋</button></div>
 					</div>
 					<div class="item-actions">
 						<a href="#">削除する</a>
 						<button>♡ お気に入りに追加</button>
 					</div>
 				</article>
-				<article class="cart-item">
-					<div class="item-number">02</div>
-					<div class="item-image">
-						<img src="https://images.unsplash.com/photo-1590439471364-192aa70c0b53?auto=format&fit=crop&w=500&q=86"
-							alt="うるんとネイル" />
-					</div>
-					<div class="item-info">
-						<p class="category">ネイルカラー</p>
-						<h2>うるんとネイル</h2>
-						<p class="price">¥2,750 <small>税込</small></p>
-					</div>
-					<div class="quantity-box" aria-label="quantity">
-						<span>数量</span>
-						<div class="counter">
-							<button>−</button><b>1</b><button>＋</button>
-						</div>
-					</div>
-					<div class="item-actions">
-						<a href="#">削除する</a>
-						<button>♡ お気に入りに追加</button>
-					</div>
-				</article>
+
 				<a href="#" class="continue-btn">ショッピングを続ける 〈</a>
 			</section>
 			<aside class="summary-card" aria-label="order summary">
@@ -161,42 +141,43 @@
 
 		</div>
 	</section>
-					<th:block th:if="${session.basketBeans != null}">
-						<div class="list_table basket">
-				<tr>
-					<th>[[#{data.basket.item.name}]]</th>
-					<th>[[#{data.basket.count}]]</th>
-					<th>[[#{data.basket.operate}]]</th>
-					<th>[[#{data.basket.stock.status}]]</th>
-				</tr>
+	<th:block th:if="${session.basketBeans != null}">
+		<!--							<div class="list_table basket">-->
+		<!--					<tr>-->
+		<!--						<th>[[#{data.basket.item.name}]]</th>-->
+		<!--						<th>[[#{data.basket.count}]]</th>-->
+		<!--						<th>[[#{data.basket.operate}]]</th>-->
+		<!--						<th>[[#{data.basket.stock.status}]]</th>-->
+		<!--					</tr>-->
 
-							<article th:each="item, status: ${session.basketBeans}">
-								<img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=160&q=80"
-									alt="" />
-								<p><a th:href="@{/client/item/detail/{id}(id=${item.id})}" th:text="${item.name}"></a></p>
-								<p th:text="${item.orderNum}"></p>
-								<p>
-								<form th:action="@{/client/basket/delete}" method="post">
-									<input type="hidden" name="id" th:value="${item.id}" /> <input type="submit" value="削除"
-										class="delete" />
-								</form>
-								</p>
-								<p th:if="${item.stock == 0}" th:text="#{data.out.of.stock}"></p>
-								<p th:if="${item.stock > 5}" th:text="#{data.in.stock}"></p>
-								<p th:if="${item.stock >= 1 and 5 >= item.stock }" th:text="${item.stock}"></p>
-							</article>
-						</div>
-						<div class="user_info_form_area shopping_button">
-							/* 注文手続きフォーム */
-							<form th:action="@{/client/order/address/input}" method="post">
-								<input type="submit" value="ご注文のお手続き" />
-							</form>
-							/* 買い物かごを空にするフォーム */
-							<form th:action="@{/client/basket/allDelete}" method="post">
-								<input type="submit" value="買い物かごを空にする" class="delete" />
-							</form>
-						</div>
-					</th:block>
+		<article th:each="item, status: ${session.basketBeans}">
+			<img th:src="@{/images/photo/{image}(image=${itemList[status.index].image})}"
+				th:if="${itemList[status.index].image != null}" />
+
+			<p><a th:href="@{/client/item/detail/{id}(id=${item.id})}" th:text="${item.name}"></a></p>
+			<p th:text="${item.orderNum}"></p>
+			<p>
+			<form th:action="@{/client/basket/delete}" method="post">
+				<input type="hidden" name="id" th:value="${item.id}" /> <input type="submit" value="削除"
+					class="delete" />
+			</form>
+			</p>
+			<p th:if="${item.stock == 0}" th:text="#{data.out.of.stock}"></p>
+			<p th:if="${item.stock > 5}" th:text="#{data.in.stock}"></p>
+			<p th:if="${item.stock >= 1 and 5 >= item.stock }" th:text="${item.stock}"></p>
+		</article>
+		</div>
+		<div class="user_info_form_area shopping_button">
+			/* 注文手続きフォーム */
+			<form th:action="@{/client/order/address/input}" method="post">
+				<input type="submit" value="ご注文のお手続き" />
+			</form>
+			/* 買い物かごを空にするフォーム */
+			<form th:action="@{/client/basket/allDelete}" method="post">
+				<input type="submit" value="買い物かごを空にする" class="delete" />
+			</form>
+		</div>
+	</th:block>
 
 </body>
 

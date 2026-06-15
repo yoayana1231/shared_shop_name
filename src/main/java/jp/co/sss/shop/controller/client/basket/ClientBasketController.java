@@ -40,6 +40,8 @@ public class ClientBasketController {
 		
 		// 現在のかごの中身を取得
 		List<BasketBean> basketList = (List<BasketBean>) session.getAttribute("basketBeans");
+
+		List<Item> itemList = new ArrayList<>();
 		
 		// かごがあり、中身もある場合の処理
 		if (basketList != null) {
@@ -56,6 +58,7 @@ public class ClientBasketController {
 					
 					// チェックしてる商品のIDから商品の情報を取得
 					Item item = itemRepository.getReferenceById(basketItem.getId());
+					itemList.add(item);
 
 					// 商品が存在している場合
 					if (item != null) {
@@ -85,6 +88,8 @@ public class ClientBasketController {
 				}
 			}
 		}
+		
+		model.addAttribute("itemList",itemList);
 		// 買い物かご画面へ遷移
 		return "client/basket/list";
 	}
@@ -99,6 +104,7 @@ public class ClientBasketController {
 		
 		// 現在のかごの中身を取得
 		List<BasketBean> basketList = (List<BasketBean>) session.getAttribute("basketBeans");
+		
 		
 		// かごに入れるボタンを押したときに送られたIDの商品の情報を取得
 		Item item = itemRepository.getReferenceById(id);
@@ -129,12 +135,16 @@ public class ClientBasketController {
 			basketItem.setName(item.getName());
 			basketItem.setOrderNum(1);
 			basketItem.setStock(item.getStock());
-
+			
 			basketList.add(basketItem);
+			//画像を挿入
+			
 		}
 
 		// かごの中身をセッションに保存し、買い物かご画面にリダイレクト
+		
 		session.setAttribute("basketBeans", basketList);
+		
 		return "redirect:/client/basket/list";
 	}
 

@@ -16,9 +16,9 @@
 		sans-serif;
 }
 
-/** {*/
-/*	box-sizing: border-box;*/
-/*}*/
+* {
+	box-sizing: border-box;
+}
 
 body {
 	margin: 0;
@@ -106,6 +106,7 @@ input {
 	display: grid;
 	grid-template-columns: minmax(0, 1fr) 410px;
 	align-items: start;
+	
 }
 
 
@@ -154,13 +155,13 @@ input {
 
 .item-info h2 {
 	margin: 0 0 20px;
-	font: 20px/1.5 var(--serif);
+	font: 15px/1.5 var(--serif);
 	letter-spacing: 0.08em;
 }
 
 .price {
 	margin: 0;
-	font: 24px var(--serif);
+	font: 15px var(--serif);
 }
 
 .price small {
@@ -177,6 +178,7 @@ input {
 }
 
 .counter {
+	position: relative;
 	width: 152px;
 	height: 46px;
 	border: 1px solid #dfc8c0;
@@ -185,6 +187,7 @@ input {
 	align-items: center;
 	text-align: center;
 	background: rgba(255, 255, 255, 0.65);
+	left:30px
 }
 
 .counter button {
@@ -242,12 +245,14 @@ input {
 	border: 1px solid #f1e4df;
 	box-shadow: var(--shadow);
 	padding: 38px 40px;
+	
 }
 
 .summary-card {
 	width: 340px;
 	top: 94px;
 	padding: 30px 32px;
+	
 }
 
 .summary-card h2 {
