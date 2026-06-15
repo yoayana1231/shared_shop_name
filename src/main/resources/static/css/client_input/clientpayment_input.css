@@ -9,6 +9,7 @@ li {
 	display: block;
     margin-top: 30px;
     display: flex;
+    align-items: flex-end;
 }
 
 .user_info_credit_area {
@@ -36,14 +37,19 @@ li {
 }
 
 .send_button_a {
-	margin-left: 60px;
+	margin-left: 100px;
 	justify-content: space-around;
 }
 
 .payment_method_select_a{
 	justify-content: space-around;
 	display: flex;
-	flex-direction: column;		
+	flex-direction: column;	
+	margin-left: 400px;	
+}
+
+.back_button_a{
+	margin-left: 550px;	
 }
 
 .step-list {

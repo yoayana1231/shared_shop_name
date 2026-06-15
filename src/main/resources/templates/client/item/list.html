@@ -92,15 +92,15 @@
 
 		<!--		/* 商品一覧 */-->
 
-		<div class="list_card">
-			<aside class="editorial-column">
-				<div class="quote-card">
-					<span class="quote-mark">“</span>
+		<div class="list_card_a">
+			<aside class="editorial-column_a">
+				<div class="quote-card_a">
+					<span class="quote-mark_a">“</span>
 					<h3>ときめきは、<br />きっと毎日つくれる。</h3>
 					<p>心がふっとほどけるような、お気に入りとの出会いを。</p>
 				</div>
-				<div class="ranking-card">
-					<div class="mini-heading">
+				<div class="ranking-card_a">
+					<div class="mini-heading_a">
 						<span>RANKING</span><small>人気アイテム</small>
 					</div>
 					<ol>
@@ -118,9 +118,9 @@
 					<a th:href="@{/client/item/list/2(categoryId=${categoryId})}">人気アイテムをもっとみる →</a>
 				</div>
 			</aside>
-			<div class="product_grid">
-				<article class="item_card_list" th:each="item, status: ${items}">
-					<div class="image">
+			<div class="product_grid_a">
+				<article class="item_card_list_a" th:each="item, status: ${items}">
+					<div class="image_a">
 						<a th:href="@{/client/item/detail/{id}(id=${item.id})}">
 							<img th:src="@{/images/photo/{imgName}(imgName=${item.image})}"
 								th:if="${item.image != null}" />
@@ -128,21 +128,21 @@
 						</a>
 					</div>
 					<div>
-						<p class="item_name" th:text="${item.name}"></p>
-						<p class="item_price" th:text="${item.price}"></p>
-						<span class="item_category" th:text="${item.category.name}"></span>
+						<p class="item_name_a" th:text="${item.name}"></p>
+						<p class="item_price_a" th:text="${item.price}"></p>
+						<span class="item_category_a" th:text="${item.category.name}"></span>
 						<div class="item_form">
-							<div class="button_all">
-								<div class="favorite_button">
+							<div class="button_all_a">
+								<div class="favorite_button_a">
 									<form th:action="@{/client/favorite/update}" method="post">
 										<input type="hidden" name="itemId" th:value="${item.id}">
 										<button type="submit"><img th:src="@{/images/faviorite_blank.svg}"></button>
 									</form>
 								</div>
-								<div class="cart">
+								<div class="cart_a">
 									<!--																		<form th:action="@{/client/basket/add}" method="post" th:if="*{stock > 0}">-->
 									<form th:action="@{/client/basket/list}" method="get">
-										<button type="submit" class="cart-button">ADD TO CART</button>
+										<button type="submit" class="cart-button_a">ADD TO CART</button>
 									</form>
 								</div>
 							</div>
