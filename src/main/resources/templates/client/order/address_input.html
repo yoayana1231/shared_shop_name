@@ -32,83 +32,78 @@
 		</ul>
 	</nav>
 
-	<!--	YOUR CART-->
-	<h2 th:class="your_cart" th:text="#{title.order.address.input}"></h2>
+	<h2 class="your_cart" th:text="#{title.order.address.input}"></h2>
 
 	<div class="user_info_form_area">
-		<form th:action="@{/client/order/payment/input}" method="post" th:object="${orderForm}">
-			<th:block th:if="${#fields.hasErrors()}">
-				<ul class="error_list">
-					<li th:each="err:${#fields.detailedErrors()}" th:text="${err.message}"></li>
+		<div class="order_input_layout">
+			<form class="address_form_card" th:action="@{/client/order/payment/input}" method="post" th:object="${orderForm}">
+				<th:block th:if="${#fields.hasErrors()}">
+					<ul class="error_list">
+						<li th:each="err:${#fields.detailedErrors()}" th:text="${err.message}"></li>
+					</ul>
+				</th:block>
+
+				<div class="form_heading_block">
+					<h2 class="delivery_mozi">DELIVERY</h2>
+					<p class="input_message_1" th:text="#{msg.order.address.input}"></p>
+				</div>
+
+				<ul class="input_list_a">
+					<li>
+						<label><span class="input_title_a">[[#{orderForm.name}]]</span></label>
+						<input type="text" th:field="*{name}" />
+					</li>
+
+					<li>
+						<label><span class="input_title_a">[[#{orderForm.phoneNumber}]]</span></label>
+						<input type="text" th:field="*{phoneNumber}" />
+					</li>
+
+					<li>
+						<label><span class="input_title_a">[[#{orderForm.postalCode}]]</span></label>
+						<input type="text" th:field="*{postalCode}" />
+					</li>
+
+					<li>
+						<label><span class="input_title_a">[[#{orderForm.address}]]</span></label>
+						<textarea class="input_title_b" rows="6" th:field="*{address}"></textarea>
+					</li>
 				</ul>
-				<br />
-			</th:block>
 
-			<ul class="input_list_a">
-				<h2 class="delivery_mozi">DELIVERY</h2>
-				<!--お届け先情報を入力してください。-->
-				<p th:class="input_message_1" th:text="#{msg.order.address.input}"></p>
+				<input type="hidden" th:field="*{id}" />
+				<input type="hidden" th:field="*{payMethod}" />
 
-				<!--氏名-->
-				<li>
-					<label><span class="input_title_a">[[#{orderForm.name}]]</span></label>
-					<input type="text" th:field="*{name}" />
-				</li>
+				<div class="order_button_area">
+					<input type="submit" value="戻る" class="back_button_a" th:formaction="@{/client/basket/list}" formmethod="post" formnovalidate />
+					<input type="submit" value="次へ" class="send_button_a" />
+				</div>
+			</form>
 
-				<!--電話番号-->
-				<li>
-					<label><span class="input_title_a">[[#{orderForm.phoneNumber}]]</span></label>
-					<input type="text" th:field="*{phoneNumber}" />
-				</li>
-				<!--郵便番号-->
-				<li>
-					<label><span class="input_title_a">[[#{orderForm.postalCode}]]</span></label>
-					<input type="text" th:field="*{postalCode}" />
-				</li>
+			<aside class="order_summary_card">
+				<div class="summary_heading">
+					<span>ORDER SUMMARY</span>
+					<small>ご注文内容</small>
+				</div>
 
-				<!--住所-->
-				<li>
-					<label><span class="input_title_a">[[#{orderForm.address}]]</span></label>
-					<textarea class="input_title_b" rows="6" th:field="*{address}"></textarea>
-				</li>
+				<div class="summary_items">
+					<div class="summary_item" th:each="basket:${session.basket}">
+						<div class="summary_thumb">
+							<img th:src="@{/images/photo/{imgName}(imgName=${basket.image})}" th:if="${basket.image != null}" />
+							<img th:src="@{/images/common/no_image.jpg}" th:if="${basket.image == null}" />
+						</div>
+						<div class="summary_text">
+							<span class="summary_name" th:text="${basket.name}"></span>
+							<span class="summary_price" th:text="'&yen;'+${basket.price}"></span>
+						</div>
+					</div>
+				</div>
 
-			</ul>
-      
-			<!--ID-->
-			<input type="hidden" th:field="*{id}" />
-
-			<!--支払い方法-->
-
-			<input type="hidden" th:field="*{payMethod}" />
-
-			<input type="submit" value="次へ" class="send_button_a" />
-		</form>
-
-		<form th:action="@{/client/basket/list}" method="post">
-			<input type="submit" value="戻る" class="back_button_a" />
-		</form>
-
-		<div th:each="basket:${session.basket}">
-			<img th:src="@{/images/photo/{imgName}(imgName=${basket.image})}" th:if="${basket.image != null}" />
-			<img th:src="@{/images/common/no_image.jpg}" th:if="${basket.image == null}" />
-			<span th:text="${basket.name}"></span>
-			<span th:text="'&yen;'+${basket.price}"></span>
+				<div class="summary_note">
+					<p>内容を確認して、次の画面でお支払い方法を選択してください。</p>
+				</div>
+			</aside>
 		</div>
-
 	</div>
-
-	<!--	<form method="post" th:object="${}">-->
-	<!--		<div class="user_info">-->
-	<!--			<div class="user_info_photo">-->
-	<!--				<input type="image" th:field="*{image}" />-->
-
-	<!--			</div>-->
-
-	<!--			<div class="user_info_photo_message">-->
-
-	<!--			</div>-->
-	<!--		</div>-->
-	<!--	</form>-->
 </body>
 
 </html>
