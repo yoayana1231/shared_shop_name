@@ -1,55 +1,49 @@
 @charset "UTF-8";
 
-ul, li {
-    margin: 30px;
+ul,
+li {
+	margin: 30px;
 }
 
-.delivery_mozi{
-	display: flex;
-	margin-left: 30px;
+.user_info_form_area_a{
+	display: block;
+    margin-top: 30px;
+    display: flex;
 }
 
-.your_cart{
-	padding: 8px 15px;
-	font-size:40px;
+.user_info_credit_area {
+	width: 100%;
+	justify-content: space-around;
+}
+
+.pay_mozi {
 	display: flex;
 	justify-content: space-around;
 }
 
-.input_message_1{
+.your_cart {
+	padding: 8px 15px;
+	font-size: 40px;
+	display: flex;
+	justify-content: space-around;
+}
+
+.input_message_a {
 	padding-top: 1px;
 	font-size: 15px;
-	margin-left: 30px;
+	justify-content: space-around;
+	display: flex;
 }
 
-.input_list_a{
-    width: 100%;
-    font-size: 1.1rem;
-    margin-bottom: 30px;
-}
-
-.input_list_a input{
-    width: 600px;
-    padding: 5px;
-    box-sizing: border-box;
-    font-size: 1rem;
-}
-
-.input_list_a .input_title_a{
-	display: block;
-	line-height: 1.1rem;
-}
-
-.input_title_b{
-    width: 600px;
-    font-size: 1.1rem;
-    margin-bottom: 30px;	
-	display: block;
-	line-height: 1.1rem;	
-}
-
-.send_button_a{
+.send_button_a {
 	margin-left: 60px;
+	justify-content: space-around;
+}
+
+.payment_method_select_a{
+	justify-content: space-around;
+	display: flex;
+	flex-direction: column;		
 }
 
 .step-list {
@@ -101,16 +95,21 @@ ul, li {
   font-weight: bold;
 }
 
+/* 2ページ目（情報入力）にいる時：1つ前のカートは終了している */
 #page-input .step-cart .step-icon,
+
+/* 3ページ目（確認）にいる時：カートと情報入力は終了している */
 #page-confirm .step-cart .step-icon,
 #page-confirm .step-input .step-icon,
+
+/* 4ページ目（完了）にいる時：それ以前はすべて終了している */
 #page-complete .step-cart .step-icon,
 #page-complete .step-input .step-icon,
 #page-complete .step-confirm .step-icon {
-  background-color: #0066cc; /* 背景を青で塗りつぶす */
+  background-color: #0066cc;
   border-color: #0066cc;
-  color: #fff; /* 数字を白抜きにする */
-  box-shadow: 0 0 8px rgba(0, 102, 204, 0.3); /* ほんのり光らせる */
+  color: #fff;
+  box-shadow: 0 0 8px rgba(0, 102, 204, 0.3); /* 終了したページもほんのり光らせる */
 }
 
 #page-input .step-cart .step-label,
@@ -121,3 +120,4 @@ ul, li {
 #page-complete .step-confirm .step-label {
   color: #333;
 }
+
