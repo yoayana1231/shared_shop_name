@@ -18,19 +18,18 @@ public interface RecommendRepository extends JpaRepository<ViewHistories, Intege
 	ViewHistories findLatestViewHistoryByUserId(@Param("userId")Integer userId);
 	
 	
-	// 他ユーザと商品1つを条件に同カテゴリの商品を新しい順に4件取得する
-	@Query(value = "SELECT * FROM( "
-			+ "SELECT v.* FROM view_histories v INNER JOIN items i ON v.item_id = i.id "
-			+ "WHERE i.category_id=:categoryId AND user_id<>:userId "
-			+ "ORDER BY viewed_at DESC) WHERE ROWNUM <= 4", nativeQuery = true)
-	List<ViewHistories> findTop4OtherUsersViewHistoriesByCategory
+	// 他ユーザと商品1つを条件に同カテゴリの商品を新しい順に取得する
+	@Query(value ="SELECT v.* FROM view_histories v INNER JOIN items i "
+			+ "ON v.item_id = i.id WHERE i.category_id=:categoryId AND user_id<>:userId "
+			+ "ORDER BY viewed_at DESC", nativeQuery = true)
+	List<ViewHistories> findOtherUsersViewHistoriesByCategory
 			(@Param("categoryId") Integer categoryId, @Param("userId") Integer userId);
 	
 	
-	// 他ユーザの閲覧履歴から新しい順で4件取得する
+	// 他ユーザの閲覧履歴から新しい順で20件取得する
 	@Query(value = "SELECT * FROM( "
 			+ "SELECT * FROM view_histories WHERE user_id<>:userId "
-			+ "ORDER BY viewed_at DESC) WHERE ROWNUM <= 4", nativeQuery = true)
-	List<ViewHistories> findTop4OtherUsersLatestViewHistories(@Param("userId") Integer userId);
+			+ "ORDER BY viewed_at DESC) WHERE ROWNUM <= 20", nativeQuery = true)
+	List<ViewHistories> findTop20OtherUsersLatestViewHistories(@Param("userId") Integer userId);
 	
 }
