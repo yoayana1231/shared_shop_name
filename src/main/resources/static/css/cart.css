@@ -28,16 +28,11 @@ body {
 	letter-spacing: 0.045em;
 }
 p{
-	font-size:30px;
+/*	font-size:30px;*/
 }
 a {
 	text-decoration: none;
 	color: inherit;
-}
-
-img {
-	display: block;
-	max-width: 100%;
 }
 
 button,
