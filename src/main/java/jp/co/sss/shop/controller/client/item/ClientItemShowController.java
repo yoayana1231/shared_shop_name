@@ -1,7 +1,6 @@
 package jp.co.sss.shop.controller.client.item;
 
 import java.time.LocalDateTime;
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +25,7 @@ import jp.co.sss.shop.repository.ReviewsRepository;
 import jp.co.sss.shop.repository.UserRepository;
 import jp.co.sss.shop.repository.ViewHistoriesRepository;
 import jp.co.sss.shop.service.BeanTools;
+import jp.co.sss.shop.service.RecommendsService;
 
 /**
  * 商品管理 一覧表示機能(一般会員用)のコントローラクラス
@@ -46,15 +46,21 @@ public class ClientItemShowController {
 	@Autowired
 	CategoryRepository categoryRepository;
 
+	// ViewHistoryリポジトリ
 	@Autowired
 	ViewHistoriesRepository viewHistoriesRepository;
 
+	// Userリポジトリ
 	@Autowired
 	UserRepository userRepository;
 	
 	// Reviewリポジトリ
 	@Autowired
 	ReviewsRepository reviewRepository;
+	
+	// recommendサービス
+	@Autowired
+	RecommendsService recommendsService;
 
 	/**
 	 * Entity、Form、Bean間のデータコピーサービス
@@ -71,16 +77,20 @@ public class ClientItemShowController {
 	@RequestMapping(path = "/", method = { RequestMethod.GET, RequestMethod.POST })
 	public String index(Model model, HttpSession session) {
 		model.addAttribute("items", itemRepository.findAll());
-
-		//		市川実装	閲覧履歴表示
+		
+		// 市川実装	閲覧履歴 / 吉永実装 おすすめ表示
 		UserBean userBean = (UserBean) session.getAttribute("user");
 		if (userBean != null) {
 			User user = userRepository.getReferenceById(userBean.getId());
-
+			
+			// 閲覧履歴表示
 			List<ViewHistories> histories = viewHistoriesRepository.findByUserOrderByViewedAtDesc(user);
 			model.addAttribute("histories", histories);
+			
+			// おすすめ表示
+			recommendsService.recommend(model, session);
 		}
-
+		
 		return "index";
 	}
 
@@ -117,7 +127,6 @@ public class ClientItemShowController {
 	//石田実装 あいまい検索用コントローラー
 	//name属性 search
 	//新規追加リポジトリメソッド findByNameContaining
-
 	@RequestMapping("/client/item/list/search")
 	public String clientItemListSearch(String search, Model model) {
 		model.addAttribute("items", itemRepository.findByNameContaining(search));
@@ -133,7 +142,6 @@ public class ClientItemShowController {
 	 * @param session	ログイン確認
 	 * @return			商品詳細画面
 	 */
-
 	@GetMapping("/client/item/detail/{id}")
 	public String clientItemDetail(@PathVariable Integer id, Model model, HttpSession session) {
 
@@ -181,7 +189,6 @@ public class ClientItemShowController {
 	 * @param user	ログインしているユーザー
 	 * @param item	閲覧した商品
 	 */
-
 	private void saveOrUpdateViewHistory(User user, Item item) {
 		// すでに同じユーザーが同じ商品の履歴を持っているか確認
 		ViewHistories history = viewHistoriesRepository.findByUserAndItem(user, item);
@@ -198,4 +205,5 @@ public class ClientItemShowController {
 		}
 
 	}
+	
 }
