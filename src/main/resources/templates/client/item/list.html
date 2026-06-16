@@ -51,10 +51,10 @@
 	<div class="category-tabs">
 
 		<a th:href="@{/client/item/list/1}" class="active">すべて</a>
-
-		<a th:each="category : ${categories}" th:href="@{/client/item/list/category(categoryId=${category.id})}"
-			th:text="${category.name}">
-		</a>
+		<div th:each="category :${categories}">
+			<a th:href="@{/client/item/list/category/{categoryId}(categoryId=${category.id})}"
+				th:text="${category.name}"></a>
+		</div>
 
 		<!--		<a href="#">下地</a>-->
 		<!--		<a href="#">ファンデーション</a>-->

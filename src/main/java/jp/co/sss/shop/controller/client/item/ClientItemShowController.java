@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import jakarta.servlet.http.HttpSession;
 import jp.co.sss.shop.bean.ItemBean;
 import jp.co.sss.shop.bean.UserBean;
-import jp.co.sss.shop.entity.Category;
 import jp.co.sss.shop.entity.Item;
 import jp.co.sss.shop.entity.Reviews;
 import jp.co.sss.shop.entity.User;
@@ -76,6 +75,10 @@ public class ClientItemShowController {
 	 */
 	@RequestMapping(path = "/", method = { RequestMethod.GET, RequestMethod.POST })
 	public String index(Model model, HttpSession session) {
+		
+		// カテゴリ表示用の検索
+		model.addAttribute("categories", categoryRepository.findAll());
+		// アイテム全件検索
 		model.addAttribute("items", itemRepository.findAll());
 		
 		// 市川実装	閲覧履歴 / 吉永実装 おすすめ表示
@@ -97,7 +100,10 @@ public class ClientItemShowController {
 	//	売れてない奴も表示する（商品一覧）
 	@RequestMapping(path = "/client/item/list/{sortType}", method = { RequestMethod.GET })
 	public String clientItem(@PathVariable int sortType, Model model) {
+		
+		model.addAttribute("categories", categoryRepository.findAll());
 		model.addAttribute("items", itemRepository.findAllByQuantityDesc());
+		
 		//		新着順
 		if (sortType == 1) {
 			model.addAttribute("items", itemRepository.findAllByOrderByInsertDateDesc());
@@ -109,16 +115,16 @@ public class ClientItemShowController {
 	}
 
 	/*
-	 * 一覧表示 カテゴリ検索
+	 * 吉永作成 一覧表示 カテゴリ検索
 	 * 
 	 * @param model Viewとの値受渡し
 	 * @return "client/item/list" 商品一覧
 	 */
-	@GetMapping(path = "/client/item/list/category")
-	public String categorySort(Integer categoryId, Model model) {
-		Category category = new Category();
-		category.setId(categoryId);
-		List<Item> items = itemRepository.findByCategory(category);
+	@GetMapping(path = "/client/item/list/category/{categoryId}")
+	public String categorySort(@PathVariable Integer categoryId, Model model) {
+		
+		model.addAttribute("categories", categoryRepository.findAll());
+		List<Item> items = itemRepository.findByCategoryId(categoryId);
 		model.addAttribute("items", items);
 
 		return "client/item/list";
@@ -129,6 +135,7 @@ public class ClientItemShowController {
 	//新規追加リポジトリメソッド findByNameContaining
 	@RequestMapping("/client/item/list/search")
 	public String clientItemListSearch(String search, Model model) {
+		model.addAttribute("categories", categoryRepository.findAll());
 		model.addAttribute("items", itemRepository.findByNameContaining(search));
 		return "client/item/list";
 	}
