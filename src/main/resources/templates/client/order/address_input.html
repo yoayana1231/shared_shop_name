@@ -72,12 +72,12 @@
 				<input type="hidden" th:field="*{payMethod}" />
 
 				<div class="order_button_area">
-					<input type="submit" value="戻る" class="back_button_a" th:formaction="@{/client/basket/list}" formmethod="post" formnovalidate />
+					<input type="submit" value="戻る" class="back_button_ab" th:formaction="@{/client/basket/list}" formmethod="post" formnovalidate />
 					<input type="submit" value="次へ" class="send_button_a" />
 				</div>
 			</form>
 
-			<aside class="order_summary_card">
+			<div class="order_summary_card">
 				<div class="summary_heading">
 					<span>ORDER SUMMARY</span>
 					<small>ご注文内容</small>
@@ -99,7 +99,7 @@
 				<div class="summary_note">
 					<p>内容を確認して、次の画面でお支払い方法を選択してください。</p>
 				</div>
-			</aside>
+			</div>
 			
 		</div>
 	</div>

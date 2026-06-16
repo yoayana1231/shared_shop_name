@@ -110,6 +110,10 @@
 .decision_botan{
 	display: flex;
 	justify-content: center
+}
 
-
+.cart-layout_a{
+	display: grid;
+/* grid-template-columns: minmax(0, 1fr) 410px; */
+/*    justify-items: center;*/
 }

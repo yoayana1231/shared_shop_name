@@ -39,7 +39,7 @@
 	<!--お支払い方法を選択してください-->
 	<p th:class="input_message_a" th:text="#{msg.order.payment.input}"></p>
 
-	<div class="user_info_form_area">
+	<div class="user_info_form_area_a">
 		<form class="all_money" th:action="@{/client/order/check}" method="post">
 			<ul class="payment_method_select_a">
 				<li>
@@ -85,7 +85,7 @@
 			</ul>
 
 			<div class="side_photo">
-				<aside class="order_summary_card_a">
+				<div class="order_summary_card_a">
 					<div class="summary_heading">
 						<span>ORDER SUMMARY</span>
 						<small>ご注文内容</small>
@@ -108,16 +108,19 @@
 					<div class="summary_note">
 						<p>内容を確認して、次の画面でお支払い方法を選択してください。</p>
 					</div>
-				</aside>
+				</div>
 			</div>
-			
-			<form th:action="@{/client/order/payment/back}" method="post" class="update">
-				<input type="submit" class="back_button_a" value="戻る" th:formaction="@{/client/order/payment/back}"
-					formmethod="post" formnovalidate />
-				<input type="submit" class="send_button_a" value="次へ" />
-
-			</form>
 	</div>
+
+	<div class="decision">
+		<form th:action="@{/client/order/payment/back}" method="post" class="update">
+			<input type="submit" class="back_button_a" value="戻る" th:formaction="@{/client/order/payment/back}"
+				formmethod="post" formnovalidate />
+			<input type="submit" class="send_button_a" value="次へ" />
+
+		</form>
+	</div>
+
 	</div>
 </body>
 
