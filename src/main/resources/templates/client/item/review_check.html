@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{common/layout_5block :: layout(~{::title},~{::body/content()})}">
+
+<head>
+	<meta charset="UTF-8">
+	<title th:text="#{title.review.check}+' | '+ #{shop.title}"></title>
+</head>
+
+<body>
+	
+	<h2 th:class="title" th:text="#{review}+#{check.title.action}"></h2>
+	
+	<div>
+		<div>評価</div>
+		<div th:switch="${reviewForm.rating}">
+			<span th:case="1">☆</span>
+			<span th:case="2">☆☆</span>
+			<span th:case="3">☆☆☆</span>
+			<span th:case="4">☆☆☆☆</span>
+			<span th:case="5">☆☆☆☆☆</span>
+		</div>
+		<div>コメント</div>
+		<div th:text="${reviewForm.comments}"></div>
+	</div>
+	
+	<form th:action="@{/client/review/check/save}" method="post" th:object="${reviewForm}">
+		<input type="hidden" th:field="*{id}">
+		<input type="hidden" name="item.id" th:value="${reviewForm.item != null ? reviewForm.item.id : ''}">
+		<input type="hidden" th:field="*{rating}">
+		<input type="hidden" th:field="*{comments}">
+		<input type="submit" value="送信">
+	</form>
+	
+	<form th:action="@{/client/review/check/back}" method="post" th:object="${reviewForm}">
+		<input type="hidden" th:field="*{id}">
+		<input type="hidden" name="item.id" th:value="${reviewForm.item != null ? reviewForm.item.id : ''}">
+		<input type="hidden" th:field="*{rating}">
+		<input type="hidden" th:field="*{comments}">
+		<input type="submit" value="戻る">
+	</form>
+
+</body>
+
+</html>

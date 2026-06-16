@@ -1,8 +1,9 @@
-﻿@charset "UTF-8";
+@charset "UTF-8";
 
 body {
 	color: #12526d;
 	font-size: 14px;
+	background-color: #F7F7F7;
 }
 
 /* ---- テキスト系 ---- */
@@ -12,12 +13,63 @@ body {
 }
 
 p {
+	color: #595959;
 	margin: 15px 0;
+}
+
+h1 {
+	color: #595959;
+	font-family: var(--font-display);
+}
+
+h2 {
+	color: #595959;
 }
 
 /* --- トップ画面 ---*/
 .navi_area~.container {
 	display: flex;
+	margin: 0;
+}
+
+.top_page {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	height: 700px;
+	background: rgb(235, 251, 254);
+}
+
+.top_photo {
+	padding-right: 10px;
+	width: 500px;
+	height: 85%;
+}
+
+.brand_concept {
+	display: right;
+	align-items: self-start;
+	gap: 12px;
+	flex-direction: column
+}
+
+.brand_concept_char {
+	display: flex;
+	align-items: flex-end;
+	flex-direction: column;
+	gap: 12px;
+	margin-right: 40px;
+}
+
+.brand_concept_photo {
+	display: flex;
+	justify-content: flex-start;
+	flex-direction: row;
+	margin-top: -500px;
+}
+
+.brand_concept_photo_1 {
+	width: 700px;
 }
 
 /* ---- 入力フォーム(ログイン) ---- */
@@ -30,6 +82,11 @@ p {
 .login_form_area ul {
 	text-align: center;
 	margin-left: 20px;
+}
+
+.login_form_area {
+	margin-bottom: 20px;
+
 }
 
 .login_form {
@@ -61,18 +118,70 @@ p {
 	cursor: pointer;
 }
 
+.login_botan {
+	transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.login_botan:hover {
+	transform: translateY(-1px);
+	box-shadow: 0 12px 24px rgb(232, 234, 249);
+
+}
+
 .new_login_content input {
 	cursor: pointer;
 }
 
-.complete_link a{
-	
+.new_login_botan {
+	transition: transform .18s ease, box-shadow .18s ease;
 }
+
+.new_login_botan:hover {
+	transform: translateY(-1px);
+	box-shadow: 0 12px 24px rgb(232, 234, 249);
+
+}
+
+
+.a {
+	border: 3px solid #F7F7F7;
+	overflow: hidden;
+	border-radius: 16px;
+	background: #ffffff;
+	box-shadow: 0 8px 20px rgba(15, 81, 50, .08);
+	width: 700px;
+	text-align: center;
+	margin-left: 13%;
+	margin-top: 25px;
+}
+
+.new_login_content {
+	border: 3px solid #F7F7F7;
+	overflow: hidden;
+	border-radius: 16px;
+	background: #ffffff;
+	box-shadow: 0 8px 20px rgba(15, 81, 50, .08);
+	width: 700px;
+	text-align: center;
+	margin-left: 13%;
+	margin-top: 25px;
+}
+
+.complete_link a {
+	color: rgb(121, 137, 164);
+}
+
+.input_newMember {
+	color: rgb(121, 137, 164);
+}
+
 
 /* ---- ページタイトル ---- */
 .page_title {
 	text-align: center;
 	margin: 0;
+	cursor: default;
+	font-family: Noto Sans JP;
 }
 
 .login .page_title {
@@ -87,6 +196,8 @@ p {
 .page_title_login {
 	text-align: center;
 	font-size: 25px;
+	cursor: default;
+	font-family: sans-serif;
 }
 
 .input_login {
@@ -104,6 +215,9 @@ p {
 	margin-top: 30px;
 	text-align: center;
 	font-size: 25px;
+	cursor: default;
+	font-family: sans-serif;
+
 }
 
 /* ---- 会員登録入力画面へのリンク ---- */
@@ -116,6 +230,7 @@ p {
 .description {
 	margin-top: 15px;
 	text-align: center;
+	cursor: default
 }
 
 /* ---- ボタン(機能呼出) ---- */
@@ -335,6 +450,20 @@ ul.error_list {
 	margin-bottom: 5px;
 }
 
+.input_mail input {
+	cursor: text;
+	text-align: center;
+	width: 300px;
+}
+
+.input_pass input {
+	cursor: text;
+	text-align: center;
+	margin-top: 10px;
+	width: 300px;
+
+}
+
 /* ---- エラー表示 ---- */
 li.error_msg {
 	display: list-item;
@@ -486,13 +615,13 @@ select {
 
 /* ---- ボタン全般 ---- */
 [type=submit] {
-	border: 1px solid #808080;
-	border-radius: 6px;
-	padding: 2px 10px;
-	color: #12526d;
-	background: #fff;
-	box-shadow: 1px 2px 2px #eee;
-	text-shadow: 1px 1px 1px #d8d8d8;
+/*	border: 1px solid #808080;*/
+/*	border-radius: 6px;*/
+/*	padding: 2px 10px;*/
+/*	color: #12526d;*/
+/*	background: rgb(255, 255, 255);*/
+/*	box-shadow: 1px 2px 2px #eee;*/
+/*	text-shadow: 1px 1px 1px #d8d8d8;*/
 }
 
 /* スキルアップテクニック10
@@ -658,6 +787,36 @@ select {
 
 .list_table.category_list {
 	margin: 10px auto 20px;
+}
+
+.category_one {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+}
+
+.category_tittle {
+	width: 500px;
+	height: min-content;
+	margin-top: 80px;
+	margin-left: 50px;
+}
+
+.category_list img {
+	width: 100%;
+	height: 200px;
+	object-fit: cover;
+	display: block;
+}
+
+.category_name {
+	cursor: default;
+}
+
+.category_list {
+	margin-right: 10px;
+	margin-left: 10px;
+	margin-bottom: 50px;
+	text-decoration: none;
 }
 
 /* ---- 注文詳細 ---- */

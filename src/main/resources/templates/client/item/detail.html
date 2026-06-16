@@ -9,37 +9,89 @@
 
 <body class="user">
 
-	<h2 th:class="title" th:text="#{item}+#{title.detail}"></h2>
+	<!--	<h2 th:class="title" th:text="#{item}+#{title.detail}"></h2>-->
 
-	<div class="info_form_area" th:object="${item}">
-		<div class="item_detail_area">
-			<div class="item_image_area">
-				<img th:if="*{image != null}" th:src="@{/images/{image}(image=*{image})}"></img>
-				<img th:if="*{image == null}" th:src="@{/images/common/no_image.jpg}"></img>
+
+	<div class="all_detail" th:object="${item}">
+		<div class="pic_item_cart_fav">
+			<div class="item_detail_area">
+				<div class="item_img">
+					<img th:src="@{/images/photo/{imgName}(imgName=${item.image})}" th:if="${item.image != null}" />
+					<img th:src="@{/images/common/no_image.jpg}" th:if="${item.image == null}" />
+				</div>
+				<div class="item_cart">
+					<div class="item_detail">
+<!--						<dt>[[#{data.item.name}]]</dt>-->
+						<p class="category_name" th:text="*{categoryName}"></p>
+						<h2 th:text="*{name}"></h2>
+<!--						<dt>[[#{data.item.price}]]</dt>-->
+						<p th:text="*{price}"></p>
+<!--						<dt>[[#{data.item.stock}]]</dt>-->
+						<p th:if="*{stock > 5}" th:text="#{data.in.stock}"></p>
+						<p th:if="*{stock >= 1 and 5 >= stock }" th:text="*{stock}"></p>
+						<p th:if="*{stock == 0}" th:text="#{data.out.of.stock}"></p>
+<!--						<dt>[[#{data.category}]</dt>-->
+<!--						<dt>[[#{data.description}]]</dt>-->
+						<p th:text="*{description}"></p>
+					</div>
+					<div class="detail_button">
+						<form th:action="@{/client/basket/add}" method="post" class="user_info_form"
+							th:if="*{stock > 0}">
+							<input type="hidden" th:field="*{id}" />
+							<input type="submit" value="買い物かごに入れる" class="send_button" />
+						</form>
+					</div>
+				</div>
 			</div>
-			<dl class="item_detail_list">
-				<dt>[[#{data.item.name}]]</dt>
-				<dd th:text="*{name}"></dd>
-				<dt>[[#{data.item.price}]]</dt>
-				<dd th:text="*{price}"></dd>
-				<dt>[[#{data.item.stock}]]</dt>
-				<dd th:if="*{stock > 5}" th:text="#{data.in.stock}"></dd>
-				<dd th:if="*{stock >= 1 and 5 >= stock }" th:text="*{stock}"></dd>
-				<dd th:if="*{stock == 0}" th:text="#{data.out.of.stock}"></dd>
-				<dt>[[#{data.category}]]</dt>
-				<dd th:text="*{categoryName}"></dd>
-				<dt>[[#{data.description}]]</dt>
-				<dd th:text="*{description}"></dd>
-			</dl>
 		</div>
-		<div class="detail_button_area">
-			<form th:action="@{/client/basket/add}" method="post" class="user_info_form" th:if="*{stock > 0}">
-				<input type="hidden" th:field="*{id}" />
-				<input type="submit" value="買い物かごに入れる" class="send_button" />
-			</form>
-			<form th:action="@{/client/item/list/1}" method="post">
-				<input type="submit" value="戻る" class="back_button" />
-			</form>
+<!--			<div class="detail_button_area">-->
+<!--				<form th:action="@{/client/basket/add}" method="post" class="user_info_form" th:if="*{stock > 0}">-->
+<!--					<input type="hidden" th:field="*{id}" />-->
+<!--					<input type="submit" value="買い物かごに入れる" class="send_button" />-->
+<!--				</form>-->
+<!--			</div>-->
+		
+<!--		<div>-->
+<!--			<form th:action="@{/client/review/input/{itemId}(itemId=${item.id})}" method="get" class="user_info_form">-->
+<!--				<input type="submit" value="レビュー" class="send_button" />-->
+<!--			</form>-->
+<!--			<form th:action="@{/client/item/list/1}" method="post">-->
+<!--				<input type="submit" value="戻る" class="back_button" />-->
+<!--			</form>-->
+<!--		</div>-->
+
+		<div>
+			<!--レビュー表示-->
+<!--			<p th:text="#{msg.review.list.none}" th:if="${#lists.isEmpty(itemReviews)}"></p>-->
+
+<!--			<th:block th:if="!${#lists.isEmpty(itemReviews)}">-->
+<!--				<table>-->
+<!--					<tr>-->
+<!--						<th th:text="#{rating}"></th>-->
+<!--						<th th:text="#{comments}"></th>-->
+<!--					</tr>-->
+<!--					<tr th:each="review: ${itemReviews}">-->
+<!--						<td th:text="${review.rating}"></td>-->
+<!--						<td th:text="${review.comments}"></td>-->
+<!--						<th:block th:if="${session.user != null && review.user.id == session.user.id}">-->
+<!--							<td>-->
+<!--								<form th:action="@{/client/review/edit/input/{reviewId}(reviewId=${review.id})}"-->
+<!--									method="get">-->
+<!--																		<input type="hidden" th:value="${review.id}">-->
+<!--									<button type="submit">編集</button>-->
+<!--								</form>-->
+<!--							</td>-->
+<!--							<td>-->
+<!--								<form th:action="@{/client/review/delete}" method="post">-->
+<!--									<input type="hidden" name="reviewId" th:value="${review.id}">-->
+<!--									<button type="submit">削除</button>-->
+<!--								</form>-->
+<!--							</td>-->
+<!--						</th:block>-->
+<!--					</tr>-->
+<!--				</table>-->
+<!--			</th:block>-->
+
 		</div>
 	</div>
 

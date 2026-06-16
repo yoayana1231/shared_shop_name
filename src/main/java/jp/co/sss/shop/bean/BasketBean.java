@@ -29,6 +29,40 @@ public class BasketBean {
 	private Integer orderNum = 1;
 
 	/**
+	 *ここから Bean追加要素
+	 */
+
+	/**
+	 * 商品写真名
+	 */
+	private String image;
+
+	/**
+	 * 金額
+	 */
+	private Integer price;
+
+	// ...コンストラクタに追加...
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	public Integer getPrice() {
+		return price;
+	}
+
+	public void setPrice(Integer price) {
+		this.price = price;
+	}
+
+	//    ここまで追加
+
+	/**
 	 * コンストラクタ
 	 */
 	public BasketBean() {

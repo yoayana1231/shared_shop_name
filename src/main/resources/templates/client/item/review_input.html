@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{common/layout_5block :: layout(~{::title},~{::body/content()})}">
+
+<head>
+	<meta charset="UTF-8">
+	<title th:text="#{title.review.input}+' | '+ #{shop.title}"></title>
+</head>
+
+<body class="user">
+
+	<h2 th:class="title" th:text="#{review}+#{input.title.action}"></h2>
+
+	<form th:action="@{/client/review/check}" method="post" th:object="${reviewForm}">
+
+		<!--エラーメッセージ-->
+		<p>
+			<span th:each="err: ${#fields.detailedErrors()}">
+				<span th:text="${err.message}"></span><br>
+			</span>
+		</p>
+		
+		<!--評価-->
+		<div>
+			<div><input type="hidden" th:field="*{id}"></div>
+			<div><input type="hidden" th:field="*{item.id}"></div>
+			
+			<div>
+				<label><input type="radio" th:field="*{rating}" value="1">☆</label><br>
+				<label><input type="radio" th:field="*{rating}" value="2">☆☆</label><br>
+				<label><input type="radio" th:field="*{rating}" value="3">☆☆☆</label><br>
+				<label><input type="radio" th:field="*{rating}" value="4">☆☆☆☆</label><br>
+				<label><input type="radio" th:field="*{rating}" value="5">☆☆☆☆☆</label><br>
+			</div>
+
+			<!--レビュー記入欄-->
+			<div>
+				<textarea th:field="*{comments}" cols="30" rows="5"></textarea><br>
+			</div>
+			<div class="send_button">
+				<input type="submit" value="確認">
+			</div>
+		</div>
+	</form>
+
+</body>
+
+</html>

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import jp.co.sss.shop.bean.UserBean;
+import jp.co.sss.shop.entity.User;
 import jp.co.sss.shop.form.LoginForm;
 import jp.co.sss.shop.repository.UserRepository;
 import jp.co.sss.shop.util.Constant;
@@ -21,10 +22,10 @@ import jp.co.sss.shop.util.Constant;
  */
 @Controller
 public class LoginController {
-	
+
 	//test
 	//吉田ばーか
-	
+
 	/**
 	 * 会員情報
 	 */
@@ -71,18 +72,35 @@ public class LoginController {
 			session.invalidate();
 			returnStr = "login";
 
+		}
+
+		// メールアドレスからユーザー情報を取得
+		User user = userRepository.findByEmail(form.getEmail());
+		
+		// 取得したユーザー情報と入力されたパスワードが正しいか判定
+		if ((user == null) || (!user.getPassword().equals(form.getPassword()))) {
+			// 一致しなかった場合
+			// セッション情報を無効にして、ログイン画面再表示
+			session.invalidate();
+			returnStr = "login";
 		} else {
-			//セッションスコープから権限を取り出す
-			Integer authority = ((UserBean) session.getAttribute("user")).getAuthority();
-			if (authority.intValue() == Constant.AUTH_CLIENT) {
-				// 一般会員ログインした場合、トップ画面表示処理にリダイレクト
+			// 一致した場合
+			// セッションに情報をセット
+			UserBean userBean = new UserBean();
+			userBean.setId(user.getId());
+			userBean.setName(user.getName());
+			userBean.setAuthority(user.getAuthority());
+			
+			session.setAttribute("user", userBean);
+			
+			// 権限による分岐
+			if (user.getAuthority() == Constant.AUTH_CLIENT) {
 				returnStr = "redirect:/";
 			} else {
-
-				// 運用管理者、もしくはシステム管理者としてログインした場合、管理者用メニュー画面表示処理にリダイレクト
 				returnStr = "redirect:/admin/menu";
 			}
 		}
+
 		return returnStr;
 
 	}

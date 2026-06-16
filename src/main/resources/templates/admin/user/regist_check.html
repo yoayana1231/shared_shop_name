@@ -39,7 +39,7 @@
 			</li>
 			<li>
 				<span class="input_title">[[#{data.authority}]]</span>
-				<th:block  th:switch="*{authority}">
+				<th:block th:switch="*{authority}">
 					<span class="input_value" th:case="0">[[#{auth.system.str}]]</span>
 					<span class="input_value" th:case="1">[[#{auth.admin.str}]]</span>
 					<span class="input_value" th:case="2">[[#{auth.client.str}]]</span>
@@ -47,7 +47,7 @@
 			</li>
 		</ul>
 
-		<form th:action="@{/admin/user/regist/complete}"  method="post" class="user_info_form">
+		<form th:action="@{/admin/user/regist/complete}" method="post" class="user_info_form">
 			<input type="submit" value="登録" class="send_button" />
 		</form>
 		<form th:action="@{/admin/user/regist/input}" method="post">

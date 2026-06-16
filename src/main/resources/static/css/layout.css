@@ -21,11 +21,12 @@ html {
 body {
 	margin: 0 0 30px;
 	padding: 0;
+	font-family: 'Noto Serif JP', serif;
 }
 
 h2,
 h3 {
-	font-size: 1em;
+	/*	font-size: 1em;*/
 	font-weight: normal;
 	margin: 0;
 	padding: 0;
@@ -58,13 +59,11 @@ li {
 
 }
 
-
-
-.container {
-	width: 960px;
-	margin: 0 auto;
-	justify-content: space-between;
-}
+/*.container {*/
+/*	width: auto;*/
+/*	margin: 0 auto;*/
+/*	justify-content: space-between;*/
+/*}*/
 
 body>.container {
 	margin-top: 15px;
@@ -78,11 +77,16 @@ body>.container {
 header .container {
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
+	height: 50px;
 }
 
 header {
-	background: rgb(228, 237, 239);
+	background: #ffffff;
 	padding: 10px 0;
+	position: sticky;
+	top: 0;
+	z-index: 99;
 }
 
 .admin header {
@@ -91,6 +95,23 @@ header {
 
 .header_one {
 	display: flex;
+	grid-template-columns: 240px minmax(280px, 1fr) auto;
+}
+
+.header_light {
+	display: flex;
+	width: auto;
+}
+
+.header_two {
+	display: flex;
+	justify-content: space-evenly;
+	margin: 5px 0 5px 0;
+}
+
+.header_two a {
+	text-decoration: none;
+	cursor: pointer;
 }
 
 .header-serch input {
@@ -99,14 +120,121 @@ header {
 	box-sizing: border-box;
 }
 
-
 .header-serch button {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
 	height: 40px;
 	box-sizing: border-box;
-	cursor: pointer
+}
+
+.search-demo-form {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.search-demo-form input {
+	min-width: 0;
+	height: 40px;
+	border: 1px solid rgb(192, 192, 192);
+	flex-grow: 1;
+	padding: 0.7rem 0 0.7rem 0.8rem;
+	border-radius: 1.5rem 0 0 1.5rem;
+}
+
+.search-demo-form button {
+	cursor: pointer;
+	border: 1px solid rgb(192, 192, 192);
+	padding: .8rem .9rem .8rem .8rem;
+	border-radius: 0 1.5rem 1.5rem 0;
+	border: none;
+	background-color: rgb(235, 251, 254);
+	font-size: .75rem;
+
+}
+
+.person_photo {
+	width: 35px;
+	height: 35px;
+	border: 2px solid #f3f3f3;
+	border-radius: 50%;
+	object-fit: cover;
+	transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.person_photo:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 12px 24px rgba(15, 81, 50, .16);
+}
+
+.cart_photo {
+	width: 35px;
+	height: 35px;
+	border: 2px solid #f3f3f3;
+	border-radius: 50%;
+	object-fit: cover;
+	transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.cart_photo:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 12px 24px rgba(15, 81, 50, .16);
+}
+
+.favorite_photo {
+	width: 35px;
+	height: 35px;
+	border: 2px solid #f3f3f3;
+	border-radius: 50%;
+	object-fit: cover;
+	transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.favorite_photo:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 12px 24px rgba(15, 81, 50, .16);
+}
+
+.right_photo {
+	display: flex;
+	align-items: center;
+	gap: 30px;
+	margin-right: 10px;
+	color: r#6d808b;
+}
+
+/*.search-demo-form input:focus {*/
+/*	outline: none;*/
+/*	border-color: #0f5132;*/
+/*	box-shadow: 0 0 0 4px rgb(232, 234, 249);*/
+
+/*}*/
+
+.shop_list {
+	position: relative;
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+	padding: 8px 0px;
+	color: #595959;
+	object-fit: cover;
+	transition: transform .18s ease, box-shadow .18s ease;
+	padding: 9px;
+
+}
+
+.shop_list:hover {
+	text-decoration: underline;
+}
+
+.shop_list_many {
+	color: #595959;
+	object-fit: cover;
+	transition: transform .18s ease, box-shadow .18s ease;
+	padding: 9px;
+}
+
+.shop_list_many:hover {
+	text-decoration: underline;
 }
 
 /* スキルアップテクニック3
@@ -117,9 +245,13 @@ header {
  * 基本サイズが変更になったとしても、比例して大きさが変化します。
  */
 .site_title {
-	font-size: 1.8em;
+	font-size: 1em;
 	font-weight: normal;
-	margin: 0;
+	margin: 3px;
+	cursor: pointer;
+	color: #595959;
+	text-decoration: none;
+
 }
 
 /* スキルアップテクニック4
@@ -128,7 +260,8 @@ header {
  */
 .user_info {
 	text-align: right;
-	padding-top: 15px;
+	padding-top: 10px;
+	width: auto;
 }
 
 .user_info a {
@@ -162,9 +295,9 @@ header {
 
 
 /* ---- ナビゲーションバー ---- */
-.navi_area {
-	background: #edf9fe;
-}
+/*.navi_area {*/
+/*	background: #edf9fe;*/
+/*}*/
 
 .navi_menu {
 	width: 960px;
@@ -268,8 +401,9 @@ aside.admin_menu {
 
 /* ---- メイン ---- */
 .main {
-	width: 76%;
+	width: 100%;
 	padding-bottom: 80px;
+
 
 }
 
@@ -407,7 +541,7 @@ aside.admin_menu {
  * footer要素は画面、もしくはページの最下部に表示されるようになります。
  */
 footer {
-	background-color: #87ceeb;
+	background-color: #ffffff;
 	text-align: center;
 	position: absolute;
 	bottom: 0;
