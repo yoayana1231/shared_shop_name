@@ -115,7 +115,7 @@ input {
 .cart-item {
 	position: relative;
 	display: grid;
-	grid-template-columns: 72px 150px minmax(0, 1fr) 180px 170px;
+	grid-template-columns: 40px 150px minmax(130px, 1fr) 180px 170px;
 	gap: 28px;
 	align-items: center;
 	padding: 34px 0;

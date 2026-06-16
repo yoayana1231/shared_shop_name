@@ -128,8 +128,8 @@
 						</a>
 					</div>
 					<div>
-						<p class="item_name_a" th:text="${item.name}"></p>
-						<p class="item_price_a" th:text="${item.price}"></p>
+						<p class="item_name_a_list" th:text="${item.name}"></p>
+						<p class="item_price_a" th:text="'&yen;'+${item.price}"></p>
 						<span class="item_category_a" th:text="${item.category.name}"></span>
 						<div class="item_form">
 							<div class="button_all_a">

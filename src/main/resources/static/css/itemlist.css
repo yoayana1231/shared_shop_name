@@ -560,10 +560,11 @@ button {
 
 }
 
-.item_name_a {
+.item_name_a_list {
 	font-weight: bold;
 	font-size: 15px;
 	color: #393c41;
+	font-family: var(--serif);
 }
 
 .button_all_a {
@@ -630,7 +631,7 @@ button {
 
 	background-color: rgb(0, 0, 0);
 	border-style: solid;
-	border-width: 0.3px;
+/*	border-width: 0.3px;*/
 	color: rgb(255, 255, 255);
 	background-color: rgb(63, 63, 63);
 	cursor: pointer
