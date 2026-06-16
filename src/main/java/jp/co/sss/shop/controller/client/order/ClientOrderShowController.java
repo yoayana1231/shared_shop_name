@@ -95,8 +95,8 @@ public class ClientOrderShowController {
 		int total = priceCalc.orderItemBeanPriceTotalUseSubtotal(orderItemBeanList);
 
 		// 注文情報をViewへ渡す
-		model.addAttribute("order", orderBean);
-		model.addAttribute("orderItemBeans", orderItemBeanList);
+		model.addAttribute("orders", orderBean);
+		model.addAttribute("orderItem", orderItemBeanList);
 		model.addAttribute("total", total);
 		
 		return "client/order/detail";
