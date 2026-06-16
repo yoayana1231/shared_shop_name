@@ -4,44 +4,124 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>お気に入り一覧</title>
+	<title>MY FAVORITES</title>
 </head>
 
 <body>
+	<div class="favorite-page">
 
-	<p th:text="#{msg.favorite.list.none}" th:if="${#lists.isEmpty(favoriteItems)}"></p>
+		<!--/* お気に入りが空の場合 */-->
+		<th:block th:if="${#lists.isEmpty(favoriteItems)}">
+			<section class="favorite-empty">
+				<div class="favorite-empty__icon">♡</div>
+				<p class="favorite-empty__eyebrow">MY FAVORITES</p>
+				<h1>お気に入りはまだありません</h1>
+				<p class="favorite-empty__text">
+					気になるコスメを見つけたら、<br>
+					ハートを押してここに保存できます。
+				</p>
+				<a th:href="@{/client/item/list}" class="favorite-empty__btn">商品を探す</a>
+			</section>
+		</th:block>
 
-	<th:block th:if="!${#lists.isEmpty(favoriteItems)}">
-		<table class="list_table item_detail">
-			<tr>
-				<th th:text="#{data.item.image}"></th>
-				<th th:text="#{data.item.name}"></th>
-				<th th:text="#{data.item.price}"></th>
-				<th th:text="#{category}"></th>
-				<th>お気に入りボタン(仮)</th>
-			</tr>
-			<!--/* 商品一覧 */-->
-			<tr th:each="favorite: ${favoriteItems}" th:if="${favorite.deleteFlag==0}">
-				<td class="image">
-					<img th:src="@{/images/{image}(image=${favorite.item.image})}"
-						th:if="${favorite.item.image != null}" />
-					<img th:src="@{/images/common/no_image.jpg}" th:if="${favorite.item.image == null}" />
+		<!--/* お気に入りがある場合 */-->
+		<th:block th:if="!${#lists.isEmpty(favoriteItems)}">
 
-				</td>
-				<td><a th:href="@{/client/item/detail/{id}(id=${favorite.item.id})}"
-						th:text="${favorite.item.name}"></a></td>
-				<td th:text="${favorite.item.price}"></td>
-				<td th:text="${favorite.item.category.name}"></td>
-				<td>
-					<form th:action="@{/client/favorite/update}" method="post">
-						<input type="hidden" name="itemId" th:value="${favorite.item.id}">
-						<button type="submit">登録・削除</button>
-					</form>
-				</td>
-			</tr>
-		</table>
-	</th:block>
+			<section class="favorite-hero">
+				<div class="favorite-hero__copy">
+					<p class="favorite-hero__eyebrow">WISH LIST</p>
+					<h1>FAVORITES</h1>
+					<p class="favorite-hero__lead">
+						あなたのお気に入りアイテムを、<br>
+						いつでも見返せます
+					</p>
 
+					<div class="favorite-hero__count">
+						<strong th:text="${#lists.size(favoriteItems)}">5</strong>
+						<span>ITEMS SAVED</span>
+					</div>
+				</div>
+
+				<div class="favorite-hero__visual">
+					<div class="favorite-hero__photo">
+						<img th:src="@{/images/top_image_two_1.jpg}" alt="favorites visual">
+					</div>
+					<div class="favorite-hero__note">
+						<p>Collect<br>your<br>List</p>
+						<span>- Cry Baby. -</span>
+					</div>
+				</div>
+			</section>
+
+			<section class="favorite-grid">
+
+				<th:block th:each="favorite, stat : ${favoriteItems}" th:if="${favorite.deleteFlag == 0}">
+					<article class="favorite-card" th:classappend="${stat.index % 5 == 0} ? ' favorite-card--large' : ''">
+						<div class="favorite-card__image">
+							<a th:href="@{/client/item/detail/{id}(id=${favorite.item.id})}">
+								<img th:src="@{/images/photo/{imgName}(imgName=${favorite.item.image})}"
+									th:if="${favorite.item.image != null}" alt="item image" />
+								<img th:src="@{/images/common/no_image.jpg}"
+									th:if="${favorite.item.image == null}" alt="no image" />
+							</a>
+
+							<span class="favorite-card__category" th:text="${favorite.item.category.name}">LIP</span>
+
+							<form th:action="@{/client/favorite/update}" method="post" class="favorite-card__heart-form">
+								<input type="hidden" name="itemId" th:value="${favorite.item.id}">
+								<button type="submit" class="favorite-card__heart-btn" aria-label="お気に入り解除">♡</button>
+							</form>
+						</div>
+
+						<div class="favorite-card__body">
+							<h2>
+								<a th:href="@{/client/item/detail/{id}(id=${favorite.item.id})}"
+									th:text="${favorite.item.name}">商品名</a>
+							</h2>
+
+							<p class="favorite-card__price">
+								¥<span th:text="${favorite.item.price}">3,500</span>
+								<small>（税込）</small>
+							</p>
+
+							<div class="favorite-card__actions">
+								<a th:href="@{/client/item/detail/{id}(id=${favorite.item.id})}" class="detail-link">
+									詳しく見る
+								</a>
+							</div>
+						</div>
+					</article>
+
+					<article class="favorite-note-card" th:if="${stat.index == 1}">
+						<div class="favorite-note-card__inner">
+							<p>
+								Every day<br>
+								is more beautiful<br>
+								with your favorite<br>
+								cosmetics.
+							</p>
+						</div>
+					</article>
+
+					<article class="favorite-side-message" th:if="${stat.index == 3}">
+						<div class="favorite-side-message__flower">
+							<img th:src="@{/images/flower_title.avif}" alt="flower">
+						</div>
+						<div class="favorite-side-message__text">
+							<p>あなたの“好き”が<br>ここに集まる。</p>
+							<span>CRY BABY.</span>
+						</div>
+					</article>
+				</th:block>
+
+			</section>
+
+			<div class="favorite-bottom-action">
+				<a th:href="@{/client/item/list}" class="favorite-more-btn">商品一覧を見る</a>
+			</div>
+
+		</th:block>
+	</div>
 </body>
 
 </html>

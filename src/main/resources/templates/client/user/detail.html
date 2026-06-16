@@ -1,53 +1,64 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	th:replace="~{common/layout_5block :: layout(~{::title},~{::body/content()})}">
+	th:replace="~{common/layout_user_detail :: layout(~{::title},~{::body/content()})}">
 
 <head>
 	<title th:text="#{user}+#{title.detail}+' | '+ #{shop.title}"> </title>
 	<meta charset="UTF-8" />
 </head>
 
-<body class="user user_detail">
-	<h2 th:class="title" th:text="#{user}+#{title.detail}"></h2>
+<body>
+	<main class="user-detail-page" th:style="|--user-detail-bg: url(@{/images/user-detail-bubbles-bg.png});|">
+		<div class="user-detail-brand" aria-label="Cry Baby Cosmetics">
+			<span>CRY BABY</span>
+			<small>COSMETICS</small>
+		</div>
 
-	<div class="info_form_area">
-		<div class="detail_area">
-			<ul class="input_list" th:object=${userBean}>
+		<div class="user-detail-heading">
+			<p class="user-detail-eyebrow">MY PAGE</p>
+			<h2 class="user-detail-title" th:text="#{user}+#{title.detail}">会員詳細</h2>
+			<span class="user-detail-line" aria-hidden="true"></span>
+		</div>
+
+		<section class="user-detail-card" aria-labelledby="user-detail-title">
+			<ul class="user-detail-list" th:object="${userBean}">
 				<li>
-					<span class="input_title">[[#{userForm.email}]]</span>
-					<span class="input_value" th:text="*{email}"></span>
+					<span class="user-detail-label">[[#{userForm.name}]]</span>
+					<span class="user-detail-value" th:text="*{name}"></span>
 				</li>
 				<li>
-					<span class="input_title">[[#{userForm.name}]]</span>
-					<span class="input_value" th:text="*{name}"></span>
+					<span class="user-detail-label">[[#{userForm.email}]]</span>
+					<span class="user-detail-value" th:text="*{email}"></span>
 				</li>
 				<li>
-					<span class="input_title">[[#{userForm.postalCode}]]</span>
-					<span class="input_value" th:text="*{postalCode}"></span>
+					<span class="user-detail-label">[[#{userForm.postalCode}]]</span>
+					<span class="user-detail-value" th:text="*{postalCode}"></span>
 				</li>
 				<li>
-					<span class="input_title">[[#{userForm.address}]]</span>
-					<span class="input_value" th:text="*{address}"></span>
+					<span class="user-detail-label">[[#{userForm.address}]]</span>
+					<span class="user-detail-value" th:text="*{address}"></span>
 				</li>
 				<li>
-					<span class="input_title">[[#{userForm.phoneNumber}]]</span>
-					<span class="input_value" th:text="*{phoneNumber}"></span>
+					<span class="user-detail-label">[[#{userForm.phoneNumber}]]</span>
+					<span class="user-detail-value" th:text="*{phoneNumber}"></span>
 				</li>
 			</ul>
-		</div>
+		</section>
 
-		<div class="detail_button_area">
+		<div class="user-detail-actions">
 			<form th:action="@{/}" method="post">
-				<input type="submit" value="戻る" class="back_button" />
+				<button type="submit" class="user-detail-button user-detail-button--back">← 戻る</button>
 			</form>
 			<form th:action="@{/client/user/update/input}" method="post">
-				<input type="submit" value="変更" />
+				<button type="submit" class="user-detail-button user-detail-button--update">変更する <span aria-hidden="true">›</span></button>
 			</form>
 			<form th:action="@{/client/user/delete/check}" method="post">
-				<input type="submit" value="退会" class="delete" />
+				<button type="submit" class="user-detail-button user-detail-button--delete">退会する</button>
 			</form>
 		</div>
-	</div>
+
+		<p class="user-detail-message" aria-hidden="true">Make your day,<br />with a little bit of emotion.</p>
+	</main>
 </body>
 
 </html>

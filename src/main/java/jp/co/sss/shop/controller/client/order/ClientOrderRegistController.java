@@ -84,6 +84,14 @@ public class ClientOrderRegistController {
 	@RequestMapping(path = "/client/order/address/input", method = RequestMethod.GET)
 	public String showAddressInput(HttpSession session, Model model) {
 		OrderForm form = (OrderForm) session.getAttribute("orderForm");
+		List<BasketBean> basketBeans = (List<BasketBean>) session.getAttribute("basketBeans");
+
+		if (form == null || basketBeans == null || basketBeans.isEmpty()) {
+			return "redirect:/client/basket/list";
+		}
+
+		session.setAttribute("basket", basketBeans);
+		model.addAttribute("summaryTotal", calcBasketTotal(basketBeans));
 
 		BindingResult bindingResult = (BindingResult) session.getAttribute("result");
 		// 入力チェックエラー表示
@@ -116,7 +124,14 @@ public class ClientOrderRegistController {
 
 	@RequestMapping(path = "/client/order/payment/input", method = RequestMethod.GET)
 	public String showPaymentInput(HttpSession session, Model model) {
+		List<BasketBean> basketBeans = (List<BasketBean>) session.getAttribute("basketBeans");
+		OrderForm orderForm = (OrderForm) session.getAttribute("orderForm");
 
+		if (orderForm == null || basketBeans == null || basketBeans.isEmpty()) {
+			return "redirect:/client/basket/list";
+		}
+
+		model.addAttribute("summaryTotal", calcBasketTotal(basketBeans));
 		return "client/order/payment_input";
 	}
 
@@ -234,11 +249,10 @@ public class ClientOrderRegistController {
 	//入力画面で戻るを押した時の処理
 	@RequestMapping(path = "/client/order/complete", method = RequestMethod.POST)
 	@Transactional
-	public String showOrderComplete(HttpSession session) {
+	public String showOrderComplete(HttpSession session, Model model) {
 
 		OrderForm orderForm = (OrderForm) session.getAttribute("orderForm");
 		List<BasketBean> basketBeans = (List<BasketBean>) session.getAttribute("basketBeans");
-		List<OrderItem> orderItem = (List<OrderItem>) session.getAttribute("basketBeans");
 		UserBean userBean = (UserBean) session.getAttribute("user");
 
 		if (orderForm == null || basketBeans == null || userBean == null) {
@@ -286,11 +300,29 @@ public class ClientOrderRegistController {
 			orderItemRepository.save(newOrderItem);
 		}
 
-		// 4. セッションクリア
+		// 4. 完了画面表示用の注文番号を設定
+		model.addAttribute("orderId", order.getId());
+
+		// 5. セッションクリア
 		session.removeAttribute("basketBeans");
+		session.removeAttribute("basket");
 		session.removeAttribute("orderForm");
 
-		return "redirect:/";
+		return "client/order/complete";
+	}
+
+	private int calcBasketTotal(List<BasketBean> basketBeans) {
+		if (basketBeans == null) {
+			return 0;
+		}
+
+		int total = 0;
+		for (BasketBean basketBean : basketBeans) {
+			if (basketBean.getPrice() != null && basketBean.getOrderNum() != null) {
+				total += basketBean.getPrice() * basketBean.getOrderNum();
+			}
+		}
+		return total;
 	}
 
 }

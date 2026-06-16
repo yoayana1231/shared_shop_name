@@ -1,0 +1,280 @@
+@charset "UTF-8";
+
+/* =========================================================
+   会員詳細ページ：CRY BABY / SHIROライクなミニマルデザイン
+   ※ common/layout_user_detail.html を使用するページ専用
+========================================================= */
+
+.user-detail-clean-body {
+	margin: 0;
+	padding: 0;
+	min-height: 100vh;
+	font-family: "Noto Serif JP", "Yu Mincho", "Hiragino Mincho ProN", serif;
+	color: #202020;
+	background: #fbfbfa;
+}
+
+.user-detail-clean-body * {
+	box-sizing: border-box;
+}
+
+.user-detail-clean-body form {
+	display: block;
+}
+
+.user-detail-page {
+	position: relative;
+	isolation: isolate;
+	min-height: 100vh;
+	overflow: hidden;
+	padding: 52px clamp(24px, 5vw, 80px) 64px;
+	background:
+		linear-gradient(rgba(255, 255, 255, 0.56), rgba(255, 255, 255, 0.56)),
+		var(--user-detail-bg, url("../images/user-detail-bubbles-bg.png")) center center / cover no-repeat,
+		linear-gradient(135deg, #ffffff 0%, #fbfbfa 47%, #f7fbfc 100%);
+}
+
+.user-detail-page::before,
+.user-detail-page::after {
+	display: none;
+}
+
+.user-detail-brand {
+	text-align: center;
+	letter-spacing: 0.34em;
+	line-height: 1;
+	margin-bottom: 58px;
+}
+
+.user-detail-brand span {
+	display: block;
+	font-size: clamp(1.35rem, 2.1vw, 2.05rem);
+	font-weight: 500;
+}
+
+.user-detail-brand small {
+	display: block;
+	margin-top: 13px;
+	font-size: 0.68rem;
+	letter-spacing: 0.58em;
+	color: #4a4a4a;
+}
+
+.user-detail-heading {
+	text-align: center;
+	margin-bottom: 48px;
+}
+
+.user-detail-eyebrow {
+	margin: 0 0 20px;
+	font-size: 0.98rem;
+	letter-spacing: 0.38em;
+	color: #343434;
+}
+
+.user-detail-title {
+	margin: 0;
+	font-size: clamp(2rem, 3.4vw, 3rem);
+	font-weight: 400;
+	letter-spacing: 0.36em;
+	text-indent: 0.36em;
+	line-height: 1.25;
+}
+
+.user-detail-line {
+	display: block;
+	width: 42px;
+	height: 1px;
+	margin: 28px auto 0;
+	background: #202020;
+}
+
+.user-detail-card {
+	width: min(960px, 100%);
+	margin: 0 auto;
+	padding: clamp(30px, 4vw, 60px) clamp(28px, 5vw, 68px);
+	border-radius: 14px;
+	background: rgba(255, 255, 255, 0.80);
+	box-shadow: 0 22px 60px rgba(25, 35, 45, 0.06);
+	backdrop-filter: blur(10px);
+	-webkit-backdrop-filter: blur(10px);
+}
+
+.user-detail-list {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.user-detail-list li {
+	display: grid;
+	grid-template-columns: minmax(150px, 260px) minmax(0, 1fr);
+	align-items: center;
+	gap: clamp(24px, 5vw, 72px);
+	min-height: 86px;
+	border-bottom: 1px solid rgba(32, 32, 32, 0.1);
+}
+
+.user-detail-list li:first-child {
+	border-top: none;
+}
+
+.user-detail-list li:last-child {
+	border-bottom: none;
+}
+
+.user-detail-label,
+.user-detail-value {
+	display: block;
+	font-size: clamp(0.98rem, 1.2vw, 1.12rem);
+	line-height: 1.8;
+}
+
+.user-detail-label {
+	position: relative;
+	padding-left: 25px;
+	font-weight: 600;
+	letter-spacing: 0.18em;
+	color: #1f1f1f;
+}
+
+.user-detail-label::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 50%;
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background: #cde6ef;
+	transform: translateY(-50%);
+}
+
+.user-detail-list li:nth-child(even) .user-detail-label::before {
+	background: #efd1d9;
+}
+
+.user-detail-value {
+	word-break: break-word;
+	letter-spacing: 0.2em;
+	color: #252525;
+}
+
+.user-detail-actions {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(180px, 250px));
+	justify-content: center;
+	gap: clamp(24px, 4vw, 56px);
+	width: min(960px, 100%);
+	margin: 42px auto 0;
+}
+
+.user-detail-button {
+	appearance: none;
+	width: 100%;
+	height: 68px;
+	border-radius: 8px;
+	font-family: inherit;
+	font-size: 1rem;
+	letter-spacing: 0.22em;
+	line-height: 1;
+	cursor: pointer;
+	transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+.user-detail-button:hover {
+	transform: translateY(-3px);
+	box-shadow: 0 16px 34px rgba(28, 32, 36, 0.08);
+}
+
+.user-detail-button--back {
+	border: 1px solid rgba(111, 166, 183, 0.72);
+	background: rgba(255, 255, 255, 0.58);
+	color: #6fa6b7;
+}
+
+.user-detail-button--back:hover {
+	background: rgba(232, 246, 250, 0.72);
+}
+
+.user-detail-button--update {
+	border: 1px solid transparent;
+	background: linear-gradient(105deg, rgba(239, 181, 194, 0.92), rgba(198, 225, 239, 0.92));
+	color: #2d2d2d;
+}
+
+.user-detail-button--update span {
+	display: inline-block;
+	margin-left: 16px;
+	font-size: 1.4em;
+	vertical-align: -0.06em;
+}
+
+.user-detail-button--delete {
+	border: 1px solid rgba(230, 120, 133, 0.72);
+	background: rgba(255, 255, 255, 0.54);
+	color: #e45f70;
+}
+
+.user-detail-button--delete:hover {
+	background: rgba(255, 245, 247, 0.86);
+}
+
+.user-detail-message {
+	position: absolute;
+	right: clamp(18px, 3.2vw, 54px);
+	top: 52%;
+	margin: 0;
+	writing-mode: vertical-rl;
+	text-orientation: mixed;
+	font-size: 0.84rem;
+	letter-spacing: 0.16em;
+	line-height: 1.8;
+	color: rgba(32, 32, 32, 0.48);
+}
+
+@media (max-width: 900px) {
+	.user-detail-page {
+		padding: 38px 20px 48px;
+	}
+
+	.user-detail-brand {
+		margin-bottom: 42px;
+	}
+
+	.user-detail-heading {
+		margin-bottom: 34px;
+	}
+
+	.user-detail-card {
+		padding: 20px 24px;
+	}
+
+	.user-detail-list li {
+		grid-template-columns: 1fr;
+		gap: 8px;
+		align-items: start;
+		min-height: auto;
+		padding: 22px 0;
+	}
+
+	.user-detail-value {
+		padding-left: 25px;
+		letter-spacing: 0.12em;
+	}
+
+	.user-detail-actions {
+		grid-template-columns: 1fr;
+		gap: 16px;
+		margin-top: 28px;
+	}
+
+	.user-detail-button {
+		height: 58px;
+	}
+
+	.user-detail-message {
+		display: none;
+	}
+}
