@@ -67,6 +67,9 @@ public class ClientBasketCalcController {
 			if (basketItem.getId().equals(id)) {
 				basketItem.setOrderNum(basketItem.getOrderNum() + 1);
 				isExisting = true;
+//				System.out.println(basketItem.getOrderNum());
+//				basketItem.setPrice(basketItem.getPrice() * basketItem.getOrderNum());
+//				System.out.println(basketItem.getPrice());
 				break;
 			}
 		}
@@ -87,6 +90,7 @@ public class ClientBasketCalcController {
 		// かごの中身をセッションに保存し、買い物かご画面にリダイレクト
 
 		session.setAttribute("basketBeans", basketList);
+		
 
 		return "redirect:/client/basket/list";
 	}

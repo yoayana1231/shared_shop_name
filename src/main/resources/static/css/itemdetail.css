@@ -1,0 +1,84 @@
+@charset "UTF-8";
+
+:root {
+	--ink: #3d302b;
+	--sub: #9a8177;
+	--line: #eee3dd;
+	--rose: #d89d94;
+	--pale: #fbf6f3;
+	--paper: #fffdfb;
+	--brown: #4b332d;
+	--shadow: 0 22px 70px rgba(80, 52, 42, 0.075);
+	--serif:
+		Georgia, "Times New Roman", "Yu Mincho", "Hiragino Mincho ProN", serif;
+	--sans:
+		"Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo,
+		sans-serif;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	background: linear-gradient(90deg, #fff 0, #fffaf7 45%, #fff 100%);
+	color: var(--ink);
+	font-family: var(--sans);
+	letter-spacing: 0.045em;
+}
+h2 {
+	font-size:34px;
+}
+.category {
+	margin: 0 0 10px;
+	color: #d19a8f;
+	font-size: 10px;
+	letter-spacing: 0.16em;
+}
+
+.all_detail {}
+
+.pic_item_cart_fav {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) 10px;
+	align-items: start;
+}
+
+p {
+	font-size: 20px;
+}
+
+.item_cart {
+	/*	display: grid;*/
+	margin-left: 400px;
+}
+
+.item_detail {
+	position: relative;
+	right: 200px;
+	width: 300px;
+
+}
+
+.detail_button {
+	position: relative;
+	right: 200px;
+
+}
+
+.item_img {
+	height: 100%;
+	width: 100%;
+/*	linear-gradient (180deg, rgba(248, 252, 255, 0.04) 0%, rgba(24, 34, 40, 0.14) 46%, rgba(24, 34, 40, 0.62) 100%), linear-gradient(120deg, rgba(243, 251, 255, 0.22), transparent 38%);*/
+}
+
+.item_img img {
+	/*	width: 100%;*/
+	/*  height: auto;  縦横比を維持 */
+	/*  object-fit: cover;*/
+	filter: brightness(110%);
+	width: 700px;
+	height: 600px;
+
+}
