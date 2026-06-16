@@ -207,6 +207,7 @@ public class BeanTools {
 
 			orderItemBean.setName(orderItem.getItem().getName());
 			orderItemBean.setPrice(orderItem.getPrice());
+			orderItemBean.setImage(orderItem.getItem().getImage());
 			orderItemBean.setOrderNum(orderItem.getQuantity());
 
 			//購入時単価の合計値を計算

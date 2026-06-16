@@ -3,51 +3,50 @@
 	th:replace="~{common/layout_5block :: layout(~{::title},~{::body/content()})}">
 
 <head>
-	<title th:text="#{title.order.complete}+' | '+ #{shop.title}"> </title>
+	<title th:text="#{title.order.complete}+' | '+ #{shop.title}">注文完了</title>
 	<meta charset="UTF-8" />
 </head>
 
-<body class="user order_complete" id="page-input">
+<body>
+	<div class="order-flow order-flow--complete" id="page-order-complete">
+		<section class="order-editorial-head" aria-labelledby="order-complete-title">
+			<p class="order-kicker">CHECKOUT FLOW</p>
+			<div class="order-title-row">
+				<span class="order-screen-no">04</span>
+				<div>
+					<h2 id="order-complete-title" class="order-page-title" th:text="#{title.order.complete}">注文完了</h2>
+					<p class="order-page-lead">ご注文ありがとうございました。</p>
+				</div>
+			</div>
+		</section>
 
-	<!--タイムライン-->
-	<nav class="step-timeline">
-		<ul class="step-list">
-			<li class="step-item step-cart">
-				<span class="step-icon">1</span>
-				<span class="step-label">情報入力</span>
-			</li>
-			<li class="step-item step-input">
-				<span class="step-icon">2</span>
-				<span class="step-label">支払方法選択</span>
-			</li>
-			<li class="step-item step-confirm">
-				<span class="step-icon">3</span>
-				<span class="step-label">ご注文確認</span>
-			</li>
-			<li class="step-item step-complete">
-				<span class="step-icon">4</span>
-				<span class="step-label">注文完了</span>
-			</li>
-		</ul>
-	</nav>
+		<nav class="step-timeline" aria-label="注文ステップ">
+			<ul class="step-list">
+				<li class="step-item step-address"><span class="step-icon">1</span><span class="step-label">情報入力</span></li>
+				<li class="step-item step-payment"><span class="step-icon">2</span><span class="step-label">支払方法選択</span></li>
+				<li class="step-item step-confirm"><span class="step-icon">3</span><span class="step-label">ご注文確認</span></li>
+				<li class="step-item step-complete"><span class="step-icon">4</span><span class="step-label">注文完了</span></li>
+			</ul>
+		</nav>
 
-	<!--YOUR CART-->
-	<h2 th:class="your_cart" th:text="#{title.order.address.input}"></h2>
+		<div class="order-shell complete-shell">
+			<div class="complete-visual" aria-hidden="true"></div>
+			<section class="complete-card order-card" aria-label="注文完了">
+				<div class="complete-check" aria-hidden="true">✓</div>
+				<p class="complete-eyebrow">Thank you for your order</p>
+				<h3 th:text="#{title.order.complete}">ご注文完了</h3>
+				<p class="complete-message">
+					<span th:text="#{msg.order.complete1}">ご注文ありがとうございます。</span><br />
+					<span th:text="#{msg.order.complete2}">商品の発送までしばらくお待ちください。</span>
+				</p>
+				<div class="complete-order-no" th:if="${orderId != null}">
+					<span>ご注文番号</span>
+					<strong th:text="${orderId}">0000</strong>
+				</div>
+				<a class="order-btn order-btn--primary complete-return" th:href="@{/}">トップページへ戻る<span aria-hidden="true">→</span></a>
+			</section>
 
-	<!--注文完了-->
-	<h2 th:class="complete_mozi" th:text="#{title.order.complete}"></h2>
-	<p th:class="complete_message">
-		<span class="message1" th:text="#{msg.order.complete1}"></span>
-		<br />
-		<span class="message1" th:text="#{msg.order.complete2}"></span>
-	</p>
-
-	<div class="top_return">
-		<button class="state-real-button state-real-button--hover_a" type="button">
-			<a th:href="@{/}" th:text="#{msg.back.to.top}"></a>
-		</button>
+		</div>
 	</div>
-	<!--	<p class="complete_link"><a th:href="@{/}" th:text="#{msg.back.to.top}"></a></p>-->
 </body>
-
 </html>

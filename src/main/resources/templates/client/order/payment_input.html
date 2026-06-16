@@ -1,127 +1,129 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	th:replace="~{common/layout_5block :: layout(~{::title},~{::body/content()})}">
- 
+
 <head>
-	<script th:src="@{/js/payment_input.js}" type="text/javascript"></script>
-	<title th:text="#{title.order.payment.input}+' | '+ #{shop.title}"> </title>
+	<title th:text="#{title.order.payment.input}+' | '+ #{shop.title}">支払方法選択</title>
 	<meta charset="UTF-8" />
 </head>
 
-<body class="user order_payment_input" id="page-input">
+<body>
+	<div class="order-flow order-flow--payment" id="page-order-payment">
+		<section class="order-editorial-head" aria-labelledby="order-payment-title">
+			<p class="order-kicker">CHECKOUT FLOW</p>
+			<div class="order-title-row">
+				<span class="order-screen-no">02</span>
+				<div>
+					<h2 id="order-payment-title" class="order-page-title" th:text="#{title.order.payment.input}">支払方法選択</h2>
+					<p class="order-page-lead">お支払い方法をお選びください。</p>
+				</div>
+			</div>
+		</section>
 
-	<!--タイムライン-->
-	<nav class="step-timeline">
-		<ul class="step-list">
-			<li class="step-item step-cart">
-				<span class="step-icon">1</span>
-				<span class="step-label">情報入力</span>
-			</li>
-			<li class="step-item step-input">
-				<span class="step-icon">2</span>
-				<span class="step-label">支払方法選択</span>
-			</li>
-			<li class="step-item step-confirm">
-				<span class="step-icon">3</span>
-				<span class="step-label">ご注文確認</span>
-			</li>
-			<li class="step-item step-complete">
-				<span class="step-icon">4</span>
-				<span class="step-label">注文完了</span>
-			</li>
-		</ul>
-	</nav>
-
-	<!--YOUR CART-->
-	<h2 th:class="your_cart" th:text="#{title.order.address.input}"></h2>
-	<!--お支払い方法選択-->
-	<h2 th:class="pay_mozi" th:text="#{title.order.payment.input}"></h2>
-	<!--お支払い方法を選択してください-->
-	<p th:class="input_message_a" th:text="#{msg.order.payment.input}"></p>
-
-	<div class="user_info_form_area_a">
-		<form class="all_money" th:action="@{/client/order/check}" method="post">
-			<ul class="payment_method_select_a">
-				<li>
-					<label class="radio_label">
-						<input type="radio" name="payMethod" value="1" th:if="${payMethod == 1}" checked="checked"
-							onclick=" payChange();" />
-						<input type="radio" name="payMethod" value="1"
-							th:unless="${payMethod == 1}" />[[#{paymethod.credit.str}]]
-					</label>
-				</li>
-				<li>
-					<label class="radio_label">
-						<input type="radio" name="payMethod" value="2" th:if="${payMethod == 2}" checked="checked"
-							onclick=" payChange();" />
-						<input type="radio" name="payMethod" value="2"
-							th:unless="${payMethod == 2}" />[[#{paymethod.bank.str}]]
-					</label>
-				</li>
-				<li>
-					<label class="radio_label">
-						<input type="radio" name="payMethod" value="3" th:if="${payMethod  == 3}" checked="checked"
-							onclick=" payChange();" />
-						<input type="radio" name="payMethod" value="3"
-							th:unless="${payMethod  == 3}" />[[#{paymethod.onarrival.str}]]
-					</label>
-				</li>
-				<li>
-					<label class="radio_label">
-						<input type="radio" name="payMethod" value="4" th:if="${payMethod == 4}" checked="checked"
-							onclick=" payChange();" />
-						<input type="radio" name="payMethod" value="4"
-							th:unless="${payMethod == 4}" />[[#{paymethod.emoney.str}]]
-					</label>
-				</li>
-				<li>
-					<label class="radio_label">
-						<input type="radio" name="payMethod" value="5" th:if="${payMethod == 5}" checked="checked"
-							onclick=" payChange();" />
-						<input type="radio" name="payMethod" value="5"
-							th:unless="${payMethod == 5}" />[[#{paymethod.convenience.str}]]
-					</label>
-				</li>
+		<nav class="step-timeline" aria-label="注文ステップ">
+			<ul class="step-list">
+				<li class="step-item step-address"><span class="step-icon">1</span><span class="step-label">情報入力</span></li>
+				<li class="step-item step-payment"><span class="step-icon">2</span><span class="step-label">支払方法選択</span></li>
+				<li class="step-item step-confirm"><span class="step-icon">3</span><span class="step-label">ご注文確認</span></li>
+				<li class="step-item step-complete"><span class="step-icon">4</span><span class="step-label">注文完了</span></li>
 			</ul>
+		</nav>
 
-			<div class="side_photo">
-				<div class="order_summary_card_a">
-					<div class="summary_heading">
-						<span>ORDER SUMMARY</span>
-						<small>ご注文内容</small>
+		<div class="order-shell">
+			<div class="order-shell__ornament" aria-hidden="true"></div>
+
+			<form class="payment-layout" th:action="@{/client/order/check}" method="post">
+				<section class="order-card order-card--form payment-card">
+					<div class="order-section-head">
+						<span class="order-section-no">Payment</span>
+						<h3>お支払い方法の選択</h3>
+						<p th:text="#{msg.order.payment.input}">お支払い方法を選択してください。</p>
 					</div>
 
-					<div class="summary_items">
-						<div class="summary_item" th:each="basket:${session.basket}">
-							<div class="summary_thumb">
-								<img th:src="@{/images/photo/{imgName}(imgName=${basket.image})}"
-									th:if="${basket.image != null}" />
-								<img th:src="@{/images/common/no_image.jpg}" th:if="${basket.image == null}" />
+					<ul class="payment-method-list">
+						<li>
+							<label class="payment-option">
+								<input type="radio" name="payMethod" value="1" th:checked="${session.orderForm == null or session.orderForm.payMethod == null or session.orderForm.payMethod == 1}" />
+								<span class="payment-radio" aria-hidden="true"></span>
+								<span class="payment-icon" aria-hidden="true"><img src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/icons/credit-card-2-front.svg" alt="" loading="lazy" /></span>
+								<span class="payment-copy">
+									<strong>[[#{paymethod.credit.str}]]</strong>
+									<small>Visa / Master / JCB / AMEX</small>
+								</span>
+							</label>
+						</li>
+						<li>
+							<label class="payment-option">
+								<input type="radio" name="payMethod" value="2" th:checked="${session.orderForm != null and session.orderForm.payMethod == 2}" />
+								<span class="payment-radio" aria-hidden="true"></span>
+								<span class="payment-icon" aria-hidden="true"><img src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/icons/bank.svg" alt="" loading="lazy" /></span>
+								<span class="payment-copy"><strong>[[#{paymethod.bank.str}]]</strong><small>ご注文後、指定口座へお振込みください</small></span>
+							</label>
+						</li>
+						<li>
+							<label class="payment-option">
+								<input type="radio" name="payMethod" value="3" th:checked="${session.orderForm != null and session.orderForm.payMethod == 3}" />
+								<span class="payment-radio" aria-hidden="true"></span>
+								<span class="payment-icon" aria-hidden="true"><img src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/icons/cash-coin.svg" alt="" loading="lazy" /></span>
+								<span class="payment-copy"><strong>[[#{paymethod.onarrival.str}]]</strong><small>商品お届け時にお支払いください</small></span>
+							</label>
+						</li>
+						<li>
+							<label class="payment-option">
+								<input type="radio" name="payMethod" value="4" th:checked="${session.orderForm != null and session.orderForm.payMethod == 4}" />
+								<span class="payment-radio" aria-hidden="true"></span>
+								<span class="payment-icon" aria-hidden="true"><img src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/icons/wallet2.svg" alt="" loading="lazy" /></span>
+								<span class="payment-copy"><strong>[[#{paymethod.emoney.str}]]</strong><small>PayPay / 楽天Edy / Suica など</small></span>
+							</label>
+						</li>
+						<li>
+							<label class="payment-option">
+								<input type="radio" name="payMethod" value="5" th:checked="${session.orderForm != null and session.orderForm.payMethod == 5}" />
+								<span class="payment-radio" aria-hidden="true"></span>
+								<span class="payment-icon" aria-hidden="true"><img src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/icons/shop-window.svg" alt="" loading="lazy" /></span>
+								<span class="payment-copy"><strong>[[#{paymethod.convenience.str}]]</strong><small>セブンイレブン / ファミリーマート / ローソン など</small></span>
+							</label>
+						</li>
+					</ul>
+
+					<div class="order-actions">
+						<button type="submit" class="order-btn order-btn--ghost" th:formaction="@{/client/order/payment/back}" formmethod="post" formnovalidate>戻る</button>
+						<button type="submit" class="order-btn order-btn--primary">次へ<span aria-hidden="true">→</span></button>
+					</div>
+				</section>
+
+				<aside class="order-card order-summary-card" aria-label="ご注文内容">
+					<div class="summary-heading">
+						<div><span>ORDER SUMMARY</span><h3>ご注文内容</h3></div>
+						<small>Review</small>
+					</div>
+
+					<div class="summary-items">
+						<div class="summary-item" th:each="basket:${session.basket}">
+							<div class="summary-thumb">
+								<img th:src="@{/images/photo/{imgName}(imgName=${basket.image})}" th:if="${basket.image != null}" alt="" />
+								<img th:src="@{/images/common/no_image.jpg}" th:if="${basket.image == null}" alt="" />
 							</div>
-							<div class="summary_text">
-								<span class="summary_name" th:text="${basket.name}"></span>
-								<span class="summary_price" th:text="'&yen;'+${basket.price}"></span>
+							<div class="summary-text">
+								<span class="summary-name" th:text="${basket.name}">商品名</span>
+								<span class="summary-meta" th:text="'数量：' + ${basket.orderNum}">数量：1</span>
 							</div>
+							<span class="summary-price" th:text="'¥' + ${#numbers.formatInteger(basket.price, 1, 'COMMA')}">¥2,980</span>
 						</div>
 					</div>
 
-					<div class="summary_note">
-						<p>内容を確認して、次の画面でお支払い方法を選択してください。</p>
+					<div class="summary-total" th:if="${summaryTotal != null}">
+						<span>ご請求予定額</span>
+						<strong th:text="'¥' + ${#numbers.formatInteger(summaryTotal, 1, 'COMMA')}">¥0</strong>
 					</div>
-				</div>
-			</div>
-	</div>
 
-	<div class="decision">
-		<form th:action="@{/client/order/payment/back}" method="post" class="update">
-			<input type="submit" class="back_button_a" value="戻る" th:formaction="@{/client/order/payment/back}"
-				formmethod="post" formnovalidate />
-			<input type="submit" class="send_button_a" value="次へ" />
-
-		</form>
-	</div>
-
+					<div class="summary-note">
+						<span class="summary-note-icon">✦</span>
+						<p>次の画面で確認画面を表示します。<br>入力内容にお間違いがないかご確認ください。</p>
+					</div>
+				</aside>
+			</form>
+		</div>
 	</div>
 </body>
-
 </html>
