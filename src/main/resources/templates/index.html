@@ -27,20 +27,21 @@
 	</div>
 
 	<!--カテゴリ-->
-	<h1 class="category_tittle">カテゴリ</h1>
+	<div class="category_mozi">
+		<h1><a class="shop_list_a" th:href="@{/client/item/list/1}" th:text="#{item}+#{title.list}">商品一覧</a></h1>
+		<h3 class="category_tittle">カテゴリ</h3>
+	</div>
 	<div class="category_one">
 
 		<!--		<div>-->
 		<!--			<a class="shop_list" th:href="@{/client/item/list/1}" th:text="#{item}+#{title.list}">商品一覧</a>-->
 		<!--		</div>-->
-
 		<div th:each="category: ${categories}" class="category_list">
-			<a th:href="@{/client/item/list/category}" th:value="${category.id}">
+			<a th:href="@{/client/item/list/category/{categoryId}(categoryId=${category.id})}" th:value="${category.id}">
 				<img th:src="@{/images/top/category/top_image_{imgName}.jpg(imgName=${category.id})}">
 			</a>
 			<span class="category_name" th:text="${category.name}"></span>
 		</div>
-
 	</div>
 
 	<!--おすすめ-->
@@ -114,7 +115,33 @@
 			</div>
 		</th:block>>
 	</div>
+	
+	<!--おすすめ-->
+	<div>
+		<h2 class="title">
+			<span th:text="#{sort.recommend.title}"></span>
+		</h2>
+	</div>
+<!--	<div th:if="${#lists.isEmpty(histories)}">-->
+<!--		<p th:text="#{msg.client.item.list.none}"></p>-->
+<!--	</div>-->
+	<div class="item_list">
+		<th:block th:each="recommend, status: ${recommends}" th:if="${status.count le 4}">
+			<!--/* 1件分の商品情報 */-->
+			<div class="item">
+				<div class="item_name" th:text="${recommend.item.name}"></div>
+				<a th:href="@{/client/item/detail/}+${recommend.item.id}">
+          
+					<img th:src="@{/images/photo/{imgName}(imgName=${recommend.item.image})}" th:if="${recommend.item.image != null}" />"
+						
 
+					<img th:src="@{/images/common/no_image.jpg}" th:if="${recommend.item.image == null}" />
+				</a>
+			</div>
+		</th:block>
+	</div>
+	
+	<!--閲覧履歴-->
 	<div>
 		<h2 class="title">
 			<span th:text="#{sort.history.title}"></span>
@@ -129,9 +156,10 @@
 			<div class="item">
 				<div class="item_name" th:text="${itemHistories.item.name}"></div>
 				<a th:href="@{/client/item/detail/}+${itemHistories.item.id}">
-          
-					<img th:src="@{/images/photo/{imgName}(imgName=${itemHistories.item.image})}" th:if="${itemHistories.item.image != null}" />"
-						
+
+					<img th:src="@{/images/photo/{imgName}(imgName=${itemHistories.item.image})}"
+						th:if="${itemHistories.item.image != null}" />"
+
 
 					<img th:src="@{/images/common/no_image.jpg}" th:if="${itemHistories.item.image == null}" />
 				</a>
