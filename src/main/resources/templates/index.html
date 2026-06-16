@@ -33,14 +33,12 @@
 		<!--		<div>-->
 		<!--			<a class="shop_list" th:href="@{/client/item/list/1}" th:text="#{item}+#{title.list}">商品一覧</a>-->
 		<!--		</div>-->
-
 		<div th:each="category: ${categories}" class="category_list">
-			<a th:href="@{/client/item/list/category}" th:value="${category.id}">
+			<a th:href="@{/client/item/list/category/{categoryId}(categoryId=${category.id})}" th:value="${category.id}">
 				<img th:src="@{/images/top/category/top_image_{imgName}.jpg(imgName=${category.id})}">
 			</a>
 			<span class="category_name" th:text="${category.name}"></span>
 		</div>
-
 	</div>
 
 	<!--おすすめ-->
