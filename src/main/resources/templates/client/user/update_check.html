@@ -14,23 +14,23 @@
 	<div class="user_info_form_area" th:object="${userForm}">
 		<ul class="input_list">
 			<li>
-				<span class="input_title">[[#{userForm.email}]]</span>
+				<span class="input_title" th:text="#{userForm.email}"></span>
 				<span class="input_value" th:text="*{email}"></span>
 			</li>
 			<li>
-				<span class="input_title">[[#{userForm.password}]]</span>
+				<span class="input_title" th:text="#{userForm.password}"></span>
 				<span class="input_value">********</span>
 			</li>
 			<li>
-				<span class="input_title">[[#{userForm.name}]]</span>
+				<span class="input_title" th:text="#{userForm.name}"></span>
 				<span class="input_value" th:text="*{name}"></span>
 			</li>
 			<li>
-				<span class="input_title">[[#{userForm.postalCode}]]</span>
+				<span class="input_title" th:text="#{userForm.postalCode}"></span>
 				<span class="input_value" th:text="*{postalCode}"></span>
 			</li>
 			<li>
-				<span class="input_title">[[#{userForm.address}]]</span>
+				<span class="input_title" th:text=#{userForm.address}"></span>
 				<span class="input_value" th:text="*{address}"></span>
 			</li>
 			<li>
