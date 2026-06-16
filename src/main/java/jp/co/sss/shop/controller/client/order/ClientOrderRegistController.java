@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,9 +19,13 @@ import jp.co.sss.shop.bean.BasketBean;
 import jp.co.sss.shop.bean.OrderItemBean;
 import jp.co.sss.shop.bean.UserBean;
 import jp.co.sss.shop.entity.Item;
+import jp.co.sss.shop.entity.Order;
+import jp.co.sss.shop.entity.OrderItem;
 import jp.co.sss.shop.entity.User;
 import jp.co.sss.shop.form.OrderForm;
 import jp.co.sss.shop.repository.ItemRepository;
+import jp.co.sss.shop.repository.OrderItemRepository;
+import jp.co.sss.shop.repository.OrderRepository;
 import jp.co.sss.shop.repository.UserRepository;
 import jp.co.sss.shop.util.Constant;
 
@@ -35,6 +40,12 @@ public class ClientOrderRegistController {
 
 	@Autowired
 	ItemRepository itemRepository;
+
+	@Autowired
+	OrderRepository orderRepository;
+
+	@Autowired
+	OrderItemRepository orderItemRepository;
 
 	@RequestMapping(path = "/client/order/address/input", method = RequestMethod.POST)
 	public String inputOrder() {
@@ -91,9 +102,6 @@ public class ClientOrderRegistController {
 	@RequestMapping(path = "/client/order/payment/input", method = RequestMethod.POST)
 	public String stepToPayment(@Valid @ModelAttribute("orderForm") OrderForm orderForm, BindingResult bindingResult,
 			HttpSession session) {
-		OrderForm orderForms = (OrderForm) session.getAttribute("orderForm");
-		orderForm.setId(orderForms.getId());
-		orderForm.setPayMethod(orderForms.getPayMethod());
 		session.setAttribute("orderForm", orderForm);
 		if (bindingResult.hasErrors()) {
 			session.setAttribute("result", bindingResult);
@@ -108,11 +116,6 @@ public class ClientOrderRegistController {
 
 	@RequestMapping(path = "/client/order/payment/input", method = RequestMethod.GET)
 	public String showPaymentInput(HttpSession session, Model model) {
-		OrderForm orderForm = (OrderForm) session.getAttribute("orderForm");
-
-		model.addAttribute("orderForm", orderForm);
-
-		model.addAttribute("payMethod", orderForm.getPayMethod());
 
 		return "client/order/payment_input";
 	}
@@ -200,7 +203,7 @@ public class ClientOrderRegistController {
 		for (BasketBean basketItem : newBaskets) {
 			Item item = itemRepository.findByIdAndDeleteFlag(basketItem.getId(), Constant.NOT_DELETED);
 			if (item != null) {
-				// 【修正】用意されていた本物の OrderItemBean を生成してデータを詰める
+				//  OrderItemBean を生成してデータを詰める
 				OrderItemBean orderItemBean = new OrderItemBean();
 				orderItemBean.setId(item.getId());
 				orderItemBean.setName(item.getName());
@@ -230,8 +233,64 @@ public class ClientOrderRegistController {
 
 	//入力画面で戻るを押した時の処理
 	@RequestMapping(path = "/client/order/complete", method = RequestMethod.POST)
-	public String showOrderComplete() {
-		return "/client/order/complete";
+	@Transactional
+	public String showOrderComplete(HttpSession session) {
+
+		OrderForm orderForm = (OrderForm) session.getAttribute("orderForm");
+		List<BasketBean> basketBeans = (List<BasketBean>) session.getAttribute("basketBeans");
+		List<OrderItem> orderItem = (List<OrderItem>) session.getAttribute("basketBeans");
+		UserBean userBean = (UserBean) session.getAttribute("user");
+
+		if (orderForm == null || basketBeans == null || userBean == null) {
+			return "redirect:/client/basket/list";
+		}
+
+		// 1. 在庫の再チェック（購入直前の確認）
+		for (BasketBean basketItem : basketBeans) {
+			Item item = itemRepository.findByIdAndDeleteFlag(basketItem.getId(), Constant.NOT_DELETED);
+			if (item == null || item.getStock() < basketItem.getOrderNum()) {
+				// 在庫が足りない場合はエラー扱い（本来はエラー画面へ遷移）
+				return "redirect:/client/basket/list?error=stock";
+			}
+		}
+
+		User user = userRepository.findById(userBean.getId()).orElse(null);
+		if (user == null) {
+			return "redirect:/client/login";
+		}
+
+		// 2. Order保存
+		Order order = new Order();
+		BeanUtils.copyProperties(orderForm, order);
+		order.setId(null);
+		order.setUser(user);
+		order.setPayMethod(orderForm.getPayMethod());
+
+		orderRepository.save(order);
+		orderRepository.flush();
+
+		// 3. 在庫減算とOrderItem保存
+		for (BasketBean basketItem : basketBeans) {
+			// 在庫減算
+			Item item = itemRepository.findByIdAndDeleteFlag(basketItem.getId(), Constant.NOT_DELETED);
+			item.setStock(item.getStock() - basketItem.getOrderNum());
+			itemRepository.save(item);
+
+			// OrderItem保存
+			OrderItem newOrderItem = new OrderItem();
+			newOrderItem.setQuantity(basketItem.getOrderNum());
+			newOrderItem.setOrder(order);
+			newOrderItem.setItem(item);
+			newOrderItem.setPrice(item.getPrice());
+
+			orderItemRepository.save(newOrderItem);
+		}
+
+		// 4. セッションクリア
+		session.removeAttribute("basketBeans");
+		session.removeAttribute("orderForm");
+
+		return "redirect:/";
 	}
 
 }

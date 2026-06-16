@@ -1,6 +1,6 @@
 package jp.co.sss.shop.entity;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -63,7 +63,7 @@ public class Order {
 	/**
 	 * 注文日付
 	 */
-	@Column(insertable = false)
+	@Column(name = "insert_date", insertable = false, updatable = false)
 	private Date insertDate;
 
 	/**
