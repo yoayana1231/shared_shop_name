@@ -628,3 +628,75 @@
 		top: 69px;
 	}
 }
+
+/* =========================================================
+   会員情報変更 / 退会 デザイン確認画面
+========================================================= */
+.user-account-page {
+	font-family: "Noto Serif JP", "Yu Mincho", "Hiragino Mincho ProN", serif;
+}
+
+.user-account-page .user-regist-shell {
+	grid-template-columns: minmax(320px, 430px) minmax(560px, 720px);
+}
+
+.user-account-visual__image {
+	background:
+		linear-gradient(180deg, rgba(255,255,255,.42) 0%, rgba(255,255,255,.16) 44%, rgba(255,255,255,.70) 100%),
+		linear-gradient(90deg, rgba(218, 239, 244, .58), rgba(255, 226, 235, .40)),
+		url("../images/image_top_photo.jpg") center / cover no-repeat;
+}
+
+.user-account-page--delete .user-account-visual__image,
+.user-account-page--delete-complete .user-account-visual__image {
+	filter: saturate(.86) contrast(.96);
+}
+
+.user-account-card .user-regist-card__head h2 {
+	letter-spacing: .14em;
+}
+
+.user-account-card .user-regist-card__head p:not(.user-regist-label) {
+	line-height: 1.9;
+}
+
+.user-account-danger-button,
+.user-regist-confirm-actions .user-account-danger-button {
+	border: 0;
+	background: linear-gradient(135deg, #d56f7d 0%, #bd596a 58%, #e6a6ae 132%);
+	box-shadow: 0 18px 34px rgba(183, 75, 93, .24);
+	color: #fff;
+}
+
+.user-regist-confirm-actions .user-account-danger-button:hover {
+	box-shadow: 0 22px 42px rgba(183, 75, 93, .30);
+}
+
+.user-account-delete-list li {
+	border-color: rgba(196, 104, 119, .18);
+}
+
+.user-account-card--delete::before {
+	border-color: rgba(196, 104, 119, .15);
+}
+
+.user-account-card--delete .user-regist-label,
+.user-account-complete-card--delete .user-regist-label {
+	color: #b65366;
+}
+
+.user-account-complete-card--delete::before {
+	background: linear-gradient(135deg, rgba(198, 89, 105, .94), rgba(232, 168, 177, .94));
+}
+
+.user-account-complete-card--delete::after {
+	content: "×";
+	font-size: 2.15rem;
+	top: 88px;
+}
+
+@media (max-width: 1024px) {
+	.user-account-page .user-regist-shell {
+		grid-template-columns: 1fr;
+	}
+}

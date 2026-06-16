@@ -1050,32 +1050,14 @@
 		linear-gradient(135deg, rgba(255,255,255,0.92), rgba(255,255,255,0.82)),
 		radial-gradient(circle at 12% 10%, rgba(239, 168, 184, 0.20), transparent 24%),
 		radial-gradient(circle at 90% 90%, rgba(127, 178, 223, 0.22), transparent 24%);
+	border: none;
 }
 
 .complete-card::before,
 .complete-card::after {
-	content: "";
-	position: absolute;
-	width: 122px;
-	height: 190px;
-	bottom: 28px;
-	opacity: 0.26;
-	background:
-		linear-gradient(75deg, transparent 49%, var(--order-blue-deep) 50%, transparent 51%),
-		linear-gradient(105deg, transparent 49%, var(--order-blue-deep) 50%, transparent 51%);
-	background-size: 38px 86px;
-	background-repeat: repeat-y;
+	display: none;
 }
 
-.complete-card::before {
-	left: -38px;
-	transform: rotate(-12deg);
-}
-
-.complete-card::after {
-	right: -38px;
-	transform: rotate(12deg) scaleX(-1);
-}
 
 .complete-check {
 	display: inline-flex;
@@ -1116,12 +1098,14 @@
 }
 
 .complete-order-no {
-	display: inline-flex;
+	display: flex;
 	align-items: baseline;
+	justify-content: center;
 	gap: 16px;
-	margin-top: 28px;
-	padding-top: 22px;
-	border-top: 1px dashed rgba(46, 114, 184, 0.22);
+	width: fit-content;
+	margin: 30px auto 0;
+	padding-top: 0;
+	border-top: none;
 	color: #50637a;
 	font-family: "Noto Sans JP", sans-serif;
 	font-size: 13px;
@@ -1136,7 +1120,8 @@
 }
 
 .complete-return {
-	margin-top: 32px;
+	display: inline-flex;
+	margin: 26px auto 0;
 }
 
 .complete-guide {
