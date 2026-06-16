@@ -5,11 +5,11 @@ li {
 	margin: 30px;
 }
 
-.user_info_form_area_a{
+.user_info_form_area_a {
 	display: block;
-    margin-top: 30px;
-    display: flex;
-    align-items: flex-end;
+	margin-top: 30px;
+	display: flex;
+	align-items: flex-end;
 }
 
 .user_info_credit_area {
@@ -41,64 +41,79 @@ li {
 	justify-content: space-around;
 }
 
-.payment_method_select_a{
+.payment_method_select_a {
 	justify-content: space-around;
 	display: flex;
-	flex-direction: column;	
-	margin-left: 400px;	
+	flex-direction: column;
+	margin-left: 400px;
 }
 
-.back_button_a{
-	margin-left: 550px;	
+.back_button_a {
+	margin-left: 550px;
 }
 
 .step-list {
-  display: flex;
-  justify-content: space-between;
-  list-style: none;
-  padding: 0;
-  position: relative;
+	display: flex;
+	justify-content: space-between;
+	list-style: none;
+	padding: 0;
+	position: relative;
 }
 
 .step-list::before {
-  content: "";
-  position: absolute;
-  top: 20px;
-  left: 0; right: 0; height: 2px;
-  background-color: #e0e0e0;
-  z-index: 1;
+	content: "";
+	position: absolute;
+	top: 20px;
+	left: 0;
+	right: 0;
+	height: 2px;
+	background-color: #e0e0e0;
+	z-index: 1;
 }
 
-.step-item { 
-	flex: 1; text-align: center; position: relative; z-index: 2; 
+.step-item {
+	flex: 1;
+	text-align: center;
+	position: relative;
+	z-index: 2;
 }
 
 .step-icon {
-  display: flex; align-items: center; justify-content: center;
-  width: 40px; height: 40px; border-radius: 50%;
-  background-color: #fff; border: 2px solid #e0e0e0; color: #999;
-  margin: 0 auto 8px auto; font-weight: bold; transition: all 0.3s;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	background-color: #fff;
+	border: 2px solid #e0e0e0;
+	color: #999;
+	margin: 0 auto 8px auto;
+	font-weight: bold;
+	transition: all 0.3s;
 }
 
-.step-label { 
-	font-size: 0.85rem; color: #999; 
+.step-label {
+	font-size: 0.85rem;
+	color: #999;
 }
 
 #page-cart .step-cart .step-icon,
 #page-input .step-input .step-icon,
 #page-confirm .step-confirm .step-icon,
 #page-complete .step-complete .step-icon {
-  border-color: #0066cc;
-  color: #0066cc;
-  box-shadow: 0 0 12px rgba(0, 102, 204, 0.5); /* 現在地を強く光らせる */
+	border-color: #0066cc;
+	color: #0066cc;
+	box-shadow: 0 0 12px rgba(0, 102, 204, 0.5);
+	/* 現在地を強く光らせる */
 }
 
 #page-cart .step-cart .step-label,
 #page-input .step-input .step-label,
 #page-confirm .step-confirm .step-label,
 #page-complete .step-complete .step-label {
-  color: #0066cc;
-  font-weight: bold;
+	color: #0066cc;
+	font-weight: bold;
 }
 
 /* 2ページ目（情報入力）にいる時：1つ前のカートは終了している */
@@ -112,10 +127,11 @@ li {
 #page-complete .step-cart .step-icon,
 #page-complete .step-input .step-icon,
 #page-complete .step-confirm .step-icon {
-  background-color: #0066cc;
-  border-color: #0066cc;
-  color: #fff;
-  box-shadow: 0 0 8px rgba(0, 102, 204, 0.3); /* 終了したページもほんのり光らせる */
+	background-color: #0066cc;
+	border-color: #0066cc;
+	color: #fff;
+	box-shadow: 0 0 8px rgba(0, 102, 204, 0.3);
+	/* 終了したページもほんのり光らせる */
 }
 
 #page-input .step-cart .step-label,
@@ -124,6 +140,28 @@ li {
 #page-complete .step-cart .step-label,
 #page-complete .step-input .step-label,
 #page-complete .step-confirm .step-label {
-  color: #333;
+	color: #333;
 }
 
+.order_summary_card_a {
+	position: sticky;
+	top: 96px;
+	padding: 28px;
+	border: 1px solid rgba(0, 0, 0, 0.08);
+	border-radius: 24px;
+	background: #fff;
+	box-shadow: 0 18px 46px rgba(0, 0, 0, 0.06);
+	margin-left: 190px;
+	margin-bottom: 20px;
+}
+
+.side_photo {
+	display: flex;
+
+}
+
+.all_money {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+}

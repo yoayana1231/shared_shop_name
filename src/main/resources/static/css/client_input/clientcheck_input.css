@@ -88,3 +88,28 @@
 #page-complete .step-confirm .step-label {
   color: #333;
 }
+
+.pay_way{
+	width: 153px;
+}
+
+.table_caption_a{
+	display: flex;
+}
+
+.detail_table.address{
+	margin: 10px auto 20px;
+    width: 800px;
+}
+
+.detail_table.pay{
+	margin: 10px auto 20px;
+    width: 800px;
+}
+
+.decision_botan{
+	display: flex;
+	justify-content: center
+
+
+}

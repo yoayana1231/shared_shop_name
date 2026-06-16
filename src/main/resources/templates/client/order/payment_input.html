@@ -40,7 +40,7 @@
 	<p th:class="input_message_a" th:text="#{msg.order.payment.input}"></p>
 
 	<div class="user_info_form_area">
-		<form th:action="@{/client/order/check}" method="post">
+		<form class="all_money" th:action="@{/client/order/check}" method="post">
 			<ul class="payment_method_select_a">
 				<li>
 					<label class="radio_label">
@@ -84,11 +84,39 @@
 				</li>
 			</ul>
 
-<!--		<form th:action="@{/client/order/payment/back}" method="post" class="update">-->
-			<input type="submit" class="back_button_a" value="戻る" th:formaction="@{/client/order/payment/back}" formmethod="post" formnovalidate/>
-			<input type="submit" class="send_button_a" value="次へ" />
+			<div class="side_photo">
+				<aside class="order_summary_card_a">
+					<div class="summary_heading">
+						<span>ORDER SUMMARY</span>
+						<small>ご注文内容</small>
+					</div>
 
-		</form>
+					<div class="summary_items">
+						<div class="summary_item" th:each="basket:${session.basket}">
+							<div class="summary_thumb">
+								<img th:src="@{/images/photo/{imgName}(imgName=${basket.image})}"
+									th:if="${basket.image != null}" />
+								<img th:src="@{/images/common/no_image.jpg}" th:if="${basket.image == null}" />
+							</div>
+							<div class="summary_text">
+								<span class="summary_name" th:text="${basket.name}"></span>
+								<span class="summary_price" th:text="'&yen;'+${basket.price}"></span>
+							</div>
+						</div>
+					</div>
+
+					<div class="summary_note">
+						<p>内容を確認して、次の画面でお支払い方法を選択してください。</p>
+					</div>
+				</aside>
+			</div>
+			
+			<form th:action="@{/client/order/payment/back}" method="post" class="update">
+				<input type="submit" class="back_button_a" value="戻る" th:formaction="@{/client/order/payment/back}"
+					formmethod="post" formnovalidate />
+				<input type="submit" class="send_button_a" value="次へ" />
+
+			</form>
 	</div>
 	</div>
 </body>

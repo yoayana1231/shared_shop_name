@@ -83,6 +83,7 @@
 		</table>
 		<div class="user_info_form_area">
 			<table class="detail_table address">
+				<!--お届け先-->
 				<caption class="table_caption">[[#{data.address}]]</caption>
 				<tr>
 					<th>[[#{data.address.postalcode}]]</th>
@@ -102,9 +103,10 @@
 				</tr>
 			</table>
 			<table class="detail_table pay">
+				<!--お支払い方法-->
 				<caption class="table_caption">[[#{paymethod.str}]]</caption>
 				<tr>
-					<th>[[#{paymethod.str}]]</th>
+					<th class="pay_way">[[#{paymethod.str}]]</th>
 					<td th:switch="${orderForm.payMethod}">
 						<span th:case="1">[[#{paymethod.credit.str}]]</span>
 						<span th:case="2">[[#{paymethod.bank.str}]]</span>
@@ -114,11 +116,13 @@
 					</td>
 				</tr>
 			</table>
-			<form th:action="@{/client/order/complete}" method="post">
-				<input class="send_button" type="submit" value="ご注文の確定" th:if="${orderItemBeans != null}" />
-			</form>
+
 			<form th:action="@{/client/order/payment/back}" method="post" class="update">
-				<input type="submit" value="戻る" class="back_button" />
+				<input type="submit" value="戻る" class="back_button_a" />
+			</form>
+
+			<form th:action="@{/client/order/complete}" method="post">
+				<input class="send_button_a" type="submit" value="ご注文の確定" th:if="${orderItemBeans != null}" />
 			</form>
 		</div>
 	</th:block>

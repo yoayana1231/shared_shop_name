@@ -175,6 +175,16 @@ h2 {
 	color: rgb(121, 137, 164);
 }
 
+.category_mozi{
+	display: flex;
+	align-items: center;
+}
+
+.shop_list_a{
+	display: flex;
+	margin-left: 30px;
+}
+
 
 /* ---- ページタイトル ---- */
 .page_title {
@@ -797,8 +807,7 @@ select {
 .category_tittle {
 	width: 500px;
 	height: min-content;
-	margin-top: 80px;
-	margin-left: 50px;
+	margin-left: 20px;
 }
 
 .category_list img {
