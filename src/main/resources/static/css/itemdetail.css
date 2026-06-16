@@ -27,31 +27,40 @@ body {
 	font-family: var(--sans);
 	letter-spacing: 0.045em;
 }
-h2 {
-	font-size:34px;
+
+.detail_name {
+	font-weight: bold;
+	font-size: 34px;
+	font-family: var(--serif);
 }
+
 .category {
+	font-family: var(--serif);
 	margin: 0 0 10px;
 	color: #d19a8f;
 	font-size: 10px;
 	letter-spacing: 0.16em;
 }
 
-.all_detail {}
+.all_detail {
+	
+}
 
 .pic_item_cart_fav {
 	display: grid;
-	grid-template-columns: minmax(0, 1fr) 10px;
+/*	grid-template-columns: minmax(3, 1fr) 10px;*/
 	align-items: start;
+	padding-left: 74px;
 }
 
 p {
+	font-family: var(--serif);
 	font-size: 20px;
 }
 
 .item_cart {
 	/*	display: grid;*/
-	margin-left: 400px;
+	margin-left: 300px;
 }
 
 .item_detail {
@@ -70,15 +79,97 @@ p {
 .item_img {
 	height: 100%;
 	width: 100%;
-/*	linear-gradient (180deg, rgba(248, 252, 255, 0.04) 0%, rgba(24, 34, 40, 0.14) 46%, rgba(24, 34, 40, 0.62) 100%), linear-gradient(120deg, rgba(243, 251, 255, 0.22), transparent 38%);*/
+
+	/*	background: (180deg,*/
+	/*			rgba(248, 252, 255, 0.04) 0%,*/
+	/*			rgba(24, 34, 40, 0.14) 46%,*/
+	/*			rgba(24, 34, 40, 0.62) 100%),*/
+	/*		linear-gradient(120deg,*/
+	/*			rgba(243, 251, 255, 0.22),*/
+	/*			transparent 38%);*/
+
+
 }
+
+
 
 .item_img img {
 	/*	width: 100%;*/
 	/*  height: auto;  縦横比を維持 */
 	/*  object-fit: cover;*/
 	filter: brightness(110%);
-	width: 700px;
-	height: 600px;
+	/*	box-shadow: var(--shadow);*/
+	/*box-shadow: 0 18px 48px rgba(84, 66, 59, 0.2);
+	*/
+	width: 300px;
+	height: auto;
+	background: (180deg,
+			rgba(248, 252, 255, 0.04) 0%,
+			rgba(24, 34, 40, 0.14) 46%,
+			rgba(24, 34, 40, 0.62) 100%),
+		linear-gradient(120deg,
+			rgba(243, 251, 255, 0.22),
+			transparent 38%);
+}
+
+.price_only {
+	box-sizing: border-box;
+}
+
+.price_tax {
+	display: inline-block;
+}
+
+.tax {
+	position: relative;
+	bottom: 2px;
+}
+
+.rating {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	padding-bottom: 20px;
+	border-bottom: 1px solid #ddccc5;
+	color: #8b5e55;
+}
+
+.stock_item {
+	color: #549c46;
+	border-bottom: 1px solid #ddccc5;
+	padding-bottom: 16px;
 
 }
+
+.script {
+	color: #d19a8f;
+}
+
+.detail_button {}
+
+.detail_button button {}
+
+.send_button_detail {
+	width: 100%;
+	height: 58px;
+	border-radius: 5px;
+	cursor: pointer;
+	letter-spacing: 0.12em;
+	background: var(--brown);
+	color: #fff;
+
+}
+
+.send_button_fav_detail {
+	margin-top: 10px;
+	width: 100%;
+	height: 58px;
+	border-radius: 5px;
+	border-style: 1px;
+	cursor: pointer;
+	letter-spacing: 0.12em;
+	background: white;
+	
+}
+
+

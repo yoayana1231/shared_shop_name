@@ -93,14 +93,14 @@
 		<!--		/* 商品一覧 */-->
 
 		<div class="list_card_a">
-			<aside class="editorial-column_a">
-				<div class="quote-card_a">
-					<span class="quote-mark_a">“</span>
+			<aside class="editorial-column_list">
+				<div class="quote-card_list">
+					<span class="quote-mark_list">“</span>
 					<h3>ときめきは、<br />きっと毎日つくれる。</h3>
 					<p>心がふっとほどけるような、お気に入りとの出会いを。</p>
 				</div>
-				<div class="ranking-card_a">
-					<div class="mini-heading_a">
+				<div class="ranking-card_list">
+					<div class="mini-heading_list">
 						<span>RANKING</span><small>人気アイテム</small>
 					</div>
 					<ol>
@@ -108,8 +108,7 @@
 							<img th:src="@{/images/photo/shopping.webp}" alt="" /><span>さおりっぷ<small>¥3500</small></span>
 						</li>
 						<li>
-							<img th:src="@{/images/photo/shopping3.webp}"
-								alt="" /><span>蜜ひとくち<small>¥3000</small></span>
+							<img th:src="@{/images/photo/shopping3.webp}"alt="" /><span>蜜ひとくち<small>¥3000</small></span>
 						</li>
 						<li>
 							<img th:src="@{/images/photo/shopping4.webp}" alt="" /><span>恋つぼみ<small>¥3450</small></span>
@@ -118,6 +117,7 @@
 					<a th:href="@{/client/item/list/2(categoryId=${categoryId})}">人気アイテムをもっとみる →</a>
 				</div>
 			</aside>
+			
 			<div class="product_grid_a">
 				<article class="item_card_list_a" th:each="item, status: ${items}">
 					<div class="image_a">

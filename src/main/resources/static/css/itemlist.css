@@ -317,7 +317,7 @@ a {
 	/*	padding: 3%;*/
 }
 
-.editorial-column_a {
+.editorial-column_list {
 	display: grid;
 	grid-template-columns: 1fr;
 	gap: 22px;
@@ -327,9 +327,9 @@ a {
 	max-height: calc(100vh - 40px);
 	overflow-y: auto;
 }
-
-.quote-card_a,
-.ranking-card,
+.quote-card_list,
+.quote-card_list,
+.ranking-card_list,
 .feature-card,
 .product-card {
 	background: rgba(255, 255, 255, 0.86);
@@ -338,32 +338,32 @@ a {
 
 }
 
-.quote-card {
+.quote-card_list {
 	height: 300px;
 	padding: 43px 38px;
 	position: relative;
 	overflow: hidden;
 }
 
-.quote-mark {
+.quote-mark_list {
 	font: 64px/1 var(--serif);
 	color: #e4b6ac;
 }
 
-.quote-card h3 {
+.quote-card_list h3 {
 	margin: 36px 0 24px;
 	font: 19px/2 var(--serif);
 	letter-spacing: 0.18em;
 }
 
-.quote-card p {
+.quote-card_list p {
 	margin: 0;
 	font-size: 12px;
 	line-height: 2.1;
 	color: #8d7a72;
 }
 
-.quote-card:after {
+.quote-card_list:after {
 	content: "";
 	position: absolute;
 	right: -48px;
@@ -375,13 +375,13 @@ a {
 	transform: rotate(-12deg);
 }
 
-.ranking-card {
-	height: 276px;
+.ranking-card_list {
+/*	height: 276px;*/
 	padding: 25px 26px 24px;
 	overflow: hidden;
 }
 
-.mini-heading_a {
+.mini-heading_list {
 	display: flex;
 	gap: 16px;
 	align-items: center;
@@ -390,26 +390,26 @@ a {
 	margin-bottom: 15px;
 }
 
-.mini-heading span {
+.mini-heading_list span {
 	font: 17px var(--serif);
 	letter-spacing: 0.18em;
 }
 
-.mini-heading small {
+.mini-heading_list small {
 	font-size: 11px;
 	color: #b3988f;
 }
 
-.ranking-card ol {
+.ranking-card_list ol {
 	list-style: none;
 	margin: 0;
 	padding: 0;
 	counter-reset: rank;
-	display: grid;
+/*	display: grid;*/
 	gap: 12px;
 }
 
-.ranking-card li {
+.ranking-card_list li {
 	counter-increment: rank;
 	display: grid;
 	grid-template-columns: 26px 44px 1fr;
@@ -418,7 +418,7 @@ a {
 	min-width: 0;
 }
 
-.ranking-card li:before {
+.ranking-card_list li:before {
 	content: counter(rank);
 	display: grid;
 	place-items: center;
@@ -429,13 +429,13 @@ a {
 	font-size: 11px;
 }
 
-.ranking-card img {
+.ranking-card_list img {
 	width: 44px;
 	height: 44px;
 	object-fit: cover;
 }
 
-.ranking-card span {
+.ranking-card_list span {
 	font-size: 10px;
 	line-height: 1.55;
 	min-width: 0;
@@ -443,12 +443,12 @@ a {
 	text-overflow: ellipsis;
 }
 
-.ranking-card small {
+.ranking-card_list small {
 	display: block;
 	color: #9f8c84;
 }
 
-.ranking-card a {
+.ranking-card_list a {
 	display: block;
 	margin-top: 17px;
 	padding-top: 13px;
@@ -619,13 +619,14 @@ button {
 	padding: 10px;
 }
 
+
 .cart:hover {
 	transition: transform .18s ease, box-shadow .18s ease;
 	color: rgb(255, 255, 255);
-
+	
 }
 
-.cart-button:hover {
+.cart-button_a:hover {
 
 	background-color: rgb(0, 0, 0);
 	border-style: solid;
