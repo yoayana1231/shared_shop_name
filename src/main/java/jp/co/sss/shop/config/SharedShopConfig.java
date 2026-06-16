@@ -35,7 +35,7 @@ public class SharedShopConfig implements WebMvcConfigurer {
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
 		//画像ファイルの保存場所と、パス名をつなげる設定
-		registry.addResourceHandler("/images/**").addResourceLocations("file:images/");
+		registry.addResourceHandler("/images/**").addResourceLocations("file:images/", "classpath:/static/images/");
 	}
 
 	/**

@@ -7,39 +7,64 @@
 	<meta charset="UTF-8" />
 </head>
 
-<body class="user user_delete_check">
-	<h2 th:class="title" th:text="#{user}+#{title.quit.check}"></h2>
-	<p th:class="check_message" th:text="#{msg.client.delete.check}"></p>
-	<div class="user_info_form_area" th:object="${userForm}">
-		<ul class="input_list">
-			<li>
-				<span class="input_title">[[#{userForm.email}]]</span>
-				<span class="input_value" th:text="*{email}"></span>
-			</li>
-			<li>
-				<span class="input_title">[[#{userForm.name}]]</span>
-				<span class="input_value" th:text="*{name}"></span>
-			</li>
-			<li>
-				<span class="input_title">[[#{userForm.postalCode}]]</span>
-				<span class="input_value" th:text="*{postalCode}"></span>
-			</li>
-			<li>
-				<span class="input_title">[[#{userForm.address}]]</span>
-				<span class="input_value" th:text="*{address}"></span>
-			</li>
-			<li>
-				<span class="input_title">[[#{userForm.phoneNumber}]]</span>
-				<span class="input_value" th:text="*{phoneNumber}"></span>
-			</li>
-		</ul>
-		<form th:action="@{/client/user/delete/complete}" method="post" class="user_info_form">
-			<input type="submit" value="退会" class="send_button delete" />
-		</form>
-		<form th:action="@{/client/user/detail}" method="post">
-			<input type="submit" value="戻る" class="back_button" />
-		</form>
-	</div>
+<body>
+	<section class="user-regist-page user-account-page user-account-page--delete">
+		<div class="user-regist-bg user-regist-bg--blue" aria-hidden="true"></div>
+		<div class="user-regist-bg user-regist-bg--pink" aria-hidden="true"></div>
+
+		<div class="user-regist-shell user-account-shell">
+			<aside class="user-regist-visual user-account-visual user-account-visual--delete"
+				aria-label="Cry Baby member withdrawal concept">
+				<div class="user-regist-visual__image user-account-visual__image"></div>
+				<div class="user-regist-visual__content user-account-visual__content">
+					<p class="user-regist-eyebrow">LEAVE ACCOUNT</p>
+					<h2>LEAVE<br />ACCOUNT</h2>
+					<p class="user-regist-copy">退会すると、会員情報やマイページ機能が利用できなくなります。</p>
+				</div>
+			</aside>
+
+			<div class="user-regist-card user-account-card user-account-card--delete">
+				<div class="user-regist-card__head">
+					<p class="user-regist-label">ACCOUNT CLOSE</p>
+					<h2 th:text="#{user}+#{title.quit.check}">会員退会確認</h2>
+					<p th:text="#{msg.client.delete.check}">退会する会員情報を確認してください。</p>
+				</div>
+
+				<ul class="input_list user-regist-confirm-list user-account-delete-list" th:object="${userForm}">
+					<li>
+						<span class="input_title">[[#{userForm.email}]]</span>
+						<span class="input_value" th:text="*{email}"></span>
+					</li>
+					<li>
+						<span class="input_title">[[#{userForm.name}]]</span>
+						<span class="input_value" th:text="*{name}"></span>
+					</li>
+					<li>
+						<span class="input_title">[[#{userForm.postalCode}]]</span>
+						<span class="input_value" th:text="*{postalCode}"></span>
+					</li>
+					<li>
+						<span class="input_title">[[#{userForm.address}]]</span>
+						<span class="input_value" th:text="*{address}"></span>
+					</li>
+					<li>
+						<span class="input_title">[[#{userForm.phoneNumber}]]</span>
+						<span class="input_value" th:text="*{phoneNumber}"></span>
+					</li>
+				</ul>
+
+				<div class="user-regist-confirm-actions user-account-delete-actions">
+					<form th:action="${designMode} ? @{/design/client/user/delete/complete} : @{/client/user/delete/complete}" method="post"
+						class="user_info_form">
+						<input type="submit" value="退会する" class="send_button delete user-account-danger-button" />
+					</form>
+					<form th:action="${designMode} ? @{/design/client/user/update/input} : @{/client/user/detail}" method="get">
+						<input type="submit" value="戻る" class="back_button" />
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
 </body>
 
 </html>
