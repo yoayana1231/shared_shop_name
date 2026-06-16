@@ -16,9 +16,9 @@
 		sans-serif;
 }
 
-/** {*/
-/*	box-sizing: border-box;*/
-/*}*/
+* {
+	box-sizing: border-box;
+}
 
 body {
 	margin: 0;
@@ -27,7 +27,9 @@ body {
 /*	font-family: var(--sans);*/
 	letter-spacing: 0.045em;
 }
-
+p{
+	font-size:30px;
+}
 a {
 	text-decoration: none;
 	color: inherit;
@@ -106,6 +108,7 @@ input {
 	display: grid;
 	grid-template-columns: minmax(0, 1fr) 410px;
 	align-items: start;
+
 }
 
 
@@ -145,22 +148,22 @@ input {
 	object-fit: cover;
 }
 
-.category {
+.category_name {
 	margin: 0 0 10px;
 	color: #d19a8f;
-	font-size: 10px;
+	font-size: 20px;
 	letter-spacing: 0.16em;
 }
 
 .item-info h2 {
 	margin: 0 0 20px;
-	font: 20px/1.5 var(--serif);
+	font: 15px/1.5 var(--serif);
 	letter-spacing: 0.08em;
 }
 
 .price {
 	margin: 0;
-	font: 24px var(--serif);
+	font: 15px var(--serif);
 }
 
 .price small {
@@ -177,6 +180,7 @@ input {
 }
 
 .counter {
+	position: relative;
 	width: 152px;
 	height: 46px;
 	border: 1px solid #dfc8c0;
@@ -185,6 +189,7 @@ input {
 	align-items: center;
 	text-align: center;
 	background: rgba(255, 255, 255, 0.65);
+	left: 30px
 }
 
 .counter button {
@@ -235,6 +240,22 @@ input {
 	font-size: 12px;
 }
 
+.delete_button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 220px;
+	height: 44px;
+	margin-top: 30px;
+	border: 1px solid #dfc8c0;
+	background: #fff;
+	color: #5f4d47;
+	font-size: 12px;
+	margin: 10px;
+	cursor: pointer;
+	
+}
+
 .summary-card {
 	position: sticky;
 	top: 108px;
@@ -242,12 +263,14 @@ input {
 	border: 1px solid #f1e4df;
 	box-shadow: var(--shadow);
 	padding: 38px 40px;
+
 }
 
 .summary-card {
 	width: 340px;
 	top: 94px;
 	padding: 30px 32px;
+
 }
 
 .summary-card h2 {
@@ -388,7 +411,7 @@ input {
 .recommend-items article {
 	position: relative;
 	display: grid;
-	grid-template-columns: 92px 1fr 28px;
+	/*	grid-template-columns: 92px 1fr 28px;*/
 	gap: 14px;
 	align-items: center;
 	background: #fff;
@@ -396,8 +419,14 @@ input {
 	border: 1px solid #f0e4df;
 }
 
+.heart {
+	position: relative;
+	bottom: 38px;
+	left: 60px;
+}
+
 .recommend-items img {
-	width: 92px;
+	width: 180px;
 	height: 92px;
 	object-fit: cover;
 	background: #fbf3ef;
