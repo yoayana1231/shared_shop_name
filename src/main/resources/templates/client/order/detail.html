@@ -17,6 +17,7 @@
 				<td th:text="${order.insertDate}"></td>
 			</tr>
 			<tr>
+				<!--お支払方法-->
 				<th>[[#{paymethod.str}]]</th>
 				<td th:switch="${order.payMethod}">
 					<span th:case="1">[[#{paymethod.credit.str}]]</span>
