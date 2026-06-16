@@ -77,53 +77,56 @@
 				</div>
 			</div>
 		</div>
-		<!--			<div class="detail_button_area">-->
-		<!--				<form th:action="@{/client/basket/add}" method="post" class="user_info_form" th:if="*{stock > 0}">-->
-		<!--					<input type="hidden" th:field="*{id}" />-->
-		<!--					<input type="submit" value="買い物かごに入れる" class="send_button" />-->
-		<!--				</form>-->
-		<!--			</div>-->
+		<p class="review_text">REVIEW</p>
+		
+		
+					<div class="detail_button_area">
+						<form th:action="@{/client/basket/add}" method="post" class="user_info_form" th:if="*{stock > 0}">
+							<input type="hidden" th:field="*{id}" />
+							<input type="submit" value="買い物かごに入れる" class="send_button" />
+						</form>
+					</div>
 
-		<!--		<div>-->
-		<!--			<form th:action="@{/client/review/input/{itemId}(itemId=${item.id})}" method="get" class="user_info_form">-->
-		<!--				<input type="submit" value="レビュー" class="send_button" />-->
-		<!--			</form>-->
-		<!--			<form th:action="@{/client/item/list/1}" method="post">-->
-		<!--				<input type="submit" value="戻る" class="back_button" />-->
-		<!--			</form>-->
-		<!--		</div>-->
+				<div>
+					<form th:action="@{/client/review/input/{itemId}(itemId=${item.id})}" method="get" class="user_info_form">
+						<input type="submit" value="レビュー" class="send_button" />
+					</form>
+					<form th:action="@{/client/item/list/1}" method="post">
+						<input type="submit" value="戻る" class="back_button" />
+					</form>
+				</div>
 
 		<div>
-			<!--レビュー表示-->
-			<!--			<p th:text="#{msg.review.list.none}" th:if="${#lists.isEmpty(itemReviews)}"></p>-->
+			レビュー表示
+						<p th:text="#{msg.review.list.none}" th:if="${#lists.isEmpty(itemReviews)}"></p>
 
-			<!--			<th:block th:if="!${#lists.isEmpty(itemReviews)}">-->
-			<!--				<table>-->
-			<!--					<tr>-->
-			<!--						<th th:text="#{rating}"></th>-->
-			<!--						<th th:text="#{comments}"></th>-->
-			<!--					</tr>-->
-			<!--					<tr th:each="review: ${itemReviews}">-->
-			<!--						<td th:text="${review.rating}"></td>-->
-			<!--						<td th:text="${review.comments}"></td>-->
-			<!--						<th:block th:if="${session.user != null && review.user.id == session.user.id}">-->
-			<!--							<td>-->
-			<!--								<form th:action="@{/client/review/edit/input/{reviewId}(reviewId=${review.id})}"-->
-			<!--									method="get">-->
-			<!--																		<input type="hidden" th:value="${review.id}">-->
-			<!--									<button type="submit">編集</button>-->
-			<!--								</form>-->
-			<!--							</td>-->
-			<!--							<td>-->
-			<!--								<form th:action="@{/client/review/delete}" method="post">-->
-			<!--									<input type="hidden" name="reviewId" th:value="${review.id}">-->
-			<!--									<button type="submit">削除</button>-->
-			<!--								</form>-->
-			<!--							</td>-->
-			<!--						</th:block>-->
-			<!--					</tr>-->
-			<!--				</table>-->
-			<!--			</th:block>-->
+						<th:block th:if="!${#lists.isEmpty(itemReviews)}">
+							<table>
+								<tr>
+									<th th:text="#{rating}"></th>
+									<th th:text="#{comments}"></th>
+								</tr>
+								<tr th:each="review: ${itemReviews}">
+									<td th:text="${review.rating}"></td>
+									<td th:text="${review.comments}"></td>
+									<th:block th:if="${session.user != null && review.user.id == session.user.id}">
+										<td>
+											<form th:action="@{/client/review/edit/input/{reviewId}(reviewId=${review.id})}"
+												method="get">
+																					<input type="hidden" th:value="${review.id}">
+												<button type="submit">編集</button>
+											</form>
+										</td>
+										<td>
+											<form th:action="@{/client/review/delete}" method="post">
+												<input type="hidden" name="reviewId" th:value="${review.id}">
+												<button type="submit">削除</button>
+											</form>
+										</td>
+									</th:block>
+								</tr>
+							</table>
+						</th:block>
 
 		</div>
 	</div>
