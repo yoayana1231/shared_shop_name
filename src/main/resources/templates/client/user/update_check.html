@@ -7,45 +7,69 @@
 	<meta charset="UTF-8" />
 </head>
 
-<body class="user user_update_check">
+<body>
+	<section class="user-regist-page user-account-page user-account-page--check">
+		<div class="user-regist-bg user-regist-bg--blue" aria-hidden="true"></div>
+		<div class="user-regist-bg user-regist-bg--pink" aria-hidden="true"></div>
 
-	<h2 th:class="title" th:text="#{user}+#{title.update.check}"></h2>
-	<p th:class="check_message" th:text="#{msg.update.check}"></p>
-	<div class="user_info_form_area" th:object="${userForm}">
-		<ul class="input_list">
-			<li>
-				<span class="input_title">[[#{userForm.email}]]</span>
-				<span class="input_value" th:text="*{email}"></span>
-			</li>
-			<li>
-				<span class="input_title">[[#{userForm.password}]]</span>
-				<span class="input_value">********</span>
-			</li>
-			<li>
-				<span class="input_title">[[#{userForm.name}]]</span>
-				<span class="input_value" th:text="*{name}"></span>
-			</li>
-			<li>
-				<span class="input_title">[[#{userForm.postalCode}]]</span>
-				<span class="input_value" th:text="*{postalCode}"></span>
-			</li>
-			<li>
-				<span class="input_title">[[#{userForm.address}]]</span>
-				<span class="input_value" th:text="*{address}"></span>
-			</li>
-			<li>
-				<span class="input_title">[[#{userForm.phoneNumber}]]</span>
-				<span class="input_value" th:text="*{phoneNumber}"></span>
-			</li>
-		</ul>
+		<div class="user-regist-shell user-account-shell">
+			<aside class="user-regist-visual user-account-visual" aria-label="Cry Baby member profile confirmation concept">
+				<div class="user-regist-visual__image user-account-visual__image"></div>
+				<div class="user-regist-visual__content user-account-visual__content">
+					<p class="user-regist-eyebrow">CONFIRM PROFILE</p>
+					<h2>CHECK</h2>
+					<p class="user-regist-copy">変更前に、メールアドレス・住所・電話番号を確認してください。</p>
+				</div>
+			</aside>
 
-		<form th:action="@{/client/user/update/complete}" method="post">
-			<input type="submit" value="登録" class="send_button" />
-		</form>
-		<form th:action="@{/client/user/update/input}" method="post">
-			<input type="submit" value="戻る" class="back_button" />
-		</form>
-	</div>
+			<div class="user-regist-card user-account-card">
+				<div class="user-regist-card__head">
+					<p class="user-regist-label">MY ACCOUNT</p>
+					<h2 th:text="#{user}+#{title.update.check}">会員変更確認</h2>
+					<p th:text="#{msg.update.check}">入力内容を確認してください。</p>
+				</div>
+
+				<ul class="input_list user-regist-confirm-list" th:object="${userForm}">
+					<li>
+						<span class="input_title">[[#{userForm.email}]]</span>
+						<span class="input_value" th:text="*{email}"></span>
+					</li>
+					<li>
+						<span class="input_title">[[#{userForm.password}]]</span>
+						<span class="input_value">********</span>
+					</li>
+					<li>
+						<span class="input_title">[[#{userForm.name}]]</span>
+						<span class="input_value" th:text="*{name}"></span>
+					</li>
+					<li>
+						<span class="input_title">[[#{userForm.postalCode}]]</span>
+						<span class="input_value" th:text="*{postalCode}"></span>
+					</li>
+					<li>
+						<span class="input_title">[[#{userForm.address}]]</span>
+						<span class="input_value" th:text="*{address}"></span>
+					</li>
+					<li>
+						<span class="input_title">[[#{userForm.phoneNumber}]]</span>
+						<span class="input_value" th:text="*{phoneNumber}"></span>
+					</li>
+				</ul>
+
+				<div class="user-regist-confirm-actions">
+					<form th:action="${designMode} ? @{/design/client/user/update/complete} : @{/client/user/update/complete}" method="post">
+						<input type="submit" value="変更する" class="send_button" />
+					</form>
+					<form th:if="${designMode}" th:action="@{/design/client/user/update/input}" method="get">
+						<input type="submit" value="戻る" class="back_button" />
+					</form>
+					<form th:unless="${designMode}" th:action="@{/client/user/update/input}" method="post">
+						<input type="submit" value="戻る" class="back_button" />
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
 </body>
 
 </html>

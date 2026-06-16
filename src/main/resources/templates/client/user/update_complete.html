@@ -7,10 +7,20 @@
 	<meta charset="UTF-8" />
 </head>
 
-<body class="user user_update_complete">
-	<h2 th:class="title" th:text="#{user}+#{title.update.complete}"></h2>
-	<p th:class="complete_message" th:text="#{user}+#{msg.update.complete}"></p>
-	<p class="complete_link"><a th:href="@{/client/user/detail}" th:text="#{user}+#{msg.back.to.detail}"></a></p>
+<body>
+	<section class="user-regist-page user-regist-page--complete user-account-page user-account-page--complete">
+		<div class="user-regist-bg user-regist-bg--blue" aria-hidden="true"></div>
+		<div class="user-regist-bg user-regist-bg--pink" aria-hidden="true"></div>
+
+		<div class="user-regist-complete-card user-account-complete-card">
+			<p class="user-regist-label">PROFILE UPDATED</p>
+			<h2 th:text="#{user}+#{title.update.complete}">会員変更完了</h2>
+			<p class="complete_message" th:text="#{user}+#{msg.update.complete}">会員情報の変更が完了しました。</p>
+			<a class="user-regist-complete-link" th:if="${designMode}" th:href="@{/design/client/user/update/input}">変更画面へ戻る</a>
+			<a class="user-regist-complete-link" th:unless="${designMode}" th:href="@{/client/user/detail}"
+				th:text="#{user}+#{msg.back.to.detail}">会員詳細へ戻る</a>
+		</div>
+	</section>
 </body>
 
 </html>
