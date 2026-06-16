@@ -1,12 +1,14 @@
 package jp.co.sss.shop.bean;
 
+import java.io.Serializable;
+
 /**
  * 買い物かご内の商品情報クラス
  *
  * @author SystemShared
  */
 
-public class BasketBean {
+public class BasketBean implements Serializable {
 
 	/**
 	 * 商品ID
