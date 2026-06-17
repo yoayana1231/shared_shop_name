@@ -18,7 +18,15 @@
 	--font-serif: "Marcellus", "Times New Roman", serif;
 	--font-jp-serif: "Noto Serif JP", "Yu Mincho", "Hiragino Mincho ProN", serif;
 	--font-sans: "Noto Sans JP", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-	
+	--ink: #3D302B;
+	--sub: #9A8177;
+	--line: #EEE3DD;
+	--rose: #D89D94;
+	--pale: #FBF6F3;
+	--paper: #FFFDFB;
+	--brown: #4B332D;
+	--shadow: 0 22px 70px rgba(80, 52, 42, 0.075);
+
 	--serif:
 		Georgia, "Times New Roman", "Yu Mincho", "Hiragino Mincho ProN", serif;
 	--sans:
@@ -26,10 +34,14 @@
 		sans-serif;
 }
 
+html {
+	scroll-behavior: smooth;
+}
+
 body {
 	margin: 0;
 	color: var(--color-ink);
-	font-family: var(--font-sans);
+	/*	font-family: var(--font-sans);*/
 	background:
 		radial-gradient(circle at 8% 10%, rgba(198, 232, 247, 0.58), transparent 30%),
 		radial-gradient(circle at 88% 6%, rgba(220, 244, 252, 0.72), transparent 30%),
@@ -48,4 +60,136 @@ body::before {
 	background-size: 52px 52px;
 	mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.36), transparent 70%);
 	z-index: -1;
+}
+
+
+
+.index_origin {
+	width: 200px;
+	height: 300px;
+	overflow-y: scroll;
+}
+
+[id] {
+	scroll-margin-top: 80px;
+}
+
+.brand_concept_char_mozi {
+	border-left: 1px solid var(--shadow-card);
+}
+
+.brand_concept_char_mozi h1 {
+	font-family: var(--serif)
+}
+
+.top_photo {
+	padding-right: 20px;
+	width: 650px;
+	height: 100%;
+}
+
+.top_page {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	height: 700px;
+	margin-top: 50px;
+}
+
+.top_page_mini {
+	margin-left: 10px;
+	color: #6d808b;
+}
+
+.top_page_1 {
+	display: flex;
+	flex-direction: column;
+	font-family: var(--sans);
+	border-left: 3px solid rgb(223, 207, 226);
+	padding-left: 7px;
+}
+
+.top_page_1 p {
+	font-size: 25px;
+	margin-top: 0px;
+	margin-bottom: 5px;
+	font-family: var(--serif);
+
+}
+
+.top_page_1 h2 {
+	font-size: 80px;
+	font-family: var(--serif);
+}
+
+.top_page_2 h3 {
+	width: 800px;
+	font-size: 20px;
+	font-family: var(--serif);
+	padding: 10px;
+	color: #6d808b;
+}
+
+.top_page_consept {
+	display: flex;
+	flex-direction: column;
+	margin-left: 70px;
+}
+
+.top_page_consept_1 {
+	display: flex;
+	flex-direction: column;
+}
+
+.hero-title-main {
+	font-weight: 200;
+}
+
+.button-ghost {
+	border: 1px solid rgba(34, 49, 58, 0.18);
+	background: rgba(255, 255, 255, 0.62);
+	color: var(--color-ink);
+	margin-right: 30px;
+
+}
+
+.button_a {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 50px;
+	padding: 20px 26px;
+	border-radius: 999px;
+	font-family: var(--serif);
+	color: #6d808b;
+	font-size: 18px;
+	letter-spacing: 0.18em;
+	text-transform: uppercase;
+	transition: transform .28s ease, box-shadow .28s ease, background .28s ease, color .28s ease;
+}
+
+.top_page_consept_button {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.button-ghost_a {
+	border: 1px solid #22313a;
+	background: var(--color-ink);
+	color: #fffaf6;
+	box-shadow: 0 18px 36px rgba(44, 41, 40, 0.14);
+}
+
+.brand_concept_photo {
+	display: flex;
+	justify-content: flex-start;
+	flex-direction: row;
+	margin-top: -400px;
+}
+
+.hover_button {
+	display: flex;
+	justify-content: flex-end;
+	margin-top:20px;
+	
 }
