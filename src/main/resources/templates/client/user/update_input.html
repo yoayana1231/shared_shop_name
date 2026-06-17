@@ -30,7 +30,7 @@
 					<p th:text="#{msg.update.input}">変更する情報を入力してください。</p>
 				</div>
 
-				<form th:action="${designMode} ? @{/design/client/user/update/check} : @{/client/user/update/check}" method="post"
+				<form th:action="@{/client/user/update/check}" method="post"
 					class="user_info_form user-regist-form" th:object="${userForm}">
 
 					<th:block th:if="${#fields.hasErrors()}">
@@ -94,7 +94,7 @@
 				</form>
 
 				<div class="user-regist-sub-actions">
-					<form th:action="${designMode} ? @{/design/client/user/update/input} : @{/client/user/detail}" method="get"
+					<form th:action="@{/client/user/detail}" method="get"
 						class="user-regist-back-form">
 						<input type="submit" value="戻る" class="back_button" />
 					</form>

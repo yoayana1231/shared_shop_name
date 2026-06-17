@@ -16,7 +16,6 @@
 			<p class="user-regist-label">ACCOUNT CLOSED</p>
 			<h2 th:text="#{user}+#{title.quit.complete}">会員退会完了</h2>
 			<p class="complete_message" th:text="#{msg.client.delete.complete}">退会が完了しました。</p>
-			<a class="user-regist-complete-link" th:if="${designMode}" th:href="@{/design/client/user/delete/check}">退会確認へ戻る</a>
 			<a class="user-regist-complete-link" th:unless="${designMode}" th:href="@{/}" th:text="#{msg.back.to.top}">トップへ戻る</a>
 		</div>
 	</section>
