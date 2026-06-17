@@ -65,7 +65,7 @@
 
 								<div class="order-card__item">
 									<span class="order-card__label" th:text="#{data.client.order.date}">注文日</span>
-									<span class="order-card__value" th:text="${order.insertDate}">2024-05-18</span>
+									<span class="order-card__value" th:text="${#strings.replace(#strings.substring(order.insertDate, 0, 10), '-', '/')}"></span>
 								</div>
 
 								<div class="order-card__item">
