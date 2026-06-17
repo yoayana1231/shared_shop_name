@@ -15,7 +15,9 @@
 		"Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo,
 		sans-serif;
 }
-
+html {
+	scroll-behavior: smooth;
+}
 * {
 	box-sizing: border-box;
 }
