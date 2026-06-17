@@ -41,7 +41,6 @@ public class ClientUserUpdateController {
 		// セッションからログイン中のユーザIDを取得
 		Integer userId = ((UserBean) session.getAttribute("user")).getId();
 		
-		// セッション情報がない場合、詳細画面からの遷移と判断し初期値を準備
 		// 変更対象の情報取得
 		User user = userRepository.findByIdAndDeleteFlag(userId, Constant.NOT_DELETED);
 		
@@ -65,10 +64,6 @@ public class ClientUserUpdateController {
 		
 		// セッションから入力フォーム取得
 		UserForm userForm = (UserForm)session.getAttribute("userForm");
-		if (userForm == null) {
-			// セッション情報なしの場合→エラー
-			
-		}
 		
 		// 入力フォーム情報をリクエストスコープに保存
 		model.addAttribute("userForm", userForm);
@@ -93,10 +88,7 @@ public class ClientUserUpdateController {
 		
 		// セッションから入力フォームの情報取得
 		UserForm userForm = (UserForm) session.getAttribute("userForm");
-		if (userForm == null) {
-			// セッション情報なしの場合→エラー
-			
-		}
+
 		// 入力情報に不足がある場合
 		if (form.getAuthority() == null) {
 			// セッション情報から値をセット
@@ -127,11 +119,7 @@ public class ClientUserUpdateController {
 		
 		// セッションから入力フォームの情報取得
 		UserForm userForm = (UserForm) session.getAttribute("userForm");
-		if (userForm == null) {
-			// セッション情報なしの場合→エラー
-			
-		}
-		
+
 		// 入力情報をリクエストスコープに保存
 		model.addAttribute("userForm", userForm);
 		
@@ -148,17 +136,11 @@ public class ClientUserUpdateController {
 		
 		// セッション情報から入力値を再取得
 		UserForm userForm = (UserForm)session.getAttribute("userForm");
-		if (userForm == null) {
-			// セッション情報なしの場合→エラー
-			
-		}
 		
 		// 変更対象情報を取得
-		User user = userRepository.findByIdAndDeleteFlag(userForm.getId(), Constant.NOT_DELETED);
-		if (user == null) {
-			// 対象がない場合エラー
-			
-		}
+		User user = userRepository.findByIdAndDeleteFlag
+				(userForm.getId(), Constant.NOT_DELETED);
+
 		Integer deleteFlg = user.getDeleteFlag();
 		Date insertDate = user.getInsertDate();
 		
