@@ -32,33 +32,33 @@
 
 				<ul class="input_list user-regist-confirm-list user-account-delete-list" th:object="${userForm}">
 					<li>
-						<span class="input_title">[[#{userForm.email}]]</span>
+						<span class="input_title" th:text="#{userForm.email}"></span>
 						<span class="input_value" th:text="*{email}"></span>
 					</li>
 					<li>
-						<span class="input_title">[[#{userForm.name}]]</span>
+						<span class="input_title" th:text="#{userForm.name}"></span>
 						<span class="input_value" th:text="*{name}"></span>
 					</li>
 					<li>
-						<span class="input_title">[[#{userForm.postalCode}]]</span>
+						<span class="input_title" th:text="#{userForm.postalCode}"></span>
 						<span class="input_value" th:text="*{postalCode}"></span>
 					</li>
 					<li>
-						<span class="input_title">[[#{userForm.address}]]</span>
+						<span class="input_title" th:text="#{userForm.address}"></span>
 						<span class="input_value" th:text="*{address}"></span>
 					</li>
 					<li>
-						<span class="input_title">[[#{userForm.phoneNumber}]]</span>
+						<span class="input_title" th:text="#{userForm.phoneNumber}"></span>
 						<span class="input_value" th:text="*{phoneNumber}"></span>
 					</li>
 				</ul>
 
 				<div class="user-regist-confirm-actions user-account-delete-actions">
-					<form th:action="${designMode} ? @{/design/client/user/delete/complete} : @{/client/user/delete/complete}" method="post"
+					<form th:action="@{/client/user/delete/complete}" method="post"
 						class="user_info_form">
 						<input type="submit" value="退会する" class="send_button delete user-account-danger-button" />
 					</form>
-					<form th:action="${designMode} ? @{/design/client/user/update/input} : @{/client/user/detail}" method="get">
+					<form th:action="@{/client/user/detail}" method="get">
 						<input type="submit" value="戻る" class="back_button" />
 					</form>
 				</div>

@@ -23,9 +23,6 @@ import jp.co.sss.shop.util.Constant;
 @Controller
 public class LoginController {
 
-	//test
-	//吉田ばーか
-
 	/**
 	 * 会員情報
 	 */
@@ -75,11 +72,11 @@ public class LoginController {
 		}
 
 		// メールアドレスからユーザー情報を取得
-		User user = userRepository.findByEmail(form.getEmail());
+		User user = userRepository.findByEmailAndDeleteFlag
+				(form.getEmail(), Constant.NOT_DELETED);
 		
 		// 取得したユーザー情報と入力されたパスワードが正しいか判定
 		if ((user == null) || (!user.getPassword().equals(form.getPassword()))) {
-			// 一致しなかった場合
 			// セッション情報を無効にして、ログイン画面再表示
 			session.invalidate();
 			returnStr = "login";
