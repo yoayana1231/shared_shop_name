@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import jp.co.sss.shop.bean.BasketBean;
 import jp.co.sss.shop.bean.OrderItemBean;
 import jp.co.sss.shop.entity.OrderItem;
 
@@ -59,7 +60,32 @@ public class PriceCalc {
 		int total = 0;
 
 		for (OrderItem orderItem : list) {
-			total = total + (orderItem.getPrice() * orderItem.getQuantity() );
+			total = total + (orderItem.getPrice() * orderItem.getQuantity());
+		}
+
+		return total;
+	}
+
+	/**
+	 * 買い物かご内の単価と商品個数から合計金額を計算
+	 *
+	 * @param list
+	 * 買い物かごの商品情報 (BasketBeanのリスト)
+	 * @return 合計金額
+	 */
+	public int basketItemPriceTotal(List<BasketBean> list) {
+		int total = 0;
+
+		if (list == null || list.isEmpty()) {
+			return total;
+		}
+
+		for (BasketBean basketBean : list) {
+			// 前回のNullPointerExceptionを防ぐためのnullチェック
+			int price = (basketBean.getPrice() != null) ? basketBean.getPrice() : 0;
+			int orderNum = (basketBean.getOrderNum() != null) ? basketBean.getOrderNum() : 0; // 念のため個数もチェック
+
+			total = total + (price * orderNum);
 		}
 
 		return total;

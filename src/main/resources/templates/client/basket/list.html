@@ -16,12 +16,30 @@
 				<h1>MY CART</h1>
 				<p>ショッピングバッグ</p>
 			</div>
-			<span>2 ITEMS</span>
+			<span th:text="${itemListSize}+' ITEMS'">ITEMS</span>
 		</div>
+
 		<div th:if="${session.basketBeans == null}">
 			<!--/* 買い物かごが空のとき */-->
 			<p th:text="#{msg.basket.list.none}"></p>
 		</div>
+
+		<th:block th:if="${itemNameListLessThan != null || itemNameListZero != null}">
+			<br />
+
+			<!--/* 在庫不足商品 */-->
+			<ul class="error_list_no_mark" th:if="${itemNameListLessThan != null}">
+				<li th:each="err : ${itemNameListLessThan}" th:text="#{msg.basket.stock.short(${err})}"></li>
+
+			</ul>
+			<!--/* 在庫なし商品 */-->
+			<ul class="error_list_no_mark" th:if="${itemNameListZero != null}">
+				<li th:each="err : ${itemNameListZero}" th:text="#{msg.basket.stock.none(${err})}">
+				</li>
+			</ul>
+			<br />
+		</th:block>
+
 		<th:block th:if="${session.basketBeans != null}">
 			<div class="cart-layout">
 				<section class="cart-list" aria-label="cart items">
@@ -54,27 +72,24 @@
 							</div>
 						</div>
 						<div class="item-actions">
-							<a href="#">削除する</a>
-							<button>♡ お気に入りに追加</button>
-							<p th:if="${item.stock == 0}" th:text="#{data.out.of.stock}"></p>
-							<p th:if="${item.stock > 5}" th:text="#{data.in.stock}"></p>
-							<p th:if="${item.stock >= 1 and 5 >= item.stock }" th:text="${item.stock}"></p>
-							<th:block th:if="${itemNameListLessThan != null || itemNameListZero != null}">
-								<br />
+							<form th:action="@{/client/basket/itemdelete}" method="post">
+								<input type="hidden" name="id" th:value="${item.id}" />
+								<input type="hidden" name="mode" value="delete" />
+								<button type="submit">削除</button>
+							</form>
 
-								<!--/* 在庫不足商品 */-->
-								<ul class="error_list_no_mark" th:if="${itemNameListLessThan != null}">
-									<li th:each="err : ${itemNameListLessThan}"
-										th:text="#{msg.basket.stock.short(${err})}"></li>
+							<!--							お気に入りボタン-->
 
-								</ul>
-								<!--/* 在庫なし商品 */-->
-								<ul class="error_list_no_mark" th:if="${itemNameListZero != null}">
-									<li th:each="err : ${itemNameListZero}" th:text="#{msg.basket.stock.none(${err})}">
-									</li>
-								</ul>
-								<br />
-							</th:block>
+							<div class="favorite_button_a">
+								<form th:action="@{/client/favorite/update}" method="post">
+									<input type="hidden" name="itemId" th:value="${item.id}">
+									<button type="submit"><img th:src="@{/images/faviorite_blank.svg}"></button>
+								</form>
+							</div>
+							<!--							<p th:if="${item.stock == 0}" th:text="#{data.out.of.stock}"></p>-->
+							<!--							<p th:if="${item.stock > 5}" th:text="#{data.in.stock}"></p>-->
+							<!--							<p th:if="${item.stock >= 1 and 5 >= item.stock }" th:text="${item.stock}"></p>-->
+
 						</div>
 					</article>
 
@@ -88,17 +103,17 @@
 					<p class="summary-sub">ご注文内容</p>
 
 					<dl class="summary-list">
-						<div>
-							<dt>小計</dt>
-							<dd>¥6,270</dd>
-						</div>
-						<div>
-							<dt>送料</dt>
-							<dd>¥550</dd>
-						</div>
+						<!--						<div>-->
+						<!--							<dt>小計</dt>-->
+						<!--							<dd>¥6,270</dd>-->
+						<!--						</div>-->
+						<!--						<div>-->
+						<!--							<dt>送料</dt>-->
+						<!--							<dd>¥550</dd>-->
+						<!--						</div>-->
 						<div class="total">
 							<dt>合計（税込）</dt>
-							<dd>¥6,820</dd>
+							<dd th:text="${total}"></dd>
 						</div>
 					</dl>
 
@@ -111,81 +126,66 @@
 				</aside>
 			</div>
 		</th:block>
+
+		<!--		ここからおすすめ商品（閲覧履歴）-->
+
 		<section class="recommend-band">
 			<div class="recommend-copy">
 				<h2>EDITOR’S<br />RECOMMEND</h2>
 				<p>こちらもおすすめ</p>
 			</div>
 			<div class="recommend-items">
-				<article>
-					<img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=350&q=85"
-						alt="シルキーフェイスパウダー" />
+				<div th:each="recommend, status: ${recommends}" th:if="${status.count le 4}">
+					<!--/* 1件分の商品情報 */-->
 					<div>
-						<p>フェイスパウダー</p>
-						<h3>シルキーフェイスパウダー</h3>
-						<span>¥4,180</span>
+						<a th:href="@{/client/item/detail/}+${recommend.item.id}">
+
+							<img th:src="@{/images/photo/{imgName}(imgName=${recommend.item.image})}"
+								th:if="${recommend.item.image != null}" />
+
+
+							<img th:src="@{/images/common/no_image.jpg}" th:if="${recommend.item.image == null}" />
+						</a>
 					</div>
-					<button class="heart">♡</button>
-				</article>
-				<article>
-					<img src="https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?auto=format&fit=crop&w=350&q=85"
-						alt="モイストセラム" />
 					<div>
-						<p>美容液</p>
-						<h3>モイストセラム</h3>
-						<span>¥5,940</span>
+						<span th:text="${recommend.item.category.name}"></span>
+						<span th:text="${recommend.item.name}"></span>
+						<span th:text="${recommend.item.price}"></span>
+
 					</div>
-					<button>♡</button>
-				</article>
-				<article>
-					<img src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=350&q=85"
-						alt="ドリームアイシャドウ" />
-					<div>
-						<p>アイシャドウ</p>
-						<h3>ドリームアイシャドウ</h3>
-						<span>¥4,290</span>
-					</div>
-					<button>♡</button>
-				</article>
-				<article>
-					<img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=350&q=85"
-						alt="センシュアルオードトワレ" />
-					<div>
-						<p>オードトワレ</p>
-						<h3>センシュアルオードトワレ</h3>
-						<span>¥6,600</span>
-					</div>
-					<button>♡</button>
-				</article>
+				</div>
+
 			</div>
 		</section>
 
+		<!--		ここまでおすすめ商品-->
+
 		<!--		<h2 th:class="title" th:text="#{basket}"></h2>-->
 
-		<th:block th:if="${itemNameListLessThan != null || itemNameListZero != null}">
-			<br />
-			<!--/* 在庫不足商品 */-->
-			<ul class="error_list_no_mark" th:if="${itemNameListLessThan != null}">
-				<li th:each="err : ${itemNameListLessThan}" th:text="#{msg.basket.stock.short(${err})}"></li>
+		<!--		<th:block th:if="${itemNameListLessThan != null || itemNameListZero != null}">-->
+		<!--			<br />-->
+		<!--			/* 在庫不足商品 */-->
+		<!--			<ul class="error_list_no_mark" th:if="${itemNameListLessThan != null}">-->
+		<!--				<li th:each="err : ${itemNameListLessThan}" th:text="#{msg.basket.stock.short(${err})}"></li>-->
 
-			</ul>
-			<!--/* 在庫なし商品 */-->
-			<ul class="error_list_no_mark" th:if="${itemNameListZero != null}">
-				<li th:each="err : ${itemNameListZero}" th:text="#{msg.basket.stock.none(${err})}"></li>
-			</ul>
-			<br />
-		</th:block>
+		<!--			</ul>-->
+		<!--			/* 在庫なし商品 */-->
+		<!--			<ul class="error_list_no_mark" th:if="${itemNameListZero != null}">-->
+		<!--				<li th:each="err : ${itemNameListZero}" th:text="#{msg.basket.stock.none(${err})}"></li>-->
+		<!--			</ul>-->
+		<!--			<br />-->
+		<!--		</th:block>-->
 
-<!--ここから下をコメントアウトしたらデザイン以前の画面になります。-->
+		<!--ここから下をコメントアウトしたらデザイン以前の画面になります。-->
 
 		<!--		<div th:if="${session.basketBeans == null}">-->
 		<!--			/* 買い物かごが空のとき */-->
 		<!--			<p th:text="#{msg.basket.list.none}"></p>-->
 		<!--		</div>-->
 
-<!--		</div>-->
-<!--	</section>-->
-<!--	<th:block th:if="${session.basketBeans != null}">-->
+		<!--		</div>-->
+		<!--	</section>-->
+		<!--	<th:block th:if="${session.basketBeans != null}">-->
 		<!--							<div class="list_table basket">-->
 		<!--					<tr>-->
 		<!--						<th>[[#{data.basket.item.name}]]</th>-->
@@ -194,34 +194,34 @@
 		<!--						<th>[[#{data.basket.stock.status}]]</th>-->
 		<!--					</tr>-->
 
-<!--		<article th:each="item, status: ${session.basketBeans}">-->
-<!--			<img th:src="@{/images/photo/{image}(image=${itemList[status.index].image})}"-->
-<!--				th:if="${itemList[status.index].image != null}" />-->
+		<!--		<article th:each="item, status: ${session.basketBeans}">-->
+		<!--			<img th:src="@{/images/photo/{image}(image=${itemList[status.index].image})}"-->
+		<!--				th:if="${itemList[status.index].image != null}" />-->
 
-<!--			<p><a th:href="@{/client/item/detail/{id}(id=${item.id})}" th:text="${item.name}"></a></p>-->
-<!--			<p th:text="${item.orderNum}"></p>-->
-<!--			<p>-->
-<!--			<form th:action="@{/client/basket/delete}" method="post">-->
-<!--				<input type="hidden" name="id" th:value="${item.id}" /> <input type="submit" value="削除"-->
-<!--					class="delete" />-->
-<!--			</form>-->
-<!--			</p>-->
-<!--			<p th:if="${item.stock == 0}" th:text="#{data.out.of.stock}"></p>-->
-<!--			<p th:if="${item.stock > 5}" th:text="#{data.in.stock}"></p>-->
-<!--			<p th:if="${item.stock >= 1 and 5 >= item.stock }" th:text="${item.stock}"></p>-->
-<!--		</article>-->
-<!--		</div>-->
-<!--		<div class="user_info_form_area shopping_button">-->
-<!--			/* 注文手続きフォーム */-->
-<!--			<form th:action="@{/client/order/address/input}" method="post">-->
-<!--				<input type="submit" value="ご注文のお手続き" />-->
-<!--			</form>-->
-<!--			/* 買い物かごを空にするフォーム */-->
-<!--			<form th:action="@{/client/basket/allDelete}" method="post">-->
-<!--				<input type="submit" value="買い物かごを空にする" class="delete" />-->
-<!--			</form>-->
-<!--		</div>-->
-<!--	</th:block>-->
+		<!--			<p><a th:href="@{/client/item/detail/{id}(id=${item.id})}" th:text="${item.name}"></a></p>-->
+		<!--			<p th:text="${item.orderNum}"></p>-->
+		<!--			<p>-->
+		<!--			<form th:action="@{/client/basket/delete}" method="post">-->
+		<!--				<input type="hidden" name="id" th:value="${item.id}" /> <input type="submit" value="削除"-->
+		<!--					class="delete" />-->
+		<!--			</form>-->
+		<!--			</p>-->
+		<!--			<p th:if="${item.stock == 0}" th:text="#{data.out.of.stock}"></p>-->
+		<!--			<p th:if="${item.stock > 5}" th:text="#{data.in.stock}"></p>-->
+		<!--			<p th:if="${item.stock >= 1 and 5 >= item.stock }" th:text="${item.stock}"></p>-->
+		<!--		</article>-->
+		<!--		</div>-->
+		<!--		<div class="user_info_form_area shopping_button">-->
+		<!--			/* 注文手続きフォーム */-->
+		<!--			<form th:action="@{/client/order/address/input}" method="post">-->
+		<!--				<input type="submit" value="ご注文のお手続き" />-->
+		<!--			</form>-->
+		<!--			/* 買い物かごを空にするフォーム */-->
+		<!--			<form th:action="@{/client/basket/allDelete}" method="post">-->
+		<!--				<input type="submit" value="買い物かごを空にする" class="delete" />-->
+		<!--			</form>-->
+		<!--		</div>-->
+		<!--	</th:block>-->
 
 </body>
 
