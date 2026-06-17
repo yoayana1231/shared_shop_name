@@ -91,7 +91,10 @@
 
 
 
-
+.aside_text{
+color: var(--order-pink);
+text-align: center;
+}
 
 
 

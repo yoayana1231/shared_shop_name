@@ -30,10 +30,10 @@ body {
 p{
 /*	font-size:30px;*/
 }
-a {
-	text-decoration: none;
-	color: inherit;
-}
+/*a {*/
+/*	text-decoration: none;*/
+/*	color: inherit;*/
+/*}*/
 
 button,
 input {
