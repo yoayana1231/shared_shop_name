@@ -88,10 +88,18 @@
 }
 
 
+.aside_top_text{
+	font-size:30px;
+	color: #61708d;
+	font-family: var(--order-serif);
+	line-height: 1.55;
+}
 
 
-
-
+.aside_text{
+color: var(--order-pink);
+text-align: center;
+}
 
 
 

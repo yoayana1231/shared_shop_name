@@ -1,2 +1,120 @@
 @charset "UTF-8";
 /* 注文フローの共通デザインは clientaddress_input.css に集約 */
+
+.check_mozi{
+	display: flex;
+	font-weight: 550;
+	display: flex;
+	justify-content: space-around;
+}
+
+.check_message_a{
+	padding-top: 1px;
+	font-size: 15px;
+	display: flex;
+	justify-content: space-around;
+}
+
+.step-list {
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  padding: 0;
+  position: relative;
+}
+
+.step-list::before {
+  content: "";
+  position: absolute;
+  top: 20px;
+  left: 0; right: 0; height: 2px;
+  background-color: #e0e0e0;
+  z-index: 1;
+}
+
+.step-item { 
+	flex: 1; text-align: center; position: relative; z-index: 2; 
+}
+
+.step-icon {
+  display: flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px; border-radius: 50%;
+  background-color: #fff; border: 2px solid #e0e0e0; color: #999;
+  margin: 0 auto 8px auto; font-weight: bold; transition: all 0.3s;
+}
+
+.step-label { 
+	font-size: 0.85rem; color: #999; 
+}
+
+#page-cart .step-cart .step-icon,
+#page-input .step-input .step-icon,
+#page-confirm .step-confirm .step-icon,
+#page-complete .step-complete .step-icon {
+  border-color: #0066cc;
+  color: #0066cc;
+  box-shadow: 0 0 12px rgba(0, 102, 204, 0.5); /* 現在地を強く光らせる */
+}
+
+#page-cart .step-cart .step-label,
+#page-input .step-input .step-label,
+#page-confirm .step-confirm .step-label,
+#page-complete .step-complete .step-label {
+  color: #0066cc;
+  font-weight: bold;
+}
+
+/* 2ページ目（情報入力）にいる時：1つ前のカートは終了している */
+#page-input .step-cart .step-icon,
+
+/* 3ページ目（確認）にいる時：カートと情報入力は終了している */
+#page-confirm .step-cart .step-icon,
+#page-confirm .step-input .step-icon,
+
+/* 4ページ目（完了）にいる時：それ以前はすべて終了している */
+#page-complete .step-cart .step-icon,
+#page-complete .step-input .step-icon,
+#page-complete .step-confirm .step-icon {
+  background-color: #0066cc;
+  border-color: #0066cc;
+  color: #fff;
+  box-shadow: 0 0 8px rgba(0, 102, 204, 0.3); /* 終了したページもほんのり光らせる */
+}
+
+#page-input .step-cart .step-label,
+#page-confirm .step-cart .step-label,
+#page-confirm .step-input .step-label,
+#page-complete .step-cart .step-label,
+#page-complete .step-input .step-label,
+#page-complete .step-confirm .step-label {
+  color: #333;
+}
+
+.pay_way{
+	width: 153px;
+}
+
+.table_caption_a{
+	display: flex;
+}
+
+.detail_table.address{
+	margin: 10px auto 20px;
+    width: 800px;
+}
+
+.detail_table.pay{
+	margin: 10px auto 20px;
+    width: 800px;
+}
+
+.decision_botan{
+	display: flex;
+	justify-content: center
+}
+
+.cart-layout_a{
+	display: grid;
+/* grid-template-columns: minmax(0, 1fr) 410px; */
+/*    justify-items: center;*/
+}
