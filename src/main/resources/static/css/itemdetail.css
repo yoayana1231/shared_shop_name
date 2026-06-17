@@ -60,19 +60,19 @@ body {
 
 .item_cart {
 	/*	display: grid;*/
-	margin-left: 300px;
+	margin-left: 400px;
 }
 
 .item_detail {
 	position: relative;
-	right: 200px;
+	right: 400px;
 	width: 300px;
 
 }
 
 .detail_button {
 	position: relative;
-	right: 200px;
+	right: 400px;
 
 }
 
@@ -101,7 +101,7 @@ body {
 	/*	box-shadow: var(--shadow);*/
 	/*box-shadow: 0 18px 48px rgba(84, 66, 59, 0.2);
 	*/
-	margin-left: 150px;
+	margin-left: 300px;
 	width: 500px;
 	height: 500px;
 	background: (180deg,
@@ -268,7 +268,7 @@ body {
 	font-size: 15px;
 	margin: 2px;
 	cursor: pointer;
-	left:751px;
+	left:900px;
 	bottom:190px;
 }
 .bar_detail {
@@ -283,3 +283,4 @@ body {
 .review_link{
 	text-decoration: underline;
 }
+
