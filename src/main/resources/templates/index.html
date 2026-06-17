@@ -26,8 +26,7 @@
 					<a class="button_a button-ghost" href="#concept">Read concept</a>
 				</div>
 				<div class="top_page_consept_button_a">
-					<a class="button_a button-ghost_a" href="#product"
-						th:text="#{product.list}">Product List</a>
+					<a class="button_a button-ghost_a" href="#product" th:text="#{product.list}">Product List</a>
 				</div>
 			</div>
 		</div>
@@ -38,9 +37,10 @@
 	<!--ブランドコンセプト-->
 	<section class="brand_concept" id="concept">
 		<div class="brand_concept_char">
+			<p>Sheer &amp; luminous</p>
 			<div class="brand_concept_char_mozi">
-				<h1>Brand Concept</h1>
-				<h2>日常のラグジュアリー</h2>
+				<h2>Brand Concept</h2>
+				<h3>日常のラグジュアリー</h3>
 			</div>
 			<p>厳選された素材と洗練された色彩が、あなたの個性にそっと寄り添います</p>
 			<p>鏡に向き合う時間が、もっと愛おしく、誇らしくなるように</p>
@@ -51,14 +51,10 @@
 	</section>
 
 	<!--カテゴリ-->
-	<div class="category_mozi" id="product">
-		<h3 class="category_tittle">カテゴリ</h3>
+	<div id="product">
+		<h1 class="category_tittle">Category</h1>
 	</div>
 	<div class="category_one">
-
-		<!--		<div>-->
-		<!--			<a class="shop_list" th:href="@{/client/item/list/1}" th:text="#{item}+#{title.list}">商品一覧</a>-->
-		<!--		</div>-->
 		<div th:each="category: ${categories}" class="category_list">
 			<a th:href="@{/client/item/list/category/{categoryId}(categoryId=${category.id})}"
 				th:value="${category.id}">

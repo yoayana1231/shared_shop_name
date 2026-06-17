@@ -53,13 +53,13 @@ h2 {
 	flex-direction: column
 }
 
-.brand_concept_char {
-	display: flex;
-	align-items: flex-end;
-	flex-direction: column;
-	gap: 12px;
-	margin-right: 40px;
-}
+/*.brand_concept_char {*/
+/*	display: flex;*/
+/*	align-items: flex-end;*/
+/*	flex-direction: column;*/
+/*	gap: 12px;*/
+/*	margin-right: 40px;*/
+/*}*/
 
 /*.brand_concept_photo {*/
 /*	display: flex;*/
@@ -68,9 +68,9 @@ h2 {
 /*	margin-top: -400px;*/
 /*}*/
 
-.brand_concept_photo_1 {
-	width: 900px;
-}
+/*.brand_concept_photo_1 {*/
+/*	width: 900px;*/
+/*}*/
 
 /* ---- 入力フォーム(ログイン) ---- */
 
