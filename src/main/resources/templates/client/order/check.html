@@ -22,23 +22,30 @@
 
 		<nav class="step-timeline" aria-label="注文ステップ">
 			<ul class="step-list">
-				<li class="step-item step-address"><span class="step-icon">1</span><span class="step-label">情報入力</span></li>
-				<li class="step-item step-payment"><span class="step-icon">2</span><span class="step-label">支払方法選択</span></li>
-				<li class="step-item step-confirm"><span class="step-icon">3</span><span class="step-label">ご注文確認</span></li>
-				<li class="step-item step-complete"><span class="step-icon">4</span><span class="step-label">注文完了</span></li>
+				<li class="step-item step-address"><span class="step-icon">1</span><span class="step-label">情報入力</span>
+				</li>
+				<li class="step-item step-payment"><span class="step-icon">2</span><span
+						class="step-label">支払方法選択</span></li>
+				<li class="step-item step-confirm"><span class="step-icon">3</span><span class="step-label">ご注文確認</span>
+				</li>
+				<li class="step-item step-complete"><span class="step-icon">4</span><span class="step-label">注文完了</span>
+				</li>
 			</ul>
 		</nav>
 
 		<div class="order-shell">
 			<div class="order-shell__ornament" aria-hidden="true"></div>
 
-			<p class="check-message" th:text="#{msg.order.check}" th:if="${orderItemBeans != null}">以下の内容でよろしければ、ご注文を確定してください。</p>
-			<p class="check-message check-message--error" th:text="#{msg.order.stop}" th:if="${orderItemBeans == null}">注文できません。</p>
+			<p class="check-message" th:text="#{msg.order.check}" th:if="${orderItemBeans != null}">
+				以下の内容でよろしければ、ご注文を確定してください。</p>
+			<p class="check-message check-message--error" th:text="#{msg.order.stop}" th:if="${orderItemBeans == null}">
+				注文できません。</p>
 
 			<th:block th:if="${itemNameListLessThan != null || itemNameListZero != null}">
 				<div class="order-card stock-alert">
 					<ul class="error-list" th:if="${itemNameListLessThan != null}">
-						<li th:each="err : ${itemNameListLessThan}" th:text="#{msg.order.item.stock.short(${err})}"></li>
+						<li th:each="err : ${itemNameListLessThan}" th:text="#{msg.order.item.stock.short(${err})}">
+						</li>
 					</ul>
 					<ul class="error-list" th:if="${itemNameListZero != null}">
 						<li th:each="err : ${itemNameListZero}" th:text="#{msg.order.item.stock.none(${err})}"></li>
@@ -50,7 +57,9 @@
 				<div class="confirm-layout">
 					<section class="order-card confirm-items-card" aria-label="ご注文内容の確認">
 						<div class="summary-heading summary-heading--line">
-							<div><span>ORDER REVIEW</span><h3>ご注文内容の確認</h3></div>
+							<div><span>ORDER REVIEW</span>
+								<h3>ご注文内容の確認</h3>
+							</div>
 							<small>Confirm</small>
 						</div>
 
@@ -64,14 +73,17 @@
 							<div class="confirm-row" th:each="orderItem: ${orderItemBeans}">
 								<div class="confirm-product">
 									<div class="confirm-thumb">
-										<img th:src="@{/images/photo/{image}(image=${orderItem.image})}" th:if="${orderItem.image != null}" alt="" />
-										<img th:src="@{/images/common/no_image.jpg}" th:if="${orderItem.image == null}" alt="" />
+										<img th:src="@{/images/photo/{image}(image=${orderItem.image})}"
+											th:if="${orderItem.image != null}" alt="" />
+										<img th:src="@{/images/common/no_image.jpg}" th:if="${orderItem.image == null}"
+											alt="" />
 									</div>
 									<strong th:text="${orderItem.name}">商品名</strong>
 								</div>
 								<span th:text="'¥' + ${#numbers.formatInteger(orderItem.price, 1, 'COMMA')}">¥0</span>
 								<span th:text="${orderItem.orderNum}">1</span>
-								<span th:text="'¥' + ${#numbers.formatInteger(orderItem.subtotal, 1, 'COMMA')}">¥0</span>
+								<span
+									th:text="'¥' + ${#numbers.formatInteger(orderItem.subtotal, 1, 'COMMA')}">¥0</span>
 							</div>
 						</div>
 
@@ -85,40 +97,60 @@
 						<section class="order-card info-card">
 							<div class="info-card-head">
 								<h3>お届け先</h3>
-								<form th:action="@{/client/order/payment/back}" method="post"><button type="submit" class="edit-link">変更</button></form>
+								<form th:action="@{/client/order/payment/back}" method="post"><button type="submit"
+										class="edit-link">変更</button></form>
 							</div>
 							<dl class="info-list">
-								<div><dt>お名前</dt><dd th:text="${orderForm.name}">山田 花子</dd></div>
-								<div><dt>郵便番号</dt><dd th:text="${orderForm.postalCode}">1500001</dd></div>
-								<div><dt>住所</dt><dd th:text="${orderForm.address}">東京都渋谷区</dd></div>
-								<div><dt>電話番号</dt><dd th:text="${orderForm.phoneNumber}">09012345678</dd></div>
+								<div>
+									<dt>お名前</dt>
+									<dd th:text="${orderForm.name}">山田 花子</dd>
+								</div>
+								<div>
+									<dt>郵便番号</dt>
+									<dd th:text="${orderForm.postalCode}">1500001</dd>
+								</div>
+								<div>
+									<dt>住所</dt>
+									<dd th:text="${orderForm.address}">東京都渋谷区</dd>
+								</div>
+								<div>
+									<dt>電話番号</dt>
+									<dd th:text="${orderForm.phoneNumber}">09012345678</dd>
+								</div>
 							</dl>
 						</section>
 
 						<section class="order-card info-card">
 							<div class="info-card-head">
 								<h3>お支払い方法</h3>
-								<form th:action="@{/client/order/payment/input}" method="get"><button type="submit" class="edit-link">変更</button></form>
+								<form th:action="@{/client/order/payment/input}" method="get"><button type="submit"
+										class="edit-link">変更</button></form>
 							</div>
 							<div class="pay-confirm">
 								<th:block th:switch="${orderForm.payMethod}">
 									<span class="payment-icon" aria-hidden="true" th:case="1">
-										<img src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/icons/credit-card-2-front.svg" alt="" loading="lazy" />
+										<img src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/icons/credit-card-2-front.svg"
+											alt="" loading="lazy" />
 									</span>
 									<span class="payment-icon" aria-hidden="true" th:case="2">
-										<img src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/icons/bank.svg" alt="" loading="lazy" />
+										<img src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/icons/bank.svg"
+											alt="" loading="lazy" />
 									</span>
 									<span class="payment-icon" aria-hidden="true" th:case="3">
-										<img src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/icons/cash-coin.svg" alt="" loading="lazy" />
+										<img src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/icons/cash-coin.svg"
+											alt="" loading="lazy" />
 									</span>
 									<span class="payment-icon" aria-hidden="true" th:case="4">
-										<img src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/icons/wallet2.svg" alt="" loading="lazy" />
+										<img src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/icons/wallet2.svg"
+											alt="" loading="lazy" />
 									</span>
 									<span class="payment-icon" aria-hidden="true" th:case="5">
-										<img src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/icons/shop-window.svg" alt="" loading="lazy" />
+										<img src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/icons/shop-window.svg"
+											alt="" loading="lazy" />
 									</span>
 									<span class="payment-icon" aria-hidden="true" th:case="*">
-										<img src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/icons/credit-card-2-front.svg" alt="" loading="lazy" />
+										<img src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/icons/credit-card-2-front.svg"
+											alt="" loading="lazy" />
 									</span>
 								</th:block>
 								<div th:switch="${orderForm.payMethod}">
@@ -140,7 +172,8 @@
 						<button type="submit" class="order-btn order-btn--ghost">戻る</button>
 					</form>
 					<form th:action="@{/client/order/complete}" method="post">
-						<button class="order-btn order-btn--primary order-btn--wide" type="submit">ご注文を確定<span aria-hidden="true">→</span></button>
+						<button class="order-btn order-btn--primary order-btn--wide" type="submit">ご注文を確定<span
+								aria-hidden="true">→</span></button>
 					</form>
 				</div>
 
@@ -151,5 +184,6 @@
 			</th:block>
 		</div>
 	</div>
-</body>
+	</body>
+
 </html>

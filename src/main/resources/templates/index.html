@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	th:replace="~{common/layout_5block :: layout(~{::title},~{::body/content()})}">
+	th:replace="~{common/layout_5block_index :: layout(~{::title},~{::body/content()})}">
 
 <head>
 	<title th:text="#{top}+' | '+ #{shop.title}"> </title>
 	<meta charset="UTF-8" />
 </head>
 
-<body class="user index">
+<body class="index_origin">
 	<!--トップ写真-->
 	<div class="top_page">
 		<img class="top_photo" th:src="@{/images/image_top_photo.jpg}" alt="トップ写真">
@@ -16,6 +16,7 @@
 	<!--ブランドコンセプト-->
 	<div class="brand_concept">
 		<div class="brand_concept_char">
+			<div class="brand_concept_char_mozi">
 			<h1>ブランドコンセプト</h1>
 			<h2>日常のラグジュアリー</h2>
 			<p>厳選された素材と洗練された色彩が、あなたの個性にそっと寄り添います</p>
