@@ -24,16 +24,16 @@ body {
 	margin: 0;
 	background: linear-gradient(90deg, #fff 0, #fffaf7 45%, #fff 100%);
 	color: var(--ink);
-/*	font-family: var(--sans);*/
+	font-family: var(--sans);
 	letter-spacing: 0.045em;
 }
 p{
 /*	font-size:30px;*/
 }
-a {
-	text-decoration: none;
-	color: inherit;
-}
+/*a {*/
+/*	text-decoration: none;*/
+/*	color: inherit;*/
+/*}*/
 
 button,
 input {
@@ -115,7 +115,7 @@ input {
 .cart-item {
 	position: relative;
 	display: grid;
-	grid-template-columns: 72px 150px minmax(0, 1fr) 180px 170px;
+	grid-template-columns: 40px 150px minmax(130px, 1fr) 180px 170px;
 	gap: 28px;
 	align-items: center;
 	padding: 34px 0;
