@@ -1,5 +1,6 @@
 package jp.co.sss.shop.controller.client.user;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,22 +14,27 @@ import jp.co.sss.shop.repository.UserRepository;
 
 @Controller
 public class ClientUserUpdateController {
+	
+	// Userリポジトリ
 	@Autowired
 	UserRepository userRepository;
 	
+	/*
+	 * 
+	 */
 	@RequestMapping(path = "/client/user/update/input", method = RequestMethod.POST)
 	public String updateInput(UserForm userForm, HttpSession session) {
-		// 入力フォーム情報をセッションスコープに保存
 		
-		UserForm user = (UserForm) session.getAttribute("userForm");
-		if(user == null) {
-			UserBean userBean = (UserBean) session.getAttribute("user");
-			User userUpdate = new User();
-			userUpdate = userRepository.getReferenceById(userBean.getId());
-			session.setAttribute("userForm", userUpdate);
-			
-		}
-
-		return "redirect:/client/user/regist/input";
+		// ログイン中のユーザーIDを取得
+		Integer userId = ((UserBean) session.getAttribute("user")).getId();
+		// テーブルから変更対象にユーザー情報をDBから取得
+		User user = userRepository.getReferenceById(userId);
+		
+		// 入力画面初期表示用のフォーム情報を新規生成
+		BeanUtils.copyProperties(user, userForm);
+		// セッションスコープに保存
+		session.setAttribute("userForm", userForm);
+		
+		return "redirect:/client/user/update/input";
 	}
 }
