@@ -1,7 +1,10 @@
 package jp.co.sss.shop.controller.client.item;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -52,11 +55,11 @@ public class ClientItemShowController {
 	// Userリポジトリ
 	@Autowired
 	UserRepository userRepository;
-	
+
 	// Reviewリポジトリ
 	@Autowired
 	ReviewsRepository reviewRepository;
-	
+
 	// recommendサービス
 	@Autowired
 	RecommendsService recommendsService;
@@ -75,35 +78,35 @@ public class ClientItemShowController {
 	 */
 	@RequestMapping(path = "/", method = { RequestMethod.GET, RequestMethod.POST })
 	public String index(Model model, HttpSession session) {
-		
+
 		// カテゴリ表示用の検索
 		model.addAttribute("categories", categoryRepository.findAll());
 		// アイテム全件検索
 		model.addAttribute("items", itemRepository.findAll());
-		
+
 		// 市川実装	閲覧履歴 / 吉永実装 おすすめ表示
 		UserBean userBean = (UserBean) session.getAttribute("user");
 		if (userBean != null) {
 			User user = userRepository.getReferenceById(userBean.getId());
-			
+
 			// 閲覧履歴表示
 			List<ViewHistories> histories = viewHistoriesRepository.findByUserOrderByViewedAtDesc(user);
 			model.addAttribute("histories", histories);
-			
+
 			// おすすめ表示
 			recommendsService.recommend(model, session);
 		}
-		
+
 		return "index";
 	}
 
 	//	売れてない奴も表示する（商品一覧）
 	@RequestMapping(path = "/client/item/list/{sortType}", method = { RequestMethod.GET })
 	public String clientItem(@PathVariable int sortType, Model model) {
-		
+
 		model.addAttribute("categories", categoryRepository.findAll());
 		model.addAttribute("items", itemRepository.findAllByQuantityDesc());
-		
+
 		//		新着順
 		if (sortType == 1) {
 			model.addAttribute("items", itemRepository.findAllByOrderByInsertDateDesc());
@@ -122,7 +125,7 @@ public class ClientItemShowController {
 	 */
 	@GetMapping(path = "/client/item/list/category/{categoryId}")
 	public String categorySort(@PathVariable Integer categoryId, Model model) {
-		
+
 		model.addAttribute("categories", categoryRepository.findAll());
 		List<Item> items = itemRepository.findByCategoryId(categoryId);
 		model.addAttribute("items", items);
@@ -177,15 +180,84 @@ public class ClientItemShowController {
 		if (user != null) {
 			saveOrUpdateViewHistory(user, item);
 		}
-		
+
+		//  ここからレビューの平均	1〜5のカウントをすべて「0」で初期化したMapを作る
+		Map<Integer, Long> ratingCounts = new HashMap<>();
+		for (int i = 1; i <= 5; i++) {
+			ratingCounts.put(i, 0L);
+		}
+
+		// データベースから集計結果を取得
+		List<Object[]> results = reviewRepository.countCountsByRating();
+
+		// 取得したデータをMapに上書きする
+		for (Object[] result : results) {
+			Integer rating = (Integer) result[0];
+			Long count = (Long) result[1];
+
+			// 1〜5の範囲内であればMapを更新
+			if (rating != null && rating >= 1 && rating <= 5) {
+				ratingCounts.put(rating, count);
+			}
+		}
+
+		List<Map<String, Object>> ratingData = reviewRepository.countReviewsGroupByRatingAndItemId(id);
+
+		// 総レビュー数と、星の総合レビューを計算
+		long totalCount = 0;
+		double totalStars = 0;
+
+		for (Map<String, Object> row : ratingData) {
+			int rating = Integer.parseInt(row.get("rating").toString());
+			long count = (Long) row.get("count");
+
+			totalCount += count;
+			totalStars += (rating * count); // 評価 × 件数（例：★5が3件なら15点）
+		}
+
+		// 平均点の計算（0件の場合は0.0）
+		double averageRating = totalCount > 0 ? totalStars / totalCount : 0.0;
+
+		// 画面表示用のグラフデータ
+		List<Map<String, Object>> chartRows = new ArrayList<>();
+		for (int i = 5; i >= 1; i--) {
+			int rating = i;
+			long count = ratingData.stream()
+					.filter(row -> Integer.parseInt(row.get("rating").toString()) == rating)
+					.mapToLong(row -> (Long) row.get("count"))
+					.findFirst()
+					.orElse(0L);
+
+			double percentage = totalCount > 0 ? ((double) count / totalCount) * 100 : 0;
+
+			Map<String, Object> rowMap = new HashMap<>();
+			rowMap.put("rating", rating);
+			rowMap.put("count", count);
+			rowMap.put("percentage", Math.round(percentage));
+			chartRows.add(rowMap);
+		}
+
+		// レビューの「総数」「平均値」「グラフデータ」を渡す
+		model.addAttribute("chartRows", chartRows);
+		model.addAttribute("totalCount", totalCount);
+		model.addAttribute("averageRating", averageRating); // 平均値を渡す
+
+		// Mapを渡す
+		model.addAttribute("ratingCounts", ratingCounts);
+
 		//レビュー表示
 		//詳細画面を表示している商品IDかつ削除フラグが0のものを検索
-		List<Reviews> itemReviews =
-				reviewRepository.findByItemIdAndDeleteFlag(id, 0);
-		
-		//リクエストスコープに格納
+		List<Reviews> itemReviews = reviewRepository.findByItemIdAndDeleteFlag(id, 0);
+
+		//レビュー情報
 		model.addAttribute("itemReviews", itemReviews);
-		
+
+		//		レビュー総数
+		model.addAttribute("reviewsSize", itemReviews.size());
+
+		//		売れ筋順
+		model.addAttribute("bestSelling", itemRepository.findAllByQuantityDesc());
+
 		return "client/item/detail";
 	}
 
@@ -212,5 +284,5 @@ public class ClientItemShowController {
 		}
 
 	}
-	
+
 }
