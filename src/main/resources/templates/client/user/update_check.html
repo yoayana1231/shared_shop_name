@@ -57,13 +57,10 @@
 				</ul>
 
 				<div class="user-regist-confirm-actions">
-					<form th:action="${designMode} ? @{/design/client/user/update/complete} : @{/client/user/update/complete}" method="post">
+					<form th:action="@{/client/user/update/complete}" method="post">
 						<input type="submit" value="変更する" class="send_button" />
 					</form>
-					<form th:if="${designMode}" th:action="@{/design/client/user/update/input}" method="get">
-						<input type="submit" value="戻る" class="back_button" />
-					</form>
-					<form th:unless="${designMode}" th:action="@{/client/user/update/input}" method="post">
+					<form th:action="@{/client/user/update/input}" method="post">
 						<input type="submit" value="戻る" class="back_button" />
 					</form>
 				</div>
