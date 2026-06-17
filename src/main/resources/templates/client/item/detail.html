@@ -112,26 +112,6 @@
 	<!--				<input type="submit" value="戻る" class="back_button" />-->
 	<!--			</form>-->
 	<!--		</div>-->
-<<<<<<< HEAD
-	<div class="review_detail">
-		<div class="review_and_button">
-			<p class="review_text">REVIEW</p>
-		</div>
-		<div class="review" id="reviews">
-			<div class="review_avg">
-				<div class = "review_top_margin">
-					<p class="rating_review">4.8</p>
-					<!--		動的に実装されてない-->
-					<p class="star">★★★★★</p>
-				</div>
-				<div>
-					<form th:action="@{/client/review/input/{itemId}(itemId=${item.id})}" method="get"
-						class="user_info_form">
-						<input type="submit" value="レビューを書く" class="send_button_review" />
-					</form>
-
-				</div>
-=======
 	<p class="no_review" th:text="#{msg.review.list.none}" th:if="${#lists.isEmpty(itemReviews)}"></p>
 	<div class="review_and_button">
 		<p class="review_text">REVIEW</p>
@@ -187,7 +167,7 @@
 						</form>
 					</td>
 				</th:block>
->>>>>>> main
+
 			</div>
 			<div class="review_all_calc">
 				<!--		動的に実装されてない-->
