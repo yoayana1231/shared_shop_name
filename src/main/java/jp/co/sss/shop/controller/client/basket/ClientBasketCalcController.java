@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jakarta.servlet.http.HttpSession;
 import jp.co.sss.shop.bean.BasketBean;
@@ -44,10 +45,13 @@ public class ClientBasketCalcController {
 	BeanTools beanTools;
 
 	@RequestMapping(path = "/client/basket/add/calc", method = RequestMethod.POST)
-	public String addBasketItem(@RequestParam Integer id,Pageable pageable) {
+	public String addBasketItem(@RequestParam Integer id, Pageable pageable, Model model,
+			RedirectAttributes redirectAttributes) {
 
 		// 現在のかごの中身を取得
 		List<BasketBean> basketList = (List<BasketBean>) session.getAttribute("basketBeans");
+		// 在庫不足の商品名を入れるリスト
+		List<String> itemNameListLessThan = new ArrayList<String>();
 
 		// かごに入れるボタンを押したときに送られたIDの商品の情報を取得
 		Item item = itemRepository.getReferenceById(id);
@@ -65,11 +69,23 @@ public class ClientBasketCalcController {
 
 			// かごに入れるボタンを押したときに送られたIDが、チェックしてる商品のIDと一致した場合、注文数を1増やし、isExistingをtrueに
 			if (basketItem.getId().equals(id)) {
-				basketItem.setOrderNum(basketItem.getOrderNum() + 1);
+				if (basketItem.getOrderNum() == item.getStock()) {
+					itemNameListLessThan.add(basketItem.getName());
+				}
+
+				if (basketItem.getOrderNum() < item.getStock()) {
+					basketItem.setOrderNum(basketItem.getOrderNum() + 1);
+					isExisting = true;
+				}
 				isExisting = true;
-//				System.out.println(basketItem.getOrderNum());
-//				basketItem.setPrice(basketItem.getPrice() * basketItem.getOrderNum());
-//				System.out.println(basketItem.getPrice());
+
+				// 在庫不足リストに商品名が入っている場合、在庫不足リストをリクエストスコープに保存
+				if (itemNameListLessThan.isEmpty() == false) {
+					redirectAttributes.addFlashAttribute("itemNameListLessThan", itemNameListLessThan);
+				}
+				//				System.out.println(basketItem.getOrderNum());
+				//				basketItem.setPrice(basketItem.getPrice() * basketItem.getOrderNum());
+				//				System.out.println(basketItem.getPrice());
 				break;
 			}
 		}
@@ -90,7 +106,6 @@ public class ClientBasketCalcController {
 		// かごの中身をセッションに保存し、買い物かご画面にリダイレクト
 
 		session.setAttribute("basketBeans", basketList);
-		
 
 		return "redirect:/client/basket/list";
 	}
