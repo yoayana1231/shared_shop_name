@@ -109,6 +109,7 @@ public class URLCheck {
 
 		boolean isCheckURLOK = false;
 		if (!URLCheck.isURLForStaticFile(requestURL)
+				&& requestURL.indexOf("/design/client/user/") == -1
 				&& !requestURL.endsWith("/login")
 				&& !requestURL.endsWith(contextPath + "/")
 				&& requestURL.indexOf("/client/item/list/") == -1
@@ -156,7 +157,8 @@ public class URLCheck {
 						|| requestURL.indexOf("/client/user/detail") != -1
 						|| requestURL.indexOf("/client/user/regist") != -1
 						|| requestURL.indexOf("/client/user/update") != -1
-						|| requestURL.indexOf("/client/user/delete") != -1)) {
+						|| requestURL.indexOf("/client/user/delete") != -1
+						|| requestURL.indexOf("/design/client/user/") != -1)) {
 
 			// URLのリクエスト先がフィルタ実行対象である場合
 			isCheckURLOK = true;
