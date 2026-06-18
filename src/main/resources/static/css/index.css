@@ -288,9 +288,35 @@ body::before {
 	justify-content: space-evenly;
 	font-size: 20px;
 	letter-spacing: 0.16em;
-	margin: 0 0 10px;
+	margin: 10px 0px 10px;
 	color: #6d808b;
 	font-family: var(--serif);
 
 }
 
+
+/*ーーーーーーーーーーーーーーーー売れ筋商品ーーーーーーーーーーーーーーーーーーーー*/
+
+
+.title_best_selling {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+
+.title_best_selling_main {
+	font-family: var(--serif);
+	font-size: 50px;
+	margin: 50px 30px 50px 100px;
+}
+
+.title_best_selling_sub {
+	margin-top: 25px;
+	font-family: var(--serif);
+	font-size: large;
+}
+
+.item_list_top{
+	display: flex;
+}
