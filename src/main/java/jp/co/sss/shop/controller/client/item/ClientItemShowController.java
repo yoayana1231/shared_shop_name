@@ -81,8 +81,8 @@ public class ClientItemShowController {
 
 		// カテゴリ表示用の検索
 		model.addAttribute("categories", categoryRepository.findAll());
-		// アイテム全件検索
-		model.addAttribute("items", itemRepository.findAll());
+		// 売れ筋検索
+		model.addAttribute("items", itemRepository.findAllByQuantityDesc());
 
 		// 市川実装	閲覧履歴 / 吉永実装 おすすめ表示
 		UserBean userBean = (UserBean) session.getAttribute("user");
@@ -96,6 +96,28 @@ public class ClientItemShowController {
 			// おすすめ表示
 			recommendsService.recommend(model, session);
 		}
+
+		//		レビュー数ランキング
+		List<Object[]> reviewRanking = reviewRepository.findTopItemsByReviewCount();
+
+		// 画面で扱いやすいように Map のリストに詰め替える
+		List<Map<String, Object>> rankingList = new ArrayList<>();
+		int rank = 1;
+
+		for (Object[] reviewsRanking : reviewRanking) {
+			Item item = (Item) reviewsRanking[0];
+			Long count = (Long) reviewsRanking[1];
+
+			Map<String, Object> reviewsRank = new HashMap<>();
+			reviewsRank.put("rank", rank++); // 順位 (1, 2, 3...)
+			reviewsRank.put("item", item); // 商品エンティティ
+			reviewsRank.put("reviewCount", count); // レビュー件数
+
+			rankingList.add(reviewsRank);
+		}
+
+		// "rankingList" という名前でViewに渡す
+		model.addAttribute("rankingList", rankingList);
 
 		return "index";
 	}
@@ -219,7 +241,7 @@ public class ClientItemShowController {
 		double averageRating = totalCount > 0 ? totalStars / totalCount : 0.0;
 
 		// 画面表示用のグラフデータ
-		List<Map<String, Object>> chartRows = new ArrayList<>();
+		List<Map<String, Object>> itemRating = new ArrayList<>();
 		for (int i = 5; i >= 1; i--) {
 			int rating = i;
 			long count = ratingData.stream()
@@ -234,15 +256,15 @@ public class ClientItemShowController {
 			rowMap.put("rating", rating);
 			rowMap.put("count", count);
 			rowMap.put("percentage", Math.round(percentage));
-			chartRows.add(rowMap);
+			itemRating.add(rowMap);
 		}
 
-		// レビューの「総数」「平均値」「グラフデータ」を渡す
-		model.addAttribute("chartRows", chartRows);
+		// レビューの「総数」「平均値」「グラフデータ」
+		model.addAttribute("itemRating", itemRating);
 		model.addAttribute("totalCount", totalCount);
 		model.addAttribute("averageRating", averageRating); // 平均値を渡す
 
-		// Mapを渡す
+		// レビュー全件数
 		model.addAttribute("ratingCounts", ratingCounts);
 
 		//レビュー表示

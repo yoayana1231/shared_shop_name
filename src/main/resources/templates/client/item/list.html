@@ -49,23 +49,11 @@
 	</div>
 
 	<div class="category-tabs">
-
-		<a th:href="@{/client/item/list/1}" class="active">すべて</a>
-		<div th:each="category :${categories}">
-			<a th:href="@{/client/item/list/category/{categoryId}(categoryId=${category.id})}"
-				th:text="${category.name}"></a>
-		</div>
-
-		<!--		<a href="#">下地</a>-->
-		<!--		<a href="#">ファンデーション</a>-->
-		<!--		<a href="#">アイブロウ</a>-->
-		<!--		<a href="#">アイライナー</a>-->
-		<!--		<a href="#">マスカラ</a>-->
-		<!--		<a href="#">アイシャドウ</a>-->
-		<!--		<a href="#">チーク</a>-->
-		<!--		<a href="#">リップ</a>-->
-
-
+			<a th:href="@{/client/item/list/1}" class="active">すべて</a>
+			<div th:each="category :${categories}">
+				<a th:href="@{/client/item/list/category/{categoryId}(categoryId=${category.id})}"
+					th:text="${category.name}"></a>
+			</div>
 	</div>
 	<!--		<div class="sorted_all">-->
 
@@ -108,7 +96,8 @@
 							<img th:src="@{/images/photo/shopping.webp}" alt="" /><span>さおりっぷ<small>¥3500</small></span>
 						</li>
 						<li>
-							<img th:src="@{/images/photo/shopping3.webp}"alt="" /><span>蜜ひとくち<small>¥3000</small></span>
+							<img th:src="@{/images/photo/shopping3.webp}"
+								alt="" /><span>蜜ひとくち<small>¥3000</small></span>
 						</li>
 						<li>
 							<img th:src="@{/images/photo/shopping4.webp}" alt="" /><span>恋つぼみ<small>¥3450</small></span>
@@ -117,7 +106,7 @@
 					<a th:href="@{/client/item/list/2(categoryId=${categoryId})}">人気アイテムをもっとみる →</a>
 				</div>
 			</aside>
-			
+
 			<div class="product_grid_a">
 				<article class="item_card_list_a" th:each="item, status: ${items}">
 					<div class="image_a">

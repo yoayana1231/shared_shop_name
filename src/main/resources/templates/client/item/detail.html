@@ -34,7 +34,7 @@
 					<div class="rating">
 						<!--						動的に実装していない-->
 						<span>★★★★★</span>
-						<b>4.8</b>
+						<b th:text="${totalCount}"></b>
 						<a class="review_link" a href="#reviews"><span
 								th:text="'レビューを見る（'+${reviewsSize}+'件）'"></span></a>
 					</div>
@@ -118,6 +118,7 @@
 	</div>
 	<div class="review" id="reviews">
 		<div class="review_avg">
+
 			<p class="rating_review" th:text="${#numbers.formatDecimal(averageRating, 1, 1)}"></p>
 			<!--		動的に実装されてない-->
 
@@ -130,18 +131,16 @@
 
 			</div>
 		</div>
-		<div class="review_all_calc">
-			<!--		動的に実装されてない-->
 
-			<ul>
-				<li>★★★★★： <span th:text="${ratingCounts.get(5)}">0</span> 件</li>
-				<li>★★★★☆： <span th:text="${ratingCounts.get(4)}">0</span> 件</li>
-				<li>★★★☆☆： <span th:text="${ratingCounts.get(3)}">0</span> 件</li>
-				<li>★★☆☆☆： <span th:text="${ratingCounts.get(2)}">0</span> 件</li>
-				<li>★☆☆☆☆： <span th:text="${ratingCounts.get(1)}">0</span> 件</li>
-			</ul>
+		<div class="review_all_calc" th:each="itemRating:${itemRating}">
+			<!--		動的に実装されてない-->
+			<span th:if="${itemRating.rating}==1" th:text="'★☆☆☆☆'+${itemRating.count}+'件'"></span>
+			<span th:if="${itemRating.rating}==2" th:text="'★★☆☆☆'+${itemRating.count}+'件'"></span>
+			<span th:if="${itemRating.rating}==3" th:text="'★★★☆☆'+${itemRating.count}+'件'"></span>
+			<span th:if="${itemRating.rating}==4" th:text="'★★★★☆'+${itemRating.count}+'件'"></span>
+			<span th:if="${itemRating.rating}==5" th:text="'★★★★★'+${itemRating.count}+'件'"></span>
 		</div>
-		<p class="no_review" th:text="#{msg.review.list.none}" th:if="${#lists.isEmpty(itemReviews)}"></p>
+
 		<th:block th:if="!${#lists.isEmpty(itemReviews)}">
 			<div class="review_comments" th:each="review: ${itemReviews}">
 				<th:block th:switch="${review.rating}">
