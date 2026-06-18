@@ -31,4 +31,8 @@ public interface ReviewsRepository extends JpaRepository<Reviews, Integer> {
 			"GROUP BY r.rating ORDER BY r.rating DESC")
 	List<Map<String, Object>> countReviewsGroupByRatingAndItemId(@Param("itemId") Integer itemId);
 
+	// レビュー数が多い順に商品（Item）とレビュー数を取得する
+	@Query("SELECT r.item, COUNT(r) AS reviewCount FROM Reviews r WHERE r.deleteFlag = 0 GROUP BY r.item ORDER BY reviewCount DESC")
+	List<Object[]> findTopItemsByReviewCount();
+
 }
