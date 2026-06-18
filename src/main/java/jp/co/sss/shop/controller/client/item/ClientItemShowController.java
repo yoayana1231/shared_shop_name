@@ -81,8 +81,8 @@ public class ClientItemShowController {
 
 		// カテゴリ表示用の検索
 		model.addAttribute("categories", categoryRepository.findAll());
-		// アイテム全件検索
-		model.addAttribute("items", itemRepository.findAll());
+		// 売れ筋検索
+		model.addAttribute("items", itemRepository.findAllByQuantityDesc());
 
 		// 市川実装	閲覧履歴 / 吉永実装 おすすめ表示
 		UserBean userBean = (UserBean) session.getAttribute("user");

@@ -62,8 +62,6 @@ body::before {
 	z-index: -1;
 }
 
-
-
 .index_origin {
 	width: 200px;
 	height: 300px;
@@ -74,38 +72,14 @@ body::before {
 	scroll-margin-top: 80px;
 }
 
-.brand_concept_char {
-	margin-top: 40px;
-	margin-right: 40px;
-	display: flex;
-	flex-direction: column;
-	align-items: flex-end
-}
 
-.brand_concept_char_mozi {
-	border-right: 3px solid rgb(223, 207, 226);
-	display: flex;
-	flex-direction: column;
-	align-items: flex-end;
-	padding-right: 9px;
-
-}
-
-.brand_concept_char_mozi h2 {
-	font-family: var(--serif);
-	font-size: 70px;
-	font-weight: 200;
-}
-
-.brand_concept_char_mozi h3 {
-	font-family: var(--serif);
-	font-size: 40px;
-}
+/*ーーーーーーーーーーーーーーーーヒーローセクションーーーーーーーーーーーーーーーーー*/
 
 .top_photo {
-	padding-right: 20px;
-	width: 650px;
-	height: 100%;
+	padding-right: unset;
+	width: 700px;
+	height: 750px;
+	border: 15px solid #fffaf6;
 }
 
 .top_page {
@@ -138,13 +112,13 @@ body::before {
 }
 
 .top_page_1 h2 {
-	font-size: 80px;
+	font-size: 100px;
 	font-family: var(--serif);
 }
 
 .top_page_2 h3 {
 	width: 800px;
-	font-size: 20px;
+	font-size: 35px;
 	font-family: var(--serif);
 	padding: 10px;
 	color: #6d808b;
@@ -154,6 +128,7 @@ body::before {
 	display: flex;
 	flex-direction: column;
 	margin-left: 70px;
+	margin-top: 30px;
 }
 
 .top_page_consept_1 {
@@ -178,11 +153,11 @@ body::before {
 	align-items: center;
 	justify-content: center;
 	min-height: 50px;
-	padding: 20px 26px;
+	padding: 30px 36px;
 	border-radius: 999px;
 	font-family: var(--serif);
 	color: #6d808b;
-	font-size: 18px;
+	font-size: 20px;
 	letter-spacing: 0.18em;
 	text-transform: uppercase;
 	transition: transform .28s ease, box-shadow .28s ease, background .28s ease, color .28s ease;
@@ -200,31 +175,94 @@ body::before {
 	box-shadow: 0 18px 36px rgba(44, 41, 40, 0.14);
 }
 
+
+/*ーーーーーーーーーーーーーーーーコンセプトーーーーーーーーーーーーーーーーーーーー*/
+
 .brand_concept_photo {
 	display: flex;
 	justify-content: flex-start;
 	flex-direction: row;
-	margin-top: -400px;
+	margin-top: -532px;
 }
 
 .brand_concept_photo_1 {
-	width: 900px;
-	margin-top: -100px;
+	width: 985px;
+	border: 15px solid #fffaf6;
+	margin-top: -18px;
 }
 
 .hover_button {
 	display: flex;
-	justify-content: flex-end;
-	margin-top: 20px;
+	margin-top: 40px;
+	margin-left: 75px;
 }
 
-.brand_concept_char p {
+.brand_concept_char_p {
 	display: flex;
 	justify-content: flex-end;
 	margin-right: 15px;
 	color: #6d808b;
 	margin-bottom: -0px;
 	font-size: 20px;
+	margin-top: 300px;
+}
+
+.brand_concept_char {
+	margin-right: 40px;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end
+}
+
+.brand_concept_char_mozi {
+	border-right: 3px solid rgb(223, 207, 226);
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	padding-right: 15px;
+	margin-right: 15px;
+}
+
+.brand_concept_char_mozi h2 {
+	font-family: var(--serif);
+	font-size: 70px;
+	font-weight: 200;
+}
+
+.brand_concept_char_mozi h3 {
+	font-family: var(--serif);
+	font-size: 40px;
+}
+
+.brand_concept_char_mozi2 {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	font-size: 20px;
+}
+
+.brand_concept_char_mozi2 p {
+	font-family: var(--serif);
+	font-size: 30px;
+	font-weight: 400;
+	margin-top: 5px;
+	margin-right: 20px;
+}
+
+.brand_concept_char_mozi2 h3 {
+	display: flex;
+	flex-direction: column;
+	font-size: 25px;
+}
+
+
+/*ーーーーーーーーーーーーーーーーカテゴリーーーーーーーーーーーーーーーーーーーー*/
+
+.product {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-around;
 }
 
 .category_tittle {
@@ -235,3 +273,24 @@ body::before {
 	font-weight: 200;
 	display: flex;
 }
+
+.category_tittle_sub {
+	font-size: 23px;
+	font-family: var(--serif);
+	margin-top: 80px;
+	margin-left: 50px;
+	margin-bottom: 20px;
+	color: #6d808b;
+}
+
+.category_name {
+	display: flex;
+	justify-content: space-evenly;
+	font-size: 20px;
+	letter-spacing: 0.16em;
+	margin: 0 0 10px;
+	color: #6d808b;
+	font-family: var(--serif);
+
+}
+
