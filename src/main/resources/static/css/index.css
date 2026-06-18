@@ -62,6 +62,10 @@ body::before {
 	z-index: -1;
 }
 
+* {
+	box-sizing: border-box;
+}
+
 .index_origin {
 	width: 200px;
 	height: 300px;
@@ -70,6 +74,43 @@ body::before {
 
 [id] {
 	scroll-margin-top: 80px;
+}
+
+.line-title {
+	display: flex;
+	/* 横並びにして、子要素を整列させる */
+	align-items: center;
+	/* 上下の中央に揃える */
+	width: 100%;
+	/* 画面いっぱいに広げる */
+	margin: 40px 0;
+	/* 上下の余白（お好みで調整） */
+}
+
+.line-title::before,
+.line-title::after {
+	content: "";
+	/* 線を表示するために必須 */
+	flex-grow: 1;
+	/* 線を限界まで横に伸ばす */
+	margin: 80px;
+	height: 2px;
+	/* 線の太さ */
+	background-color: rgb(128, 128, 128);
+	/* 線の色（サイトの雰囲気に合わせた淡いグレー） */
+}
+
+.line-title span {
+	padding: 0 20px;
+	/* 文字と線の間のすき間（左右の余白） */
+	font-family: serif;
+	/* 「Cry Baby.」に合わせた上品なセリフ体 */
+	font-size: 14px;
+	/* 文字の大きさ */
+	letter-spacing: 0.2em;
+	/* 文字の間隔を少し広げて洗練された印象に */
+	color: rgb(153, 153, 153);
+	/* 文字の色 */
 }
 
 
@@ -265,10 +306,21 @@ body::before {
 	justify-content: space-around;
 }
 
+.product p {
+	width: 100px;
+	font-size: 20px;
+	margin-bottom: 0;
+	border-bottom: 3px solid rgb(223, 207, 226);
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 140px;
+
+}
+
 .category_tittle {
 	height: min-content;
-	margin-top: 80px;
-	margin-left: 50px;
+	margin-top: 10px;
+	margin-left: 10px;
 	font-size: 100px;
 	font-weight: 200;
 	display: flex;
@@ -277,7 +329,7 @@ body::before {
 .category_tittle_sub {
 	font-size: 23px;
 	font-family: var(--serif);
-	margin-top: 80px;
+	margin-top: 157px;
 	margin-left: 50px;
 	margin-bottom: 20px;
 	color: #6d808b;
@@ -286,12 +338,24 @@ body::before {
 .category_name {
 	display: flex;
 	justify-content: space-evenly;
-	font-size: 20px;
+	font-size: 18px;
 	letter-spacing: 0.16em;
 	margin: 10px 0px 10px;
 	color: #6d808b;
 	font-family: var(--serif);
+}
 
+.category_list_a {
+	margin: 10px auto;
+}
+
+.category_list_a img {
+	width: 380px;
+	height: 250px;
+	object-fit: cover;
+	display: block;
+	border: 10px solid #fffaf6;
+	border-radius: 8px;
 }
 
 
@@ -300,23 +364,112 @@ body::before {
 
 .title_best_selling {
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	align-items: center;
+	justify-content: space-evenly;
 }
 
 
 .title_best_selling_main {
 	font-family: var(--serif);
-	font-size: 50px;
-	margin: 50px 30px 50px 100px;
+	font-size: 55px;
+	margin-top: 150px;
 }
 
 .title_best_selling_sub {
-	margin-top: 25px;
+	margin-top: 10px;
+	margin-bottom: 50px;
 	font-family: var(--serif);
 	font-size: large;
 }
 
-.item_list_top{
+.item_list_top {
 	display: flex;
+}
+
+.product_grid_selling_item {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.product_grid_selling {
+	display: grid;
+	/* grid-template-columns: repeat(3, 1fr); */
+	gap: 26px;
+	align-items: start;
+	grid-auto-flow: column;
+	margin: 0 10px;
+
+}
+
+.selling_image img {
+	width: 250px;
+	height: 250px;
+	object-fit: contain;
+	filter: brightness(110%);
+}
+
+.item_card_list_selling {
+	position: relative;
+	border: 1px solid #ccc;
+	border-radius: 16px;
+	padding: 10px;
+	background: white;
+	box-shadow: 0 18px 48px rgba(84, 66, 59, 0.1);
+	text-align: center;
+	overflow: hidden;
+	isolation: isolate;
+	transition: transform 0.32s ease, box-shadow 0.32s ease;
+}
+
+.item_card_list_selling:hover {
+	transform: translateY(-8px);
+	box-shadow: 0 18px 48px rgba(84, 66, 59, 0.2);
+}
+
+
+/*ーーーーーーーーーーーーーーーーおすすめーーーーーーーーーーーーーーーーーーーー*/
+
+
+.title_recommended_items {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	margin-right: 100px;
+}
+
+.title_recommended_items_title {
+	font-family: var(--serif);
+	font-size: 90px;
+	font-weight: 100;
+	margin-bottom: 50px;
+}
+
+.title_recommended_items p {
+	width: 100px;
+	font-size: 20px;
+	margin-bottom: 0;
+	border-bottom: 3px solid rgb(223, 207, 226);
+	display: flex;
+	justify-content: flex-end;
+}
+
+.product_grid_recommended_a {
+	display: grid;
+	gap: 26px;
+	align-items: start;
+	grid-auto-flow: column;
+	margin:50px 30px;
+}
+
+.product_grid_recommended {
+	display: flex;
+	flex-direction: column;
+	margin-left: 60px;
+	margin-right: 60px;
+}
+
+.selling_image {
+	display: flex;
+	justify-content: center;
 }
