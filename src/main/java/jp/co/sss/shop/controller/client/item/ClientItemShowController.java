@@ -157,9 +157,10 @@ public class ClientItemShowController {
 			model.addAttribute("items", itemRepository.findAllByQuantityDesc());
 		}
 		
-		// ログイン中のユーザーIDを取得
-		Integer userId = ((UserBean) session.getAttribute("user")).getId();
-		if (userId != null) {
+		// ログイン中のユーザー情報を取得
+		UserBean userBean = (UserBean) session.getAttribute("user");
+		if (userBean != null) {
+			Integer userId = userBean.getId();
 			// ログイン中ならお気に入りリストの商品IDを取得
 			List<Integer> favoriteItemIds = favoriteRepository.findItemIdsByUserId(userId);
 	        model.addAttribute("favoriteItemIds", favoriteItemIds);
@@ -183,9 +184,10 @@ public class ClientItemShowController {
 		model.addAttribute("items", items);
 		model.addAttribute("id", categoryId);
 		
-		// ログイン中のユーザーIDを取得
-		Integer userId = ((UserBean) session.getAttribute("user")).getId();
-		if (userId != null) {
+		// ログイン中のユーザー情報を取得
+		UserBean userBean = (UserBean) session.getAttribute("user");
+		if (userBean != null) {
+			Integer userId = userBean.getId();
 			// ログイン中ならお気に入りリストの商品IDを取得
 			List<Integer> favoriteItemIds = favoriteRepository.findItemIdsByUserId(userId);
 	        model.addAttribute("favoriteItemIds", favoriteItemIds);
@@ -210,9 +212,10 @@ public class ClientItemShowController {
 		model.addAttribute("categories", categoryRepository.findAll());
 		model.addAttribute("items", itemRepository.findByNameContaining(search));
 		
-		// ログイン中のユーザーIDを取得
-		Integer userId = ((UserBean) session.getAttribute("user")).getId();
-		if (userId != null) {
+		// ログイン中のユーザー情報を取得
+		UserBean userBean = (UserBean) session.getAttribute("user");
+		if (userBean != null) {
+			Integer userId = userBean.getId();
 			// ログイン中ならお気に入りリストの商品IDを取得
 			List<Integer> favoriteItemIds = favoriteRepository.findItemIdsByUserId(userId);
 	        model.addAttribute("favoriteItemIds", favoriteItemIds);
@@ -335,9 +338,8 @@ public class ClientItemShowController {
 		//		売れ筋順
 		model.addAttribute("bestSelling", itemRepository.findAllByQuantityDesc());
 		
-		// ログイン中のユーザーIDを取得
-		Integer userId = ((UserBean) session.getAttribute("user")).getId();
-		if (userId != null) {
+		if (userBean != null) {
+			Integer userId = userBean.getId();
 			// ログイン中ならお気に入りリストの商品IDを取得
 			List<Integer> favoriteItemIds = favoriteRepository.findItemIdsByUserId(userId);
 	        model.addAttribute("favoriteItemIds", favoriteItemIds);
