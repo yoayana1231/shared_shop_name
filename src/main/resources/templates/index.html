@@ -133,47 +133,132 @@
 		<span>・・・・・・・・・</span>
 	</div>
 
+	<!--ーーーーーーーーー-->
+	<!--ログインしてないときの処理-->
+	<div class="notlogin_top">
+		<th:block th:if="${session.user} == null">
+			<h2 th:text="#{msg.client.item.list.none}"></h2>
+			<p>【無料】新規会員登録で、お買い物がもっと便利に！</p>
+			<p>会員登録をしていただくと、以下の便利な限定機能をご利用いただけます。</p>
 
-	<!--おすすめ-->
-	<div class="title_recommended_items">
-		<p>おすすめ</p>
-		<h2 class="title_recommended_items_title">
-			<span th:text="#{sort.recommend.title}"></span>
-		</h2>
+			<ul>おすすめ商品：あなたにぴったりのアイテムをご提案</ul>
+			<ul>レビュー数ランキング：みんなが注目している人気商品が一目でわかる</ul>
+			<ul>閲覧履歴：前に気になった商品をいつでもチェック</ul>
+
+			<p>ぜひご登録のうえ、お買い物をお楽しみください。</p>
+		</th:block>
 	</div>
+	<!--ログインしてるときの処理-->
+	<th:block th:if="${session.user} != null">
+		<!--ーーーーーーーーー-->
 
-	<div class="product_grid_recommended">
+		<!--おすすめ-->
+		<div class="title_recommended_items">
+			<p>おすすめ</p>
+			<h2 class="title_recommended_items_title">
+				<span th:text="#{sort.recommend.title}"></span>
+			</h2>
+		</div>
+
+		<div class="product_grid_recommended">
+			<div class="product_grid_recommended_a">
+				<!--表示数-->
+				<th:block th:each="recommend, status: ${recommends}" th:if="${status.count le 4}">
+					<article class="item_card_list_selling">
+						<div class="selling_image">
+							<a th:href="@{/client/item/detail/}+${recommend.item.id}">
+								<img th:src="@{/images/photo/{imgName}(imgName=${recommend.item.image})}"
+									th:if="${recommend.item.image != null}" />
+								<img th:src="@{/images/common/no_image.jpg}" th:if="${recommend.item.image == null}" />
+							</a>
+						</div>
+
+						<!--商品情報-->
+						<div>
+							<p class="item_name_a_list" th:text="${recommend.item.name}"></p>
+							<p class="item_price_a" th:text="'&yen;'+${recommend.item.price}"></p>
+							<span class="item_category_a" th:text="${recommend.item.category.name}"></span>
+							<div class="item_form">
+								<div class="button_all_a">
+									<div class="favorite_button_a">
+										<form th:action="@{/client/favorite/update}" method="post">
+											<input type="hidden" name="itemId" th:value="${recommend.item.id}">
+											<button type="submit"><img th:src="@{/images/faviorite_blank.svg}"></button>
+										</form>
+									</div>
+									<div class="cart_a">
+										<!-- <form th:action="@{/client/basket/add}" method="post" th:if="*{stock > 0}">-->
+										<form th:action="@{/client/basket/add}" method="post">
+											<input type="hidden" name="id" th:value="${recommend.item.id}">
+											<button type="submit" class="cart-button_a">ADD TO CART</button>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</article>
+				</th:block>
+
+			</div>
+		</div>
+		<!--	<div class="item_list">-->
+		<!--	<th:block th:each="recommend, status: ${recommends}" th:if="${status.count le 4}">-->
+		<!--					/* 1件分の商品情報 */-->
+		<!--					<div class="item">-->
+		<!--		<div class="item_name" th:text="${recommend.item.name}"></div>-->
+		<!--		<a th:href="@{/client/item/detail/}+${recommend.item.id}">-->
+
+		<!--			<img th:src="@{/images/photo/{imgName}(imgName=${recommend.item.image})}"-->
+		<!--				th:if="${recommend.item.image != null}" />"-->
+
+
+		<!--			<img th:src="@{/images/common/no_image.jpg}" th:if="${recommend.item.image == null}" />-->
+		<!--							</a>-->
+		<!--						</div>-->
+		<!--					</th:block>-->
+		<!--				</div>-->
+
+
+		<!--	レビュー数ランキング-->
+		<div class="title_review_ranking">
+			<p class="bakayoshida">レビュー数ランキング</p>
+			<h2 class="title_review_ranking_title">
+				<span th:text="#{sort.reviewRanking.title}"></span>
+			</h2>
+		</div>
+
+		<div th:if="${#lists.isEmpty(rankingList)}">
+			<p th:text="#{msg.client.item.list.none}"></p>
+		</div>
 		<div class="product_grid_recommended_a">
 			<!--表示数-->
-			<th:block th:each="recommend, status: ${recommends}" th:if="${status.count le 4}">
-
-
-				<article class="item_card_list_selling">
+			<th:block th:each="reviews, status: ${rankingList}" th:if="${status.count le 1}">
+				<article class="review_ranking_list_one">
 					<div class="selling_image">
-						<a th:href="@{/client/item/detail/}+${recommend.item.id}">
-							<img th:src="@{/images/photo/{imgName}(imgName=${recommend.item.image})}"
-								th:if="${recommend.item.image != null}" />
-							<img th:src="@{/images/common/no_image.jpg}" th:if="${recommend.item.image == null}" />
+						<a th:href="@{/client/item/detail/}+${reviews.item.id}">
+							<img th:src="@{/images/photo/{imgName}(imgName=${reviews.item.image})}"
+								th:if="${reviews.item.image != null}" />
+							<img th:src="@{/images/common/no_image.jpg}" th:if="${reviews.item.image == null}" />
 						</a>
 					</div>
 
 					<!--商品情報-->
 					<div>
-						<p class="item_name_a_list" th:text="${recommend.item.name}"></p>
-						<p class="item_price_a" th:text="'&yen;'+${recommend.item.price}"></p>
-						<span class="item_category_a" th:text="${recommend.item.category.name}"></span>
+						<p class="item_name_a_list" th:text="${reviews.item.name}"></p>
+						<p class="item_price_a" th:text="'&yen;'+${reviews.item.price}"></p>
+						<span class="item_category_a" th:text="${reviews.item.category.name}"></span>
 						<div class="item_form">
 							<div class="button_all_a">
 								<div class="favorite_button_a">
 									<form th:action="@{/client/favorite/update}" method="post">
-										<input type="hidden" name="itemId" th:value="${recommend.item.id}">
+										<input type="hidden" name="itemId" th:value="${reviews.item.id}">
 										<button type="submit"><img th:src="@{/images/faviorite_blank.svg}"></button>
 									</form>
 								</div>
 								<div class="cart_a">
 									<!-- <form th:action="@{/client/basket/add}" method="post" th:if="*{stock > 0}">-->
 									<form th:action="@{/client/basket/add}" method="post">
-										<input type="hidden" name="id" th:value="${recommend.item.id}">
+										<input type="hidden" name="id" th:value="${reviews.item.id}">
 										<button type="submit" class="cart-button_a">ADD TO CART</button>
 									</form>
 								</div>
@@ -182,78 +267,87 @@
 					</div>
 				</article>
 			</th:block>
-
 		</div>
-	</div>
-	<!--	<div class="item_list">-->
-	<!--	<th:block th:each="recommend, status: ${recommends}" th:if="${status.count le 4}">-->
-	<!--					/* 1件分の商品情報 */-->
-	<!--					<div class="item">-->
-	<!--		<div class="item_name" th:text="${recommend.item.name}"></div>-->
-	<!--		<a th:href="@{/client/item/detail/}+${recommend.item.id}">-->
-
-	<!--			<img th:src="@{/images/photo/{imgName}(imgName=${recommend.item.image})}"-->
-	<!--				th:if="${recommend.item.image != null}" />"-->
 
 
-	<!--			<img th:src="@{/images/common/no_image.jpg}" th:if="${recommend.item.image == null}" />-->
-	<!--							</a>-->
-	<!--						</div>-->
-	<!--					</th:block>-->
-	<!--				</div>-->
+		<!--表示数-->
+		<th:block class="review_ranking_list" th:each="reviews, status: ${rankingList}" th:if="${status.count >= 2 and status.count <= 4}">
+			<article class="review_ranking_list_two">
+				<div class="selling_image">
+					<a th:href="@{/client/item/detail/}+${reviews.item.id}">
+						<img th:src="@{/images/photo/{imgName}(imgName=${reviews.item.image})}"
+							th:if="${reviews.item.image != null}" />
+						<img th:src="@{/images/common/no_image.jpg}" th:if="${reviews.item.image == null}" />
+					</a>
+				</div>
 
-
-	<!--	レビュー数ランキング-->
-	<div>
-		<h2 class="title">
-			<span th:text="#{sort.reviewRanking.title}"></span>
-		</h2>
-	</div>
-	<div th:if="${#lists.isEmpty(rankingList)}">
-		<p th:text="#{msg.client.item.list.none}"></p>
-	</div>
-	<div class="item_list">
-		<th:block th:each="reviews, status: ${rankingList}" th:if="${status.count le 4}">
-			<!--/* 1件分の商品情報 */-->
-			<div class="item">
-				<div class="item_name" th:text="${reviews.item.name}"></div>
-				<a th:href="@{/client/item/detail/}+${reviews.item.id}">
-
-					<img th:src="@{/images/photo/{imgName}(imgName=${reviews.item.image})}"
-						th:if="${reviews.item.image != null}" />"
-
-
-					<img th:src="@{/images/common/no_image.jpg}" th:if="${reviews.item.image == null}" />
-				</a>
-			</div>
+				<!--商品情報-->
+				<div>
+					<p class="item_name_a_list" th:text="${reviews.item.name}"></p>
+					<p class="item_price_a" th:text="'&yen;'+${reviews.item.price}"></p>
+					<span class="item_category_a" th:text="${reviews.item.category.name}"></span>
+					<div class="item_form">
+						<div class="button_all_a">
+							<div class="favorite_button_a">
+								<form th:action="@{/client/favorite/update}" method="post">
+									<input type="hidden" name="itemId" th:value="${reviews.item.id}">
+									<button type="submit"><img th:src="@{/images/faviorite_blank.svg}"></button>
+								</form>
+							</div>
+							<div class="cart_a">
+								<!-- <form th:action="@{/client/basket/add}" method="post" th:if="*{stock > 0}">-->
+								<form th:action="@{/client/basket/add}" method="post">
+									<input type="hidden" name="id" th:value="${reviews.item.id}">
+									<button type="submit" class="cart-button_a">ADD TO CART</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</article>
 		</th:block>
-	</div>
 
-	<!--閲覧履歴-->
-	<div>
-		<h2 class="title">
-			<span th:text="#{sort.history.title}"></span>
-		</h2>
-	</div>
-	<div th:if="${#lists.isEmpty(histories)}">
-		<p th:text="#{msg.client.item.list.none}"></p>
-	</div>
-	<div class="item_list">
-		<th:block th:each="itemHistories, status: ${histories}" th:if="${status.count le 4}">
-			<!--/* 1件分の商品情報 */-->
-			<div class="item">
-				<div class="item_name" th:text="${itemHistories.item.name}"></div>
-				<a th:href="@{/client/item/detail/}+${itemHistories.item.id}">
+		<!--/* 1件分の商品情報 */-->
+		<!--				<div class="item">-->
+		<!--					<div class="item_name" th:text="${reviews.item.name}"></div>-->
+		<!--					<a th:href="@{/client/item/detail/}+${reviews.item.id}">-->
 
-					<img th:src="@{/images/photo/{imgName}(imgName=${itemHistories.item.image})}"
-						th:if="${itemHistories.item.image != null}" />"
+		<!--		<img th:src="@{/images/photo/{imgName}(imgName=${reviews.item.image})}"-->
+		<!--			th:if="${reviews.item.image != null}" />"-->
 
 
-					<img th:src="@{/images/common/no_image.jpg}" th:if="${itemHistories.item.image == null}" />
-				</a>
-			</div>
-		</th:block>
-	</div>
+		<!--		<img th:src="@{/images/common/no_image.jpg}" th:if="${reviews.item.image == null}" />-->
+		<!--					</a>-->
+		<!--				</div>-->
+		<!--			</th:block>-->
+		<!--		</div>-->
+
+		<!--閲覧履歴-->
+		<div>
+			<h2 class="title">
+				<span th:text="#{sort.history.title}"></span>
+			</h2>
+		</div>
+		<div th:if="${#lists.isEmpty(histories)}">
+			<p th:text="#{msg.client.item.list.none}"></p>
+		</div>
+		<div class="item_list">
+			<th:block th:each="itemHistories, status: ${histories}" th:if="${status.count le 4}">
+				<!--/* 1件分の商品情報 */-->
+				<div class="item">
+					<div class="item_name" th:text="${itemHistories.item.name}"></div>
+					<a th:href="@{/client/item/detail/}+${itemHistories.item.id}">
+
+						<img th:src="@{/images/photo/{imgName}(imgName=${itemHistories.item.image})}"
+							th:if="${itemHistories.item.image != null}" />"
+
+
+						<img th:src="@{/images/common/no_image.jpg}" th:if="${itemHistories.item.image == null}" />
+					</a>
+				</div>
+			</th:block>
+		</div>
+	</th:block>
 
 </body>
 

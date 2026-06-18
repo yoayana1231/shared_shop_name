@@ -83,7 +83,7 @@ body::before {
 	/* 上下の中央に揃える */
 	width: 100%;
 	/* 画面いっぱいに広げる */
-	margin: 40px 0;
+	margin: 40px 0 20px;
 	/* 上下の余白（お好みで調整） */
 }
 
@@ -113,6 +113,16 @@ body::before {
 	/* 文字の色 */
 }
 
+
+/*ーーーーーーーーーーーーーーーーログインしてない時ーーーーーーーーーーーーーーーーー*/
+
+
+.notlogin_top {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-bottom: 70px;
+}
 
 /*ーーーーーーーーーーーーーーーーヒーローセクションーーーーーーーーーーーーーーーーー*/
 
@@ -321,7 +331,7 @@ body::before {
 	height: min-content;
 	margin-top: 10px;
 	margin-left: 10px;
-	font-size: 100px;
+	font-size: 120px;
 	font-weight: 200;
 	display: flex;
 }
@@ -459,7 +469,7 @@ body::before {
 	gap: 26px;
 	align-items: start;
 	grid-auto-flow: column;
-	margin:50px 30px;
+/*	margin: 50px 30px;*/
 }
 
 .product_grid_recommended {
@@ -467,9 +477,76 @@ body::before {
 	flex-direction: column;
 	margin-left: 60px;
 	margin-right: 60px;
+	border: 3px #22313a;
 }
 
 .selling_image {
 	display: flex;
 	justify-content: center;
+}
+
+
+/*ーーーーーーーーーーーーーーーーレビュー数ランキングーーーーーーーーーーーーーーーーーーーー*/
+
+
+.bakayoshida{
+	width: 210px;
+    font-size: 20px;
+    margin-bottom: 0;
+    border-bottom: 3px solid rgb(223, 207, 226);
+    display: flex;
+    justify-content: flex-end;
+    margin-left: 80px;
+}
+
+.title_review_ranking h2 {
+	font-size: 120px;
+	margin-left: 90px;
+}
+
+.title_review_ranking {
+	font-family: var(--serif);
+	font-size: 90px;
+	font-weight: 100;
+	margin-bottom: 50px;
+}
+
+.title_review_ranking_title {
+	height: min-content;
+	margin-top: 10px;
+	margin-left: 10px;
+	font-size: 100px;
+	font-weight: 200;
+	display: flex;
+}
+
+.review_ranking_list,
+.review_ranking_list_one,
+.review_ranking_list_two {
+	position: relative;
+	border: 1px solid #ccc;
+	border-radius: 16px;
+	padding: 10px;
+	background: white;
+	box-shadow: 0 18px 48px rgba(84, 66, 59, 0.1);
+	text-align: center;
+	overflow: hidden;
+	isolation: isolate;
+	transition: transform 0.32s ease, box-shadow 0.32s ease;
+}
+
+/*.review_ranking_list:hover,*/
+/*.review_ranking_list_one:hover {*/
+/*	transform: translateY(-8px);*/
+/*	box-shadow: 0 18px 48px rgba(84, 66, 59, 0.2);*/
+/*}*/
+
+.review_ranking_list_one{
+	width: 600px;
+	height: 900px;
+}
+
+.review_ranking_list_two{
+	width: 900px;
+	height: 300px;
 }
