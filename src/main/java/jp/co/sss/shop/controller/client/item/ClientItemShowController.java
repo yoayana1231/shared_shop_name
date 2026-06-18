@@ -151,7 +151,7 @@ public class ClientItemShowController {
 
 		//		新着順
 		if (sortType == 1) {
-			model.addAttribute("items", itemRepository.findAllByOrderByInsertDateDesc());
+			model.addAttribute("items", itemRepository.findByDeleteFlagOrderByInsertDateDesc(0));
 			//		売れ筋順	
 		} else {
 			model.addAttribute("items", itemRepository.findAllByQuantityDesc());
@@ -180,7 +180,7 @@ public class ClientItemShowController {
 			HttpSession session, Model model) {
 
 		model.addAttribute("categories", categoryRepository.findAll());
-		List<Item> items = itemRepository.findByCategoryId(categoryId);
+		List<Item> items = itemRepository.findByCategoryIdAndDeleteFlag(categoryId, 0);
 		model.addAttribute("items", items);
 		model.addAttribute("id", categoryId);
 		
@@ -210,7 +210,7 @@ public class ClientItemShowController {
 		}
 		
 		model.addAttribute("categories", categoryRepository.findAll());
-		model.addAttribute("items", itemRepository.findByNameContaining(search));
+		model.addAttribute("items", itemRepository.findByNameContainingAndDeleteFlag(search, 0));
 		
 		// ログイン中のユーザー情報を取得
 		UserBean userBean = (UserBean) session.getAttribute("user");

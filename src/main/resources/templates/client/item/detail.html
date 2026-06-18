@@ -44,7 +44,7 @@
 					<p class="script" th:text="*{description}"></p>
 				</div>
 				<div class="detail_button">
-					<form th:action="@{/client/basket/add}" method="post" class="user_info_form" th:if="*{stock > 0}">
+					<form th:action="@{/client/basket/add/calc}" method="post" class="user_info_form" th:if="*{stock > 0}">
 						<input type="hidden" th:field="*{id}" />
 						<input type="submit" value="カートに入れる" class="send_button_detail" />
 					</form>
