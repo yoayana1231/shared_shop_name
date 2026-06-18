@@ -155,7 +155,7 @@
 								</div>
 								<div class="cart_a">
 									<!-- <form th:action="@{/client/basket/add}" method="post" th:if="*{stock > 0}">-->
-									<form th:action="@{/client/basket/add}" method="post">
+									<form th:action="@{/client/basket/add/calc}" method="post">
 										<input type="hidden" name="id" th:value="${item.id}">
 										<button type="submit" class="cart-button_a">ADD TO CART</button>
 									</form>
