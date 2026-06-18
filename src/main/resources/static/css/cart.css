@@ -20,6 +20,7 @@
 /*	box-sizing: border-box;*/
 /*}*/
 
+/*<<<<<<< HEAD*/
 /*body {*/
 /*	margin: 0;*/
 /*	background: linear-gradient(90deg, #fff 0, #fffaf7 45%, #fff 100%);*/
@@ -27,6 +28,15 @@
 /*	font-family: var(--sans);*/
 /*	letter-spacing: 0.045em;*/
 /*}*/
+/*=======*/
+/*body {*/
+/*	margin: 0;*/
+/*	background: linear-gradient(90deg, #fff 0, #fffaf7 45%, #fff 100%);*/
+/*	color: var(--ink);*/
+/*	font-family: var(--sans);*/
+/*	letter-spacing: 0.045em;*/
+/*}*/
+
 /*p{*/
 /*	font-size:30px;*/
 /*}*/
@@ -35,10 +45,10 @@
 /*	color: inherit;*/
 /*}*/
 
-img {
-	display: block;
-	max-width: 100%;
-}
+/*img {*/
+/*	display: block;*/
+/*	max-width: 100%;*/
+/*}*/
 
 button,
 input {
