@@ -140,7 +140,9 @@
 								<div class="favorite_button_a">
 									<form th:action="@{/client/favorite/update}" method="post">
 										<input type="hidden" name="itemId" th:value="${item.id}">
-										<button type="submit"><img th:src="@{/images/faviorite_blank.svg}"></button>
+										<button type="submit">
+											<img th:src="@{/images/faviorite_blank.svg}">
+										</button>
 									</form>
 								</div>
 								<div class="cart_a">
