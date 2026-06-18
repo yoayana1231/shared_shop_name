@@ -34,7 +34,7 @@ header {
 .container_header {
 	/*	display: flex;*/
 	display: grid;
-	grid-template-columns: 300px 600px minmax(220px, 1fr) auto;
+	grid-template-columns: 300px 500px minmax(220px, 1fr) auto;
 	border-bottom: solid 1px rgb(218, 218, 218);
 
 }
@@ -99,6 +99,7 @@ small {
 	color: #8b5e55;
 }
 .header_text {
+	
 	font-weight: bold;
 	position: relative;
 	top: 10px;
