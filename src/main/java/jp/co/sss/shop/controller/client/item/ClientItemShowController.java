@@ -22,6 +22,7 @@ import jp.co.sss.shop.entity.Reviews;
 import jp.co.sss.shop.entity.User;
 import jp.co.sss.shop.entity.ViewHistories;
 import jp.co.sss.shop.repository.CategoryRepository;
+import jp.co.sss.shop.repository.FavoriteRepository;
 import jp.co.sss.shop.repository.ItemRepository;
 import jp.co.sss.shop.repository.ReviewsRepository;
 import jp.co.sss.shop.repository.UserRepository;
@@ -59,6 +60,10 @@ public class ClientItemShowController {
 	// Reviewリポジトリ
 	@Autowired
 	ReviewsRepository reviewRepository;
+	
+	// Favoriteリポジトリ
+	@Autowired
+	FavoriteRepository favoriteRepository;
 
 	// recommendサービス
 	@Autowired
@@ -94,6 +99,10 @@ public class ClientItemShowController {
 		UserBean userBean = (UserBean) session.getAttribute("user");
 		if (userBean != null) {
 			User user = userRepository.getReferenceById(userBean.getId());
+			
+			// ログイン中ならお気に入りリストの商品IDを取得
+			List<Integer> favoriteItemIds = favoriteRepository.findItemIdsByUserId(userBean.getId());
+			model.addAttribute("favoriteItemIds", favoriteItemIds);
 
 			// 閲覧履歴表示
 			List<ViewHistories> histories = viewHistoriesRepository.findByUserOrderByViewedAtDesc(user);
@@ -108,7 +117,8 @@ public class ClientItemShowController {
 
 	//	売れてない奴も表示する（商品一覧）
 	@RequestMapping(path = "/client/item/list/{sortType}", method = { RequestMethod.GET })
-	public String clientItem(@PathVariable int sortType, Model model) {
+	public String clientItem(@PathVariable int sortType, 
+			HttpSession session, Model model) {
 		
 		model.addAttribute("categories", categoryRepository.findAll());
 		model.addAttribute("items", itemRepository.findAllByQuantityDesc());
@@ -124,6 +134,15 @@ public class ClientItemShowController {
 		} else {
 			model.addAttribute("items", itemRepository.findAllByQuantityDesc());
 		}
+		
+		// ログイン中のユーザーIDを取得
+		Integer userId = ((UserBean) session.getAttribute("user")).getId();
+		if (userId != null) {
+			// ログイン中ならお気に入りリストの商品IDを取得
+			List<Integer> favoriteItemIds = favoriteRepository.findItemIdsByUserId(userId);
+	        model.addAttribute("favoriteItemIds", favoriteItemIds);
+		}
+		
 		return "client/item/list";
 	}
 
@@ -134,12 +153,21 @@ public class ClientItemShowController {
 	 * @return "client/item/list" 商品一覧
 	 */
 	@GetMapping(path = "/client/item/list/category/{categoryId}")
-	public String categorySort(@PathVariable Integer categoryId, Model model) {
+	public String categorySort(@PathVariable Integer categoryId,
+			HttpSession session, Model model) {
 
 		model.addAttribute("categories", categoryRepository.findAll());
 		List<Item> items = itemRepository.findByCategoryId(categoryId);
 		model.addAttribute("items", items);
 		model.addAttribute("id", categoryId);
+		
+		// ログイン中のユーザーIDを取得
+		Integer userId = ((UserBean) session.getAttribute("user")).getId();
+		if (userId != null) {
+			// ログイン中ならお気に入りリストの商品IDを取得
+			List<Integer> favoriteItemIds = favoriteRepository.findItemIdsByUserId(userId);
+	        model.addAttribute("favoriteItemIds", favoriteItemIds);
+		}
 
 		return "client/item/list";
 	}
@@ -148,7 +176,7 @@ public class ClientItemShowController {
 	//name属性 search
 	//新規追加リポジトリメソッド findByNameContaining
 	@RequestMapping("/client/item/list/search")
-	public String clientItemListSearch(String search, Model model) {
+	public String clientItemListSearch(String search, HttpSession session, Model model) {
 		
 		// searchがnull→全件検索
 		// カテゴリ検索表示用のフラグをtrueにする
@@ -159,6 +187,14 @@ public class ClientItemShowController {
 		
 		model.addAttribute("categories", categoryRepository.findAll());
 		model.addAttribute("items", itemRepository.findByNameContaining(search));
+		
+		// ログイン中のユーザーIDを取得
+		Integer userId = ((UserBean) session.getAttribute("user")).getId();
+		if (userId != null) {
+			// ログイン中ならお気に入りリストの商品IDを取得
+			List<Integer> favoriteItemIds = favoriteRepository.findItemIdsByUserId(userId);
+	        model.addAttribute("favoriteItemIds", favoriteItemIds);
+		}
 		
 		return "client/item/list";
 		
@@ -272,12 +308,18 @@ public class ClientItemShowController {
 
 		//レビュー情報
 		model.addAttribute("itemReviews", itemReviews);
-
 		//		レビュー総数
 		model.addAttribute("reviewsSize", itemReviews.size());
-
 		//		売れ筋順
 		model.addAttribute("bestSelling", itemRepository.findAllByQuantityDesc());
+		
+		// ログイン中のユーザーIDを取得
+		Integer userId = ((UserBean) session.getAttribute("user")).getId();
+		if (userId != null) {
+			// ログイン中ならお気に入りリストの商品IDを取得
+			List<Integer> favoriteItemIds = favoriteRepository.findItemIdsByUserId(userId);
+	        model.addAttribute("favoriteItemIds", favoriteItemIds);
+		}
 
 		return "client/item/detail";
 	}

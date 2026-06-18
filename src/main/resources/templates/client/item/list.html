@@ -140,7 +140,15 @@
 								<div class="favorite_button_a">
 									<form th:action="@{/client/favorite/update}" method="post">
 										<input type="hidden" name="itemId" th:value="${item.id}">
-										<button type="submit">
+										<button type="submit"
+											th:if="${favoriteItemIds != null && favoriteItemIds.contains(item.id)}">
+											<!--お気に入り登録中-->
+											<!--画像を人型に変えてるのでなんかいい感じにしてください-->
+											<img th:src="@{/images/header/person.svg}">
+										</button>
+
+										<button type="submit"
+											th:unless="${favoriteItemIds != null && favoriteItemIds.contains(item.id)}">
 											<img th:src="@{/images/faviorite_blank.svg}">
 										</button>
 									</form>
