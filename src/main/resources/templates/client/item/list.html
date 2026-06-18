@@ -49,26 +49,11 @@
 	</div>
 
 	<div class="category-tabs">
-		<th:block>
-			<div th:unless="">
-				<a th:href="@{/client/item/list/1}">すべて</a>
-			</div>
+			<a th:href="@{/client/item/list/1}" class="active">すべて</a>
 			<div th:each="category :${categories}">
 				<a th:href="@{/client/item/list/category/{categoryId}(categoryId=${category.id})}"
 					th:text="${category.name}"></a>
 			</div>
-		</th:block>
-
-		<!--		<a href="#">下地</a>-->
-		<!--		<a href="#">ファンデーション</a>-->
-		<!--		<a href="#">アイブロウ</a>-->
-		<!--		<a href="#">アイライナー</a>-->
-		<!--		<a href="#">マスカラ</a>-->
-		<!--		<a href="#">アイシャドウ</a>-->
-		<!--		<a href="#">チーク</a>-->
-		<!--		<a href="#">リップ</a>-->
-
-
 	</div>
 	<!--		<div class="sorted_all">-->
 
