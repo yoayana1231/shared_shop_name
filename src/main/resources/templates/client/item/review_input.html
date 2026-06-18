@@ -19,12 +19,12 @@
 				<span th:text="${err.message}"></span><br>
 			</span>
 		</p>
-		
+
 		<!--評価-->
 		<div>
 			<div><input type="hidden" th:field="*{id}"></div>
 			<div><input type="hidden" th:field="*{item.id}"></div>
-			
+
 			<div>
 				<label><input type="radio" th:field="*{rating}" value="1">☆</label><br>
 				<label><input type="radio" th:field="*{rating}" value="2">☆☆</label><br>
@@ -41,6 +41,11 @@
 				<input type="submit" value="確認">
 			</div>
 		</div>
+
+		<div class="send_button">
+			<a th:href="@{/client/item/detail/{id}(id=${reviewForm.item.id})}">戻る</a>
+		</div>
+
 	</form>
 
 </body>
