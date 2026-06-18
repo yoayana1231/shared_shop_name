@@ -17,156 +17,184 @@
 	<div class="brand_concept">
 		<div class="brand_concept_char">
 			<div class="brand_concept_char_mozi">
-			<h1>ブランドコンセプト</h1>
-			<h2>日常のラグジュアリー</h2>
-			<p>厳選された素材と洗練された色彩が、あなたの個性にそっと寄り添います</p>
-			<p>鏡に向き合う時間が、もっと愛おしく、誇らしくなるように</p>
+				<h1>ブランドコンセプト</h1>
+				<h2>日常のラグジュアリー</h2>
+				<p>厳選された素材と洗練された色彩が、あなたの個性にそっと寄り添います</p>
+				<p>鏡に向き合う時間が、もっと愛おしく、誇らしくなるように</p>
+			</div>
+			<div class="brand_concept_photo">
+				<img class="brand_concept_photo_1" th:src="@{/images/top_image_two_1.jpg}" alt="コンセプト写真">
+			</div>
 		</div>
-		<div class="brand_concept_photo">
-			<img class="brand_concept_photo_1" th:src="@{/images/top_image_two_1.jpg}" alt="コンセプト写真">
+
+		<!--カテゴリ-->
+		<div class="category_mozi">
+			<h1><a class="shop_list_a" th:href="@{/client/item/list/1}" th:text="#{item}+#{title.list}">商品一覧</a></h1>
+			<h3 class="category_tittle">カテゴリ</h3>
 		</div>
-	</div>
+		<div class="category_one">
 
-	<!--カテゴリ-->
-	<div class="category_mozi">
-		<h1><a class="shop_list_a" th:href="@{/client/item/list/1}" th:text="#{item}+#{title.list}">商品一覧</a></h1>
-		<h3 class="category_tittle">カテゴリ</h3>
-	</div>
-	<div class="category_one">
+			<!--		<div>-->
+			<!--			<a class="shop_list" th:href="@{/client/item/list/1}" th:text="#{item}+#{title.list}">商品一覧</a>-->
+			<!--		</div>-->
+			<div th:each="category: ${categories}" class="category_list">
+				<a th:href="@{/client/item/list/category/{categoryId}(categoryId=${category.id})}"
+					th:value="${category.id}">
+					<img th:src="@{/images/top/category/top_image_{imgName}.jpg(imgName=${category.id})}">
+				</a>
+				<span class="category_name" th:text="${category.name}"></span>
+			</div>
+		</div>
 
+		<!--おすすめ-->
+
+
+		<!--ランキング-->
+		<!--	<div>-->
+		<!--		<h2 class="title">-->
+		<!--			<span th:if="${sortType==1}" th:text="#{sort.latest.title}"></span>-->
+		<!--			<span th:if="${sortType==2 || sortType==null}" th:text="#{sort.hotsell.title}"></span>-->
+		<!--		</h2>-->
+		<!--	</div>-->
+		<!--	<div th:if="${#lists.isEmpty(items)}">-->
+		<!--		<p th:text="#{msg.client.item.list.none}"></p>-->
+		<!--	</div>-->
+		<!--	<div class="item_list">-->
+		<!--		<th:block th:each="item, status: ${items}" th:if="${status.count le 10}">-->
+		<!--			/* 1件分の商品情報 */-->
+		<!--			<div class="item">-->
+		<!--				<div class="item_name" th:text="${item.name}"></div>-->
+		<!--				<a th:href="@{/client/item/detail/}+${item.id}">-->
+		<!--					<img th:src="@{/images/{image}(image=${item.image})}" th:if="${item.image != null}" />-->
+		<!--					<img th:src="@{/images/common/no_image.jpg}" th:if="${item.image == null}" />-->
+		<!--				</a>-->
+		<!--			</div>-->
+		<!--		</th:block>>-->
+		<!--	</div>-->
+
+
+		<!--カテゴリ欄	-->
+		<!--商品一覧-->
 		<!--		<div>-->
 		<!--			<a class="shop_list" th:href="@{/client/item/list/1}" th:text="#{item}+#{title.list}">商品一覧</a>-->
 		<!--		</div>-->
-		<div th:each="category: ${categories}" class="category_list">
-			<a th:href="@{/client/item/list/category/{categoryId}(categoryId=${category.id})}" th:value="${category.id}">
-				<img th:src="@{/images/top/category/top_image_{imgName}.jpg(imgName=${category.id})}">
-			</a>
-			<span class="category_name" th:text="${category.name}"></span>
+
+
+		<!--														いらない-->
+		<!--	<div class="margin">-->
+		<!--		<h1 class="category_h1">カテゴリ</h1>-->
+
+		<!--		<div class="category_main">-->
+
+		<!--			<div th:each="category: ${categories}" class="category_list">-->
+		<!--				<a th:href="@{/client/item/list/category}" th:value="${category.id}">-->
+		<!--					<img class="category_photo"-->
+		<!--						th:src="@{/images/top/category/top_image_{imgName}.jpg(imgName=${category.id})}">-->
+		<!--					<span th:text="${category.name}"></span>-->
+		<!--				</a>-->
+		<!--			</div>-->
+
+		<!--		</div>-->
+		<!--	</div>-->
+		<div>
+			<h2 class="title">
+				<span th:if="${sortType==1}" th:text="#{sort.latest.title}"></span>
+				<span th:if="${sortType==2 || sortType==null}" th:text="#{sort.hotsell.title}"></span>
+			</h2>
 		</div>
-	</div>
+		<div th:if="${#lists.isEmpty(items)}">
+			<p th:text="#{msg.client.item.list.none}"></p>
+		</div>
+		<div class="item_list">
+			<th:block th:each="item, status: ${items}" th:if="${status.count le 10}">
+				<!--			/* 1件分の商品情報 */-->
+				<div class="item">
+					<div class="item_name" th:text="${item.name}"></div>
+					<a th:href="@{/client/item/detail/}+${item.id}">
+						<img th:src="@{/images/photo/{imgName}(imgName=${item.image})}" th:if="${item.image != null}" />
+						<img th:src="@{/images/common/no_image.jpg}" th:if="${item.image == null}" />
+					</a>
+				</div>
+			</th:block>>
+		</div>
 
-	<!--おすすめ-->
+		<!--おすすめ-->
+		<div>
+			<h2 class="title">
+				<span th:text="#{sort.recommend.title}"></span>
+			</h2>
+		</div>
+		<!--	<div th:if="${#lists.isEmpty(histories)}">-->
+		<!--		<p th:text="#{msg.client.item.list.none}"></p>-->
+		<!--	</div>-->
+		<div class="item_list">
+			<th:block th:each="recommend, status: ${recommends}" th:if="${status.count le 4}">
+				<!--/* 1件分の商品情報 */-->
+				<div class="item">
+					<div class="item_name" th:text="${recommend.item.name}"></div>
+					<a th:href="@{/client/item/detail/}+${recommend.item.id}">
 
-
-	<!--ランキング-->
-	<!--	<div>-->
-	<!--		<h2 class="title">-->
-	<!--			<span th:if="${sortType==1}" th:text="#{sort.latest.title}"></span>-->
-	<!--			<span th:if="${sortType==2 || sortType==null}" th:text="#{sort.hotsell.title}"></span>-->
-	<!--		</h2>-->
-	<!--	</div>-->
-	<!--	<div th:if="${#lists.isEmpty(items)}">-->
-	<!--		<p th:text="#{msg.client.item.list.none}"></p>-->
-	<!--	</div>-->
-	<!--	<div class="item_list">-->
-	<!--		<th:block th:each="item, status: ${items}" th:if="${status.count le 10}">-->
-	<!--			/* 1件分の商品情報 */-->
-	<!--			<div class="item">-->
-	<!--				<div class="item_name" th:text="${item.name}"></div>-->
-	<!--				<a th:href="@{/client/item/detail/}+${item.id}">-->
-	<!--					<img th:src="@{/images/{image}(image=${item.image})}" th:if="${item.image != null}" />-->
-	<!--					<img th:src="@{/images/common/no_image.jpg}" th:if="${item.image == null}" />-->
-	<!--				</a>-->
-	<!--			</div>-->
-	<!--		</th:block>>-->
-	<!--	</div>-->
-
-
-	<!--カテゴリ欄	-->
-	<!--商品一覧-->
-	<!--		<div>-->
-	<!--			<a class="shop_list" th:href="@{/client/item/list/1}" th:text="#{item}+#{title.list}">商品一覧</a>-->
-	<!--		</div>-->
-
-
-	<!--														いらない-->
-	<!--	<div class="margin">-->
-	<!--		<h1 class="category_h1">カテゴリ</h1>-->
-
-	<!--		<div class="category_main">-->
-
-	<!--			<div th:each="category: ${categories}" class="category_list">-->
-	<!--				<a th:href="@{/client/item/list/category}" th:value="${category.id}">-->
-	<!--					<img class="category_photo"-->
-	<!--						th:src="@{/images/top/category/top_image_{imgName}.jpg(imgName=${category.id})}">-->
-	<!--					<span th:text="${category.name}"></span>-->
-	<!--				</a>-->
-	<!--			</div>-->
-
-	<!--		</div>-->
-	<!--	</div>-->
-	<div>
-		<h2 class="title">
-			<span th:if="${sortType==1}" th:text="#{sort.latest.title}"></span>
-			<span th:if="${sortType==2 || sortType==null}" th:text="#{sort.hotsell.title}"></span>
-		</h2>
-	</div>
-	<div th:if="${#lists.isEmpty(items)}">
-		<p th:text="#{msg.client.item.list.none}"></p>
-	</div>
-	<div class="item_list">
-		<th:block th:each="item, status: ${items}" th:if="${status.count le 10}">
-			<!--			/* 1件分の商品情報 */-->
-			<div class="item">
-				<div class="item_name" th:text="${item.name}"></div>
-				<a th:href="@{/client/item/detail/}+${item.id}">
-					<img th:src="@{/images/photo/{imgName}(imgName=${item.image})}" th:if="${item.image != null}" />
-					<img th:src="@{/images/common/no_image.jpg}" th:if="${item.image == null}" />
-				</a>
-			</div>
-		</th:block>>
-	</div>
-	
-	<!--おすすめ-->
-	<div>
-		<h2 class="title">
-			<span th:text="#{sort.recommend.title}"></span>
-		</h2>
-	</div>
-<!--	<div th:if="${#lists.isEmpty(histories)}">-->
-<!--		<p th:text="#{msg.client.item.list.none}"></p>-->
-<!--	</div>-->
-	<div class="item_list">
-		<th:block th:each="recommend, status: ${recommends}" th:if="${status.count le 4}">
-			<!--/* 1件分の商品情報 */-->
-			<div class="item">
-				<div class="item_name" th:text="${recommend.item.name}"></div>
-				<a th:href="@{/client/item/detail/}+${recommend.item.id}">
-          
-					<img th:src="@{/images/photo/{imgName}(imgName=${recommend.item.image})}" th:if="${recommend.item.image != null}" />"
-						
-
-					<img th:src="@{/images/common/no_image.jpg}" th:if="${recommend.item.image == null}" />
-				</a>
-			</div>
-		</th:block>
-	</div>
-	
-	<!--閲覧履歴-->
-	<div>
-		<h2 class="title">
-			<span th:text="#{sort.history.title}"></span>
-		</h2>
-	</div>
-	<div th:if="${#lists.isEmpty(histories)}">
-		<p th:text="#{msg.client.item.list.none}"></p>
-	</div>
-	<div class="item_list">
-		<th:block th:each="itemHistories, status: ${histories}" th:if="${status.count le 4}">
-			<!--/* 1件分の商品情報 */-->
-			<div class="item">
-				<div class="item_name" th:text="${itemHistories.item.name}"></div>
-				<a th:href="@{/client/item/detail/}+${itemHistories.item.id}">
-
-					<img th:src="@{/images/photo/{imgName}(imgName=${itemHistories.item.image})}"
-						th:if="${itemHistories.item.image != null}" />"
+						<img th:src="@{/images/photo/{imgName}(imgName=${recommend.item.image})}"
+							th:if="${recommend.item.image != null}" />"
 
 
-					<img th:src="@{/images/common/no_image.jpg}" th:if="${itemHistories.item.image == null}" />
-				</a>
-			</div>
-		</th:block>
-	</div>
+						<img th:src="@{/images/common/no_image.jpg}" th:if="${recommend.item.image == null}" />
+					</a>
+				</div>
+			</th:block>
+		</div>
+
+		<!--	レビュー数ランキング-->
+		<div>
+			<h2 class="title">
+				<span th:text="#{sort.reviewRanking.title}"></span>
+			</h2>
+		</div>
+		<div th:if="${#lists.isEmpty(rankingList)}">
+			<p th:text="#{msg.client.item.list.none}"></p>
+		</div>
+		<div class="item_list">
+			<th:block th:each="reviews, status: ${rankingList}" th:if="${status.count le 4}">
+				<!--/* 1件分の商品情報 */-->
+				<div class="item">
+					<div class="item_name" th:text="${reviews.item.name}"></div>
+					<a th:href="@{/client/item/detail/}+${reviews.item.id}">
+
+						<img th:src="@{/images/photo/{imgName}(imgName=${reviews.item.image})}"
+							th:if="${reviews.item.image != null}" />"
+
+
+						<img th:src="@{/images/common/no_image.jpg}" th:if="${reviews.item.image == null}" />
+					</a>
+				</div>
+			</th:block>
+		</div>
+
+		<!--閲覧履歴-->
+		<div>
+			<h2 class="title">
+				<span th:text="#{sort.history.title}"></span>
+			</h2>
+		</div>
+		<div th:if="${#lists.isEmpty(histories)}">
+			<p th:text="#{msg.client.item.list.none}"></p>
+		</div>
+		<div class="item_list">
+			<th:block th:each="itemHistories, status: ${histories}" th:if="${status.count le 4}">
+				<!--/* 1件分の商品情報 */-->
+				<div class="item">
+					<div class="item_name" th:text="${itemHistories.item.name}"></div>
+					<a th:href="@{/client/item/detail/}+${itemHistories.item.id}">
+
+						<img th:src="@{/images/photo/{imgName}(imgName=${itemHistories.item.image})}"
+							th:if="${itemHistories.item.image != null}" />"
+
+
+						<img th:src="@{/images/common/no_image.jpg}" th:if="${itemHistories.item.image == null}" />
+					</a>
+				</div>
+			</th:block>
+		</div>
 
 </body>
 
