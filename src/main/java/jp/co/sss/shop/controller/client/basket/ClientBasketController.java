@@ -16,6 +16,7 @@ import jp.co.sss.shop.bean.UserBean;
 import jp.co.sss.shop.entity.Item;
 import jp.co.sss.shop.entity.User;
 import jp.co.sss.shop.entity.ViewHistories;
+import jp.co.sss.shop.repository.FavoriteRepository;
 import jp.co.sss.shop.repository.ItemRepository;
 import jp.co.sss.shop.repository.UserRepository;
 import jp.co.sss.shop.repository.ViewHistoriesRepository;
@@ -44,6 +45,10 @@ public class ClientBasketController {
 	// Userリポジトリ
 	@Autowired
 	UserRepository userRepository;
+	
+	// Favoriteリポジトリ
+	@Autowired
+	FavoriteRepository favoriteRepository;
 
 	// recommendサービス
 	@Autowired
@@ -141,6 +146,10 @@ public class ClientBasketController {
 
 			// おすすめ表示
 			recommendsService.recommend(model, session);
+			
+			// ログイン中ならお気に入りリストの商品IDを取得
+			List<Integer> favoriteItemIds = favoriteRepository.findItemIdsByUserId(userBean.getId());
+			model.addAttribute("favoriteItemIds", favoriteItemIds);
 		}
 
 		// 買い物かご画面へ遷移
@@ -194,7 +203,6 @@ public class ClientBasketController {
 		}
 
 		// かごの中身をセッションに保存し、買い物かご画面にリダイレクト
-
 		session.setAttribute("basketBeans", basketList);
 
 		return "redirect:/client/basket/list";

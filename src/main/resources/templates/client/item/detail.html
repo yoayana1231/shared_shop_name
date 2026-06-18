@@ -13,7 +13,7 @@
 
 
 	<div class="all_detail" th:object="${item}">
-		<div class="item_detail_area_detail">
+		<div class="item_detail_area">
 			<div class="item_img">
 				<img th:src="@{/images/photo/{imgName}(imgName=${item.image})}" th:if="${item.image != null}" />
 				<img th:src="@{/images/common/no_image.jpg}" th:if="${item.image == null}" />
@@ -34,7 +34,7 @@
 					<div class="rating">
 						<!--						動的に実装していない-->
 						<span>★★★★★</span>
-						<b th:text="${totalCount}"></b>
+						<b>4.8</b>
 						<a class="review_link" a href="#reviews"><span
 								th:text="'レビューを見る（'+${reviewsSize}+'件）'"></span></a>
 					</div>
@@ -44,57 +44,23 @@
 					<p class="script" th:text="*{description}"></p>
 				</div>
 				<div class="detail_button">
-					<form th:action="@{/client/basket/add}" method="post" class="user_info_form" th:if="*{stock > 0}">
+					<form th:action="@{/client/basket/add/calc}" method="post" class="user_info_form" th:if="*{stock > 0}">
 						<input type="hidden" th:field="*{id}" />
-						<input type="submit" value="ADD TO CART" class="send_button_detail" />
+						<input type="submit" value="カートに入れる" class="send_button_detail" />
 					</form>
 					<form th:action="@{/client/favorite/update}" method="post">
 						<input type="hidden" name="itemId" th:value="${item.id}" />
-						<input type="submit" value="ADD TO FAVORITE" class="send_button_fav_detail" />
+						<input type="submit" value="♡　お気に入りに追加" class="send_button_fav_detail" />
 					</form>
-
+					<form th:action="@{/client/review/input/{itemId}(itemId=${item.id})}" method="get"
+						class="user_info_form">
+						<input type="submit" value="レビューを書く" class="send_button_review" />
+					</form>
 				</div>
 			</div>
 		</div>
 	</div>
-	<section class="editorial-cards">
-		<article>
-			<h2>TEXTURE</h2>
-			<small>テクスチャー</small>
-			<img src="https://images.unsplash.com/photo-1600428853876-fb5a850b444f?auto=format&fit=crop&w=700&q=85"
-				alt="リップの質感" />
-			<p>
-				なめらかに伸びて、唇にとろけるようにフィット。ツヤのあるクリーミーな質感です。
-			</p>
-		</article>
-		<article>
-			<h2>HOW TO USE</h2>
-			<small>ご使用方法</small>
-			<img src="https://images.unsplash.com/photo-1522338242992-e1a54906a8da?auto=format&fit=crop&w=700&q=85"
-				alt="使用イメージ" />
-			<p>
-				唇の中央から外側に向かって、やさしく塗布します。重ね塗りでお好みの発色に。
-			</p>
-		</article>
-		<article>
-			<h2>EDITOR'S NOTE</h2>
-			<small>エディターズノート</small>
-			<img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=700&q=85"
-				alt="ノート" />
-			<p>
-				どんなメイクにも寄り添う万能カラー。デイリーにも、特別な日にも。
-			</p>
-		</article>
-		<article>
-			<h2>INGREDIENTS</h2>
-			<small>主な成分</small>
-			<img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=700&q=85"
-				alt="美容成分" />
-			<p>
-				保湿成分配合で、うるおいをキープしながら美しい仕上がりが続きます。
-			</p>
-		</article>
-	</section>
+
 
 
 	<!--					<div class="detail_button_area">-->
@@ -112,35 +78,36 @@
 	<!--				<input type="submit" value="戻る" class="back_button" />-->
 	<!--			</form>-->
 	<!--		</div>-->
+	<p class="no_review" th:text="#{msg.review.list.none}" th:if="${#lists.isEmpty(itemReviews)}"></p>
 	<div class="review_and_button">
 		<p class="review_text">REVIEW</p>
-
+		<div>
+			<form th:action="@{/client/review/input/{itemId}(itemId=${item.id})}" method="get" class="user_info_form">
+				<input type="submit" value="レビューを書く" class="send_button_review" />
+			</form>
+			<form th:action="@{/client/item/list/1}" method="get">
+				<input type="submit" value="戻る" class="back_button_detail" />
+			</form>
+		</div>
 	</div>
 	<div class="review" id="reviews">
 		<div class="review_avg">
-
 			<p class="rating_review" th:text="${#numbers.formatDecimal(averageRating, 1, 1)}"></p>
 			<!--		動的に実装されてない-->
 
-			<div th:if="${totalCount}!=null" class="review_count" th:text="${totalCount}+'件'">★★★★★</div>
-			<div>
-				<form th:action="@{/client/review/input/{itemId}(itemId=${item.id})}" method="get"
-					class="user_info_form">
-					<input type="submit" value="レビューを書く" class="send_button_review" />
-				</form>
-
-			</div>
+			<div th:if="${totalCount}!=null" class="star" th:text="${totalCount}+'件'">★★★★★</div>
 		</div>
-
-		<div class="review_all_calc" th:each="itemRating:${itemRating}">
+		<div class="review_all_calc">
 			<!--		動的に実装されてない-->
-			<span th:if="${itemRating.rating}==1" th:text="'★☆☆☆☆'+${itemRating.count}+'件'"></span>
-			<span th:if="${itemRating.rating}==2" th:text="'★★☆☆☆'+${itemRating.count}+'件'"></span>
-			<span th:if="${itemRating.rating}==3" th:text="'★★★☆☆'+${itemRating.count}+'件'"></span>
-			<span th:if="${itemRating.rating}==4" th:text="'★★★★☆'+${itemRating.count}+'件'"></span>
-			<span th:if="${itemRating.rating}==5" th:text="'★★★★★'+${itemRating.count}+'件'"></span>
-		</div>
 
+			<ul>
+				<li>★★★★★： <span th:text="${ratingCounts.get(5)}">0</span> 件</li>
+				<li>★★★★☆： <span th:text="${ratingCounts.get(4)}">0</span> 件</li>
+				<li>★★★☆☆： <span th:text="${ratingCounts.get(3)}">0</span> 件</li>
+				<li>★★☆☆☆： <span th:text="${ratingCounts.get(2)}">0</span> 件</li>
+				<li>★☆☆☆☆： <span th:text="${ratingCounts.get(1)}">0</span> 件</li>
+			</ul>
+		</div>
 		<th:block th:if="!${#lists.isEmpty(itemReviews)}">
 			<div class="review_comments" th:each="review: ${itemReviews}">
 				<th:block th:switch="${review.rating}">
@@ -166,55 +133,12 @@
 						</form>
 					</td>
 				</th:block>
-
 			</div>
-			<div class="review_all_calc">
-				<!--		動的に実装されてない-->
-
-				<p class="star">★★★★★　10</p>
-				<p class="star">★★★★☆　21</p>
-				<p class="star">★★★☆☆　20</p>
-				<p class="star">★★☆☆☆　10</p>
-				<p class="star">★☆☆☆☆　10</p>
-			</div>
-			<p class="no_review" th:text="#{msg.review.list.none}" th:if="${#lists.isEmpty(itemReviews)}"></p>
-			<th:block th:if="!${#lists.isEmpty(itemReviews)}">
-				<div class="review_comments" th:each="review: ${itemReviews}">
-					<th:block th:switch="${review.rating}">
-						<p class="star" th:case="1" th:text="'★☆☆☆☆'+'&nbsp;1'"></p>
-						<p class="star" th:case="2" th:text="'★★☆☆☆'+'&nbsp;2'"></p>
-						<p class="star" th:case="3" th:text="'★★★☆☆'+'&nbsp;3'"></p>
-						<p class="star" th:case="4" th:text="'★★★★☆'+'&nbsp;4'"></p>
-						<p class="star" th:case="5" th:text="'★★★★★'+'&nbsp;5'"></p>
-					</th:block>
-					<!--			<p th:text="#{rating}"></p>-->
-					<p class="reviewer" th:text="${review.comments}"></p>
-					<th:block th:if="${session.user != null && review.user.id == session.user.id}">
-						<td>
-							<form th:action="@{/client/review/edit/input/{reviewId}(reviewId=${review.id})}"
-								method="get">
-								<input type="hidden" th:value="${review.id}">
-								<button type="submit" class="edit_button">編集</button>
-							</form>
-						</td>
-						<td>
-							<form th:action="@{/client/review/delete}" method="post">
-								<input type="hidden" name="reviewId" th:value="${review.id}">
-								<button type="submit" class="delete_button_detail">削除</button>
-							</form>
-						</td>
-					</th:block>
-				</div>
-			</th:block>
-
-			<!--		<form th:action="@{/client/item/list/1}" method="post">-->
-			<!--			<input type="submit" value="戻る" class="back_button_detail" />-->
-			<!--		</form>-->
+		</th:block>
+		<!--		<form th:action="@{/client/item/list/1}" method="post">-->
+		<!--			<input type="submit" value="戻る" class="back_button_detail" />-->
+		<!--		</form>-->
 	</div>
-	</div>
-	<form th:action="@{/client/item/list/1}" method="get">
-		<input type="submit" value="戻る" class="back_button_detail" />
-	</form>
 	<div class="bar_detail"></div>
 	<section class="recommend-band">
 		<div class="recommend-copy">
@@ -222,87 +146,42 @@
 			<p>こちらもおすすめ</p>
 		</div>
 		<div class="recommend-items">
-
-			<article>
-				<img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=350&q=85"
-					alt="シルキーフェイスパウダー" />
+			<div th:each="bestSelling, status: ${bestSelling}" th:if="${status.count le 4}">
+				<!--/* 1件分の商品情報 */-->
 				<div>
-					<p>フェイスパウダー</p>
-					<h3>シルキーフェイスパウダー</h3>
-					<span>¥4,180</span>
+					<a th:href="@{/client/item/detail/}+${bestSelling.id}">
+
+						<img th:src="@{/images/photo/{imgName}(imgName=${bestSelling.image})}"
+							th:if="${bestSelling.image != null}" />
+
+
+						<img th:src="@{/images/common/no_image.jpg}" th:if="${bestSelling.image == null}" />
+					</a>
 				</div>
-				<button class="heart">♡</button>
-			</article>
-			<article>
-				<img src="https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?auto=format&fit=crop&w=350&q=85"
-					alt="モイストセラム" />
 				<div>
-					<p>美容液</p>
-					<h3>モイストセラム</h3>
-					<span>¥5,940</span>
+					<span th:text="${bestSelling.category.name}"></span>
+					<span th:text="${bestSelling.name}"></span>
+					<span th:text="${bestSelling.price}"></span>
+
 				</div>
-				<button>♡</button>
-			</article>
-			<article>
-				<img src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=350&q=85"
-					alt="ドリームアイシャドウ" />
 				<div>
-					<p>アイシャドウ</p>
-					<h3>ドリームアイシャドウ</h3>
-					<span>¥4,290</span>
+					<form th:action="@{/client/favorite/update}" method="post">
+						<input type="hidden" name="itemId" th:value="${bestSelling.id}">
+						<button type="submit"><img th:src="@{/images/faviorite_blank.svg}"></button>
+					</form>
 				</div>
-				<button>♡</button>
-			</article>
-			<article>
-				<img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=350&q=85"
-					alt="センシュアルオードトワレ" />
-				<div>
-					<p>オードトワレ</p>
-					<h3>センシュアルオードトワレ</h3>
-					<span>¥6,600</span>
-				</div>
-				<button>♡</button>
-			</article>
-		</div>
-	</section>
 
-
-	<div th:each="bestSelling, status: ${bestSelling}" th:if="${status.count le 4}">
-		<!--/* 1件分の商品情報 */-->
-		<div>
-			<a th:href="@{/client/item/detail/}+${bestSelling.id}">
-
-				<img th:src="@{/images/photo/{imgName}(imgName=${bestSelling.image})}"
-					th:if="${bestSelling.image != null}" />
-
-
-				<img th:src="@{/images/common/no_image.jpg}" th:if="${bestSelling.image == null}" />
-			</a>
-		</div>
-		<div>
-			<span th:text="${bestSelling.category.name}"></span>
-			<span th:text="${bestSelling.name}"></span>
-			<span th:text="${bestSelling.price}"></span>
-
-		</div>
-		<div>
-			<form th:action="@{/client/favorite/update}" method="post">
-				<input type="hidden" name="itemId" th:value="${bestSelling.id}">
-				<button type="submit"><img th:src="@{/images/faviorite_blank.svg}"></button>
-			</form>
-		</div>
-
-		<!--				<article>-->
-		<!--					<img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=350&q=85"-->
-		<!--						alt="センシュアルオードトワレ" />-->
-		<!--					<div>-->
-		<!--						<p>オードトワレ</p>-->
-		<!--						<h3>センシュアルオードトワレ</h3>-->
-		<!--						<span>¥6,600</span>-->
-		<!--					</div>-->
-		<!--					<button>♡</button>-->
-		<!--				</article>-->
-	</div>
+				<!--				<article>-->
+				<!--					<img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=350&q=85"-->
+				<!--						alt="センシュアルオードトワレ" />-->
+				<!--					<div>-->
+				<!--						<p>オードトワレ</p>-->
+				<!--						<h3>センシュアルオードトワレ</h3>-->
+				<!--						<span>¥6,600</span>-->
+				<!--					</div>-->
+				<!--					<button>♡</button>-->
+				<!--				</article>-->
+			</div>
 	</section>
 
 	<!--	<p class="no_review" th:text="#{msg.review.list.none}" th:if="${#lists.isEmpty(itemReviews)}"></p>-->

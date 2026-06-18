@@ -49,22 +49,28 @@ public interface ItemRepository extends JpaRepository<Item, Integer> {
 //	売れてる奴だけ表示
 //	SELECT * FROM items ORDER BY (SELECT SUM(quantity) FROM order_items GROUP BY item_id) DESC;
 //	@Query("SELECT i FROM Item i ORDER BY (SELECT SUM(oi.quantity)  FROM OrderItem oi GROUP BY oi.item.id) DESC")
-	@Query("SELECT i FROM Item i INNER JOIN OrderItem oi ON oi.item = i GROUP BY i.id, i.name, i.price, i.description, i.image, i.stock, i.deleteFlag, i.insertDate, i.category.id ORDER BY SUM(oi.quantity) DESC")
+	@Query("SELECT i FROM Item i INNER JOIN OrderItem oi ON oi.item = i "
+			+ "WHERE i.deleteFlag = 0 "
+			+ "GROUP BY i.id, i.name, i.price, i.description, i.image, i.stock, i.deleteFlag,"
+			+ " i.insertDate, i.category.id ORDER BY SUM(oi.quantity) DESC")
 	List<Item> findByQuantityDesc();
 	
 //	売れてないやつも表示
-	@Query("SELECT i FROM Item i LEFT JOIN OrderItem oi ON oi.item = i GROUP BY i.id, i.name, i.price, i.description, i.image, i.stock, i.deleteFlag, i.insertDate, i.category.id ORDER BY SUM(oi.quantity) DESC NULLS LAST")
+	@Query("SELECT i FROM Item i LEFT JOIN OrderItem oi ON oi.item = i "
+			+ "WHERE i.deleteFlag = 0"
+			+ "GROUP BY i.id, i.name, i.price, i.description, i.image, i.stock, i.deleteFlag,"
+			+ " i.insertDate, i.category.id ORDER BY SUM(oi.quantity) DESC NULLS LAST")
 	List<Item> findAllByQuantityDesc();
 
 	
 //	新着順のリポジトリ
-	List<Item> findAllByOrderByInsertDateDesc();
+	List<Item> findByDeleteFlagOrderByInsertDateDesc(Integer deleteFlg);
 	
 	// カテゴリ検索
-	List<Item> findByCategoryId(Integer categoryId);
+	List<Item> findByCategoryIdAndDeleteFlag(Integer categoryId, Integer deleteFlg);
   
 	// 曖昧検索用メソッド
-	List<Item> findByNameContaining(String search);
+	List<Item> findByNameContainingAndDeleteFlag(String search, Integer deleteFlg);
 
 	
 }
