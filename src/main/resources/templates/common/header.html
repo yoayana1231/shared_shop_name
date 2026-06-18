@@ -16,18 +16,47 @@
 				<div class="vivien_logo">
 					<!--					<a th:href="@{/}"><img  th:src="@{/images/logo-crybaby_v.png}"class="logo"></a>-->
 					<a th:href="@{/}">
-						<img class="logo" th:src="@{/images/logo-crybaby_v.png}" alt="logo">
+						<img class="logo" th:src="@{/images/logo_cry_wi.png}" alt="logo">
 					</a>
+
+				</div>
+				<div class="header_nav">
+					<div>
+						<a th:href="@{/}">
+							<p class="header_text">TOP</p>
+							<small>トップページ</small>
+						</a>
+					</div>
+					<div>
+						<a th:href="@{/client/item/list/1}">
+							<p class="header_text">PRODUCTS</p>
+							<small>商品一覧</small>
+						</a>
+					</div>
+					<div>
+						<a th:href="@{/client/order/list}">
+							<p class="header_text">ORDERLIST</p>
+							<small>注文一覧</small>
+						</a>
+					</div>
+					<div>
+						<a href="#">
+							<p class="header_text">RANKING</p>
+							<small>ランキング</small>
+						</a>
+					</div>
+
 
 				</div>
 				<!--検索欄-->
 				<div class="header-serch">
 					<form class="search-demo-form" th:action="@{/client/item/list/search}">
-						<input type="search" placeholder="商品名・カテゴリで探す" name="search">
+						<input type="search" placeholder="キーワードで探す" name="search">
 						<button class="search_button" type="submit">
 							<img th:src="@{/images/header/search.svg}" alt="検索">
 						</button>
 					</form>
+
 				</div>
 
 				<div class="right_photo">
@@ -35,11 +64,11 @@
 						<!--ログイン-->
 						<!--一般三郎　さん　|　ログアウト-->
 						<div th:if="${session.user != null and session.user.authority == 2}" class="user_info">
-							<a class="user_name_header" th:href="@{/client/user/detail}" th:text="${session.user.name} + 'さん'"></a>
+							<a class="user_name_header" th:href="@{/client/user/detail}"
+								th:text="${session.user.name} + 'さん'"></a>
 							<a class="user_logout" th:href="@{/logout}" th:text="#{logout}"></a>
 						</div>
-<!--								<img class="person_photo" th:src="@{/images/header/person.svg}">さん</a>-->
-
+						<!--								<img class="person_photo" th:src="@{/images/header/person.svg}">さん</a>-->
 						<div th:if="${session.user != null and (session.user.authority == 0 or session.user.authority == 1)}"
 							class="user_info">
 							<a th:href="@{/admin/user/detail/{id}(id=${session.user.id})}"
@@ -50,38 +79,38 @@
 					<!--ログイン・会員登録　|　新規会員登録-->
 					<div th:if="${session.user == null}" class="user_info">
 
-						<a th:href="@{/login}"><img class="person_photo" th:src="@{/images/header/person.svg}">|</a>
+						<a th:href="@{/login}">ログイン 新規会員登録</a>
 						<!--<a th:href="@{/client/user/regist/input/init}" th:text="#{client.regist}"></a>-->
 
 					</div>
 
 					<!--お気に入り-->
-					<div class="user_info">
-						<a th:href="@{/client/favorite/list}"><img class="favorite_photo"
-								th:src="@{/images/header/favorite.svg}"></a>
+					<div class="user_info_header_fav">
+						<a th:href="@{/client/favorite/list}">
+							<img class="header_fav" th:src="@{/images/favoritebrown.svg}"></a>
 					</div>
 
 
 					<!--買い物かご-->
-					<div class="user_info">
-						<a th:href="@{/client/basket/list}"><img class="cart_photo"
-								th:src="@{/images/header/shopping_cart.svg}"></a>
+					<div class="user_info_header_fav">
+						<a th:href="@{/client/basket/list}"><img class="header_cart_photo"
+								th:src="@{/images/shoppingbag.svg}"></a>
 					</div>
 				</div>
 			</div>
-			<!--	<div class="header_two">-->
-			<!--	商品一覧-->
-			<!--	<div>-->
-			<!--	<a class="shop_list" th:href="@{/client/item/list/1}" th:text="#{item}+#{title.list}">商品一覧</a>-->
-			<!--	</div>-->
+			<!--				<div class="header_two">-->
+			<!--				商品一覧-->
+			<!--				<div>-->
+			<!--				<a class="shop_list" th:href="@{/client/item/list/1}" th:text="#{item}+#{title.list}">商品一覧</a>-->
+			<!--				</div>-->
 
 
-			<!--	<div th:each="category: ${categories}">-->
-			<!--	<a class="shop_list_many" th:href="@{/client/item/list/category}" th:value="${category.id}"-->
-			<!--		th:text="${category.name}"></a>-->
-			<!--	</div>-->
+			<!--				<div th:each="category: ${categories}">-->
+			<!--				<a class="shop_list_many" th:href="@{/client/item/list/category}" th:value="${category.id}"-->
+			<!--					th:text="${category.name}"></a>-->
+			<!--				</div>-->
 
-			<!--	</div>-->
+			<!--				</div>-->
 
 		</div>
 	</div>
