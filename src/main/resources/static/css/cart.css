@@ -222,6 +222,7 @@ input {
 	justify-items: start;
 	font-size: 12px;
 	color: #78635c;
+	
 }
 
 .item-actions a {
@@ -236,7 +237,8 @@ input {
 	color: #9a6f66;
 	cursor: pointer;
 	padding: 10px;
-	top:10px;
+	top:15px;
+	left:40px;
 }
 
 .continue-btn {
@@ -259,12 +261,14 @@ input {
 	width: 220px;
 	height: 44px;
 	margin-top: 30px;
+	margin-right:10px;
 	border: 1px solid #dfc8c0;
 	background: #fff;
 	color: #5f4d47;
 	font-size: 12px;
 	margin: 10px;
 	cursor: pointer;
+	
 	
 }
 
@@ -444,7 +448,7 @@ input {
 	width: 30px;
 	position: relative;
 	bottom:0px;
-	top:20px;
+	top:40px;
 	left:150px;
 }
 .recommend_img img{
@@ -494,11 +498,13 @@ input {
 }
 
 .recommend-items button {
+	position:relative;
 	border: 0;
 	background: transparent;
 	color: #9a6f66;
 	font-size: 18px;
 	cursor: pointer;
+	bottom:20px;
 }
 .rec_item_name {
 	color:black;
@@ -513,11 +519,10 @@ input {
 
 .favorite_button_a{
 	position:relative;
-	bottom:70px;
-	left:100px;	
+	bottom:25px;
+	left:10px;	
 	
 }
 .favorite_button_a img{
-	width: 20px;
-	height: 30px;
-}
+	width: 100%;
+	height: 100%;}
