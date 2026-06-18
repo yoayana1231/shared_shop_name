@@ -56,11 +56,12 @@
 
 	<!--売れ筋商品-->
 	<div class="title_best_selling">
-		<h2 class="title_best_selling_main">Best Selling Products</h2>
-		<span class="title_best_selling_sub" th:if="${sortType==1}" th:text="#{sort.latest.title}"></span>
 		<!--売れ筋商品-->
 		<span class="title_best_selling_sub" th:if="${sortType==2 || sortType==null}"
 			th:text="#{sort.hotsell.title}"></span>
+		<h2 class="title_best_selling_main">Best Selling Products</h2>
+		<span class="title_best_selling_sub" th:if="${sortType==1}" th:text="#{sort.latest.title}"></span>
+
 	</div>
 
 	<div th:if="${#lists.isEmpty(items)}">
@@ -114,7 +115,7 @@
 	<div id="product" class="product">
 		<div class="category_tittle_waku">
 			<p>カテゴリ</p>
-			<h1 class="category_tittle">Category</h1>
+			<h2 class="category_tittle">Category</h2>
 		</div>
 		<h3 class="category_tittle_sub">リップ、アイカラー、ファンデーションまで。 写真のムードごとに<br>気になるカテゴリへ自然にたどり着ける構成に整えました。</h3>
 	</div>
@@ -139,13 +140,13 @@
 		<th:block th:if="${session.user} == null">
 			<h2 th:text="#{msg.client.item.list.none}"></h2>
 			<p>【無料】新規会員登録で、お買い物がもっと便利に！</p>
-			<p>会員登録をしていただくと、以下の便利な限定機能をご利用いただけます。</p>
+			<p>会員登録をしていただくと、以下の便利な限定機能をご利用いただけます</p>
 
 			<ul>おすすめ商品：あなたにぴったりのアイテムをご提案</ul>
 			<ul>レビュー数ランキング：みんなが注目している人気商品が一目でわかる</ul>
 			<ul>閲覧履歴：前に気になった商品をいつでもチェック</ul>
 
-			<p>ぜひご登録のうえ、お買い物をお楽しみください。</p>
+			<p>ぜひご登録のうえ、お買い物をお楽しみください</p>
 		</th:block>
 	</div>
 	<!--ログインしてるときの処理-->
@@ -154,7 +155,7 @@
 
 		<!--おすすめ-->
 		<div class="title_recommended_items">
-			<p>おすすめ</p>
+			<p>おすすめ商品</p>
 			<h2 class="title_recommended_items_title">
 				<span th:text="#{sort.recommend.title}"></span>
 			</h2>
@@ -271,7 +272,8 @@
 
 
 		<!--表示数-->
-		<th:block class="review_ranking_list" th:each="reviews, status: ${rankingList}" th:if="${status.count >= 2 and status.count <= 4}">
+		<th:block class="review_ranking_list" th:each="reviews, status: ${rankingList}"
+			th:if="${status.count >= 2 and status.count <= 4}">
 			<article class="review_ranking_list_two">
 				<div class="selling_image">
 					<a th:href="@{/client/item/detail/}+${reviews.item.id}">

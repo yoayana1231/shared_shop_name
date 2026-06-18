@@ -124,6 +124,26 @@ body::before {
 	margin-bottom: 70px;
 }
 
+.notlogin_top h2 {
+	font-size: 23px;
+	border-bottom: 2px solid var(--rose);
+	width: 400px;
+	display: flex;
+	justify-content: space-around
+}
+
+.notlogin_top p {
+	font-family: var(--serif);
+	font-size: 25px;
+	margin-bottom: 15px;
+	margin-top: 20px;
+}
+
+.notlogin_top ul {
+/*	font-family: var(--serif);*/
+	font-size: 20px;
+}
+
 /*ーーーーーーーーーーーーーーーーヒーローセクションーーーーーーーーーーーーーーーーー*/
 
 .top_photo {
@@ -163,7 +183,7 @@ body::before {
 }
 
 .top_page_1 h2 {
-	font-size: 100px;
+	font-size: 120px;
 	font-family: var(--serif);
 }
 
@@ -239,7 +259,7 @@ body::before {
 .brand_concept_photo_1 {
 	width: 985px;
 	border: 15px solid #fffaf6;
-	margin-top: -18px;
+	margin-top: -40px;
 }
 
 .hover_button {
@@ -276,8 +296,8 @@ body::before {
 
 .brand_concept_char_mozi h2 {
 	font-family: var(--serif);
-	font-size: 70px;
-	font-weight: 200;
+	font-size: 90px;
+	font-weight: 100;
 }
 
 .brand_concept_char_mozi h3 {
@@ -328,19 +348,18 @@ body::before {
 }
 
 .category_tittle {
-	height: min-content;
+	font-family: var(--serif);
 	margin-top: 10px;
 	margin-left: 10px;
-	font-size: 120px;
-	font-weight: 200;
-	display: flex;
+	margin-bottom: 50px;
+	font-size: 90px;
+	font-weight: 100;
 }
 
 .category_tittle_sub {
 	font-size: 23px;
 	font-family: var(--serif);
 	margin-top: 157px;
-	margin-left: 50px;
 	margin-bottom: 20px;
 	color: #6d808b;
 }
@@ -364,7 +383,7 @@ body::before {
 	height: 250px;
 	object-fit: cover;
 	display: block;
-	border: 10px solid #fffaf6;
+	border: 15px solid #fffaf6;
 	border-radius: 8px;
 }
 
@@ -382,15 +401,21 @@ body::before {
 
 .title_best_selling_main {
 	font-family: var(--serif);
-	font-size: 55px;
-	margin-top: 150px;
+	font-size: 80px;
+	margin-top: 10px;
+	font-weight: 100;
+	margin-bottom: 50px;
+
 }
 
 .title_best_selling_sub {
-	margin-top: 10px;
-	margin-bottom: 50px;
+	margin-top: 150px;
 	font-family: var(--serif);
-	font-size: large;
+	font-size: 20px;
+	border-bottom: 3px solid rgb(223, 207, 226);
+	width: 110px;
+	display: flex;
+	justify-content: space-around;
 }
 
 .item_list_top {
@@ -456,7 +481,7 @@ body::before {
 }
 
 .title_recommended_items p {
-	width: 100px;
+	width: 150px;
 	font-size: 20px;
 	margin-bottom: 0;
 	border-bottom: 3px solid rgb(223, 207, 226);
@@ -469,7 +494,7 @@ body::before {
 	gap: 26px;
 	align-items: start;
 	grid-auto-flow: column;
-/*	margin: 50px 30px;*/
+	/*	margin: 50px 30px;*/
 }
 
 .product_grid_recommended {
@@ -489,14 +514,14 @@ body::before {
 /*ーーーーーーーーーーーーーーーーレビュー数ランキングーーーーーーーーーーーーーーーーーーーー*/
 
 
-.bakayoshida{
+.bakayoshida {
 	width: 210px;
-    font-size: 20px;
-    margin-bottom: 0;
-    border-bottom: 3px solid rgb(223, 207, 226);
-    display: flex;
-    justify-content: flex-end;
-    margin-left: 80px;
+	font-size: 20px;
+	margin-bottom: 0;
+	border-bottom: 3px solid rgb(223, 207, 226);
+	display: flex;
+	justify-content: flex-end;
+	margin-left: 80px;
 }
 
 .title_review_ranking h2 {
@@ -541,12 +566,12 @@ body::before {
 /*	box-shadow: 0 18px 48px rgba(84, 66, 59, 0.2);*/
 /*}*/
 
-.review_ranking_list_one{
+.review_ranking_list_one {
 	width: 600px;
 	height: 900px;
 }
 
-.review_ranking_list_two{
+.review_ranking_list_two {
 	width: 900px;
 	height: 300px;
 }
