@@ -83,7 +83,17 @@
 							<div class="favorite_button_a">
 								<form th:action="@{/client/favorite/update}" method="post">
 									<input type="hidden" name="itemId" th:value="${item.id}">
-									<button type="submit"><img th:src="@{/images/faviorite_blank.svg}"></button>
+									<button type="submit"
+										th:if="${favoriteItemIds != null && favoriteItemIds.contains(item.id)}">
+										<!--お気に入り登録中-->
+										<!--画像を人型に変えてるのでなんかいい感じにしてください-->
+										<img th:src="@{/images/header/person.svg}">
+									</button>
+
+									<button type="submit"
+										th:unless="${favoriteItemIds != null && favoriteItemIds.contains(item.id)}">
+										<img th:src="@{/images/faviorite_blank.svg}">
+									</button>
 								</form>
 							</div>
 							<!--							<p th:if="${item.stock == 0}" th:text="#{data.out.of.stock}"></p>-->
@@ -157,7 +167,17 @@
 					<div>
 						<form th:action="@{/client/favorite/update}" method="post">
 							<input type="hidden" name="itemId" th:value="${recommend.item.id}">
-							<button type="submit"><img th:src="@{/images/faviorite_blank.svg}"></button>
+							<button type="submit"
+								th:if="${favoriteItemIds != null && favoriteItemIds.contains(recommend.item.id)}">
+								<!--お気に入り登録中-->
+								<!--画像を人型に変えてるのでなんかいい感じにしてください-->
+								<img th:src="@{/images/header/person.svg}">
+							</button>
+
+							<button type="submit"
+								th:unless="${favoriteItemIds != null && favoriteItemIds.contains(recommend.item.id)}">
+								<img th:src="@{/images/faviorite_blank.svg}">
+							</button>
 						</form>
 					</div>
 
