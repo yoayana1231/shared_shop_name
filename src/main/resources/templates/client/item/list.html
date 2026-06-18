@@ -137,14 +137,14 @@
 						<span class="item_category_a" th:text="${item.category.name}"></span>
 						<div class="item_form">
 							<div class="button_all_a">
-								<div class="favorite_button_a">
+								<div class="favorite_button_list">
 									<form th:action="@{/client/favorite/update}" method="post">
 										<input type="hidden" name="itemId" th:value="${item.id}">
 										<button type="submit"
 											th:if="${favoriteItemIds != null && favoriteItemIds.contains(item.id)}">
 											<!--お気に入り登録中-->
 											<!--画像を人型に変えてるのでなんかいい感じにしてください-->
-											<img th:src="@{/images/header/person.svg}">
+											<img th:src="@{/images/favorite_red.png}">
 										</button>
 
 										<button type="submit"
