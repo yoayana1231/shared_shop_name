@@ -34,10 +34,10 @@
 		</div>
 	</section>
 	<div class="wide-banners">
-		<a th:href="@{/client/item/list/1(categoryId=${categoryId})}"
+		<a th:href="@{/client/item/list/1}"
 			class="wide-banner arrival"><strong>NEW<br />ARRIVAL</strong><span>新作アイテムはこちら</span>
 			</th:unless="${sortType==1}"a>
-			<a th:href="@{/client/item/list/2(categoryId=${categoryId})}"
+			<a th:href="@{/client/item/list/2}"
 				class="wide-banner special"><strong>EDITOR'S<br />PICK</strong><span>今月の人気アイテム</span></a>
 	</div>
 	<div class="section-head">
@@ -49,11 +49,26 @@
 	</div>
 
 	<div class="category-tabs">
+		<th:block th:if="${flag} == true">
 			<a th:href="@{/client/item/list/1}" class="active">すべて</a>
 			<div th:each="category :${categories}">
 				<a th:href="@{/client/item/list/category/{categoryId}(categoryId=${category.id})}"
 					th:text="${category.name}"></a>
 			</div>
+		</th:block>
+		<th:block th:unless="${flag} == true">
+			<a th:href="@{/client/item/list/1}">すべて</a>
+			<div th:each="category :${categories}">
+				<div th:if="${id} == ${category.id}">
+					<a th:href="@{/client/item/list/category/{categoryId}(categoryId=${category.id})}"
+						th:text="${category.name}" class="active"></a>
+				</div>
+				<div th:unless="${id} == ${category.id}">
+					<a th:href="@{/client/item/list/category/{categoryId}(categoryId=${category.id})}"
+						th:text="${category.name}"></a>
+				</div>
+			</div>
+		</th:block>
 	</div>
 	<!--		<div class="sorted_all">-->
 

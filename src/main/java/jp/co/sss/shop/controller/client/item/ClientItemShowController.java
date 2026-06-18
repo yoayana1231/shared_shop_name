@@ -69,6 +69,12 @@ public class ClientItemShowController {
 	 */
 	@Autowired
 	BeanTools beanTools;
+	
+	/*
+	 * カテゴリ検索表示用 フラグ
+	 * @param  true:一覧表示中  false:カテゴリ検索中
+	 */
+	boolean isAllList = false;
 
 	/**
 	 * トップ画面 表示処理
@@ -103,9 +109,13 @@ public class ClientItemShowController {
 	//	売れてない奴も表示する（商品一覧）
 	@RequestMapping(path = "/client/item/list/{sortType}", method = { RequestMethod.GET })
 	public String clientItem(@PathVariable int sortType, Model model) {
-
+		
 		model.addAttribute("categories", categoryRepository.findAll());
 		model.addAttribute("items", itemRepository.findAllByQuantityDesc());
+		
+		// カテゴリ検索表示用のフラグをtrueにする
+		isAllList = true;
+		model.addAttribute("flag", isAllList);
 
 		//		新着順
 		if (sortType == 1) {
@@ -129,6 +139,7 @@ public class ClientItemShowController {
 		model.addAttribute("categories", categoryRepository.findAll());
 		List<Item> items = itemRepository.findByCategoryId(categoryId);
 		model.addAttribute("items", items);
+		model.addAttribute("id", categoryId);
 
 		return "client/item/list";
 	}
@@ -138,9 +149,19 @@ public class ClientItemShowController {
 	//新規追加リポジトリメソッド findByNameContaining
 	@RequestMapping("/client/item/list/search")
 	public String clientItemListSearch(String search, Model model) {
+		
+		// searchがnull→全件検索
+		// カテゴリ検索表示用のフラグをtrueにする
+		if (search == "") {
+			isAllList = true;
+			model.addAttribute("flag", isAllList);
+		}
+		
 		model.addAttribute("categories", categoryRepository.findAll());
 		model.addAttribute("items", itemRepository.findByNameContaining(search));
+		
 		return "client/item/list";
+		
 	}
 
 	/**
