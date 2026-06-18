@@ -183,7 +183,6 @@ body {
 	color: #549c46;
 	border-bottom: 1px solid #ddccc5;
 	padding-bottom: 16px;
-
 }
 
 .script {
@@ -250,7 +249,7 @@ body {
 	margin: 50px;
 	margin-left: 270px;
 	font-size: 40px;
-	bottom: 40px;
+	bottom: 50px;
 
 
 }
@@ -282,10 +281,10 @@ body {
 	border-right: 1px solid #ddccc5;
 }
 
-/*.review_avg{*/
-/*	position: relative;*/
-/*	top: 30px;	*/
-/*}*/
+.review_avg{
+	position: relative;
+	
+}
 
 .edit_button,
 .delete_button_detail {
@@ -309,8 +308,13 @@ body {
 
 .rating_review {
 	font-size: 40px;
+	position: relative;
+    bottom: 40px;
 }
-
+.review_count {
+	position: relative;
+	bottom:60px;
+}
 .back_button_detail {
 
 	/*	align-items: center;*/
@@ -357,7 +361,7 @@ body {
 	font-size: 15px;
 	/*	margin: 2px;*/
 	cursor: pointer;
-	top: 20px;
+	bottom:30px;
 
 }
 

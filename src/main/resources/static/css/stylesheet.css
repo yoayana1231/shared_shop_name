@@ -71,7 +71,13 @@ h2 {
 /*.brand_concept_photo_1 {*/
 /*	width: 900px;*/
 /*}*/
-
+.logo {
+	
+	 width: 100px;
+    height: auto;
+    object-fit: contain;
+   
+}
 /* ---- 入力フォーム(ログイン) ---- */
 
 .user_container {
