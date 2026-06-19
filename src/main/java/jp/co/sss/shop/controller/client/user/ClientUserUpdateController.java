@@ -68,7 +68,7 @@ public class ClientUserUpdateController {
 		// 入力フォーム情報をリクエストスコープに保存
 		model.addAttribute("userForm", userForm);
 		
-		BindingResult result = (BindingResult) session.getAttribute("result");
+		BindingResult result = (BindingResult) session.getAttribute("errors");
 		if (result != null) {
 			// エラー情報あり→エラー情報を設定
 			model.addAttribute("org.springframework.validation.BindingResult.userForm", result);
@@ -102,8 +102,8 @@ public class ClientUserUpdateController {
 		if (result.hasErrors()) {
 			// エラーあり
 			// 入力エラー情報をセッションに保存してリダイレクト
-			session.setAttribute("result", result);
-			return "redirect:/user/update/input";
+			session.setAttribute("errors", result);
+			return "redirect:/client/user/update/input";
 		} else {
 			// エラーなし 確認画面表示処理へ
 			return "redirect:/client/user/update/check";
