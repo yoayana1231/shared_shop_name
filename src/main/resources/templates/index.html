@@ -223,8 +223,8 @@
 		<!--レビュー数ランキング-->
 		<div class="title_review_ranking">
 			<p class="bakayoshida">レビュー数ランキング</p>
-			<h2 class="title_review_ranking_title">
-				<span th:text="#{sort.reviewRanking.title}"></span>
+			<h2>
+				<span class="title_review_ranking_title" th:text="#{sort.reviewRanking.title}"></span>
 			</h2>
 		</div>
 
@@ -237,7 +237,8 @@
 				<!--１位の表示数-->
 				<th:block th:each="reviews, status: ${rankingList}" th:if="${status.count le 1}">
 					<article class="review_ranking_list_one">
-						<div class="selling_image">
+						<div class="card_number_1" th:text="${status.count}"></div>
+						<div class="selling_image_one">
 							<a th:href="@{/client/item/detail/}+${reviews.item.id}">
 								<img th:src="@{/images/photo/{imgName}(imgName=${reviews.item.image})}"
 									th:if="${reviews.item.image != null}" />
@@ -247,9 +248,10 @@
 
 						<!--１位の商品情報-->
 						<div>
+							<span class="item_category_one" th:text="${reviews.item.category.name}"></span>
 							<p class="item_name_a_list" th:text="${reviews.item.name}"></p>
+							<p class="item_detail_a_list" th:text="${reviews.item.description}"></p>
 							<p class="item_price_a" th:text="'&yen;'+${reviews.item.price}"></p>
-							<span class="item_category_a" th:text="${reviews.item.category.name}"></span>
 							<div class="item_form">
 								<div class="button_all_a">
 									<div class="favorite_button_list">
@@ -263,7 +265,7 @@
 									<!-- <form th:action="@{/client/basket/add}" method="post" th:if="*{stock > 0}">-->
 									<form th:action="@{/client/basket/add}" method="post">
 										<input type="hidden" name="id" th:value="${reviews.item.id}">
-										<button type="submit" class="cart-button_a">ADD TO CART</button>
+										<button type="submit" class="cart-button_one">ADD TO CART</button>
 									</form>
 								</div>
 							</div>
@@ -274,9 +276,10 @@
 
 			<!--２位～４位　表示数-->
 			<div class="review_ranking_list_ha">
-				<th:block th:each="reviews, status: ${rankingList}"
+				<th:block class="circle" th:each="reviews, status: ${rankingList}"
 					th:if="${status.count >= 2 and status.count <= 4}">
 					<article class="review_ranking_list_two">
+						<div class="card_number" th:text="${status.count}"></div>
 						<div class="selling_image_ha">
 							<a th:href="@{/client/item/detail/}+${reviews.item.id}">
 								<img th:src="@{/images/photo/{imgName}(imgName=${reviews.item.image})}"
@@ -287,9 +290,10 @@
 
 						<!--２位～４位　商品情報-->
 						<div class="item_name_a_list_ha">
+							<span class="item_category_two" th:text="${reviews.item.category.name}"></span>
 							<p class="item_name_a_list" th:text="${reviews.item.name}"></p>
+							<p class="item_detail_a_list_two" th:text="${reviews.item.description}"></p>
 							<p class="item_price_a" th:text="'&yen;'+${reviews.item.price}"></p>
-							<span class="item_category_a" th:text="${reviews.item.category.name}"></span>
 							<div class="item_form">
 								<div class="button_all_a">
 									<div class="favorite_button_list">
@@ -298,15 +302,15 @@
 											<button type="submit"><img th:src="@{/images/faviorite_blank.svg}"></button>
 										</form>
 									</div>
-									<div class="cart_a">
-										<!-- <form th:action="@{/client/basket/add}" method="post" th:if="*{stock > 0}">-->
-										<form th:action="@{/client/basket/add}" method="post">
-											<input type="hidden" name="id" th:value="${reviews.item.id}">
-											<button type="submit" class="cart-button_a">ADD TO CART</button>
-										</form>
-									</div>
 								</div>
 							</div>
+						</div>
+						<div class="cart_reviews">
+							<!-- <form th:action="@{/client/basket/add}" method="post" th:if="*{stock > 0}">-->
+							<form th:action="@{/client/basket/add}" method="post">
+								<input type="hidden" name="id" th:value="${reviews.item.id}">
+								<button type="submit" class="cart-button_two">ADD TO CART</button>
+							</form>
 						</div>
 					</article>
 				</th:block>

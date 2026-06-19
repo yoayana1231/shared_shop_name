@@ -1,0 +1,29 @@
+@charset "UTF-8";
+.review_form{
+	
+    border: 1px solid #ddccc5;
+    border-style: 0.2px;
+    padding: 20px;
+    border-radius: 40px;
+    background: white;
+    box-shadow: 0 16px 34px rgba(28, 32, 36, 0.08);
+    width: 1000px;
+    height: 500px;
+    margin-left: 350px;
+    margin-top: 80px;
+    justify-content: center;
+    
+	
+}
+.review_input_form{
+	display: flex;
+	padding:20px;
+	
+}
+.review_input{
+	margin-left:300px;
+	border: 1px solid #ddccc5;
+	border-style: 0.2px;
+	padding:40px;
+	
+}
