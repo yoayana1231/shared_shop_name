@@ -516,7 +516,9 @@ input {
 	color: #9a6f66;
 	font-size: 15px;
 }
-
+.item_detail_rec_box{
+	
+}
 .favorite_button_a{
 	position:relative;
 	bottom:25px;
@@ -525,4 +527,8 @@ input {
 }
 .favorite_button_a img{
 	width: 100%;
-	height: 100%;}
+	height: 100%;
+}
+.bar_detail{
+	margin-right:100px;
+}
