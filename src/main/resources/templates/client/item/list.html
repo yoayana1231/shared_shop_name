@@ -11,14 +11,7 @@
 </head>
 
 <body th:object="${loginForm}" class="user item_list">
-	<!--	<div class="list_title">-->
-	<!--		<div class="img_title">-->
-	<!--			<img th:src="@{/images/top_list_image.jpg}">-->
-	<!--		</div>-->
-	<!--		<div class="text_title">-->
-	<!--			<span th:class="title_list" th:text="#{item}+#{title.list}"></span>-->
-	<!--		</div>-->
-	<!--	</div>-->
+
 	<section class="hero">
 		<div class="hero-copy">
 			<p class="eyebrow">Make everyday</p>
@@ -70,30 +63,8 @@
 			</div>
 		</th:block>
 	</div>
-	<!--		<div class="sorted_all">-->
 
-	<!--			<span class="new_sort" th:if="${sortType==1}" th:text="#{sort.latest.str}"></span>-->
-	<!--			<a class="a_new" th:unless="${sortType==1}" th:href="@{/client/item/list/1(categoryId=${categoryId})}"-->
-	<!--				th:text="#{sort.latest.str}"></a>-->
-
-	<!--			<span class="pop_sort" th:if="${sortType==2}" th:text="#{sort.hotsell.str}"></span>-->
-	<!--			<a class="a_new" th:unless="${sortType==2}" th:href="@{/client/item/list/2(categoryId=${categoryId})}"-->
-	<!--				th:text="#{sort.hotsell.str}"></a>-->
-
-	<!--			<p th:text="#{msg.client.item.list.none}" th:if="${#lists.isEmpty(items)}"></p>-->
-
-	<!--		</div>-->
 	<th:block th:if="!${#lists.isEmpty(items)}">
-		<!--					<article class="item_menu">-->
-		<!--						<p class="item_image" th:text="#{data.item.image}"></p>-->
-		<!--						<p class="item_name" th:text="#{data.item.name}"></p>-->
-		<!--						<p class="item_price" th:text="#{data.item.price}"></p>-->
-		<!--						<p class="item_category" th:text="#{category}"></p>-->
-		<!--						<p class="favorite">お気に入りボタン(仮)</p>-->
-		<!--					</article>-->
-
-
-		<!--		/* 商品一覧 */-->
 
 		<div class="list_card_a">
 			<aside class="editorial-column_list">
@@ -154,11 +125,11 @@
 									</form>
 								</div>
 								<div class="cart_a">
-									<!-- <form th:action="@{/client/basket/add}" method="post" th:if="*{stock > 0}">-->
-									<form th:action="@{/client/basket/add/calc}" method="post">
+									<form th:action="@{/client/basket/add/calc}" method="post}">
 										<input type="hidden" name="id" th:value="${item.id}">
-										<button type="submit" class="cart-button_a">ADD TO CART</button>
+										<button type="submit" class="cart-button_a" th:if="*{item.stock} > 0">ADD TO CART</button>
 									</form>
+									<button type="submit" class="cart-button_a" th:if="*{item.stock} == 0">SOLD OUT</button>
 								</div>
 							</div>
 						</div>
