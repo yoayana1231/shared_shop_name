@@ -21,6 +21,7 @@ import jp.co.sss.shop.form.ReviewForm;
 import jp.co.sss.shop.repository.ItemRepository;
 import jp.co.sss.shop.repository.ReviewsRepository;
 import jp.co.sss.shop.repository.UserRepository;
+import jp.co.sss.shop.util.Constant;
 
 /*
  * レビュー機能のコントローラクラス
@@ -114,7 +115,7 @@ public class ReviewController {
 			review = new Reviews();
 			BeanUtils.copyProperties(form, review);
 		} else {
-			review = reviewRepository.findByIdAndDeleteFlag(form.getId(), 0);
+			review = reviewRepository.findByIdAndDeleteFlag(form.getId(), Constant.NOT_DELETED);
 			review.setRating(form.getRating());
 			review.setComments(form.getComments());
 		}
@@ -162,14 +163,14 @@ public class ReviewController {
 			HttpSession session) {
 		
 		Reviews review = 
-				reviewRepository.findByIdAndDeleteFlag(reviewId, 0);
+				reviewRepository.findByIdAndDeleteFlag(reviewId, Constant.NOT_DELETED);
 		
 		// 商品IDを保存（リダイレクト用）
 		Integer itemId = review.getItem().getId();
 		
 		if (review != null) {
 			// 表示中→削除フラグを1にする
-			review.setDeleteFlag(1);
+			review.setDeleteFlag(Constant.DELETED);
 			//DBに変更を保存
 			reviewRepository.save(review);
 		}

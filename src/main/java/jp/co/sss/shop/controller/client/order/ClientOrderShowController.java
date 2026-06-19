@@ -43,6 +43,9 @@ public class ClientOrderShowController {
 	
 	/*
 	 * 注文一覧表示処理
+	 * @param model Viewとの値受渡し
+	 * @param pageable ページング情報
+	 * @return client/order/list 
 	 */
 	@GetMapping("/client/order/list")
 	public String orderList(Model model, Pageable pageable) {
@@ -78,6 +81,7 @@ public class ClientOrderShowController {
 	
 	/*
 	 * 注文詳細表示処理
+	 * 
 	 */
 	@GetMapping("/client/order/detail/{id}")
 	public String orderDetail(@PathVariable Integer id, Model model) {

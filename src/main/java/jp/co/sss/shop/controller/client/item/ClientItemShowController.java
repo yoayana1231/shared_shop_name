@@ -29,6 +29,7 @@ import jp.co.sss.shop.repository.UserRepository;
 import jp.co.sss.shop.repository.ViewHistoriesRepository;
 import jp.co.sss.shop.service.BeanTools;
 import jp.co.sss.shop.service.RecommendsService;
+import jp.co.sss.shop.util.Constant;
 
 /**
  * 商品管理 一覧表示機能(一般会員用)のコントローラクラス
@@ -149,11 +150,11 @@ public class ClientItemShowController {
 		isAllList = true;
 		model.addAttribute("flag", isAllList);
 
-		//		新着順
 		if (sortType == 1) {
-			model.addAttribute("items", itemRepository.findByDeleteFlagOrderByInsertDateDesc(0));
-			//		売れ筋順	
+			// 新着順
+			model.addAttribute("items", itemRepository.findByDeleteFlagOrderByInsertDateDesc(Constant.NOT_DELETED));
 		} else {
+			// 売れ筋順	
 			model.addAttribute("items", itemRepository.findAllByQuantityDesc());
 		}
 		
@@ -179,9 +180,13 @@ public class ClientItemShowController {
 	public String categorySort(@PathVariable Integer categoryId,
 			HttpSession session, Model model) {
 
+		// カテゴリ全件検索
 		model.addAttribute("categories", categoryRepository.findAll());
-		List<Item> items = itemRepository.findByCategoryIdAndDeleteFlag(categoryId, 0);
+		
+		// カテゴリ毎の検索結果をリクエストスコープに保存
+		List<Item> items = itemRepository.findByCategoryIdAndDeleteFlag(categoryId, Constant.NOT_DELETED);
 		model.addAttribute("items", items);
+		
 		model.addAttribute("id", categoryId);
 		
 		// ログイン中のユーザー情報を取得
@@ -210,7 +215,7 @@ public class ClientItemShowController {
 		}
 		
 		model.addAttribute("categories", categoryRepository.findAll());
-		model.addAttribute("items", itemRepository.findByNameContainingAndDeleteFlag(search, 0));
+		model.addAttribute("items", itemRepository.findByNameContainingAndDeleteFlag(search, Constant.NOT_DELETED));
 		
 		// ログイン中のユーザー情報を取得
 		UserBean userBean = (UserBean) session.getAttribute("user");
@@ -329,7 +334,7 @@ public class ClientItemShowController {
 
 		//レビュー表示
 		//詳細画面を表示している商品IDかつ削除フラグが0のものを検索
-		List<Reviews> itemReviews = reviewRepository.findByItemIdAndDeleteFlag(id, 0);
+		List<Reviews> itemReviews = reviewRepository.findByItemIdAndDeleteFlag(id, Constant.NOT_DELETED);
 
 		//レビュー情報
 		model.addAttribute("itemReviews", itemReviews);
