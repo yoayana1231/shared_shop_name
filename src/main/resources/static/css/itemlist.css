@@ -3,7 +3,7 @@
 /*ヒーロー画像*/
 .hero {
 	position: relative;
-	max-width: 1380px;
+/*	max-width: 1380px;*/
 	margin: 0 auto;
 	min-height: 405px;
 	display: grid;
@@ -49,6 +49,7 @@
 			rgba(255, 255, 255, 0.62) 30%,
 			rgba(255, 255, 255, 0) 62%),
 		url("https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1700&q=86") center/cover no-repeat;
+/*		"https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1700&q=86"*/
 }
 
 .hero-pager {
@@ -128,11 +129,15 @@
 /*カテゴリー*/
 
 .category-tabs {
+	position: relative;
 	margin: 38px 0 30px 326px;
 	display: flex;
 	gap: 52px;
-	font-size: 11px;
+	font-size: 18px;
 	color: #97827a;
+	top:30px;
+	left:80px;
+	
 }
 
 a {
@@ -432,7 +437,8 @@ a {
 .ranking-card_list img {
 	width: 44px;
 	height: 44px;
-	object-fit: cover;
+	object-fit: contain;
+	margin:10px;
 }
 
 .ranking-card_list span {
