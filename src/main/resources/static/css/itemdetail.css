@@ -47,7 +47,11 @@ body {
 	display:flex;
 	
 	
-	
+		
+}
+.count_detail_review{
+	position: relative;
+	bottom:50px;
 	
 }
 .all_detail {
@@ -247,9 +251,9 @@ body {
 	position: relative;
 	font-family: var(--serif);
 	margin: 50px;
-	margin-left: 270px;
+	margin-left: 100px;
 	font-size: 40px;
-	bottom: 50px;
+	bottom: 70px;
 
 
 }
@@ -432,4 +436,41 @@ body {
 	font-size: 12px;
 	line-height: 2;
 	color: #6f5d56;
+}
+.favorite_img img{
+	margin-left:75px;
+/*	width: 80px;*/
+	height: 120px;
+	object-fit: contain;
+	background:transparent;
+	justify-content: center;
+}
+.item_detail_box{
+	background: #fffdfb;
+	
+}
+.recommend-band_detail{
+	margin-top: 80px;
+	margin-right: 200px;
+	margin-left: 200px;
+	background: rgba(248, 237, 231, 0.72);
+	border: 1px solid #f0e4df;
+	box-shadow: var(--shadow);
+	display: grid;
+	grid-template-columns: 190px 1fr;
+	gap: 26px;
+	padding: 26px 30px;
+}
+
+.favorite_cart_detail{
+	position: relative;
+	bottom:0px;
+	top:40px;
+	left:150px;
+}
+.favorite_cart_detail img{
+	position: relative;
+	width: 30px;
+	left:30px;
+	
 }
