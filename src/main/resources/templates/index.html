@@ -130,10 +130,6 @@
 	</div>
 
 
-	<div class="line-title">
-		<span>・・・・・・・・・</span>
-	</div>
-
 	<!--ーーーーーーーーー-->
 	<!--ログインしてないときの処理-->
 	<div class="notlogin_top">
@@ -151,7 +147,11 @@
 	</div>
 	<!--ログインしてるときの処理-->
 	<th:block th:if="${session.user} != null">
-		<!--ーーーーーーーーー-->
+	<!--ーーーーーーーーー-->
+
+		<div class="line-title">
+			<span>・・・・・・・・・</span>
+		</div>
 
 		<!--おすすめ-->
 		<div class="title_recommended_items">
