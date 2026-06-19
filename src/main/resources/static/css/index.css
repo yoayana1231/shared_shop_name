@@ -140,7 +140,7 @@ body::before {
 }
 
 .notlogin_top ul {
-/*	font-family: var(--serif);*/
+	/*	font-family: var(--serif);*/
 	font-size: 20px;
 }
 
@@ -510,6 +510,20 @@ body::before {
 	justify-content: center;
 }
 
+.favorite_button_a img {
+	width: 30px;
+	height: auto;
+}
+
+.favorite_button_a button {
+	position: absolute;
+	background: transparent;
+	border: none;
+	top: 15px;
+	right: 9px;
+	cursor: pointer;
+	padding: 10px;
+}
 
 /*ーーーーーーーーーーーーーーーーレビュー数ランキングーーーーーーーーーーーーーーーーーーーー*/
 
@@ -572,6 +586,55 @@ body::before {
 }
 
 .review_ranking_list_two {
-	width: 900px;
-	height: 300px;
+	width: 800px;
+	height: 270px;
+	margin: 20px 0;
+}
+
+.favorite_button_heart button {
+	position: absolute;
+	background: transparent;
+	border: none;
+	top: 15px;
+	right: 9px;
+	cursor: pointer;
+	padding: 10px;
+}
+
+.favorite_button_heart img {
+	width: 30px;
+	height: auto;
+}
+
+.review_ranking_all {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+}
+
+.review_ranking_list {
+	display: flex;
+	flex-direction: column;
+}
+
+.review_ranking_list_ha {
+	position: relative;
+	border: 1px solid #ccc;
+	border-radius: 16px;
+	background: white;
+	box-shadow: 0 18px 48px rgba(84, 66, 59, 0.1);
+	text-align: center;
+	overflow: hidden;
+	isolation: isolate;
+	transition: transform 0.32s ease, box-shadow 0.32s ease;
+}
+
+.item_name_a_list_ha {
+	display: flex;
+	flex-direction: column;
+}
+
+.selling_image_ha {
+	display: flex;
+	flex-direction: flex-start;
 }
