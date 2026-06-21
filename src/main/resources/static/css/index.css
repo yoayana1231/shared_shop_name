@@ -662,9 +662,9 @@ body::before {
 .review_ranking_list_ha {
 	position: relative;
 	border-radius: 16px;
-	box-shadow: 0 18px 48px rgba(84, 66, 59, 0.1);
+	/*	box-shadow: 0 18px 48px rgba(84, 66, 59, 0.1);*/
 	text-align: center;
-	overflow: hidden;
+	/*	overflow: hidden;*/
 	isolation: isolate;
 	transition: transform 0.32s ease, box-shadow 0.32s ease;
 }
@@ -782,4 +782,32 @@ body::before {
 	align-items: flex-end;
 	margin-right: 20px;
 	margin-bottom: 8px;
+}
+
+
+/*ーーーーーーーーーーーーーーーー閲覧商品ーーーーーーーーーーーーーーーーーーーー*/
+
+
+.recently_viewed {
+	font-family: var(--serif);
+	font-size: 20px;
+	border-bottom: 3px solid rgb(223, 207, 226);
+	width: 110px;
+	display: flex;
+	justify-content: space-around;
+}
+
+.recently_viewed_title {
+	font-family: var(--serif);
+	font-size: 90px;
+	margin-top: 10px;
+	font-weight: 100;
+	margin-bottom: 50px;
+}
+
+.recently_viewed_all {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-evenly;
 }
