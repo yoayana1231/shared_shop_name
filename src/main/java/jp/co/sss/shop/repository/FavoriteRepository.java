@@ -20,5 +20,11 @@ public interface FavoriteRepository extends JpaRepository<Favorite, Integer>{
 	@Query("SELECT f.item.id FROM Favorite f WHERE f.user.id = :userId "
 			+ "AND f.deleteFlag = 0")
 	List<Integer>findItemIdsByUserId(@Param("userId") Integer userId);
+	
+	// ログイン中のユーザかつお気に入り登録中かつ商品とカテゴリが存在している
+	@Query("SELECT f FROM Favorite f INNER JOIN Item i ON f.item.id = i.id "
+			+ "INNER JOIN Category c ON f.item.category.id = c.id "
+			+ "WHERE f.user.id =:userId AND f.deleteFlag = 0 AND i.deleteFlag = 0 AND c.deleteFlag = 0")
+	List<Favorite>findByUserIdAndCategoryAndItem(@Param("userId") Integer userId);
 
 }

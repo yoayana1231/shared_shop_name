@@ -32,7 +32,10 @@ public interface ReviewsRepository extends JpaRepository<Reviews, Integer> {
 	List<Map<String, Object>> countReviewsGroupByRatingAndItemId(@Param("itemId") Integer itemId);
 
 	// レビュー数が多い順に商品（Item）とレビュー数を取得する
-	@Query("SELECT r.item, COUNT(r) AS reviewCount FROM Reviews r WHERE r.deleteFlag = 0 GROUP BY r.item ORDER BY reviewCount DESC")
+	@Query("SELECT r.item, COUNT(r) AS reviewCount FROM Reviews r "
+			+ "INNER JOIN Item i ON r.item.id = i.id INNER JOIN Category c ON r.item.category.id = c.id "
+			+ "WHERE r.deleteFlag = 0 AND i.deleteFlag = 0 AND c.deleteFlag = 0 "
+			+ "GROUP BY r.item ORDER BY reviewCount DESC")
 	List<Object[]> findTopItemsByReviewCount();
 
 }

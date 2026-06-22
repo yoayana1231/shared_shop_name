@@ -52,8 +52,10 @@ public class FavoriteController {
 		user.setId(userId);
 		
 		// ログイン中のユーザIDかつ削除フラグが0のものを検索
-		List<Favorite> favoriteItems =
-				favoriteRepository.findByUserIdAndDeleteFlag(userId, 0);
+//		List<Favorite> favoriteItems =
+//				favoriteRepository.findByUserIdAndDeleteFlag(userId, Constant.NOT_DELETED);
+		List<Favorite> favoriteItems = 
+				favoriteRepository.findByUserIdAndCategoryAndItem(userId);
 		
 		// リクエストスコープに格納
 		model.addAttribute("favoriteItems", favoriteItems);
