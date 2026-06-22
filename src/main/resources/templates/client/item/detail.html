@@ -11,6 +11,9 @@
 
 	<!--	<h2 th:class="title" th:text="#{item}+#{title.detail}"></h2>-->
 
+	<th:block th:if="${error}">
+		<div class="error_msg_detail" th:text="${error}"></div>
+	</th:block>
 
 	<div class="all_detail" th:object="${item}">
 		<div class="item_detail_area">
@@ -61,7 +64,7 @@
 						<input type="hidden" th:field="*{id}" />
 						<input type="submit" value="ADD TO CART" class="send_button_detail" />
 					</form>
-					
+
 					<form th:action="@{/client/favorite/update}" method="post">
 						<input type="hidden" name="itemId" th:value="${item.id}" />
 
@@ -182,16 +185,16 @@
 
 		<div class="review_all_calc">
 			<th:block th:switch="${Rating.rating}" th:each="Rating:${itemRating}">
-			<ul>
-				
-				<ol class="star" th:case="1" th:text="'★☆☆☆☆'"></ol>
-				<ol class="star" th:case="2" th:text="'★★☆☆☆'"></ol>
-				<ol class="star" th:case="3" th:text="'★★★☆☆'"></ol>
-				<ol class="star" th:case="4" th:text="'★★★★☆'"></ol>
-				<ol class="star" th:case="5" th:text="'★★★★★'"></ol>
+				<ul>
 
-				<ol th:text="${Rating.count}+'件'"></ol>
-			</ul>
+					<ol class="star" th:case="1" th:text="'★☆☆☆☆'"></ol>
+					<ol class="star" th:case="2" th:text="'★★☆☆☆'"></ol>
+					<ol class="star" th:case="3" th:text="'★★★☆☆'"></ol>
+					<ol class="star" th:case="4" th:text="'★★★★☆'"></ol>
+					<ol class="star" th:case="5" th:text="'★★★★★'"></ol>
+
+					<ol th:text="${Rating.count}+'件'"></ol>
+				</ul>
 			</th:block>
 			<!--			<p th:text="${Rating.rating} + ${Rating.count}+'件'"></p>-->
 			<!--			<div th:text="${Rating.count}+'件'"></div>-->
@@ -209,7 +212,7 @@
 				</th:block>
 				<!--			<p th:text="#{rating}"></p>-->
 				<p class="reviewer" th:text="${review.comments}"></p>
-				
+
 				<th:block th:if="${session.user != null && review.user.id == session.user.id}">
 					<td>
 						<form th:action="@{/client/review/edit/input/{reviewId}(reviewId=${review.id})}" method="get">
@@ -223,10 +226,10 @@
 							<button type="submit" class="delete_button_detail">削除</button>
 						</form>
 					</td>
-<!--					<p class="reviewer_user" th:text="${review.user.name}"></p>-->
+					<!--					<p class="reviewer_user" th:text="${review.user.name}"></p>-->
 
 				</th:block>
-						<p class="reviewer_user" th:text="${review.user.name}+'さん'"></p>
+				<p class="reviewer_user" th:text="${review.user.name}+'さん'"></p>
 
 			</div>
 		</th:block>
