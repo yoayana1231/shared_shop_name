@@ -67,12 +67,25 @@ public class ReviewController {
 	 */
 	@GetMapping("/client/review/edit/input/{reviewId}")
 	public String reviewEdit(@PathVariable Integer reviewId,
-			@ModelAttribute ReviewForm form, Model model) {
+			@ModelAttribute ReviewForm form, HttpSession session, Model model) {
+		
+		// Userオブジェクトを生成
+		User user = new User();
+		// ログイン中のユーザーIDを取得
+		Integer userId = ((UserBean) session.getAttribute("user")).getId();
+		user.setId(userId);
 		
 		// DBから編集するデータを取得する
 		Reviews editReview = reviewRepository.findByIdAndDeleteFlag(reviewId, 0);
 		
-		if (editReview != null) {
+		if (user == null || user.getId() != editReview.getUser().getId()) {
+			// ログイン中ではない時 または 
+			// ログインユーザと編集対象のレビューの入力ユーザが一致しない時
+			// エラーメッセージをリクエストスコープに保存し、商品詳細へ
+			session.setAttribute("error", "レビューが見つからないか、アクセス権限がありません。"
+					+ "商品ページへ移動しました。");
+			return "redirect:/client/item/detail/" + editReview.getItem().getId();
+		} else if (editReview != null) {
 			// データをFormにコピー
 			BeanUtils.copyProperties(editReview, form);
 			Item item = itemRepository.findByIdAndDeleteFlag(editReview.getItem().getId(), Constant.NOT_DELETED);

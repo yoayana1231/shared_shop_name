@@ -349,6 +349,13 @@ public class ClientItemShowController {
 			List<Integer> favoriteItemIds = favoriteRepository.findItemIdsByUserId(userId);
 	        model.addAttribute("favoriteItemIds", favoriteItemIds);
 		}
+		
+		// セッションにエラーメッセージがあればリクエストスコープへ
+		String error = (String) session.getAttribute("error");
+		if (error != null) {
+			model.addAttribute("error", error);
+			session.removeAttribute("error");
+		}
 
 		return "client/item/detail";
 	}
