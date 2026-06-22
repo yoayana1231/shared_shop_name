@@ -106,6 +106,11 @@ public class ClientOrderRegistController {
 		return "client/order/address_input";
 
 	}
+	
+	@RequestMapping(path = "/client/order/address/back", method = RequestMethod.POST)
+	public String backToAddressInput() {
+		return "redirect:/client/order/address/input";
+	}
 
 	@RequestMapping(path = "/client/order/payment/input", method = RequestMethod.POST)
 	public String stepToPayment(@Valid @ModelAttribute("orderForm") OrderForm orderForm, BindingResult bindingResult,
@@ -148,7 +153,7 @@ public class ClientOrderRegistController {
 	}
 
 	@RequestMapping(path = "/client/order/payment/back", method = RequestMethod.POST)
-	public String backToAddressInput() {
+	public String backToPaymentInput() {
 		return "redirect:/client/order/payment/input";
 	}
 
