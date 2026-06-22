@@ -50,9 +50,10 @@ public class ReviewController {
 	public String reviewNew(@PathVariable Integer itemId,
 			@ModelAttribute ReviewForm form, Model model) {
 		
-		// URLから受け取った商品IDをFormに保存
-		Item item = new Item();
-		item.setId(itemId);
+		// 受け取った商品IDから商品を検索
+		Item item = itemRepository.findByIdAndDeleteFlag(itemId, Constant.NOT_DELETED);
+		
+		// 検索した商品をFormに保存
 		form.setItem(item);
 		
 		model.addAttribute("reviewForm", form);
@@ -72,9 +73,10 @@ public class ReviewController {
 		Reviews editReview = reviewRepository.findByIdAndDeleteFlag(reviewId, 0);
 		
 		if (editReview != null) {
-			//データをFormにコピー
+			// データをFormにコピー
 			BeanUtils.copyProperties(editReview, form);
-			form.setItem(editReview.getItem());
+			Item item = itemRepository.findByIdAndDeleteFlag(editReview.getItem().getId(), Constant.NOT_DELETED);
+			form.setItem(item);
 		}
 		
 		model.addAttribute("reviewForm", form);
@@ -92,11 +94,22 @@ public class ReviewController {
 		
 		// 入力画面にエラーがないかチェック
 		if (result.hasErrors()) {
-			// エラーあり→入力画面に戻す
+			// エラーあり
+			// 受け取ったFormの商品IDから商品を検索
+			Item item = itemRepository.findByIdAndDeleteFlag(form.getItem().getId(), Constant.NOT_DELETED);
+			// Item情報をFormに保存
+			form.setItem(item);
+			// リクエストスコープに保存してもう一度入力画面へ
+			model.addAttribute("reviewForm", form);
 			return "client/item/review_input";
 		} else {
-			// エラーなし→formに保存して確認画面へ	
-			model.addAttribute(form);
+			// エラーなし
+			// 受け取ったFormの商品IDから商品を検索
+			Item item = itemRepository.findByIdAndDeleteFlag(form.getItem().getId(), Constant.NOT_DELETED);
+			// Item情報をFormに保存
+			form.setItem(item);
+			// リクエストスコープに保存して確認画面へ
+			model.addAttribute("reviewForm", form);
 			return "client/item/review_check";
 		}
 		
@@ -119,9 +132,7 @@ public class ReviewController {
 			review.setRating(form.getRating());
 			review.setComments(form.getComments());
 		}
-		
-		//BeanUtils.copyProperties(form, review);
-		
+				
 		// Userオブジェクトを生成
 		User user = new User();
 		// ログイン中のユーザーIDを取得
@@ -131,7 +142,7 @@ public class ReviewController {
 		// 商品IDをセット（リダイレクト用）
 		Integer itemId = review.getItem().getId();
 		
-		//ReviewエンティティにUserをセット
+		//ReviewエンティティにUserとItemをセット
 		review.setUser(user);
 		
 		//入力内容をDBに登録
@@ -150,7 +161,12 @@ public class ReviewController {
 	@PostMapping("/client/review/check/back")
 	public String back(@ModelAttribute ReviewForm form, Model model) {
 		
-		model.addAttribute("form", form);
+		// 受け取ったFormの商品IDから商品を検索
+		Item item = itemRepository.findByIdAndDeleteFlag(form.getItem().getId(), Constant.NOT_DELETED);
+		// Item情報をFormに保存
+		form.setItem(item);
+		// リクエストスコープに保存
+		model.addAttribute("reviewForm", form);
 		return "client/item/review_input";
 		
 	}

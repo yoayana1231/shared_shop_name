@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+					<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	th:replace="~{common/layout_5block :: layout(~{::title},~{::body/content()})}">
 
@@ -8,13 +8,19 @@
 </head>
 
 <body>
-
+	
+	<h2 th:class="title" th:text="#{review}+#{check.title.action}"></h2>
+	
 	<!--	<h2 th:class="title" th:text="#{review}+#{check.title.action}"></h2>-->
 	<div class="confirm_review">
 		<div class="all_text_confirm">
 			<p class="confirm_text">レビュー確認</p>
 			<span class="small_confirm_text">以下の内容でよろしければ、レビューを送信してください。</span>
 		</div>
+    
+    <div>商品名</div>
+		<div th:text="${reviewForm.item.name}"></div>
+    
 		<div class="confirm_main">
 			<div class="review_rate_confirm">
 				<div class="review_top_text">評価</div>
