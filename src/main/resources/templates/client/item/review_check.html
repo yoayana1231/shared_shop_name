@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+					<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	th:replace="~{common/layout_5block :: layout(~{::title},~{::body/content()})}">
 
@@ -12,6 +12,9 @@
 	<h2 th:class="title" th:text="#{review}+#{check.title.action}"></h2>
 	
 	<div>
+		<div>商品名</div>
+		<div th:text="${reviewForm.item.name}"></div>
+		
 		<div>評価</div>
 		<div th:switch="${reviewForm.rating}">
 			<span th:case="1">☆</span>

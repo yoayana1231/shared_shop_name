@@ -19,6 +19,8 @@
 					<span th:text="${err.message}"></span><br>
 				</span>
 			</p>
+			
+			
 
 			<!--評価-->
 
@@ -26,7 +28,9 @@
 				<div class="review_input_form">
 					<div><input type="hidden" th:field="*{id}"></div>
 					<div><input type="hidden" th:field="*{item.id}"></div>
-
+					
+					<div th:text="*{item.name}"></div>
+					
 					<div>
 						<label><input type="radio" th:field="*{rating}" value="1">★☆☆☆☆</label><br>
 						<label><input type="radio" th:field="*{rating}" value="2">★★☆☆☆</label><br>
