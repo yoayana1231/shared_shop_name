@@ -63,7 +63,7 @@ public class ClientBasketController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(path = "/client/basket/list", method = RequestMethod.GET)
+	@RequestMapping(path = "/client/basket/list", method = { RequestMethod.GET, RequestMethod.POST })
 	public String showBasket(Model model) {
 
 		// 現在のかごの中身を取得

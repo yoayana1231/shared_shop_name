@@ -106,7 +106,7 @@
 									</form>
 								</div>
 								<div class="cart_a">
-									<form th:action="@{/client/basket/add}" method="post">
+									<form th:action="@{/client/basket/add/calc}" method="post">
 										<input type="hidden" name="id" th:value="${item.id}">
 										<button type="submit" class="cart-button_a" th:if="*{item.stock} > 0">ADD TO
 											CART</button>
@@ -211,7 +211,7 @@
 									</div>
 									<div class="cart_a">
 										<!-- <form th:action="@{/client/basket/add}" method="post" th:if="*{stock > 0}">-->
-										<form th:action="@{/client/basket/add}" method="post">
+										<form th:action="@{/client/basket/add/calc}" method="post">
 											<input type="hidden" name="id" th:value="${recommend.item.id}">
 											<button type="submit" class="cart-button_a"
 												th:if="*{recommend.item.stock} > 0">ADD TO CART</button>
@@ -298,7 +298,7 @@
 								</div>
 								<div class="cart_a">
 									<!-- <form th:action="@{/client/basket/add}" method="post" th:if="*{stock > 0}">-->
-									<form th:action="@{/client/basket/add}" method="post">
+									<form th:action="@{/client/basket/add/calc}" method="post">
 										<input type="hidden" name="id" th:value="${reviews.item.id}">
 										<button type="submit" class="cart-button_one"
 											th:if="*{reviews.item.stock} > 0">ADD TO CART</button>
@@ -355,7 +355,7 @@
 						</div>
 						<div class="cart_reviews">
 							<!-- <form th:action="@{/client/basket/add}" method="post" th:if="*{stock > 0}">-->
-							<form th:action="@{/client/basket/add}" method="post">
+							<form th:action="@{/client/basket/add/calc}" method="post">
 								<input type="hidden" name="id" th:value="${reviews.item.id}">
 								<button type="submit" class="cart-button_two" th:if="*{reviews.item.stock} > 0">ADD TO
 									CART</button>
@@ -437,7 +437,7 @@
 						</div>
 						<div class="cart_recently_viewed">
 							<!-- <form th:action="@{/client/basket/add}" method="post" th:if="*{stock > 0}">-->
-							<form th:action="@{/client/basket/add}" method="post">
+							<form th:action="@{/client/basket/add/calc}" method="post">
 								<input type="hidden" name="id" th:value="${itemHistories.item.id}">
 								<button type="submit" class="cart-button_two"
 									th:if="*{itemHistories.item.stock} > 0">ADD TO
@@ -495,7 +495,7 @@
 						</div>
 						<div class="cart_reviews">
 							<!-- <form th:action="@{/client/basket/add}" method="post" th:if="*{stock > 0}">-->
-							<form th:action="@{/client/basket/add}" method="post">
+							<form th:action="@{/client/basket/add/calc}" method="post">
 								<input type="hidden" name="id" th:value="${itemHistories.item.id}">
 								<button type="submit" class="cart-button_two"
 									th:if="*{itemHistories.item.stock} > 0">ADD TO

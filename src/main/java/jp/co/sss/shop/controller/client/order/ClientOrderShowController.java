@@ -48,7 +48,7 @@ public class ClientOrderShowController {
 	 * @return client/order/list 
 	 */
 	@GetMapping("/client/order/list")
-	public String orderList(Model model, Pageable pageable) {
+	public String orderList(Model model, HttpSession session, Pageable pageable) {
 		
 		// ログイン中のユーザーIDを取得
 		String userName = ((UserBean) session.getAttribute("user")).getName();
@@ -75,6 +75,13 @@ public class ClientOrderShowController {
 		model.addAttribute("pages", orderList);
 		model.addAttribute("orders", orderBeanList);
 		
+		// セッションにエラーメッセージがあればリクエストスコープへ
+		String error = (String) session.getAttribute("error");
+		if (error != null) {
+			model.addAttribute("error", error);
+			session.removeAttribute("error");
+		}
+		
 		return "client/order/list";
 		
 	}
@@ -88,6 +95,18 @@ public class ClientOrderShowController {
 		
 		// 選択された注文情報を生成
 		Order order = orderRepository.getReferenceById(id);
+		
+		// ログイン中のユーザーIDを取得
+		Integer userId = ((UserBean) session.getAttribute("user")).getId();
+		
+		// URLから取得した注文IDの情報がログイン中のユーザのものか判定
+		if (userId != order.getUser().getId()) {
+			// ログインユーザのものではない場合、エラー文を出した上で注文一覧へ戻す
+			session.setAttribute("error", "ご指定の注文情報が見つからないか、アクセス権限がありません。"
+					+ "ログイン中のアカウントの注文一覧へ移動しました。");
+			
+			return "redirect:/client/order/list";
+		}
 		
 		// 表示する注文情報を生成
 		OrderBean orderBean = beanTools.copyEntityToOrderBean(order);

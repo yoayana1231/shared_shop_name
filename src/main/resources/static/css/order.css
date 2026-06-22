@@ -34,6 +34,15 @@
 	align-items: stretch;
 }
 
+.error_msg_order-list{
+	text-align: center;
+	font-size: 20px;
+	background: rgba(255, 243, 246, 0.9);
+	color:red;
+	border-radius: 18px;
+
+}
+
 .orders-aside {
 	position: relative;
 	overflow: hidden;
