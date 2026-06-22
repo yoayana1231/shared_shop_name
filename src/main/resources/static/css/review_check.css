@@ -1,0 +1,120 @@
+@charset "UTF-8";
+.confirm_review{
+	border: 1px solid #ddccc5;
+    border-style: 0.2px;
+    padding: 20px;
+    border-radius: 40px;
+    background: rgb(255, 255, 255);
+    box-shadow: 0 16px 34px rgba(28, 32, 36, 0.08);
+    width: 800px;
+    height: auto;
+     margin-left: 450px;
+    margin-top: 30px;
+}
+.all_text_confirm{
+	text-align: center;
+	margin-bottom: 30px;
+}
+.confirm_text{
+	font-size: 30px;
+	color: #8b5e55;
+	font-weight: bold;
+}
+.small_confirm_text{
+		color: #8b5e55;
+
+}
+.confirm_main{
+	border: 1px solid #ddccc5;
+    border-style: 0.2px;
+    padding:10px 20px 20px 20px;
+    border-radius: 40px;
+    background: rgb(255, 255, 255);
+    box-shadow: 0 16px 34px rgba(28, 32, 36, 0.08);
+    width: 600px;
+    height: auto;
+    text-align: center;
+    margin-top: 10px;
+    margin-left:83px;
+}
+.review_rate_confirm{
+	display: flex;
+	border-bottom: 1px solid #ddccc5;
+	padding: 10px;
+	font-size: 20px;
+	justify-content: center;
+	width: auto;
+	height: auto;
+	
+}
+.review_top_text{
+		color: #8b5e55;
+		font-weight: bold;
+}
+.star_confirm{
+	color: #8b5e55;
+	margin-left: 70px;
+	
+}
+.star_review_confirm{
+	width: auto;
+	height: 30px;
+}
+.review_comment{
+	 white-space: pre-wrap;
+	 word-break: break-word;
+	 background: #faf8f7;
+    border: 1px solid #eee1db;
+    border-radius: 20px;
+    padding: 20px;
+    margin-top: 15px;
+
+    white-space: pre-wrap;
+    word-break: break-word;
+    text-align: left;
+    line-height: 1.8;
+}
+.button_area_confirm{
+	margin-left:158px;
+	gap:10px;
+	margin-top:20px;
+}
+.button_back_confirm{
+	border: 1px solid #ddccc5;
+    border-radius: 999px;
+    background: #fff;
+    color: #8b5e55;
+    cursor: pointer;
+    padding:10px;
+	font-weight: 700;
+	line-height: 2.4rem;
+	min-width: 10rem;
+	font-size: 1rem;
+	box-shadow: 0 0 10px rgba(155, 106, 85, 0.3);
+	margin:40px;
+}
+.button_back_confirm:hover{
+	transition: transform .18s ease, box-shadow .18s ease;
+	transform: translateY(-3px);
+	box-shadow: 0 0 10px rgba(155, 106, 85, 0.3);
+
+}
+.button_send_review{
+	border: 1px solid #ddccc5;
+    border-radius: 999px;
+    background: #8b5e55;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    padding:10px;
+	font-weight: 700;
+	line-height: 2.4rem;
+	min-width: 10rem;
+	font-size: 1rem;
+	box-shadow: 0 0 10px rgba(155, 106, 85, 0.3);
+}
+.button_send_review:hover{
+	transition: transform .18s ease, box-shadow .18s ease;
+	transform: translateY(-3px);
+	box-shadow: 0 0 10px rgba(155, 106, 85, 0.3);
+
+}

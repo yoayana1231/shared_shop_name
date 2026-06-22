@@ -51,7 +51,7 @@
 								th:text="'レビューを見る（'+${reviewsSize}+'件）'"></span></a>
 					</div>
 					<p class="stock_item" th:if="*{stock > 5}" th:text="#{data.in.stock}"></p>
-					<p class="stock_item" th:if="*{stock >= 1 and 5 >= stock }" th:text="*{stock}"></p>
+					<p class="stock_item" th:if="*{stock >= 1 and 5 >= stock }" th:text="'残り在庫&nbsp;'+*{stock}+'個'"></p>
 					<p class="stock_item" th:if="*{stock == 0}" th:text="#{data.out.of.stock}"></p>
 					<p class="script" th:text="*{description}"></p>
 				</div>
@@ -61,6 +61,7 @@
 						<input type="hidden" th:field="*{id}" />
 						<input type="submit" value="ADD TO CART" class="send_button_detail" />
 					</form>
+					
 					<form th:action="@{/client/favorite/update}" method="post">
 						<input type="hidden" name="itemId" th:value="${item.id}" />
 
@@ -208,6 +209,7 @@
 				</th:block>
 				<!--			<p th:text="#{rating}"></p>-->
 				<p class="reviewer" th:text="${review.comments}"></p>
+				
 				<th:block th:if="${session.user != null && review.user.id == session.user.id}">
 					<td>
 						<form th:action="@{/client/review/edit/input/{reviewId}(reviewId=${review.id})}" method="get">
@@ -221,9 +223,11 @@
 							<button type="submit" class="delete_button_detail">削除</button>
 						</form>
 					</td>
-					<p class="reviewer_user" th:text="${session.user.name}"></p>
+<!--					<p class="reviewer_user" th:text="${review.user.name}"></p>-->
 
 				</th:block>
+						<p class="reviewer_user" th:text="${review.user.name}+'さん'"></p>
+
 			</div>
 		</th:block>
 		<!--				<form th:action="@{/client/item/list/1}" method="post">-->
