@@ -95,6 +95,7 @@ header {
 		transform 0.24s ease,
 		box-shadow 0.24s ease;
 }
+
 small {
 	color: #8b5e55;
 }
@@ -191,7 +192,7 @@ small {
     height: 30px;
     line-height: 30px;
     text-shadow: 1px 1px 1px #fff;
-    font-size: 8px;
+/*    font-size: 8px;*/
 }
 
 footer {

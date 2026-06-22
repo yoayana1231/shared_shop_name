@@ -19,49 +19,49 @@
 				<p class="confirm_text">レビュー確認</p>
 				<span class="small_confirm_text">以下の内容でよろしければ、レビューを送信してください。</span>
 			</div>
+			<form th:action="@{/client/review/check/back}" method="post" th:object="${reviewForm}">
 
-			<div class="review_check">
-				<div class="review_check_mozi">商品名</div>
-				<div class="review_check_mozi_a" th:text="${reviewForm.item.name}"></div>
-			</div>
-
-			<!--写真-->
-			<div class="review_form_photo">
-				<img th:src="@{/images/photo/{imgName}(imgName=*{item.image})}">
-				<div class="item_name_review_1" th:text="*{item.name}"></div>
-			</div>
-
-			<div class="confirm_main">
-				<div class="review_rate_confirm">
-					<div class="review_top_text">評価</div>
-					<div class="star_review_confirm" th:switch="${reviewForm.rating}">
-						<span class="star_confirm" th:case="1">★☆☆☆☆</span>
-						<span class="star_confirm" th:case="2">★★☆☆☆</span>
-						<span class="star_confirm" th:case="3">★★★☆☆</span>
-						<span class="star_confirm" th:case="4">★★★★☆</span>
-						<span class="star_confirm" th:case="5">★★★★★</span>
+				<div class="review_check">
+					
+					<!--写真-->
+					<div class="review_form_photo_a">
+						<img th:src="@{/images/photo/{imgName}(imgName=${reviewForm.item.image})}">
 					</div>
+					
+					<div class="review_check_mozi_a" th:text="${reviewForm.item.name}"></div>
 				</div>
-				<!--			<div>コメント</div>-->
-				<div class="review_comment" th:text="${reviewForm.comments}"></div>
-			</div>
-			<div class="button_area_confirm">
-				<form th:action="@{/client/review/check/back}" method="post" th:object="${reviewForm}">
+
+				<div class="confirm_main">
+					<div class="review_rate_confirm">
+						<div class="review_top_text">評価</div>
+						<div class="star_review_confirm" th:switch="${reviewForm.rating}">
+							<span class="star_confirm" th:case="1">★☆☆☆☆</span>
+							<span class="star_confirm" th:case="2">★★☆☆☆</span>
+							<span class="star_confirm" th:case="3">★★★☆☆</span>
+							<span class="star_confirm" th:case="4">★★★★☆</span>
+							<span class="star_confirm" th:case="5">★★★★★</span>
+						</div>
+					</div>
+					<!--			<div>コメント</div>-->
+					<div class="review_comment" th:text="${reviewForm.comments}"></div>
+				</div>
+				<div class="button_area_confirm">
+
 					<input type="hidden" th:field="*{id}">
 					<input type="hidden" name="item.id" th:value="${reviewForm.item != null ? reviewForm.item.id : ''}">
 					<input type="hidden" th:field="*{rating}">
 					<input type="hidden" th:field="*{comments}">
 					<input type="submit" value="戻る" class="button_back_confirm">
-				</form>
+			</form>
 
-				<form th:action="@{/client/review/check/save}" method="post" th:object="${reviewForm}">
-					<input type="hidden" th:field="*{id}">
-					<input type="hidden" name="item.id" th:value="${reviewForm.item != null ? reviewForm.item.id : ''}">
-					<input type="hidden" th:field="*{rating}">
-					<input type="hidden" th:field="*{comments}">
-					<input type="submit" value="送信" class="button_send_review">
-				</form>
-			</div>
+			<form th:action="@{/client/review/check/save}" method="post" th:object="${reviewForm}">
+				<input type="hidden" th:field="*{id}">
+				<input type="hidden" name="item.id" th:value="${reviewForm.item != null ? reviewForm.item.id : ''}">
+				<input type="hidden" th:field="*{rating}">
+				<input type="hidden" th:field="*{comments}">
+				<input type="submit" value="送信" class="button_send_review">
+			</form>
+		</div>
 		</div>
 	</main>
 </body>
