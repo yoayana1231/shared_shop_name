@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	th:replace="~{common/layout_5block :: layout(~{::title},~{::body/content()})}">
+	th:replace="~{common/layout_review :: layout(~{::title},~{::body/content()})}">
 
 <head>
 	<meta charset="UTF-8">
@@ -9,26 +9,29 @@
 
 <body class="user">
 
-	<!--	<h2 th:class="title" th:text="#{review}+#{input.title.action}"></h2>-->
+
+<!--	<h2 th:class="title" th:text="#{review}+#{input.title.action}"></h2>-->
 	<div class="review_form">
-		<form id="reviewForm" th:action="@{/client/review/check}" method="post" th:object="${reviewForm}">
+		<form class="review_forms" th:action="@{/client/review/check}" method="post" th:object="${reviewForm}">
 
-			<!--エラーメッセージ-->
-			<p class="error_msg_review">
-				<span th:each="err: ${#fields.detailedErrors()}">
-					<span th:text="${err.message}"></span><br>
-				</span>
-			</p>
-			
-			
+			<!--写真-->
+			<div class="review_form_photo">
+				<img th:src="@{/images/photo/{imgName}(imgName=*{item.image})}">
+				<div th:text="*{item.name}"></div>
+			</div>
+			<div class="review_form_message">
+				<!--エラーメッセージ-->
+				<p class="error_msg_review">
+					<span th:each="err: ${#fields.detailedErrors()}">
+						<span th:text="${err.message}"></span><br>
+					</span>
+				</p>
 
-			<!--評価-->
-
-			<div>
+				<!--評価-->
 				<div class="review_input_form">
 					<div><input type="hidden" th:field="*{id}"></div>
-					<div><input type="hidden" th:field="*{item.id}"></div>
-					
+					<!--					<div><input type="hidden" th:field="*{item.id}"></div>-->
+
 					<div th:text="*{item.name}"></div>
 
 					<div class="review_radio">
@@ -55,7 +58,7 @@
 							<label class="stars star-1" for="star-1"></label>
 
 						</div>
-            
+
 					</div>
 
 					<!--レビュー記入欄-->
@@ -74,27 +77,27 @@
 				</div>
 				<!--				<div class="send_button">-->
 				<!--					<input type="submit" value="確認" class="send_button_go_check_review" />-->
-				<!--				</div>-->
-
 			</div>
 		</form>
-		<div class="button_area">
+	</div>
 
-			<form th:action="@{/client/item/detail/{id}(id=${reviewForm.item.id})}" method="get">
-				<input type="submit" value="戻る" class="back_button_review_input" />
-			</form>
+	<div class="button_area">
 
-			<input type="submit" value="確認" class="send_button_go_check_review" form="reviewForm" />
+		<form th:action="@{/client/item/detail/{id}(id=${reviewForm.item.id})}" method="get">
+			<input type="submit" value="戻る" class="back_button_review_input" />
+		</form>
 
-		</div>
-		<!--		<form >-->
-		<!--			<div class="send_button">-->
-		<!--				<input type="submit" value="確認" class="send_button_go_check_review" />-->
-		<!--			</div>-->
-		<!--		</form>-->
-		<!--		<form th:action="@{/client/item/detail/{id}(id=${reviewForm.item.id})}" method="get">-->
-		<!--			<input type="submit" value="戻る" class="back_button_review_input" />-->
-		<!--		</form>-->
+		<input type="submit" value="確認" class="send_button_go_check_review" form="reviewForm" />
+
+	</div>
+	<!--		<form >-->
+	<!--			<div class="send_button">-->
+	<!--				<input type="submit" value="確認" class="send_button_go_check_review" />-->
+	<!--			</div>-->
+	<!--		</form>-->
+	<!--		<form th:action="@{/client/item/detail/{id}(id=${reviewForm.item.id})}" method="get">-->
+	<!--			<input type="submit" value="戻る" class="back_button_review_input" />-->
+	<!--		</form>-->
 	</div>
 	<!--	<div class="cont">-->
 	<!--		<div class="title">-->

@@ -4,9 +4,10 @@
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<link rel="stylesheet" type="text/css" th:href="@{/css/layout.css}" />
-	<link rel="stylesheet" type="text/css" th:href="@{/css/stylesheet.css}" />
-	<!--	//新しく作ったCSS-->
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;600&display=swap"
+		rel="stylesheet" />
 	<link rel="stylesheet" type="text/css" th:href="@{/css/itemlist.css}" />
 	<link rel="stylesheet" type="text/css" th:href="@{/css/itemdetail.css}" />
 	<link rel="stylesheet" type="text/css" th:href="@{/css/cart.css}" />
@@ -18,35 +19,32 @@
 	<link rel="stylesheet" type="text/css" th:href="@{/css/client_input/clientcheck_input.css}" />
 	<link rel="stylesheet" type="text/css" th:href="@{/css/client_input/clientcomplete_input.css}" />
 	<link rel="stylesheet" type="text/css" th:href="@{/css/header.css}" />
-<!--	<link rel="stylesheet" type="text/css" th:href="@{/css/review_input.css}" />-->
-<!--	<link rel="stylesheet" type="text/css" th:href="@{/css/review_check.css}" />-->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/layout.css}" />
+<!--		<link rel="stylesheet" type="text/css" th:href="@{/css/stylesheet.css}" />-->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/review_input.css}" />
 
 
+	<!--	<link rel="stylesheet" type="text/css" th:href="@{/css/review_check.css}" />-->
 
-	<title th:replace="${title}"></title>
+
 </head>
+<!--/* ヘッダー */-->
+<header>
+	<div th:replace="~{common/header :: layout-header}"></div>
+</header>
 
-<body class="user">
-	<!--/* ヘッダー */-->
-	<header>
-		<div th:replace="~{common/header :: layout-header}"></div>
-	</header>
-	<!--/* ナビゲーションバー */-->
-	<nav th:if="${session.user == null or session.user.authority == 2}" class="navi_area">
-		<div th:replace="~{common/menu :: layout-menu}"></div>
-	</nav>
+<!--/* ナビゲーションバー */-->
+<nav th:if="${session.user == null or session.user.authority == 2}" class="navi_area">
+	<div th:replace="~{common/menu :: layout-menu}"></div>
+</nav>
 
-	<div class="container">
-		<!--/* サイドバー */-->
-		<!--		<aside th:replace="~{common/sidebar :: layout-sidebar}"></aside>-->
+<title th:replace="${title}"></title>
 
-		<!--/* メイン */-->
-		<article class="main">
-			<div th:replace="${body}"></div>
-		</article>
-	</div>
+<body class="user-detail-clean-body">
+	<div th:replace="${body}"></div>
 
-<!--	/* フッター */-->
+
+<!--		/* フッター */-->
 	<footer>
 		<div th:replace="~{common/footer :: layout-footer}"></div>
 	</footer>
