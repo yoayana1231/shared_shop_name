@@ -629,21 +629,18 @@ button {
 	padding: 10px;
 }
 
-
 .cart:hover {
 	transition: transform .18s ease, box-shadow .18s ease;
 	color: rgb(255, 255, 255);
-	
 }
 
 .cart-button_a:hover {
-
 	background-color: rgb(0, 0, 0);
 	border-style: solid;
 /*	border-width: 0.3px;*/
 	color: rgb(255, 255, 255);
 	background-color: rgb(63, 63, 63);
-	cursor: pointer
+	cursor: pointer;
 }
 
 body {
