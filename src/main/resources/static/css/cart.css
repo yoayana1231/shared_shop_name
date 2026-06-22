@@ -222,7 +222,7 @@ input {
 	justify-items: start;
 	font-size: 12px;
 	color: #78635c;
-	
+
 }
 
 .item-actions a {
@@ -237,8 +237,8 @@ input {
 	color: #9a6f66;
 	cursor: pointer;
 	padding: 10px;
-	top:15px;
-	left:40px;
+	top: 15px;
+	left: 40px;
 }
 
 .continue-btn {
@@ -261,15 +261,15 @@ input {
 	width: 220px;
 	height: 44px;
 	margin-top: 30px;
-	margin-right:10px;
+	margin-right: 10px;
 	border: 1px solid #dfc8c0;
 	background: #fff;
 	color: #5f4d47;
 	font-size: 12px;
 	margin: 10px;
 	cursor: pointer;
-	
-	
+
+
 }
 
 .summary-card {
@@ -440,38 +440,42 @@ input {
 	bottom: 38px;
 	left: 60px;
 }
-.reccomend_box{
+
+.reccomend_box {
 	background-color: white;
 	border: 1px solid #f0e4df;
 }
-.favorite_cart img{
+
+.favorite_cart img {
 	width: 30px;
 	position: relative;
-	bottom:0px;
-	top:40px;
-	left:150px;
+	bottom: 0px;
+	top: 40px;
+	left: 150px;
 }
-.recommend_img img{
-	margin-left:65px;
+
+.recommend_img img {
+	margin-left: 65px;
 	width: 80px;
 	height: 120px;
 	object-fit: contain;
-	background:transparent;
+	background: transparent;
 	justify-content: center;
-	
+
 }
+
 .recommend-items img {
-/*	height: 92px;*/
-/*	object-fit: contain;*/
-/*	background:transparent;*/
-/*	justify-content: center;*/
-	
+	/*	height: 92px;*/
+	/*	object-fit: contain;*/
+	/*	background:transparent;*/
+	/*	justify-content: center;*/
+
 }
 
 .recommend-items p {
 	margin: 0 0 20px;
-/*	color: #d19a8f;*/
-/*	font-size: 10px;*/
+	/*	color: #d19a8f;*/
+	/*	font-size: 10px;*/
 	background-color: white;
 }
 
@@ -482,10 +486,12 @@ input {
 	font-weight: bold;
 
 }
-.recommmend_text{
-	padding:10px;
+
+.recommmend_text {
+	padding: 10px;
 	text-align: center;
 }
+
 /*.recommmend_text p{*/
 /*	font-size: 20px;*/
 /*		color:black;*/
@@ -493,39 +499,43 @@ input {
 /*}*/
 .recommend-items span {
 	font-size: 12px;
-		background-color: white;
+	background-color: white;
 
 }
 
 .recommend-items button {
-	position:relative;
+	position: relative;
 	border: 0;
 	background: transparent;
 	color: #9a6f66;
 	font-size: 18px;
 	cursor: pointer;
-	bottom:20px;
+	bottom: 20px;
 }
+
 .rec_item_name {
-	color:black;
+	color: black;
 	font-size: 15px;
-	position:relative;
-	bottom:10px;
+	position: relative;
+	bottom: 10px;
+	font-family: var(--serif);
 }
-.rec_cat_name{
+
+.rec_cat_name {
 	color: #9a6f66;
 	font-size: 15px;
 }
-.item_detail_rec_box{
-	
+
+.item_detail_rec_box {}
+
+.favorite_button_a {
+	position: relative;
+	bottom: 25px;
+	left: 10px;
+
 }
-.favorite_button_a{
-	position:relative;
-	bottom:25px;
-	left:10px;	
-	
-}
-.favorite_button_a img{
+
+.favorite_button_a img {
 	width: 100%;
 	height: 100%;
 }
