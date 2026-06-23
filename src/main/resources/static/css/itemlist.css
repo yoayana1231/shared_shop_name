@@ -437,8 +437,9 @@ a {
 
 .ranking-card_list li {
 	counter-increment: rank;
-	display: grid;
-	grid-template-columns: 26px 44px 1fr;
+/*	display: grid;*/
+	display: flex;
+/*	grid-template-columns: 26px 44px 1fr;*/
 	gap: 11px;
 	align-items: center;
 	min-width: 0;
@@ -453,13 +454,27 @@ a {
 	background: #f4ddd6;
 	color: #af776c;
 	font-size: 11px;
+	/**/
+	flex-shrink: 0;
+}
+
+/**/
+.ranking-card_list li a {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    flex-grow: 1;
+    min-width: 0;
+    text-decoration: none;
+    color: inherit;
 }
 
 .ranking-card_list img {
 	width: 44px;
 	height: 44px;
 	object-fit: contain;
-	margin: 10px;
+/*	margin: 10px;*/
+	flex-shrink: 0;
 }
 
 .ranking-card_list span {

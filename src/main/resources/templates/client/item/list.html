@@ -23,7 +23,7 @@
 		</div>
 		<div class="hero-image" role="img" aria-label="cosmetics on marble table"></div>
 		<div class="hero-pager" aria-hidden="true">
-			<span class="is-current">01</span><span>02</span><span>03</span>
+		<span class="is-current">01</span><span>02</span><span>03</span>
 		</div>
 	</section>
 	<div class="wide-banners">
@@ -79,15 +79,16 @@
 						<span>RANKING</span><small>人気アイテム</small>
 					</div>
 					<ol>
-						<li>
-							<img th:src="@{/images/photo/shopping.webp}" alt="" /><span>さおりっぷ<small>¥3500</small></span>
-						</li>
-						<li>
-							<img th:src="@{/images/photo/shopping3.webp}"
-								alt="" /><span>蜜ひとくち<small>¥3000</small></span>
-						</li>
-						<li>
-							<img th:src="@{/images/photo/shopping4.webp}" alt="" /><span>恋つぼみ<small>¥3450</small></span>
+						<li th:each="rank, status: ${ranking}" th:if="${status.count <= 3}">
+							<a th:href="@{/client/item/detail/{id}(id=${rank.id})}">
+								<img th:src="@{/images/photo/{imgName}(imgName=${rank.image})}"
+									th:if="${rank.image != null}" />
+								<img th:src="@{/images/common/no_image.jpg}" th:if="${rank.image == null}" />
+								<span>
+									<small th:text="${rank.name}"></small>
+									<small th:text="${rank.price}"></small>
+								</span>
+							</a>
 						</li>
 					</ol>
 					<a th:href="@{/client/item/list/2(categoryId=${categoryId})}">人気アイテムをもっとみる →</a>
