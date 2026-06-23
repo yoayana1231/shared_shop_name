@@ -132,33 +132,55 @@
 	position: relative;
 	margin: 38px 25px 30px 25px;
 	display: flex;
+	flex-wrap: wrap;
+	width: auto;
+	justify-content: center;
+	font-weight: bold;
 	gap: 52px;
 	font-size: 15px;
 	color: #97827a;
 	top: 30px;
+/*	line-height: 10px;*/
+	
+	
 }
+/*#97827a;*/
 
+.all_list_category{
+/*	padding-top: 5px;*/
+	font-size: 15px;
+	position: relative;
+	
+	
+}
+/* rgb(249, 230, 215);*/
 a {
 	color: inherit;
 	text-decoration: none;
 }
 
 .category-tabs a {
-	padding-bottom: 10px;
 	position: relative;
+	background: rgb(249, 230, 215);
+	border-radius: 8px;
+	padding: 5px 10px;
 }
-
+/*.active {*/
+/*	position: relative;*/
+/*	bottom:10px;*/
+/*}*/
 .category-tabs .active {
 	color: #c98378;
+	
 }
 
 .category-tabs .active:after {
 	content: "";
-	position: absolute;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	height: 1px;
+/*	position: absolute;*/
+/*	left: 0;*/
+/*	right: 0;*/
+/*	bottom: 0;*/
+/*	height: 1px;*/
 	background: #d8a195;
 }
 
@@ -415,8 +437,9 @@ a {
 
 .ranking-card_list li {
 	counter-increment: rank;
-	display: grid;
-	grid-template-columns: 26px 44px 1fr;
+/*	display: grid;*/
+	display: flex;
+/*	grid-template-columns: 26px 44px 1fr;*/
 	gap: 11px;
 	align-items: center;
 	min-width: 0;
@@ -431,13 +454,27 @@ a {
 	background: #f4ddd6;
 	color: #af776c;
 	font-size: 11px;
+	/**/
+	flex-shrink: 0;
+}
+
+/**/
+.ranking-card_list li a {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    flex-grow: 1;
+    min-width: 0;
+    text-decoration: none;
+    color: inherit;
 }
 
 .ranking-card_list img {
 	width: 44px;
 	height: 44px;
 	object-fit: contain;
-	margin: 10px;
+/*	margin: 10px;*/
+	flex-shrink: 0;
 }
 
 .ranking-card_list span {

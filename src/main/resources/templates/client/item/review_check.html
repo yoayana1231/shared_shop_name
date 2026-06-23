@@ -22,24 +22,32 @@
 			<form th:action="@{/client/review/check/back}" method="post" th:object="${reviewForm}">
 
 				<div class="review_check">
-					
+
 					<!--写真-->
 					<div class="review_form_photo_a">
 						<img th:src="@{/images/photo/{imgName}(imgName=${reviewForm.item.image})}">
 					</div>
-					
-					<div class="review_check_mozi_a" th:text="${reviewForm.item.name}"></div>
+
+					<!--					<div class="review_check_mozi_a" th:text="${reviewForm.item.name}"></div>-->
 				</div>
 
 				<div class="confirm_main">
 					<div class="review_rate_confirm">
 						<div class="review_top_text">評価</div>
 						<div class="star_review_confirm" th:switch="${reviewForm.rating}">
-							<span class="star_confirm" th:case="1">★☆☆☆☆</span>
-							<span class="star_confirm" th:case="2">★★☆☆☆</span>
-							<span class="star_confirm" th:case="3">★★★☆☆</span>
-							<span class="star_confirm" th:case="4">★★★★☆</span>
-							<span class="star_confirm" th:case="5">★★★★★</span>
+							<span class="star_confirm" th:case="5">
+								<span class="star_gold">★</span><span class="star_black">★★★★</span>
+							</span>
+							<span class="star_confirm" th:case="4">
+								<span class="star_gold">★★</span><span class="star_black">★★★</span>
+							</span>
+							<span class="star_confirm" th:case="3">
+								<span class="star_gold">★★★</span><span class="star_black">★★</span>
+							</span>
+							<span class="star_confirm" th:case="2">
+								<span class="star_gold">★★★★</span><span class="star_black">★</span>
+							</span>
+							<span class="star_gold" th:case="1">★★★★★</span>
 						</div>
 					</div>
 					<!--			<div>コメント</div>-->

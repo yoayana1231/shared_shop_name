@@ -59,13 +59,17 @@
 }
 
 .star_confirm {
-	color: #8b5e55;
-	margin-left: 70px;
+	
+	
 }
-
+.star_gold{
+	color: #FD4;
+	
+}
 .star_review_confirm {
 	width: auto;
 	height: 30px;
+	margin-left: 20px;
 }
 
 .review_comment {
