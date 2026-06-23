@@ -374,13 +374,14 @@ body::before {
 	height: 310px;
 	background: #ffffff;
 	border-radius: 10px;
-	transition: transfsorm 0.32s ease, box-shadow 0.32s ease;
+	box-shadow: 5px 10px 10px rgba(84, 66, 59, 0.2);
+/*	transition: transfsorm 0.32s ease, box-shadow 0.32s ease;*/
 }
 
-.category_hako:hover {
-	transform: translateY(-8px);
-	box-shadow: 0 18px 48px rgba(84, 66, 59, 0.2);
-}
+/*.category_hako:hover {*/
+/*	transform: translateY(-8px);*/
+/*	box-shadow: 0 18px 48px rgba(84, 66, 59, 0.2);*/
+/*}*/
 
 .category_name {
 	display: flex;
@@ -388,7 +389,7 @@ body::before {
 	letter-spacing: 0.16em;
 	margin: 10px 0px 10px;
 	color: rgb(0, 0, 64);
-	/*	font-family: var(--serif);*/
+		font-family: var(--serif);
 	padding: 2px 6px;
 	border-radius: 10px;
 	font-weight: 600;
@@ -832,31 +833,6 @@ body::before {
 	margin-bottom: 50px;
 }
 
-/*.recently_viewed_list_two,*/
-/*.recently_viewed_list,*/
-
-
-
-.recently_viewed_list_wa {
-	position: relative;
-	/*	border: 1px solid #ccc;*/
-	/*	border-radius: 16px;*/
-	padding: 10px;
-	background: white;
-	box-shadow: 0 18px 48px rgba(84, 66, 59, 0.1);
-	text-align: center;
-	/*	overflow: hidden;*/
-	isolation: isolate;
-	transform: translateY(0);
-	/*	transition: transform 0.32s ease, box-shadow 0.32s ease;*/
-}
-
-/*.recently_viewed_list_wa:hover,*/
-/*.recently_viewed_list_twoha:hover {*/
-/*	transform: translateY(-5px);*/
-/*	box-shadow: rgba(84, 66, 59, 0.2) 0px 24px 56px;*/
-/*}*/
-
 .recently_viewed_list {
 	display: flex;
 	flex-direction: row;
@@ -872,10 +848,15 @@ body::before {
 	margin: 0px 10px;
 	height: 400px;
 	width: 500px;
-	background: #fff3f1;
 	position: relative;
 	display: inline-block;
 	max-width: 100%;
+	padding: 10px;
+	box-shadow: 0 18px 48px rgba(84, 66, 59, 0.1);
+	text-align: center;
+	isolation: isolate;
+	transform: translateY(0);
+	background: #ffffff;
 }
 
 .recently_viewed_img img {
@@ -902,8 +883,6 @@ body::before {
 	margin-bottom: 8px;
 	justify-content: center;
 }
-
-
 
 .recently_viewed_img_two {
 	display: flex;
@@ -984,10 +963,6 @@ body::before {
 	margin-bottom: 2px;
 	font-family: var(--serif);
 }
-
-
-
-
 
 /* 真ん中上側のテープ */
 .recently_viewed_list_wa:after {
