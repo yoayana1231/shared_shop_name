@@ -192,6 +192,9 @@ public class ClientItemShowController {
 		
 		model.addAttribute("id", categoryId);
 		
+		// ランキング表示用で売れ筋を検索
+		model.addAttribute("ranking", itemRepository.findAllByQuantityDesc());
+		
 		// ログイン中のユーザー情報を取得
 		UserBean userBean = (UserBean) session.getAttribute("user");
 		if (userBean != null) {
@@ -219,6 +222,9 @@ public class ClientItemShowController {
 		
 		model.addAttribute("categories", categoryRepository.findAll());
 		model.addAttribute("items", itemRepository.findByNameContainingAndDeleteFlag(search, Constant.NOT_DELETED));
+		
+		// ランキング表示用で売れ筋を検索
+		model.addAttribute("ranking", itemRepository.findAllByQuantityDesc());
 		
 		// ログイン中のユーザー情報を取得
 		UserBean userBean = (UserBean) session.getAttribute("user");
