@@ -113,7 +113,7 @@ body::before {
 	/* 文字の色 */
 }
 
-.non_message{
+.non_message {
 	font-size: 20px;
 	margin-left: 20px;
 }
@@ -369,34 +369,56 @@ body::before {
 	color: #6d808b;
 }
 
+.category_hako {
+	width: 380px;
+	height: 310px;
+	background: #ffffff;
+	border-radius: 10px;
+	transition: transfsorm 0.32s ease, box-shadow 0.32s ease;
+}
+
+.category_hako:hover {
+	transform: translateY(-8px);
+	box-shadow: 0 18px 48px rgba(84, 66, 59, 0.2);
+}
+
 .category_name {
 	display: flex;
-	justify-content: space-evenly;
 	font-size: 18px;
 	letter-spacing: 0.16em;
 	margin: 10px 0px 10px;
-	color: #6d808b;
-	font-family: var(--serif);
+	color: rgb(0, 0, 64);
+	/*	font-family: var(--serif);*/
+	padding: 2px 6px;
+	border-radius: 10px;
+	font-weight: 600;
 }
 
 .category_list_a {
 	margin: 10px auto;
 }
 
+.category_name_div {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+
 .category_list_a img {
 	width: 380px;
 	height: 250px;
 	object-fit: cover;
 	display: block;
-	border: 15px solid #fffaf6;
+	border: 20px solid #ffffff;
 	border-radius: 8px;
-	transition: transform 0.32s ease, box-shadow 0.32s ease;
+	/*	transition: transform 0.32s ease, box-shadow 0.32s ease;*/
 }
 
-.category_list_a img:hover {
-	transform: translateY(-8px);
-	box-shadow: 0 18px 48px rgba(84, 66, 59, 0.2);
-}
+/*.category_list_a img:hover {*/
+/*	transform: translateY(-8px);*/
+/*	box-shadow: 0 18px 48px rgba(84, 66, 59, 0.2);*/
+/*}*/
 
 /*ーーーーーーーーーーーーーーーー売れ筋商品ーーーーーーーーーーーーーーーーーーーー*/
 
@@ -498,6 +520,7 @@ body::before {
 .item_price_a {
 	font-size: 25px;
 	font-family: var(--serif);
+	margin-top: 3px;
 }
 
 .item_card_list_selling {
@@ -697,6 +720,12 @@ body::before {
 	margin-bottom: 2px;
 }
 
+.item_name_a_list_wa {
+	font-size: 18px;
+	margin-top: 10px;
+	margin-bottom: 2px;
+}
+
 .cart-button_one {
 	color: #f3fbff;
 	padding: 10px;
@@ -808,26 +837,25 @@ body::before {
 
 
 
-.recently_viewed_list_wa,
-.recently_viewed_list_twoha {
+.recently_viewed_list_wa {
 	position: relative;
-	border: 1px solid #ccc;
-	border-radius: 16px;
+	/*	border: 1px solid #ccc;*/
+	/*	border-radius: 16px;*/
 	padding: 10px;
 	background: white;
 	box-shadow: 0 18px 48px rgba(84, 66, 59, 0.1);
 	text-align: center;
-	overflow: hidden;
+	/*	overflow: hidden;*/
 	isolation: isolate;
 	transform: translateY(0);
-	transition: transform 0.32s ease, box-shadow 0.32s ease;
+	/*	transition: transform 0.32s ease, box-shadow 0.32s ease;*/
 }
 
-.recently_viewed_list_wa:hover,
-.recently_viewed_list_twoha:hover {
-	transform: translateY(-5px);
-	box-shadow: rgba(84, 66, 59, 0.2) 0px 24px 56px;
-}
+/*.recently_viewed_list_wa:hover,*/
+/*.recently_viewed_list_twoha:hover {*/
+/*	transform: translateY(-5px);*/
+/*	box-shadow: rgba(84, 66, 59, 0.2) 0px 24px 56px;*/
+/*}*/
 
 .recently_viewed_list {
 	display: flex;
@@ -841,17 +869,23 @@ body::before {
 .recently_viewed_list_wa {
 	display: flex;
 	flex-direction: column;
-	margin: 0px 30px;
-	height: 700px;
+	margin: 0px 10px;
+	height: 400px;
 	width: 500px;
+	background: #fff3f1;
+	position: relative;
+	display: inline-block;
+	max-width: 100%;
 }
 
 .recently_viewed_img img {
-	width: 300px;
-	height: 300px;
+	width: 250px;
+	height: 250px;
 	object-fit: contain;
 	filter: brightness(110%);
-	margin-top: 15px;
+	background: white;
+	padding: 10px;
+	margin-top: 20px;
 }
 
 .item_name_a_list_wao {
@@ -924,6 +958,7 @@ body::before {
 	background-color: black;
 	color: #f3fbff;
 	padding: 10px;
+	width: 140px;
 }
 
 .cart-button_a:hover,
@@ -935,4 +970,43 @@ body::before {
 	color: rgb(255, 255, 255);
 	background-color: rgb(63, 63, 63);
 	cursor: pointer;
+}
+
+.item_name_a_list_haaa {
+	font-size: 23px;
+	margin-top: 10px;
+	margin-bottom: 2px;
+}
+
+.item_name_a_list_waoh {
+	font-size: 18px;
+	margin-top: 15px;
+	margin-bottom: 2px;
+	font-family: var(--serif);
+}
+
+
+
+
+
+/* 真ん中上側のテープ */
+.recently_viewed_list_wa:after {
+	content: "";
+	position: absolute;
+	top: -20px;
+	/* 画像から上に20pxはみ出させる */
+	left: 50%;
+	transform: translateX(-50%);
+	/* 左右中央揃え */
+	width: 150px;
+	height: 40px;
+	/* 薄いベージュのマスキングテープ */
+	background-color: rgb(215 200 240 / 70%);
+	/* 斜めのストライプ模様（オプション） */
+	background-image: repeating-linear-gradient(45deg,
+			transparent,
+			transparent 5px,
+			rgba(255, 255, 255, 0.3) 5px,
+			rgba(255, 255, 255, 0.3) 10px);
+	border-radius: 2px;
 }
