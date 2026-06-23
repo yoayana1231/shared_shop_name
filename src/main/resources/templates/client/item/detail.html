@@ -221,7 +221,7 @@
 						</form>
 					</td>
 					<td>
-						<form th:action="@{/client/review/delete}" method="post">
+						<form th:action="@{/client/review/delete}" method="post" class="js-delete-form">
 							<input type="hidden" name="reviewId" th:value="${review.id}">
 							<button type="submit" class="delete_button_detail">削除</button>
 						</form>
@@ -322,7 +322,8 @@
 	<!--		</th:block>-->
 
 
-
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script th:src="@{/js/delete-form.js}"></script>
 </body>
 
 </html>
