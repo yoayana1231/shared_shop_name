@@ -43,14 +43,14 @@
 
 	<div class="category-tabs">
 		<th:block th:if="${flag} == true">
-			<a th:href="@{/client/item/list/1}" class="active">すべて</a>
+			<div><a th:href="@{/client/item/list/1}" class="active">すべて</a></div>
 			<div th:each="category :${categories}">
 				<a th:href="@{/client/item/list/category/{categoryId}(categoryId=${category.id})}"
 					th:text="${category.name}"></a>
 			</div>
 		</th:block>
 		<th:block th:unless="${flag} == true">
-			<a th:href="@{/client/item/list/1}">すべて</a>
+			<div><a th:href="@{/client/item/list/1}"><span class="all_list_category">すべて</span></a></div>
 			<div th:each="category :${categories}">
 				<div th:if="${id} == ${category.id}">
 					<a th:href="@{/client/item/list/category/{categoryId}(categoryId=${category.id})}"
@@ -61,6 +61,7 @@
 						th:text="${category.name}"></a>
 				</div>
 			</div>
+			
 		</th:block>
 	</div>
 
