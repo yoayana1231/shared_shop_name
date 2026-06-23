@@ -50,26 +50,35 @@ public interface ItemRepository extends JpaRepository<Item, Integer> {
 //	SELECT * FROM items ORDER BY (SELECT SUM(quantity) FROM order_items GROUP BY item_id) DESC;
 //	@Query("SELECT i FROM Item i ORDER BY (SELECT SUM(oi.quantity)  FROM OrderItem oi GROUP BY oi.item.id) DESC")
 	@Query("SELECT i FROM Item i INNER JOIN OrderItem oi ON oi.item = i "
-			+ "WHERE i.deleteFlag = 0 "
+			+ "INNER JOIN i.category c "
+			+ "WHERE i.deleteFlag = 0 AND c.deleteFlag = 0 "
 			+ "GROUP BY i.id, i.name, i.price, i.description, i.image, i.stock, i.deleteFlag,"
-			+ " i.insertDate, i.category.id ORDER BY SUM(oi.quantity) DESC")
+			+ " i.insertDate, c.id ORDER BY SUM(oi.quantity) DESC")
 	List<Item> findByQuantityDesc();
 	
 //	売れてないやつも表示
 	@Query("SELECT i FROM Item i LEFT JOIN OrderItem oi ON oi.item = i "
-			+ "WHERE i.deleteFlag = 0"
+			+ "INNER JOIN i.category c "
+			+ "WHERE i.deleteFlag = 0 AND c.deleteFlag = 0 "
 			+ "GROUP BY i.id, i.name, i.price, i.description, i.image, i.stock, i.deleteFlag,"
-			+ " i.insertDate, i.category.id ORDER BY SUM(oi.quantity) DESC NULLS LAST")
+			+ " i.insertDate, i.category ORDER BY SUM(oi.quantity) DESC NULLS LAST")
 	List<Item> findAllByQuantityDesc();
 
 	
 //	新着順のリポジトリ
+	@Query("SELECT i FROM Item i INNER JOIN Category c ON i.category = c "
+			+ "WHERE i.deleteFlag = 0 AND c.deleteFlag = 0 "
+			+ "ORDER BY i.insertDate DESC")
 	List<Item> findByDeleteFlagOrderByInsertDateDesc(Integer deleteFlg);
 	
 	// カテゴリ検索
+	@Query("SELECT i FROM Item i INNER JOIN Category c ON i.category = c "
+			+ "WHERE c.id = :categoryId AND c.deleteFlag = :deleteFlg AND i.deleteFlag = :deleteFlg")
 	List<Item> findByCategoryIdAndDeleteFlag(Integer categoryId, Integer deleteFlg);
   
 	// 曖昧検索用メソッド
+	@Query("SELECT i FROM Item i INNER JOIN Category c ON i.category = c "
+			+ "WHERE i.name LIKE %:search% AND c.deleteFlag = :deleteFlg AND i.deleteFlag = :deleteFlg")
 	List<Item> findByNameContainingAndDeleteFlag(String search, Integer deleteFlg);
 
 	
