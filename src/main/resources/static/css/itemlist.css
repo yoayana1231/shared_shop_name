@@ -673,6 +673,7 @@ button {
 .cart:hover {
 	transition: transform .18s ease, box-shadow .18s ease;
 	color: rgb(255, 255, 255);
+	
 }
 
 .cart-button_a:hover {
@@ -687,4 +688,11 @@ button {
 body {
 	color: var(--ink);
 	font-family: 'Noto Serif JP', serif;
+}
+
+.non_message{
+	font-size: 20px;
+	display: flex;
+	justify-content: space-around;
+	margin-top :90px;
 }

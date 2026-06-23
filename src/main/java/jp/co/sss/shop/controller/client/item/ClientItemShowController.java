@@ -92,7 +92,7 @@ public class ClientItemShowController {
 	public String index(Model model, HttpSession session) {
 
 		// カテゴリ表示用の検索
-		model.addAttribute("categories", categoryRepository.findAll());
+		model.addAttribute("categories", categoryRepository.findByDeleteFlag(Constant.NOT_DELETED));
 		// 売れ筋検索
 		model.addAttribute("items", itemRepository.findAllByQuantityDesc());
 
@@ -143,8 +143,10 @@ public class ClientItemShowController {
 	public String clientItem(@PathVariable int sortType, 
 			HttpSession session, Model model) {
 		
-		model.addAttribute("categories", categoryRepository.findAll());
-		model.addAttribute("items", itemRepository.findAllByQuantityDesc());
+		model.addAttribute("categories", categoryRepository.findByDeleteFlag(Constant.NOT_DELETED));
+		
+		List<Item> items = itemRepository.findAllByQuantityDesc();
+		model.addAttribute("items", items);
 		
 		// カテゴリ検索表示用のフラグをtrueにする
 		isAllList = true;
@@ -184,7 +186,7 @@ public class ClientItemShowController {
 			HttpSession session, Model model) {
 
 		// カテゴリ全件検索
-		model.addAttribute("categories", categoryRepository.findAll());
+		model.addAttribute("categories", categoryRepository.findByDeleteFlag(Constant.NOT_DELETED));
 		
 		// カテゴリ毎の検索結果をリクエストスコープに保存
 		List<Item> items = itemRepository.findByCategoryIdAndDeleteFlag(categoryId, Constant.NOT_DELETED);
@@ -219,9 +221,10 @@ public class ClientItemShowController {
 			isAllList = true;
 			model.addAttribute("flag", isAllList);
 		}
+		model.addAttribute("categories", categoryRepository.findByDeleteFlag(Constant.NOT_DELETED));
 		
-		model.addAttribute("categories", categoryRepository.findAll());
-		model.addAttribute("items", itemRepository.findByNameContainingAndDeleteFlag(search, Constant.NOT_DELETED));
+		List<Item> items = itemRepository.findByNameContainingAndDeleteFlag(search, Constant.NOT_DELETED);
+		model.addAttribute("items", items);
 		
 		// ランキング表示用で売れ筋を検索
 		model.addAttribute("ranking", itemRepository.findAllByQuantityDesc());

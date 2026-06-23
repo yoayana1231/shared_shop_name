@@ -64,6 +64,10 @@
 			
 		</th:block>
 	</div>
+	
+	<th:block th:if="${#lists.isEmpty(items)}">
+		<p class="non_message" th:text="#{msg.client.item.list.none}"></p>
+	</th:block>
 
 	<th:block th:if="!${#lists.isEmpty(items)}">
 
