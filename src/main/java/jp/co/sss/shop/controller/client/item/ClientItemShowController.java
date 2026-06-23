@@ -158,6 +158,9 @@ public class ClientItemShowController {
 			model.addAttribute("items", itemRepository.findAllByQuantityDesc());
 		}
 		
+		// ランキング表示用で売れ筋を検索
+		model.addAttribute("ranking", itemRepository.findAllByQuantityDesc());
+		
 		// ログイン中のユーザー情報を取得
 		UserBean userBean = (UserBean) session.getAttribute("user");
 		if (userBean != null) {
