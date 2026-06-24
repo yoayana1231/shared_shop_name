@@ -200,6 +200,7 @@
 			<!--			<div th:text="${Rating.count}+'件'"></div>-->
 
 		</div>
+
 		<p class="no_review" th:text="#{msg.review.list.none}" th:if="${#lists.isEmpty(itemReviews)}"></p>
 		<th:block th:if="!${#lists.isEmpty(itemReviews)}">
 			<div class="review_comments" th:each="review: ${itemReviews}">
