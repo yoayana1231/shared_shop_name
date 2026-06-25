@@ -92,7 +92,7 @@
 						</span>
 
 
-						<p class="item_price_a" th:text="'&yen;'+${item.price}"></p>
+						<p class="item_price_a" th:text="'¥' + ${#numbers.formatInteger(item.price, 1, 'COMMA')}"></p>
 						<span class="item_category_a" th:text="${item.category.name}"></span>
 						<div class="item_form">
 							<div class="button_all_a">
@@ -207,7 +207,8 @@
 							</span>
 
 							<!--							<p class="item_name_a_list" th:text="${recommend.item.name}"></p>-->
-							<p class="item_price_a" th:text="'&yen;'+${recommend.item.price}"></p>
+							<p class="item_price_a"
+								th:text="'¥' + ${#numbers.formatInteger(recommend.item.price, 1, 'COMMA')}"></p>
 							<span class="item_category_a" th:text="${recommend.item.category.name}"></span>
 							<div class="item_form">
 								<div class="button_all_a">
@@ -294,7 +295,8 @@
 							<span class="item_category_one" th:text="${reviews.item.category.name}"></span>
 							<p class="item_name_a_list" th:text="${reviews.item.name}"></p>
 							<p class="item_detail_a_list" th:text="${reviews.item.description}"></p>
-							<p class="item_price_a" th:text="'&yen;'+${reviews.item.price}"></p>
+							<p class="item_price_a"
+								th:text="'¥' + ${#numbers.formatInteger(reviews.item.price, 1, 'COMMA')}"></p>
 							<div class="item_form">
 								<div class="button_all_a">
 									<div class="favorite_button_list">
@@ -350,7 +352,8 @@
 							<span class="item_category_two" th:text="${reviews.item.category.name}"></span>
 							<p class="item_name_a_list" th:text="${reviews.item.name}"></p>
 							<p class="item_detail_a_list_two" th:text="${reviews.item.description}"></p>
-							<p class="item_price_a" th:text="'&yen;'+${reviews.item.price}"></p>
+							<p class="item_price_a"
+								th:text="'¥' + ${#numbers.formatInteger(reviews.item.price, 1, 'COMMA')}"></p>
 							<div class="item_form">
 								<div class="button_all_a">
 									<div class="favorite_button_list">
@@ -416,44 +419,44 @@
 			<!--１から3個目-->
 			<div class="back_white"></div>
 
-				<div class="recently_viewed_list">
-					<th:block th:each="itemHistories, status: ${histories}" th:if="${status.count le 5}">
-						<article class="recently_viewed_list_wa">
-							<!--写真-->
-							<div class="recently_viewed_img">
-								<a th:href="@{/client/item/detail/}+${itemHistories.item.id}">
-									<img th:src="@{/images/photo/{imgName}(imgName=${itemHistories.item.image})}"
-										th:if="${itemHistories.item.image != null}" />
-									<img th:src="@{/images/common/no_image.jpg}"
-										th:if="${itemHistories.item.image == null}" />
-								</a>
-							</div>
+			<div class="recently_viewed_list">
+				<th:block th:each="itemHistories, status: ${histories}" th:if="${status.count le 5}">
+					<article class="recently_viewed_list_wa">
+						<!--写真-->
+						<div class="recently_viewed_img">
+							<a th:href="@{/client/item/detail/}+${itemHistories.item.id}">
+								<img th:src="@{/images/photo/{imgName}(imgName=${itemHistories.item.image})}"
+									th:if="${itemHistories.item.image != null}" />
+								<img th:src="@{/images/common/no_image.jpg}"
+									th:if="${itemHistories.item.image == null}" />
+							</a>
+						</div>
 
-							<!--商品内容-->
-							<div class="item_name_a_list_wao">
-								<!--							<p class="item_name_a_list" th:text="${itemHistories.item.name}"></p>-->
+						<!--商品内容-->
+						<div class="item_name_a_list_wao">
+							<!--							<p class="item_name_a_list" th:text="${itemHistories.item.name}"></p>-->
 
-								<span th:if="${#strings.length(itemHistories.item.name) >= 11}">
-									<p class="item_name_a_list_waoh" th:text="${itemHistories.item.name}"></p>
-								</span>
-								<span th:unless="${#strings.length(itemHistories.item.name) >= 11}">
-									<p class="item_name_a_list_haaa" th:text="${itemHistories.item.name}"></p>
-								</span>
-
-								<p class="item_price_a" th:text="'&yen;'+${itemHistories.item.price}"></p>
-								<div class="item_form">
-									<div class="button_all_a">
-										<div class="favorite_button_list">
-											<form th:action="@{/client/favorite/update}" method="post">
-												<input type="hidden" name="itemId" th:value="${itemHistories.item.id}">
-											</form>
-										</div>
+							<span th:if="${#strings.length(itemHistories.item.name) >= 11}">
+								<p class="item_name_a_list_waoh" th:text="${itemHistories.item.name}"></p>
+							</span>
+							<span th:unless="${#strings.length(itemHistories.item.name) >= 11}">
+								<p class="item_name_a_list_haaa" th:text="${itemHistories.item.name}"></p>
+							</span>
+							<p class="item_price_a"
+								th:text="'¥' + ${#numbers.formatInteger(itemHistories.item.price, 1, 'COMMA')}"></p>
+							<div class="item_form">
+								<div class="button_all_a">
+									<div class="favorite_button_list">
+										<form th:action="@{/client/favorite/update}" method="post">
+											<input type="hidden" name="itemId" th:value="${itemHistories.item.id}">
+										</form>
 									</div>
 								</div>
 							</div>
-						</article>
-					</th:block>
-				</div>
+						</div>
+					</article>
+				</th:block>
+			</div>
 			<!--			４と５個め-->
 			<!--			<div class="recently_viewed_list_two">-->
 			<!--				<th:block th:each="itemHistories, status: ${histories}"-->

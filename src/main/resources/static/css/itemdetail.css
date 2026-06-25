@@ -705,7 +705,7 @@ body {
 .send_button_detail,
 .send_button_fav_detail,
 .send_button_fav_detail_red {
-	border-radius: 999px;
+/*	border-radius: 999px;*/
 	border: 1px solid transparent;
 	transition: transform .18s ease, box-shadow .18s ease, background-color .18s ease, border-color .18s ease;
 }
@@ -727,6 +727,7 @@ body {
 	background: #fffdfb;
 	border-color: #dfc8c0;
 	color: #8b5e55;
+	border-radius: none;
 }
 
 .send_button_fav_detail:hover,
@@ -736,7 +737,16 @@ body {
 	background: #fbf6f3;
 	border-color: #d89d94;
 	box-shadow: 0 14px 28px rgba(80, 52, 42, 0.08);
-	border-radius: 999px;
+	border-radius: none;
+}
+
+.checkout-btn:hover {
+	box-shadow: 0 14px 28px rgba(80, 52, 42, 0.08);
+	border-radius: none;
+	cursor: pointer;
+	letter-spacing: 0.12em;
+	transition: transform .18s ease, box-shadow .18s ease;
+	transform: translateY(-3px);
 }
 
 .item_detail_box {

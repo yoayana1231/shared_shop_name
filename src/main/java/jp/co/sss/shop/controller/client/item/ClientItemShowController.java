@@ -155,9 +155,12 @@ public class ClientItemShowController {
 		if (sortType == 1) {
 			// 新着順
 			model.addAttribute("items", itemRepository.findByDeleteFlagOrderByInsertDateDesc(Constant.NOT_DELETED));
-		} else {
+		} else if(sortType == 2) {
 			// 売れ筋順	
 			model.addAttribute("items", itemRepository.findAllByQuantityDesc());
+		} else {
+			// 3456789。。。とか新着順に戻す
+			return "redirect:/client/item/list/" + Constant.DEFAULT_SORT_TYPE;
 		}
 		
 		// ランキング表示用で売れ筋を検索
