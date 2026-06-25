@@ -139,7 +139,7 @@ public class ClientItemShowController {
 	}
 
 	//	売れてない奴も表示する（商品一覧）
-	@RequestMapping(path = "/client/item/list/{sortType}", method = { RequestMethod.GET })
+	@RequestMapping(path = "/client/item/list/{sortType}", method = { RequestMethod.GET, RequestMethod.POST })
 	public String clientItem(@PathVariable int sortType, 
 			HttpSession session, Model model) {
 		
@@ -215,7 +215,7 @@ public class ClientItemShowController {
 	//石田実装 あいまい検索用コントローラー
 	//name属性 search
 	//新規追加リポジトリメソッド findByNameContaining
-	@RequestMapping("/client/item/list/search")
+	@RequestMapping(path = "/client/item/list/search", method = { RequestMethod.GET, RequestMethod.POST })
 	public String clientItemListSearch(String search, HttpSession session, Model model) {
 		
 		// searchがnull→全件検索
@@ -254,7 +254,7 @@ public class ClientItemShowController {
 	 * @param session	ログイン確認
 	 * @return			商品詳細画面
 	 */
-	@GetMapping("/client/item/detail/{id}")
+	@RequestMapping(path = "/client/item/detail/{id}", method = { RequestMethod.GET, RequestMethod.POST })
 	public String clientItemDetail(@PathVariable Integer id, Model model, HttpSession session) {
 
 		Item item = itemRepository.getReferenceById(id);

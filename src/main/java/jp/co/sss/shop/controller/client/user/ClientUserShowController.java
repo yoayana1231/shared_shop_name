@@ -19,7 +19,7 @@ public class ClientUserShowController {
 	@Autowired
 	HttpSession session;
 
-	@RequestMapping(path = "/client/user/detail", method = RequestMethod.GET)
+	@RequestMapping(path = "/client/user/detail", method = { RequestMethod.GET, RequestMethod.POST })
 	public String registInput(Integer Id, Model model) {
 
 		UserBean userBean = (UserBean) session.getAttribute("user");
