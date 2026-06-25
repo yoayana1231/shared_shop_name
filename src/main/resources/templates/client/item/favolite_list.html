@@ -80,7 +80,7 @@
 							</h2>
 
 							<p class="favorite-card__price">
-								¥<span th:text="${favorite.item.price}">3,500</span>
+								<span th:text="'¥' + ${#numbers.formatInteger(favorite.item.price, 1, 'COMMA')}">3,500</span>
 								<small>（税込）</small>
 							</p>
 

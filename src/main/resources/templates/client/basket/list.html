@@ -52,7 +52,7 @@
 						<div class="item-info">
 							<p class="category" th:text="${itemList[status.index].category.name}"></p>
 							<h2><a th:href="@{/client/item/detail/{id}(id=${item.id})}" th:text="${item.name}"></a></h2>
-							<p class="price" th:text="${itemList[status.index].price}"><small>税込</small></p>
+							<p class="price" th:text="'¥' + ${#numbers.formatInteger(itemList[status.index].price, 1, 'COMMA')}"><small>税込</small></p>
 						</div>
 						<div class="quantity-box" aria-label="quantity">
 							<span>数量</span>
@@ -123,7 +123,8 @@
 						<!--						</div>-->
 						<div class="total">
 							<dt>合計（税込）</dt>
-							<dd th:text="${total}"></dd>
+							<dd th:text="'¥' + ${#numbers.formatInteger(total, 1, 'COMMA')}"></dd>
+<!--							th:text="'¥' + ${#numbers.formatInteger(total, 3, 'COMMA')}">-->
 						</div>
 					</dl>
 
@@ -182,7 +183,7 @@
 					<div class="recommmend_text">
 						<p class="rec_cat_name" th:text="${recommend.item.category.name}"></p>
 						<h2 class="rec_item_name" th:text="${recommend.item.name}"></h2>
-						<p class="rec_item_price" th:text="'&#x000A5;'+${recommend.item.price}"></p>
+						<p class="rec_item_price" th:text="'¥' + ${#numbers.formatInteger(recommend.item.price, 1, 'COMMA')}"></p>
 					</div>
 				</div>
 			</div>

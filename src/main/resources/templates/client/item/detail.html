@@ -28,7 +28,7 @@
 					<h2 class="detail_name" th:text="*{name}"></h2>
 					<!--						<dt>[[#{data.item.price}]]</dt>-->
 					<div class="price_only">
-						<p class="price_tax" th:text="'&yen;'+*{price}"></p>
+						<p class="price_tax" th:text="'¥' + ${#numbers.formatInteger(item.price, 1, 'COMMA')}"></p>
 						<span class="tax">(税込)</span>
 					</div>
 					<!--						<dt>[[#{data.item.stock}]]</dt>-->
@@ -62,7 +62,7 @@
 					<form th:action="@{/client/basket/add/calc}" method="post" class="user_info_form"
 						th:if="*{stock > 0}">
 						<input type="hidden" th:field="*{id}" />
-						<input type="submit" value="ADD TO CART" class="send_button_detail" />
+						<input type="submit" value="ADD TO CART" class="checkout-btn" />
 					</form>
 
 					<form th:action="@{/client/favorite/update}" method="post">
@@ -237,9 +237,9 @@
 		<!--					<input type="submit" value="戻る" class="back_button_detail" />-->
 		<!--				</form>-->
 	</div>
-	<form th:action="@{/client/item/list/1}" method="get">
+	<a th:href="@{/client/item/list/1}" method="get">
 		<input type="submit" value="戻る" class="back_button_detail" />
-	</form>
+	</a>
 	<div class="bar_detail"></div>
 	<section class="recommend-band_detail">
 		<div class="recommend-copy">
@@ -274,7 +274,8 @@
 				<div class="recommmend_text">
 					<p class="rec_cat_name" th:text="${bestSelling.category.name}"></p>
 					<h2 class="rec_item_name" th:text="${bestSelling.name}"></h2>
-					<p class="rec_item_price" th:text="'&#x000A5;'+${bestSelling.price}"></p>
+					<p class="rec_item_price" th:text="'¥' + ${#numbers.formatInteger(bestSelling.price, 1, 'COMMA')}">
+</p>
 
 				</div>
 
