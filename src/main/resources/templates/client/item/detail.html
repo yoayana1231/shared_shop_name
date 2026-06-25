@@ -176,10 +176,10 @@
 			<p class="rating_review" th:text="${#numbers.formatDecimal(averageRating, 1, 1)}"></p>
 			<div class="count_detail_review" th:if="${totalCount}!=null" th:text="${totalCount}+'件'"></div>
 			<div>
-				<form th:action="@{/client/review/input/{itemId}(itemId=${item.id})}" method="get"
+				<a th:href="@{/client/review/input/{itemId}(itemId=${item.id})}" method="get"
 					class="user_info_form">
 					<input type="submit" value="レビューを書く" class="send_button_review" />
-				</form>
+				</a>
 			</div>
 		</div>
 
