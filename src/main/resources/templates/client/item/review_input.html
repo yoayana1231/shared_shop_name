@@ -90,25 +90,16 @@
 
 			</form>
 		</div>
+		
 		<div class="button_area">
-
-			<form th:action="@{/client/item/detail/{id}(id=${reviewForm.item.id})}" method="get">
+			<form th:action="@{/client/item/detail/{id}(id=${reviewForm.item.id})}" method="post">
 				<input type="submit" value="戻る" class="back_button_review_input_wo" />
 			</form>
-
 			<input type="submit" value="確認" class="send_button_go_check_review_wo" form="reviewForm" />
 		</div>
-
-		<!--		<form >-->
-		<!--			<div class="send_button">-->
-		<!--				<input type="submit" value="確認" class="send_button_go_check_review" />-->
-		<!--			</div>-->
-		<!--		</form>-->
-		<!--		<form th:action="@{/client/item/detail/{id}(id=${reviewForm.item.id})}" method="get">-->
-		<!--			<input type="submit" value="戻る" class="back_button_review_input" />-->
-		<!--		</form>-->
-
+		
 	</main>
+	
 </body>
 
 </html>

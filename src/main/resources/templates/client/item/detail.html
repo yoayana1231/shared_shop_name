@@ -9,7 +9,6 @@
 
 <body class="user">
 
-	<!--	<h2 th:class="title" th:text="#{item}+#{title.detail}"></h2>-->
 
 	<th:block th:if="${error}">
 		<div class="error_msg_detail" th:text="${error}"></div>
@@ -23,24 +22,17 @@
 			</div>
 			<div class="item_cart">
 				<div class="item_detail">
-					<!--						<dt>[[#{data.item.name}]]</dt>-->
 					<p class="category_name" th:text="*{categoryName}"></p>
 					<h2 class="detail_name" th:text="*{name}"></h2>
-					<!--						<dt>[[#{data.item.price}]]</dt>-->
 					<div class="price_only">
 						<p class="price_tax" th:text="'¥' + ${#numbers.formatInteger(item.price, 1, 'COMMA')}"></p>
 						<span class="tax">(税込)</span>
 					</div>
-					<!--						<dt>[[#{data.item.stock}]]</dt>-->
-					<!--						<dt>[[#{data.category}]</dt>-->
-					<!--						<dt>[[#{data.description}]]</dt>-->
 					<div class="rating">
-						<!--						動的に実装していない-->
 
 
 						<th:block th:with="ratingInt=${T(java.lang.Math).floor(averageRating)}">
 							<div th:switch="${ratingInt}">
-								<!--							#numbers.formatDecimal(averageRating, 1, 1)-->
 								<span class="star" th:case="1" th:text="'★☆☆☆☆'"></span>
 								<span class="star" th:case="2" th:text="'★★☆☆☆'"></span>
 								<span class="star" th:case="3" th:text="'★★★☆☆'"></span>
@@ -75,28 +67,7 @@
 							<input type="submit" th:case="false" value="ADD TO FAVORITE"
 								class="send_button_fav_detail" />
 						</div>
-						<!--							class="send_button_fav_detail" />-->
 					</form>
-					<!--					<form th:action="@{/client/favorite/update}" method="post">-->
-					<!--						<input type="hidden" name="itemId" th:value="${item.id}" />-->
-					<!--							<th:if="${favoriteItemIds != null && favoriteItemIds.contains(item.id)}">-->
-					<!--								<input type="submit" value="ADD TO FAVORITE" class="send_button_fav_detail">-->
-
-					<!--							<th:unless="${favoriteItemIds != null && favoriteItemIds.contains(item.id)}">-->
-					<!--								<input type="submit" value="REMOVE FAVORITE" class="send_button_fav_detail">-->
-
-					<!--					</form>-->
-					<!--					form th:action="@{/client/favorite/update}" method="post" class="favorite_cart_detail">-->
-					<!--						<input type="hidden" name="itemId" th:value="${bestSelling.id}">-->
-					<!--						<button type="submit"-->
-					<!--							th:if="${favoriteItemIds != null && favoriteItemIds.contains(bestSelling.id)}">-->
-					<!--							<img th:src="@{/images/favorite_red.png}">-->
-					<!--						</button>-->
-					<!--						<button type="submit"-->
-					<!--							th:unless="${favoriteItemIds != null && favoriteItemIds.contains(bestSelling.id)}">-->
-					<!--							<img th:src="@{/images/faviorite_blank.svg}">-->
-					<!--						</button>-->
-					<!--					</form>-->
 				</div>
 			</div>
 		</div>
@@ -140,36 +111,8 @@
 		</article>
 	</section>
 
-
-	<!--					<div class="detail_button_area">-->
-	<!--						<form th:action="@{/client/basket/add}" method="post" class="user_info_form" th:if="*{stock > 0}">-->
-	<!--							<input type="hidden" th:field="*{id}" />-->
-	<!--							<input type="submit" value="買い物かごに入れる" class="send_button" />-->
-	<!--						</form>-->
-	<!--					</div>-->
-
-	<!--		<div>-->
-	<!--			<form th:action="@{/client/review/input/{itemId}(itemId=${item.id})}" method="get" class="user_info_form">-->
-	<!--				<input type="submit" value="レビュー" class="send_button" />-->
-	<!--			</form>-->
-	<!--			<form th:action="@{/client/item/list/1}" method="post">-->
-	<!--				<input type="submit" value="戻る" class="back_button" />-->
-	<!--			</form>-->
-	<!--		</div>-->
-	<!--	<p class="no_review" th:text="#{msg.review.list.none}" th:if="${#lists.isEmpty(itemReviews)}"></p>-->
 	<div class="review_and_button">
 		<p class="review_text">REVIEW</p>
-
-		<!--		<div>-->
-		<!--			<form th:action="@{/client/review/input/{itemId}(itemId=${item.id})}" method="get" class="user_info_form">-->
-		<!--				<input type="submit" value="レビューを書く" class="send_button_review" />-->
-		<!--			</form>-->
-
-		<!--			<form th:action="@{/client/item/list/1}" method="get">-->
-		<!--				<input type="submit" value="戻る" class="back_button_detail" />-->
-		<!--			</form>-->
-
-		<!--		</div>-->
 	</div>
 	<div class="review" id="reviews">
 		<div class="review_avg">
@@ -196,10 +139,8 @@
 					<ol th:text="${Rating.count}+'件'"></ol>
 				</ul>
 			</th:block>
-			<!--			<p th:text="${Rating.rating} + ${Rating.count}+'件'"></p>-->
-			<!--			<div th:text="${Rating.count}+'件'"></div>-->
-
 		</div>
+		
 		<p class="no_review" th:text="#{msg.review.list.none}" th:if="${#lists.isEmpty(itemReviews)}"></p>
 		<th:block th:if="!${#lists.isEmpty(itemReviews)}">
 			<div class="review_comments" th:each="review: ${itemReviews}">
@@ -210,7 +151,6 @@
 					<p class="star" th:case="4" th:text="'★★★★☆'+'&nbsp;4'"></p>
 					<p class="star" th:case="5" th:text="'★★★★★'+'&nbsp;5'"></p>
 				</th:block>
-				<!--			<p th:text="#{rating}"></p>-->
 				<p class="reviewer" th:text="${review.comments}"></p>
 
 				<th:block th:if="${session.user != null && review.user.id == session.user.id}">
@@ -226,20 +166,17 @@
 							<button type="submit" class="delete_button_detail">削除</button>
 						</form>
 					</td>
-					<!--					<p class="reviewer_user" th:text="${review.user.name}"></p>-->
-
 				</th:block>
+				
 				<p class="reviewer_user" th:text="${review.user.name}+'さん'"></p>
-
 			</div>
 		</th:block>
-		<!--				<form th:action="@{/client/item/list/1}" method="post">-->
-		<!--					<input type="submit" value="戻る" class="back_button_detail" />-->
-		<!--				</form>-->
 	</div>
-	<a th:href="@{/client/item/list/1}" method="get">
+	
+	<a th:href="@{/client/item/list/1}" method="post">
 		<input type="submit" value="戻る" class="back_button_detail" />
 	</a>
+	
 	<div class="bar_detail"></div>
 	<section class="recommend-band_detail">
 		<div class="recommend-copy">
@@ -274,57 +211,15 @@
 				<div class="recommmend_text">
 					<p class="rec_cat_name" th:text="${bestSelling.category.name}"></p>
 					<h2 class="rec_item_name" th:text="${bestSelling.name}"></h2>
-					<p class="rec_item_price" th:text="'¥' + ${#numbers.formatInteger(bestSelling.price, 1, 'COMMA')}">
-</p>
-
+					<p class="rec_item_price" 
+						th:text="'¥' + ${#numbers.formatInteger(bestSelling.price, 1, 'COMMA')}"></p>
 				</div>
-
-
-				<!--					<article>-->
-				<!--						<img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=350&q=85"-->
-				<!--							alt="センシュアルオードトワレ" />-->
-				<!--						<div>-->
-				<!--							<p>オードトワレ</p>-->
-				<!--							<h3>センシュアルオードトワレ</h3>-->
-				<!--							<span>¥6,600</span>-->
-				<!--						</div>-->
-				<!--						<button>♡</button>-->
-				<!--					</article>-->
 			</div>
 	</section>
 
-	<!--	<p class="no_review" th:text="#{msg.review.list.none}" th:if="${#lists.isEmpty(itemReviews)}"></p>-->
-
-	<!--		<th:block th:if="!${#lists.isEmpty(itemReviews)}">-->
-	<!--			<table>-->
-	<!--				<tr>-->
-	<!--					<th th:text="#{rating}"></th>-->
-	<!--					<th th:text="#{comments}"></th>-->
-	<!--				</tr>-->
-	<!--				<tr th:each="review: ${itemReviews}">-->
-	<!--					<td th:text="${review.rating}"></td>-->
-	<!--					<td th:text="${review.comments}"></td>-->
-	<!--					<th:block th:if="${session.user != null && review.user.id == session.user.id}">-->
-	<!--						<td>-->
-	<!--							<form th:action="@{/client/review/edit/input/{reviewId}(reviewId=${review.id})}" method="get">-->
-	<!--								<input type="hidden" th:value="${review.id}">-->
-	<!--								<button type="submit">編集</button>-->
-	<!--							</form>-->
-	<!--						</td>-->
-	<!--						<td>-->
-	<!--							<form th:action="@{/client/review/delete}" method="post">-->
-	<!--								<input type="hidden" name="reviewId" th:value="${review.id}">-->
-	<!--								<button type="submit">削除</button>-->
-	<!--							</form>-->
-	<!--						</td>-->
-	<!--					</th:block>-->
-	<!--				</tr>-->
-	<!--			</table>-->
-	<!--		</th:block>-->
-
-
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script th:src="@{/js/delete-form.js}"></script>
+	
 </body>
 
 </html>

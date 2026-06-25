@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import jakarta.servlet.http.HttpSession;
 import jp.co.sss.shop.bean.OrderBean;
@@ -47,7 +49,7 @@ public class ClientOrderShowController {
 	 * @param pageable ページング情報
 	 * @return client/order/list 
 	 */
-	@GetMapping("/client/order/list")
+	@RequestMapping(path = "/client/order/list", method = { RequestMethod.GET, RequestMethod.POST })
 	public String orderList(Model model, HttpSession session, Pageable pageable) {
 		
 		// ログイン中のユーザーIDを取得
