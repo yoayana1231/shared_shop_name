@@ -5,6 +5,7 @@ import java.sql.Date;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import jp.co.sss.shop.entity.Item;
 import jp.co.sss.shop.entity.User;
@@ -39,6 +40,7 @@ public class ReviewForm implements Serializable {
 	 * コメント
 	 */
 	@NotBlank
+	@Pattern(regexp = "^[^　]+$")
 	@Size(min = 1, max = 140)
 	private String comments;
 

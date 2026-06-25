@@ -35,24 +35,32 @@ public class ClientUserUpdateController {
 	/*
 	 * 入力画面 初期表示処理
 	 */
-	@RequestMapping(path = "/client/user/update/input", method = RequestMethod.POST)
-	public String updateInputInit() {
+	@GetMapping("/client/user/update/input/init")
+	public String updateInit(UserForm userForm) {
 		
 		// セッションからログイン中のユーザIDを取得
 		Integer userId = ((UserBean) session.getAttribute("user")).getId();
-		
 		// 変更対象の情報取得
 		User user = userRepository.findByIdAndDeleteFlag(userId, Constant.NOT_DELETED);
-		
-		// 初期表示用フォーム情報の生成
-		UserForm userForm = new UserForm();
 		// 変更対象の情報をUserFormにコピー
 		BeanUtils.copyProperties(user, userForm);
+		
+		// 入力フォーム情報をセッションに保存
+		session.setAttribute("userForm",userForm);
+		return "redirect:/client/user/update/input";
+		
+	}
+	
+	
+	@RequestMapping(path = "/client/user/update/input", method = RequestMethod.POST)
+	public String updateGoInput(Model model) {
+		
+		UserForm userForm = (UserForm) session.getAttribute("userForm");
+		
+		// 入力フォーム情報をリクエストスコープに保存
+		model.addAttribute("userForm", userForm);
 			
-		// 変更入力フォームをセッションに保持
-		session.setAttribute("userForm", userForm);
-			
-	return"redirect:/client/user/update/input";
+		return"redirect:/client/user/update/input";
 
 	}
 
@@ -72,7 +80,7 @@ public class ClientUserUpdateController {
 		if (result != null) {
 			// エラー情報あり→エラー情報を設定
 			model.addAttribute("org.springframework.validation.BindingResult.userForm", result);
-			session.removeAttribute("result");
+			session.removeAttribute("errors");
 		}
 		
 		return "client/user/update_input";
