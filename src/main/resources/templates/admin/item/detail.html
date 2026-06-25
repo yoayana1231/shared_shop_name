@@ -14,7 +14,7 @@
 		<div class="item_detail_area">
 			<div class="item_image_area">
 				<span th:if="*{image != null}">
-					<img th:src="@{/images/{image}(image=*{image})}"></img>
+					<img th:src="@{/images/photo/{image}(image=*{image})}"></img>
 				</span>
 				<span th:if="*{image == null}">
 					<img th:src="@{/images/common/no_image.jpg}"></img>
