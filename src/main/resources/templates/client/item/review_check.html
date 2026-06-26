@@ -8,7 +8,7 @@
 </head>
 
 <body>
-	
+
 	<main class="review_form_aaa">
 		<div class="confirm_review">
 			<div class="all_text_confirm">
@@ -20,7 +20,9 @@
 				<div class="review_check">
 					<!--写真-->
 					<div class="review_form_photo_a">
-						<img th:src="@{/images/photo/{imgName}(imgName=${reviewForm.item.image})}">
+						<img th:src="@{/images/photo/{imgName}(imgName=*{item.image})}"
+							th:if="*{item.image != null}" />
+						<img th:src="@{/images/common/no_image.jpg}" th:if="*{item.image == null}" />
 					</div>
 				</div>
 
