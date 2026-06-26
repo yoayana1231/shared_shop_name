@@ -6,7 +6,6 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-
 import jp.co.sss.shop.annotation.LoginCheck;
 
 /**
@@ -21,6 +20,7 @@ public class LoginForm implements Serializable {
 	 * メールアドレス
 	 */
 	@NotBlank
+	@Pattern(regexp = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\\\.[a-zA-Z0-9-.]+$")
 	@Email
 	private String email;
 
