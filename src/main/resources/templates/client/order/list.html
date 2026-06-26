@@ -10,7 +10,11 @@
 <body class="user order_list">
 	<div class="orders-page">
 
-		<th:block th:if="${#lists.isEmpty(orders)} and ${error == null}">
+		<th:block th:if="${error}">
+			<div class="error_msg_order-list" th:text="${error}"></div>
+		</th:block>
+
+		<th:block th:if="${#lists.isEmpty(orders)}">
 			<section class="favorite-empty order-empty">
 				<p class="favorite-empty__eyebrow">MY ORDERS</p>
 				<h1 th:text="#{msg.client.order.list.none}">ご注文履歴はありません</h1>
@@ -21,31 +25,22 @@
 				<a th:href="@{/client/item/list/1}" class="favorite-empty__btn">商品を探す</a>
 			</section>
 		</th:block>
-		
+
 		<th:block th:unless="${#lists.isEmpty(orders)}">
-			
-		<th:block th:if="${error}">
-			<div class="error_msg_order-list" th:text="${error}"></div>
-		</th:block>
-			
 			<div class="orders-shell">
 				<aside class="orders-aside">
 					<p class="orders-aside__script">Make every day yours. ♡</p>
 					<p>&nbsp;</p>
 					<h class="aside_top_text">わたしらしい<br>毎日を、やさしく彩る。</h2>
-					<p class="orders-aside__lead">
-						<p>&nbsp;<p>
+						<p class="orders-aside__lead">
+						<p>&nbsp;
+						<p>
 						<h2>新しい私と出会う、<br>はじまりの一歩。</h2>
-<!--						<p>&nbsp;</p>-->
-<!--						<h2>きれいになる準備を、はじめましょう。</h2>-->
-<!--						<p>&nbsp;<p>-->
-<!--						<p class="aside_text">大切なあなたへ。真心を込めてお届けいたします。</p>-->
 						<br>
 						<br>
-						
-					</p>
-					<div class="orders-aside__line"></div>
-					<div class="orders-aside__visual" aria-hidden="true"></div>
+						</p>
+						<div class="orders-aside__line"></div>
+						<div class="orders-aside__visual" aria-hidden="true"></div>
 				</aside>
 
 				<section class="orders-content">
@@ -63,14 +58,16 @@
 							<div class="order-card__grid">
 								<div class="order-card__item order-card__item--number">
 									<span class="order-card__label">注文番号</span>
-									<a th:href="@{/client/order/detail/{id}(id=${order.id})}" class="order-card__value order-card__value--number">
+									<a th:href="@{/client/order/detail/{id}(id=${order.id})}"
+										class="order-card__value order-card__value--number">
 										#<span th:text="${order.id}">1001</span>
 									</a>
 								</div>
 
 								<div class="order-card__item">
 									<span class="order-card__label" th:text="#{data.client.order.date}">注文日</span>
-									<span class="order-card__value" th:text="${#strings.replace(#strings.substring(order.insertDate, 0, 10), '-', '/')}"></span>
+									<span class="order-card__value"
+										th:text="${#strings.replace(#strings.substring(order.insertDate, 0, 10), '-', '/')}"></span>
 								</div>
 
 								<div class="order-card__item">
@@ -87,13 +84,15 @@
 								<div class="order-card__item">
 									<span class="order-card__label" th:text="#{data.total.price}">合計金額</span>
 									<span class="order-card__value order-card__value--total">
-										¥<span th:text="${#numbers.formatInteger(order.total, 1, 'COMMA')}">12,540</span>
+										¥<span
+											th:text="${#numbers.formatInteger(order.total, 1, 'COMMA')}">12,540</span>
 									</span>
 									<span class="order-card__sub">（税込）</span>
 								</div>
 
 								<div class="order-card__action">
-									<a th:href="@{/client/order/detail/{id}(id=${order.id})}" class="order-card__button">詳細を見る</a>
+									<a th:href="@{/client/order/detail/{id}(id=${order.id})}"
+										class="order-card__button">詳細を見る</a>
 								</div>
 							</div>
 						</article>
