@@ -26,8 +26,7 @@ public class UserForm implements Serializable {
 	 * 会員メールアドレス
 	 */
 	@NotBlank
-	@Pattern(regexp = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\\\.[a-zA-Z0-9-.]+$")
-	@Email
+	@Email(regexp = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-.]+$")
 	private String	email;
 
 	/**

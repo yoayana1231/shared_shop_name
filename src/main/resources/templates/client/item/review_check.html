@@ -8,12 +8,8 @@
 </head>
 
 <body>
+	
 	<main class="review_form_aaa">
-
-
-		<!--	<h2 th:class="title" th:text="#{review}+#{check.title.action}"></h2>-->
-
-		<!--	<h2 th:class="title" th:text="#{review}+#{check.title.action}"></h2>-->
 		<div class="confirm_review">
 			<div class="all_text_confirm">
 				<p class="confirm_text">レビュー確認</p>
@@ -22,13 +18,10 @@
 			<form th:action="@{/client/review/check/back}" method="post" th:object="${reviewForm}">
 
 				<div class="review_check">
-
 					<!--写真-->
 					<div class="review_form_photo_a">
 						<img th:src="@{/images/photo/{imgName}(imgName=${reviewForm.item.image})}">
 					</div>
-
-					<!--					<div class="review_check_mozi_a" th:text="${reviewForm.item.name}"></div>-->
 				</div>
 
 				<div class="confirm_main">
@@ -50,7 +43,6 @@
 							<span class="star_gold" th:case="5">★★★★★</span>
 						</div>
 					</div>
-					<!--			<div>コメント</div>-->
 					<div class="review_comment" th:text="${reviewForm.comments}"></div>
 				</div>
 				<div class="button_area_confirm">
