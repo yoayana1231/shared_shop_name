@@ -18,7 +18,8 @@ public interface ViewHistoriesRepository extends JpaRepository<ViewHistories, In
 	
 	@Query(value = "SELECT v FROM ViewHistories v INNER JOIN Item i ON v.item.id = i.id "
 			+ "INNER JOIN Category c ON i.category.id = c.id "
-			+ "WHERE v.user =:user AND v.deleteFlag = 0 AND i.deleteFlag = 0 AND c.deleteFlag = 0")
+			+ "WHERE v.user =:user AND v.deleteFlag = 0 AND i.deleteFlag = 0 AND c.deleteFlag = 0 "
+			+ "ORDER BY viewedAt DESC")
 	List<ViewHistories> findByUserOrderByViewedAtDesc(User user);
 
 }
