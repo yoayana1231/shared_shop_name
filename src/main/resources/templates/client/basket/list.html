@@ -8,6 +8,7 @@
 </head>
 
 <body class="user shopping_basket">
+	
 	<section class="cart-page">
 		<div class="breadcrumb"></div>
 
@@ -77,29 +78,6 @@
 								<input type="hidden" name="mode" value="delete" />
 								<button type="submit">削除</button>
 							</form>
-
-							<!--							お気に入りボタン-->
-
-<!--							<div class="favorite_button_a">-->
-<!--								<form th:action="@{/client/favorite/update}" method="post">-->
-<!--									<input type="hidden" name="itemId" th:value="${item.id}">-->
-<!--									<button type="submit"-->
-<!--										th:if="${favoriteItemIds != null && favoriteItemIds.contains(item.id)}">-->
-<!--										お気に入り登録中-->
-<!--										画像を人型に変えてるのでなんかいい感じにしてください-->
-<!--										<img th:src="@{/images/favorite_red.png}">-->
-<!--									</button>-->
-
-<!--									<button type="submit"-->
-<!--										th:unless="${favoriteItemIds != null && favoriteItemIds.contains(item.id)}">-->
-<!--										<img th:src="@{/images/faviorite_blank.svg}">-->
-<!--									</button>-->
-<!--								</form>-->
-<!--							</div>-->
-							<!--							<p th:if="${item.stock == 0}" th:text="#{data.out.of.stock}"></p>-->
-							<!--							<p th:if="${item.stock > 5}" th:text="#{data.in.stock}"></p>-->
-							<!--							<p th:if="${item.stock >= 1 and 5 >= item.stock }" th:text="${item.stock}"></p>-->
-
 						</div>
 					</article>
 
@@ -110,21 +88,11 @@
 				</section>
 				<aside class="summary-card" aria-label="order summary">
 					<h2>ORDER SUMMARY</h2>
-<!--					<p class="summary-sub">ご注文内容</p>-->
-					<!--				動的に実装していない-->
+					<!--ご注文内容-->
 					<dl class="summary-list">
-						<!--						<div>-->
-						<!--							<dt>小計</dt>-->
-						<!--							<dd>¥6,270</dd>-->
-						<!--						</div>-->
-						<!--						<div>-->
-						<!--							<dt>送料</dt>-->
-						<!--							<dd>¥550</dd>-->
-						<!--						</div>-->
 						<div class="total">
 							<dt>合計（税込）</dt>
 							<dd th:text="'¥' + ${#numbers.formatInteger(total, 1, 'COMMA')}"></dd>
-<!--							th:text="'¥' + ${#numbers.formatInteger(total, 3, 'COMMA')}">-->
 						</div>
 					</dl>
 
@@ -139,7 +107,6 @@
 		</th:block>
 
 		<!--		ここからおすすめ商品（閲覧履歴）-->
-
 		<section class="recommend-band">
 			<div class="recommend-copy">
 				<h2>EDITOR’S<br />RECOMMEND</h2>
@@ -148,22 +115,14 @@
 			<div class="recommend-items">
 				<div th:each="recommend, status: ${recommends}" th:if="${status.count le 4}" class="reccomend_box">
 					<!--/* 1件分の商品情報 */-->
-<!--					<div class="favorite_cart">-->
-<!--						<form th:action="@{/client/favorite/update}" method="post">-->
-<!--							<input type="hidden" name="itemId" th:value="${recommend.item.id}">-->
-<!--							<button type="submit"><img th:src="@{/images/faviorite_blank.svg}"></button>-->
-<!--						</form>-->
-<!--					</div>-->
 					<div>
 						<form th:action="@{/client/favorite/update}" method="post" class="favorite_cart">
 							<input type="hidden" name="itemId" th:value="${recommend.item.id}">
 							<button type="submit"
 								th:if="${favoriteItemIds != null && favoriteItemIds.contains(recommend.item.id)}">
 								<!--お気に入り登録中-->
-								<!--画像を人型に変えてるのでなんかいい感じにしてください-->
 								<img th:src="@{/images/favorite_red.png}">
 							</button>
-
 							<button type="submit"
 								th:unless="${favoriteItemIds != null && favoriteItemIds.contains(recommend.item.id)}">
 								<img th:src="@{/images/faviorite_blank.svg}">
@@ -188,71 +147,6 @@
 				</div>
 			</div>
 		</section>
-
-		<!--		ここまでおすすめ商品-->
-
-		<!--		<h2 th:class="title" th:text="#{basket}"></h2>-->
-
-		<!--		<th:block th:if="${itemNameListLessThan != null || itemNameListZero != null}">-->
-		<!--			<br />-->
-		<!--			/* 在庫不足商品 */-->
-		<!--			<ul class="error_list_no_mark" th:if="${itemNameListLessThan != null}">-->
-		<!--				<li th:each="err : ${itemNameListLessThan}" th:text="#{msg.basket.stock.short(${err})}"></li>-->
-
-		<!--			</ul>-->
-		<!--			/* 在庫なし商品 */-->
-		<!--			<ul class="error_list_no_mark" th:if="${itemNameListZero != null}">-->
-		<!--				<li th:each="err : ${itemNameListZero}" th:text="#{msg.basket.stock.none(${err})}"></li>-->
-		<!--			</ul>-->
-		<!--			<br />-->
-		<!--		</th:block>-->
-
-		<!--ここから下をコメントアウトしたらデザイン以前の画面になります。-->
-
-		<!--		<div th:if="${session.basketBeans == null}">-->
-		<!--			/* 買い物かごが空のとき */-->
-		<!--			<p th:text="#{msg.basket.list.none}"></p>-->
-		<!--		</div>-->
-
-		<!--		</div>-->
-		<!--	</section>-->
-		<!--	<th:block th:if="${session.basketBeans != null}">-->
-		<!--							<div class="list_table basket">-->
-		<!--					<tr>-->
-		<!--						<th>[[#{data.basket.item.name}]]</th>-->
-		<!--						<th>[[#{data.basket.count}]]</th>-->
-		<!--						<th>[[#{data.basket.operate}]]</th>-->
-		<!--						<th>[[#{data.basket.stock.status}]]</th>-->
-		<!--					</tr>-->
-
-		<!--		<article th:each="item, status: ${session.basketBeans}">-->
-		<!--			<img th:src="@{/images/photo/{image}(image=${itemList[status.index].image})}"-->
-		<!--				th:if="${itemList[status.index].image != null}" />-->
-
-		<!--			<p><a th:href="@{/client/item/detail/{id}(id=${item.id})}" th:text="${item.name}"></a></p>-->
-		<!--			<p th:text="${item.orderNum}"></p>-->
-		<!--			<p>-->
-		<!--			<form th:action="@{/client/basket/delete}" method="post">-->
-		<!--				<input type="hidden" name="id" th:value="${item.id}" /> <input type="submit" value="削除"-->
-		<!--					class="delete" />-->
-		<!--			</form>-->
-		<!--			</p>-->
-		<!--			<p th:if="${item.stock == 0}" th:text="#{data.out.of.stock}"></p>-->
-		<!--			<p th:if="${item.stock > 5}" th:text="#{data.in.stock}"></p>-->
-		<!--			<p th:if="${item.stock >= 1 and 5 >= item.stock }" th:text="${item.stock}"></p>-->
-		<!--		</article>-->
-		<!--		</div>-->
-		<!--		<div class="user_info_form_area shopping_button">-->
-		<!--			/* 注文手続きフォーム */-->
-		<!--			<form th:action="@{/client/order/address/input}" method="post">-->
-		<!--				<input type="submit" value="ご注文のお手続き" />-->
-		<!--			</form>-->
-		<!--			/* 買い物かごを空にするフォーム */-->
-		<!--			<form th:action="@{/client/basket/allDelete}" method="post">-->
-		<!--				<input type="submit" value="買い物かごを空にする" class="delete" />-->
-		<!--			</form>-->
-		<!--		</div>-->
-		<!--	</th:block>-->
 
 </body>
 
